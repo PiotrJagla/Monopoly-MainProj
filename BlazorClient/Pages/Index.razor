@@ -1,0 +1,31 @@
+﻿@page "/"
+@inject IAPIservice ApiService
+
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<button @onclick="OnButtonClick" class="btn btn-primary">Click to get test message from API</button>
+
+
+<br />
+<br />
+<br />
+
+<div>API message is: @APImessage</div>
+
+@code{
+    private string? APImessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        APImessage = "To nie jest wiadomosc od API";
+    }
+
+    private async Task OnButtonClick()
+    {
+        APImessage = await ApiService.GetMessage();
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "M1llqu7vQQFngICItwlR5GLSH5r9ScGtxCp0Loa4S0c=",
+  "Source": "AspApiServer",
+  "BasePath": "_content/AspApiServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
