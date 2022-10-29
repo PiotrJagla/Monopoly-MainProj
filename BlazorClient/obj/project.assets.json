@@ -499,6 +499,16 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Models.dll": {}
+        }
+      },
       "Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1000,6 +1010,16 @@
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Models.dll": {}
         }
       },
       "Services/1.0.0": {
@@ -1774,6 +1794,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Models/1.0.0": {
+      "type": "project",
+      "path": "../Models/Models.csproj",
+      "msbuildProject": "../Models/Models.csproj"
+    },
     "Services/1.0.0": {
       "type": "project",
       "path": "../Services/Services.csproj",
@@ -1784,6 +1809,7 @@
     "net6.0": [
       "Microsoft.AspNetCore.Components.WebAssembly >= 6.0.9",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.9",
+      "Models >= 1.0.0",
       "Services >= 1.0.0"
     ]
   },
@@ -1793,11 +1819,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\BlazorClient\\BlazorClient.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\BlazorClient.csproj",
       "projectName": "BlazorClient",
-      "projectPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\BlazorClient\\BlazorClient.csproj",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\BlazorClient.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\BlazorClient\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1814,8 +1840,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\Services\\Services.csproj": {
-              "projectPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\Services\\Services.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj"
+            },
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj"
             }
           }
         }

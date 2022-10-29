@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "M1llqu7vQQFngICItwlR5GLSH5r9ScGtxCp0Loa4S0c=",
-  "Source": "AspApiServer",
-  "BasePath": "_content/AspApiServer",
+  "Hash": "QVMjeQcjru4E2GlEwfNJjW+AvML5yPpVH1caldoyYBo=",
+  "Source": "ASPcoreServer",
+  "BasePath": "_content/ASPcoreServer",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

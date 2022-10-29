@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IgBzpcQfMn+HXk5UM9/EysDyqnO30VkB5zw0u7/uGj8Heoe6KRzW/Xx34Nx9PTuyq1q0v9C0rO5E+qJ4khdMtg==",
+  "dgSpecHash": "k/1d7ISucTPgOJmwe7XDCZ4WyRz7DkdbKrLMc2v01iQ9urF3tZ6R7/qK3dA5HSn0q0krGPwaIXbx2S+FZ2Xqdg==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\UnitTests\\UnitTests.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\UnitTests\\UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",

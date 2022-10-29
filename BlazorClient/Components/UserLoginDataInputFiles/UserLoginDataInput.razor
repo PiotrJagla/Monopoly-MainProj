@@ -1,0 +1,19 @@
+﻿@inherits UserLoginDataInputBase
+
+<div>
+    @Title
+</div>
+<div>
+    <h4>Enter your name and password</h4>
+</div>
+
+
+<div>
+    <label>Enter Name: </label>
+    <input @bind-value=userLoginDataInput.Name />
+    <br />
+    <label>Enter Password: </label>
+    <input @bind-value=userLoginDataInput.Password />
+</div>
+
+<button @onclick="SendUserLoginData">@ButtonName</button>

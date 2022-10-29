@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\Services\\Services.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\Services\\Services.csproj",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\Services\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\AspApiServer\\ASPcoreServer.csproj": {}
+    "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj": {}
   },
   "projects": {
-    "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\AspApiServer\\ASPcoreServer.csproj": {
+    "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\AspApiServer\\ASPcoreServer.csproj",
+        "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj",
         "projectName": "ASPcoreServer",
-        "projectPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\AspApiServer\\ASPcoreServer.csproj",
+        "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj",
         "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-        "outputPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\AspApiServer\\obj\\",
+        "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",

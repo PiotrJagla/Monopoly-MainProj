@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{BEDD7707-187D-41CE-B6F8-8B5891DA2A44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{BEDD7707-187D-41CE-B6F8-8B5891DA2A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPcoreServer", "AspApiServer\ASPcoreServer.csproj", "{8FFAFB22-D39A-4626-B3DD-1E995C6D1010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPcoreServer", "AspApiServer\ASPcoreServer.csproj", "{8FFAFB22-D39A-4626-B3DD-1E995C6D1010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F5031B8C-9E22-473D-9CDA-93175F530CAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F5031B8C-9E22-473D-9CDA-93175F530CAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{1F120FDC-9EE1-43A3-93BC-D04666B9FBE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{1F120FDC-9EE1-43A3-93BC-D04666B9FBE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringManipulationLib", "StringManipulationLib\StringManipulationLib.csproj", "{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{1F120FDC-9EE1-43A3-93BC-D04666B9FBE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F120FDC-9EE1-43A3-93BC-D04666B9FBE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F120FDC-9EE1-43A3-93BC-D04666B9FBE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

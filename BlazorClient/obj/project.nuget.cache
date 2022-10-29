@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s2iyy26GcrlBG8s6rS4TUrOJog+hpg/J/iVVrbp01QdQj6b/f2YkV/WoYriLbPIfsPp1lWt3LUDIsG25OWl93Q==",
+  "dgSpecHash": "xyfJoFRNaYqswiaFMv3jOWwjzcxTuPT3k++XStv59+Lg1Do579STzdYA5bJHXyCJqYiwHqQzeEY4mhp+/aMUGA==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\BlazorClient\\BlazorClient.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\BlazorClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.9\\microsoft.aspnetcore.authorization.6.0.9.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.9\\microsoft.aspnetcore.components.6.0.9.nupkg.sha512",

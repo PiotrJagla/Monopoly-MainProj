@@ -6341,11 +6341,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\UnitTests\\UnitTests.csproj",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\UnitTests\\UnitTests.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\UnitTests\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",

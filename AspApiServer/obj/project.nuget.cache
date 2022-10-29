@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YRYNFf9ure3Y2ViVr0OlnnX4xMGPBrvZDOj4c851gz4o9qb9X9pCkoXsxCcLbz7tH2DgEVKVxHXF37p8WVjEwQ==",
+  "dgSpecHash": "5JLK76acTHWM+rTUwd6ofpuiWXDG+JUELgDSwG2J1aj179ZPkZMktJuo8bAVcWE2r20DLkeiFViAziQ9tAgXmA==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioProjects\\CS\\MinigamesAndOthersSite\\AspApiServer\\ASPcoreServer.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
