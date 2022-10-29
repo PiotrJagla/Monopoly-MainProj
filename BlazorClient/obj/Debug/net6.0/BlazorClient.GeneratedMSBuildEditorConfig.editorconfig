@@ -22,21 +22,13 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UserLoginDataInputFiles/UserLoginDataInput.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVc2VyTG9naW5EYXRhSW5wdXRGaWxlc1xVc2VyTG9naW5EYXRhSW5wdXQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/UserPages/LoginPageFiles/LoginPage.razor]
-build_metadata.AdditionalFiles.TargetPath = VXNlclBhZ2VzXExvZ2luUGFnZUZpbGVzXExvZ2luUGFnZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/UserPages/RegisterPageFiles/RegisterPage.razor]
-build_metadata.AdditionalFiles.TargetPath = VXNlclBhZ2VzXFJlZ2lzdGVyUGFnZUZpbGVzXFJlZ2lzdGVyUGFnZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UserLoginDataInputFiles/UserLoginDataInput.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVc2VyTG9naW5EYXRhSW5wdXRGaWxlc1xVc2VyTG9naW5EYXRhSW5wdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dj9qcnb75s
 
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/MenuPages/StartupPageFiles/StartupPage.razor]
 build_metadata.AdditionalFiles.TargetPath = TWVudVBhZ2VzXFN0YXJ0dXBQYWdlRmlsZXNcU3RhcnR1cFBhZ2UucmF6b3I=
@@ -45,3 +37,11 @@ build_metadata.AdditionalFiles.CssScope = b-4kvv8nvjde
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-lor2elsqal
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/UserPages/LoginPageFiles/LoginPage.razor]
+build_metadata.AdditionalFiles.TargetPath = VXNlclBhZ2VzXExvZ2luUGFnZUZpbGVzXExvZ2luUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-seqggc6fm2
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/UserPages/RegisterPageFiles/RegisterPage.razor]
+build_metadata.AdditionalFiles.TargetPath = VXNlclBhZ2VzXFJlZ2lzdGVyUGFnZUZpbGVzXFJlZ2lzdGVyUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gn72gdfilv

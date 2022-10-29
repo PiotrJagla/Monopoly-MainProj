@@ -1,8 +1,3 @@
-body[b-4kvv8nvjde] {
-    background-color: red;
-}
-
-.Title[b-4kvv8nvjde]{
-    font-size: 70px;
-    color: green;
+.buttonStyle[b-4kvv8nvjde]{
+    background-image:linear-gradient(red, blue);
 }

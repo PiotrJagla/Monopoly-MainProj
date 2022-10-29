@@ -1,11 +1,9 @@
-/* /MenuPages/StartupPageFiles/StartupPage.razor.rz.scp.css */
-body[b-4kvv8nvjde] {
-    background-color: red;
+/* /Components/UserLoginDataInputFiles/UserLoginDataInput.razor.rz.scp.css */
+body[b-dj9qcnb75s] {
 }
-
-.Title[b-4kvv8nvjde]{
-    font-size: 70px;
-    color: green;
+/* /MenuPages/StartupPageFiles/StartupPage.razor.rz.scp.css */
+.buttonStyle[b-4kvv8nvjde]{
+    background-image:linear-gradient(red, blue);
 }
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-lor2elsqal] {
@@ -88,4 +86,10 @@ main[b-lor2elsqal] {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+}
+/* /UserPages/LoginPageFiles/LoginPage.razor.rz.scp.css */
+body[b-seqggc6fm2] {
+}
+/* /UserPages/RegisterPageFiles/RegisterPage.razor.rz.scp.css */
+body[b-gn72gdfilv] {
 }
