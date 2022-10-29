@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{1F120FDC-9EE1-43A3-93BC-D04666B9FBE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{EE163A6E-A8A0-40DF-B9B4-5D418F500FB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringManipulationLib", "StringManipulationLib\StringManipulationLib.csproj", "{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringManipulationLib", "StringManipulationLib\StringManipulationLib.csproj", "{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation", "Validation\Validation.csproj", "{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

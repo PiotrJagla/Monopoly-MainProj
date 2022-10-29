@@ -10,7 +10,8 @@
         "dependencies": {
           "Models": "1.0.0",
           "Services": "1.0.0",
-          "Swashbuckle.AspNetCore": "6.2.3"
+          "Swashbuckle.AspNetCore": "6.2.3",
+          "Validation": "1.0.0"
         },
         "runtime": {
           "ASPcoreServer.dll": {}
@@ -267,6 +268,14 @@
         "runtime": {
           "Services.dll": {}
         }
+      },
+      "Validation/1.0.0": {
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "Validation.dll": {}
+        }
       }
     }
   },
@@ -457,6 +466,11 @@
       "sha512": ""
     },
     "Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Validation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

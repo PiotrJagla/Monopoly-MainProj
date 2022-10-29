@@ -1,0 +1,12 @@
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\bin\Debug\net6.0\StringManipulationLib.deps.json
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\bin\Debug\net6.0\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\bin\Debug\net6.0\StringManipulationLib.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.csproj.AssemblyReference.cache
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.GeneratedMSBuildEditorConfig.editorconfig
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.AssemblyInfoInputs.cache
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.AssemblyInfo.cs
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.csproj.CoreCompileInputs.cache
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\refint\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\StringManipulationLib.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\StringManipulationLib\obj\Debug\net6.0\ref\StringManipulationLib.dll

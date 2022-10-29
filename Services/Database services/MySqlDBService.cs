@@ -27,9 +27,43 @@ namespace Services.Database_services
             throw new NotImplementedException();
         }
 
-        public bool InsertUser(UserLoginData userData)
+        public bool InsertUser(UserLoginData UserDataToRegister)
         {
-            throw new NotImplementedException();
+            bool IsDataInserted = false;
+            databaseConnection.Open();
+
+            MySqlCommand InsertUserQuery = new MySqlCommand(
+                "INSERT INTO users(Name,Password) " +
+                $"VALUES('{UserDataToRegister.Name}','{UserDataToRegister.Password}');",
+                databaseConnection);
+
+            if (UserWithNameExist(UserDataToRegister.Name) == false)
+            {
+                InsertUserQuery.ExecuteNonQuery();
+                IsDataInserted = true;
+            }
+
+            databaseConnection.Close();
+            return IsDataInserted;
+        }
+
+        private bool UserWithNameExist(string UserName)
+        {
+            int userID = -1;
+
+            MySqlCommand getUserId = new MySqlCommand(
+                "SELECT users.ID FROM users " +
+                $"WHERE users.Name='{UserName}';",
+                databaseConnection);
+
+            MySqlDataReader dataReader = getUserId.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                userID = dataReader.GetInt32(0);
+            }
+
+            return userID != -1;
         }
 
         public bool UserExist(UserLoginData userLoginData)

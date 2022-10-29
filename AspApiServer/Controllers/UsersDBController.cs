@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Database_services;
+using Validation;
 
 namespace ASPcoreServer.Controllers
 {
@@ -21,6 +22,20 @@ namespace ASPcoreServer.Controllers
         {
             bool result = DatabaseService.UserExist(userLoginData);
             return Ok(result);
+        }
+
+        [HttpPost("RegisterUser")]
+        public async Task<ActionResult<bool>> RegisterUser(UserLoginData UserDataToRegister)
+        {
+            if(UserInputValidation.IsDataToRegisterCorrect(UserDataToRegister) == true)
+            {
+                bool result = DatabaseService.InsertUser(UserDataToRegister);
+                return Ok(result);
+            }
+            else
+            {
+                return Ok(false);
+            }
         }
     }
 }

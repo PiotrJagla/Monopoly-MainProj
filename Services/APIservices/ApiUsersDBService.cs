@@ -21,7 +21,13 @@ namespace Services.APIservices
         {
             var PostResult = await HttpRequest.PostAsJsonAsync("api/UsersDB/UserExist", userLoginData);
             var result = await PostResult.Content.ReadFromJsonAsync<bool>();
-            
+            return result;
+        }
+
+        public async Task<bool> RegisterUser(UserLoginData UserDataToRegister)
+        {
+            var PostResult = await HttpRequest.PostAsJsonAsync("api/UsersDB/RegisterUser", UserDataToRegister);
+            var result = await PostResult.Content.ReadFromJsonAsync<bool>();
             return result;
         }
     }

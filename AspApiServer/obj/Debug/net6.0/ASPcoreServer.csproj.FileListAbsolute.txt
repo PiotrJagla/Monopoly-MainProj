@@ -47,3 +47,5 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Services.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Models.pdb
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Services.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Validation.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Validation.pdb

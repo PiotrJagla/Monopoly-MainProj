@@ -13,6 +13,6 @@ namespace Services.Database_services
 
         bool UserExist(UserLoginData userLoginData);
 
-        bool InsertUser(UserLoginData userData);
+        bool InsertUser(UserLoginData UserDataToRegister);
     }
 }

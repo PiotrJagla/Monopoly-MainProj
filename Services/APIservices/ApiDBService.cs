@@ -10,5 +10,6 @@ namespace Services.APIservices
     public interface ApiDBService
     {
         Task<bool> IsLoginDataValid(UserLoginData userLoginData);
+        Task<bool> RegisterUser(UserLoginData UserDataToRegister);
     }
 }
