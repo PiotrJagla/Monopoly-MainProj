@@ -5,21 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Services.Database_services.SQLqueries;
 
 namespace Services.Database_services
 {
     public class MySqlDBService : DBservice
     {
-        private MySqlConnection databaseConnection;
+        private MySqlConnection DatabaseConnection;
+        private SqlSelect SelectQuery;
+        private SqlInsert InsertQuery;
 
         public MySqlDBService()
         {
-            connectToDatabase();
+            ConnectToDatabase();
+            InitSqlSelect();
+            InitSqlInsert();
         }
 
-        private void connectToDatabase()
+        private void ConnectToDatabase()
         {
-            databaseConnection = new MySqlConnection(Constants.MySQLConnectionString);
+            DatabaseConnection = new MySqlConnection(Constants.MySQLConnectionString);
+        }
+
+        private void InitSqlSelect()
+        {
+            SelectQuery = new MySqlSelect(DatabaseConnection);
+        }
+
+        private void InitSqlInsert()
+        {
+            InsertQuery = new MySqlInsert(DatabaseConnection);
         }
 
         public User GetUserData(int ID)
@@ -29,62 +44,12 @@ namespace Services.Database_services
 
         public bool InsertUser(UserLoginData UserDataToRegister)
         {
-            bool IsDataInserted = false;
-            databaseConnection.Open();
-
-            MySqlCommand InsertUserQuery = new MySqlCommand(
-                "INSERT INTO users(Name,Password) " +
-                $"VALUES('{UserDataToRegister.Name}','{UserDataToRegister.Password}');",
-                databaseConnection);
-
-            if (UserWithNameExist(UserDataToRegister.Name) == false)
-            {
-                InsertUserQuery.ExecuteNonQuery();
-                IsDataInserted = true;
-            }
-
-            databaseConnection.Close();
-            return IsDataInserted;
-        }
-
-        private bool UserWithNameExist(string UserName)
-        {
-            int userID = -1;
-
-            MySqlCommand getUserId = new MySqlCommand(
-                "SELECT users.ID FROM users " +
-                $"WHERE users.Name='{UserName}';",
-                databaseConnection);
-
-            MySqlDataReader dataReader = getUserId.ExecuteReader();
-
-            while (dataReader.Read())
-            {
-                userID = dataReader.GetInt32(0);
-            }
-
-            return userID != -1;
+            return InsertQuery.InsertUser(UserDataToRegister);
         }
 
         public bool UserExist(UserLoginData userLoginData)
         {
-            int userID = -1;
-            databaseConnection.Open();
-
-            MySqlCommand getUserId = new MySqlCommand(
-                "SELECT users.ID FROM users " +
-                $"WHERE users.Name='{userLoginData.Name}' AND users.Password='{userLoginData.Password}';",
-                databaseConnection);
-
-            MySqlDataReader dataReader = getUserId.ExecuteReader();
-            
-            while(dataReader.Read())
-            {
-                userID = dataReader.GetInt32(0);
-            }
-
-            databaseConnection.Close();
-            return userID != -1;
+            return SelectQuery.SelectWithCriteria(userLoginData) != null;
         }
     }
 }
