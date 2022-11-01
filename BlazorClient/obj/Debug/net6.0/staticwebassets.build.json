@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8x3a6tj3zutUz0OMQnqoKBEnwAdAltN3PpMr3km3dtM=",
+  "Hash": "5kdeGu/atjRHt3MJnerLCsg4VSWrWMPyabIJ+cQlYqQ=",
   "Source": "BlazorClient",
   "BasePath": "/",
   "Mode": "Root",
@@ -151,6 +151,40 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\piotr\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.9\\runtimes\\browser-wasm\\native\\dotnet.wasm"
+    },
+    {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Enums.dll",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Enums.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\bin\\Debug\\net6.0\\Enums.dll"
+    },
+    {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Enums.pdb",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Enums.pdb",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "symbol",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\bin\\Debug\\net6.0\\Enums.pdb"
     },
     {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Google.Protobuf.dll",
@@ -4879,6 +4913,23 @@
       "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Collections.Immutable.dll"
     },
     {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\EmGMb7zU.gz",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Enums.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Enums.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Enums.dll"
+    },
+    {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\EmpCYIXp.gz",
       "SourceId": "BlazorClient",
       "SourceType": "Computed",
@@ -5948,6 +5999,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Runtime.Serialization.Json.dll"
+    },
+    {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\o1+gNhWu.gz",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Enums.pdb.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Enums.pdb",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Enums.pdb"
     },
     {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\O55Faw1Z.gz",
@@ -7648,23 +7716,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icon-192.png"
-    },
-    {
-      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\wwwroot\\Images\\StartupPageBackground.png",
-      "SourceId": "BlazorClient",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "Images/StartupPageBackground.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\StartupPageBackground.png"
     },
     {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\wwwroot\\index.html",

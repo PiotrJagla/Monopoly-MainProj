@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringManipulationLib", "StringManipulationLib\StringManipulationLib.csproj", "{A4098D15-A2ED-43EB-A2AD-5A037C25E42D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation", "Validation\Validation.csproj", "{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validation", "Validation\Validation.csproj", "{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Enums\Enums.csproj", "{ABCD7964-DA8F-4A4F-9CB5-D451B04AE92C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93825CF8-ABC8-484F-8EC2-E7860EC20FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABCD7964-DA8F-4A4F-9CB5-D451B04AE92C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABCD7964-DA8F-4A4F-9CB5-D451B04AE92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABCD7964-DA8F-4A4F-9CB5-D451B04AE92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABCD7964-DA8F-4A4F-9CB5-D451B04AE92C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -809,6 +809,16 @@
           }
         }
       },
+      "Enums/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Enums.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Enums.dll": {}
+        }
+      },
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1584,6 +1594,16 @@
           "lib/netcoreapp3.0/System.Windows.Extensions.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "Enums/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Enums.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Enums.dll": {}
         }
       },
       "Models/1.0.0": {
@@ -2898,6 +2918,11 @@
         "version.txt"
       ]
     },
+    "Enums/1.0.0": {
+      "type": "project",
+      "path": "../Enums/Enums.csproj",
+      "msbuildProject": "../Enums/Enums.csproj"
+    },
     "Models/1.0.0": {
       "type": "project",
       "path": "../Models/Models.csproj",
@@ -2911,6 +2936,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Enums >= 1.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly >= 6.0.9",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.9",
       "Models >= 1.0.0",
@@ -2944,6 +2970,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj"
+            },
             "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj"
             },

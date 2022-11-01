@@ -1707,3 +1707,17 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\iau79WXJ.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\qK+Z686F.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\9+J6ogmn.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\MenuPages\CommunityMenuFiles\CommunityMenu.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\MenuPages\MainMenuFiles\MainMenu.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\MenuPages\MultiplayerGamesMenuFiles\MultiplayerGamesMenu.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\MenuPages\SingleplayerGamesMenuFiles\SingleplayerGamesMenu.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\Enums.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\Enums.dll.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\Enums.pdb.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\Enums.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\EmGMb7zU.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\o1+gNhWu.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\GemplayPages\MultiplayerGameFiles\MultiplayerGamePage.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\GemplayPages\SinglplayerGameFiles\SinglplayerGamePage.razor.rz.scp.css

@@ -1,0 +1,14 @@
+﻿@page "/MultiplayerGamesMenu"
+@inherits MultiplayerGamesMenuBase
+
+
+<h3>Multiplayer games</h3>
+
+
+@for(int iii = 0; iii < AllAddedMultiplayerGames.Count; ++iii)
+{
+    MultiplayerGame multiplayerGame = AllAddedMultiplayerGames[iii];
+    <button @onclick="(() => NavigateToMultiplayerGame(multiplayerGame))">@MultiplayerGameMethods.ToString(multiplayerGame)</button>
+}
+
+

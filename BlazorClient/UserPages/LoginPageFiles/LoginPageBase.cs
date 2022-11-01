@@ -10,6 +10,9 @@ namespace BlazorClient.UserPages.LoginPageFiles
         [Inject]
         public ApiDBService validateUserLoginData { get; set; }
 
+        [Inject]
+        public NavigationManager NavManager { get; set; }
+
         public string LoginMessage { get; set; }
 
         protected override void OnInitialized()
@@ -20,10 +23,10 @@ namespace BlazorClient.UserPages.LoginPageFiles
 
         protected async void LoginUser(UserLoginData userLoginData)
         {
-            if(await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
+            if (await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
                 LoginMessage = "Failed to login";
             else
-                LoginMessage = "Login sukcesful";
+                NavManager.NavigateTo("/MainMenu");
 
             StateHasChanged();
         }
