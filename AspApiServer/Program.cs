@@ -1,3 +1,4 @@
+using ASPcoreServer.Hubs;
 using Microsoft.Net.Http.Headers;
 using Services.Database_services;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<DBservice, MySqlDBService>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -23,11 +25,14 @@ if (app.Environment.IsDevelopment())
 app.UseCors(policy =>
     policy.WithOrigins("http://localhost:7244", "https://localhost:7244")
     .AllowAnyMethod()
+    .AllowAnyHeader()
     .WithHeaders(HeaderNames.ContentType)
-);
+); 
+
+app.MapHub<SomeMultiplayerGameHub>("/multihub");
 
 app.UseHttpsRedirection();
-
+ 
 app.UseAuthorization();
 
 app.MapControllers();

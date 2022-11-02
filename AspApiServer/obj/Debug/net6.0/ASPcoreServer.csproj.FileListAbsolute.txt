@@ -49,3 +49,14 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Services.pdb
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Validation.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Validation.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\System.IO.Pipelines.dll
