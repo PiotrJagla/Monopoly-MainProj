@@ -26,7 +26,7 @@ namespace BlazorClient.UserPages.LoginPageFiles
             if (await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
                 LoginMessage = "Failed to login";
             else
-                NavManager.NavigateTo("/MainMenu");
+                NavManager.NavigateTo($"/MainMenu/{userLoginData.Name}");
 
             StateHasChanged();
         }

@@ -2,7 +2,9 @@
 
 <h5>This is a multipayer test game</h5>
 
+<button @onclick="Connect" disabled="@(IsConnected() == true)">Connect</button>
+<button @onclick="FindEnemy" disabled="@(isEnemyFound)">Find enemy</button>
 
-<button @onclick="SendButtonClicked">Your button : @allPoints</button>
+<button @onclick="OnUserButtonClick">Your button : @allPoints</button>
+<button>Enemy button: @enemyPoints</button>
 
-<button>Enemy player button</button>

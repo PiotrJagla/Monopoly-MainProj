@@ -9,6 +9,9 @@ namespace BlazorClient.MenuPages.MultiplayerGamesMenuFiles
         [Inject]
         public NavigationManager NavManager { get; set; }
 
+        [Parameter]
+        public string loggedUserName { get; set; }
+
         public List<MultiplayerGame> AllAddedMultiplayerGames { get; private set; }
 
         protected override void OnInitialized()
@@ -20,7 +23,7 @@ namespace BlazorClient.MenuPages.MultiplayerGamesMenuFiles
 
         protected void NavigateToMultiplayerGame(MultiplayerGame multiplayerGame)
         {
-            NavManager.NavigateTo($"/MultiplayerGame/{MultiplayerGameMethods.ToString(multiplayerGame)}");
+            NavManager.NavigateTo($"/MultiplayerGame/{MultiplayerGameMethods.ToString(multiplayerGame)}/{loggedUserName}");
         }
 
     }

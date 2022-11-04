@@ -1,20 +1,35 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
+using Services.OnlineConnectionsService;
+using Models;
 
 namespace ASPcoreServer.Hubs
 {
     public class SomeMultiplayerGameHub : Hub
     {
-        private static Dictionary<string, string> UserNameToConnIdMap = new Dictionary<string, string>();
+        private static GameConnectionService PlayersGameConnection = new PlayersConnection();
 
-        public void InformEnemyAboutButtonClick(int playerPoints)
+
+        public void SendToEnemyUserButtonPoints(string userName, int userPoints)
         {
-            Clients.All.SendAsync("RecieveMessage", playerPoints);
+            Player enemy = PlayersGameConnection.getEnemyWithGivenUserName(userName);
+            Clients.Client(enemy.ConnectionId).SendAsync("RecieveEnemyPoints", userPoints);
         }
 
         public void OnPlayerConnected(string userName, string userConnId)
         {
-            UserNameToConnIdMap.Add(userName, userConnId);
+            PlayersGameConnection.addOnlinePlayer(userName, userConnId);
+        }
+
+        public void FindEnemyForPlayer(string userName)
+        {
+            bool isEnemyFound = PlayersGameConnection.findEnemy(userName);
+            Tuple<Player, Player> twoPlayersRoom = PlayersGameConnection.getTwoUsersGameRoomWithGiveName(userName);
+            if (twoPlayersRoom is not null)
+            {
+                Clients.Client(twoPlayersRoom.Item1.ConnectionId).SendAsync("IsEnemyFound", isEnemyFound);
+                Clients.Client(twoPlayersRoom.Item2.ConnectionId).SendAsync("IsEnemyFound", isEnemyFound);
+            }
         }
 
     }

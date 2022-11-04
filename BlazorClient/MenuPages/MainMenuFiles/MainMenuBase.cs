@@ -4,6 +4,8 @@ namespace BlazorClient.MenuPages.MainMenuFiles
 {
     public class MainMenuBase : ComponentBase
     {
+        [Parameter]
+        public string loggedUserName { get; set; }
 
         [Inject]
         public NavigationManager NavManager{ get; set; }
@@ -15,7 +17,7 @@ namespace BlazorClient.MenuPages.MainMenuFiles
 
         protected void NavigateToMultiplayerGamesMenu()
         {
-            NavManager.NavigateTo("/MultiplayerGamesMenu");
+            NavManager.NavigateTo($"/MultiplayerGamesMenu/{loggedUserName}");
         }
 
         protected void NavigateToCommunityMenu()

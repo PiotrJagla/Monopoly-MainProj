@@ -8,6 +8,9 @@ namespace BlazorClient.GemplayPages.MultiplayerGameFiles
         [Parameter]
         public string multiplayerGameType { get; set; }
 
+        [Parameter]
+        public string loggedUserName { get; set; }
+
         public MultiplayerGame multiplayerGame { get; set; }
 
         protected override void OnInitialized()
