@@ -6,10 +6,10 @@ namespace BlazorClient.UserPages.RegisterPageFiles
 {
     public class RegisterPageBase : ComponentBase
     {
-        protected string RegisterMessage;
-
         [Inject]
         public ApiDBService InsertUserDataIntoDB { get; set; }
+
+        protected string RegisterMessage;
 
         protected override void OnInitialized()
         {

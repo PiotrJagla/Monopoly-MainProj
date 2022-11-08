@@ -19,16 +19,16 @@ namespace Services.APIservices
 
         public async Task<bool> IsLoginDataValid(UserLoginData userLoginData)
         {
-            var PostResult = await HttpRequest.PostAsJsonAsync("api/UsersDB/UserExist", userLoginData);
-            var result = await PostResult.Content.ReadFromJsonAsync<bool>();
-            return result;
+            var DataValidationHttpResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/UserExist", userLoginData);
+            var IsUserLogged = await DataValidationHttpResponse.Content.ReadFromJsonAsync<bool>();
+            return IsUserLogged;
         }
 
         public async Task<bool> RegisterUser(UserLoginData UserDataToRegister)
         {
-            var PostResult = await HttpRequest.PostAsJsonAsync("api/UsersDB/RegisterUser", UserDataToRegister);
-            var result = await PostResult.Content.ReadFromJsonAsync<bool>();
-            return result;
+            var UserRegistrationHttpResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/RegisterUser", UserDataToRegister);
+            var IsUserRegistered = await UserRegistrationHttpResponse.Content.ReadFromJsonAsync<bool>();
+            return IsUserRegistered;
         }
     }
 }

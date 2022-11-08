@@ -6,7 +6,7 @@ namespace BlazorClient.GemplayPages.MultiplayerGameFiles
     public class MultiplayerGamePageBase : ComponentBase
     {
         [Parameter]
-        public string multiplayerGameType { get; set; }
+        public string multiplayerGameName { get; set; }
 
         [Parameter]
         public string loggedUserName { get; set; }
@@ -15,7 +15,7 @@ namespace BlazorClient.GemplayPages.MultiplayerGameFiles
 
         protected override void OnInitialized()
         {
-            multiplayerGame = MultiplayerGameMethods.ToEnum(multiplayerGameType);
+            multiplayerGame = MultiplayerGameMethods.ToEnum(multiplayerGameName);
         }
     }
 }

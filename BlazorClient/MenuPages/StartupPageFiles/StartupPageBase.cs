@@ -7,12 +7,6 @@ namespace BlazorClient.MenuPages.StartupPageFiles
         [Inject]
         public NavigationManager NavManager { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-
-
-        }
-
         public void NavigateToLoginPage()
         {
             NavManager.NavigateTo("/login");

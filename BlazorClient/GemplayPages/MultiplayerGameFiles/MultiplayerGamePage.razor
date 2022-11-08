@@ -1,11 +1,22 @@
 ﻿@page "/MultiplayerGame"
-@page "/MultiplayerGame/{multiplayerGameType}/{loggedUserName}"
+@page "/MultiplayerGame/{multiplayerGameName}/{loggedUserName}"
 @inherits MultiplayerGamePageBase
 
 
-<h3>Player the multiplayer game: @MultiplayerGameMethods.ToString(multiplayerGame)</h3>
+<h3>Play the multiplayer game: @MultiplayerGameMethods.ToString(multiplayerGame)</h3>
+
+@switch(multiplayerGame)
+{
+    case MultiplayerGame.Statki:
+
+        break;
+    case MultiplayerGame.DemoButtonClickingGame:
+        <SomeMultiplayerGame loggedUserName="@loggedUserName"></SomeMultiplayerGame>
+        break;
+    default:
+        <div> there is no such game</div>
+        break;
+}
 
 
-
-<SomeMultiplayerGame loggedUserName="@loggedUserName"></SomeMultiplayerGame>
 

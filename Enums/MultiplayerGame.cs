@@ -9,12 +9,15 @@ namespace Enums
     public enum MultiplayerGame
     {
         Statki,
+        DemoButtonClickingGame,
         NoGame
     }
 
     public static class MultiplayerGameMethods
     {
         private const string StatkiGameString = "Statki";
+        private const string DemoButtonCLickingGameString= "Demo button clicking game";
+
 
         public static string ToString(MultiplayerGame multiplayerGame)
         {
@@ -22,6 +25,8 @@ namespace Enums
             {
                 case MultiplayerGame.Statki:
                     return StatkiGameString;
+                case MultiplayerGame.DemoButtonClickingGame:
+                    return DemoButtonCLickingGameString;
                 default:
                     return "There is no such game";
             }
@@ -33,6 +38,8 @@ namespace Enums
             {
                 case StatkiGameString:
                     return MultiplayerGame.Statki;
+                case DemoButtonCLickingGameString:
+                    return MultiplayerGame.DemoButtonClickingGame;
                 default:
                     return MultiplayerGame.NoGame;
                         

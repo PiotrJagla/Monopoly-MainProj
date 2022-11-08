@@ -11,6 +11,6 @@ namespace Services.Database_services.SQLqueries
     {
         List<User> SelectAll();
         User SelectOne(int id);
-        User SelectWithCriteria(UserLoginData userLoginData);
+        User SelectWithCriteria(UserLoginData UserLoginDataInput);
     }
 }

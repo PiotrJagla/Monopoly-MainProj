@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Models/1.0.0": {
+        "dependencies": {
+          "Enums": "1.0.0"
+        },
         "runtime": {
           "Models.dll": {}
+        }
+      },
+      "Enums/1.0.0": {
+        "runtime": {
+          "Enums.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Enums/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

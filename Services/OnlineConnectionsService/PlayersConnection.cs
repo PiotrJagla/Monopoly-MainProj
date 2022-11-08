@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,38 +25,42 @@ namespace Services.OnlineConnectionsService
 
         public bool findEnemy(string userName)
         {
-            foreach(Player player in ConnectedPlayers)
+            Player PlayerLookingForEnemy = ConnectedPlayers.FirstOrDefault(user => user.Name == userName);
+            foreach (Player player in ConnectedPlayers)
             {
-                if (player.Name != userName && player.IsWaitingForGame == true)
+                if (player.Name != PlayerLookingForEnemy.Name && player.IsWaitingForGame == true)
                 {
-                    TwoUsersGameRooms.Add( new Tuple<Player,Player>( player, ConnectedPlayers.FirstOrDefault(user => user.Name == userName) ) );
-                    setFoundEnemiesStatusToInGame(player, ConnectedPlayers.FirstOrDefault(user => user.Name == userName));
-                    Console.WriteLine($"{TwoUsersGameRooms.Last().Item1.Name}  :  {TwoUsersGameRooms.Last().Item2.Name}");
+                    TwoUsersGameRooms.Add( new Tuple<Player,Player>( player, PlayerLookingForEnemy ) );
+                    setEnemiesStatusToInGame(player, PlayerLookingForEnemy);
                     return true;
                 }
             }
+
             return false;
         }
 
 
-        private void setFoundEnemiesStatusToInGame(Player Enemy1, Player Enemy2)
+        private void setEnemiesStatusToInGame(Player Enemy1, Player Enemy2)
         {
             ConnectedPlayers[ConnectedPlayers.IndexOf(Enemy1)].IsWaitingForGame = false;
             ConnectedPlayers[ConnectedPlayers.IndexOf(Enemy2)].IsWaitingForGame = false;
         }
-        public Tuple<Player, Player> getTwoUsersGameRoomWithGiveName(string userName)
-        {
-            return TwoUsersGameRooms.FirstOrDefault(user => (user.Item1.Name == userName || user.Item2.Name == userName));
-        }
+        
 
-        public Player getEnemyWithGivenUserName(string userName)
+        public Player getUserEnemy(string userName)
         {
-            Tuple<Player, Player> TwoPlayersRoom = getTwoUsersGameRoomWithGiveName(userName);
+            Tuple<Player, Player> TwoPlayersRoom = findGameRoomByOneName(userName);
+
+            if (TwoPlayersRoom == null) return null;
 
             if (TwoPlayersRoom.Item1.Name == userName)
                 return TwoPlayersRoom.Item2;
             else
                 return TwoPlayersRoom.Item1;
+        }
+        public Tuple<Player, Player> findGameRoomByOneName(string userName)
+        {
+            return TwoUsersGameRooms.FirstOrDefault(user => (user.Item1.Name == userName || user.Item2.Name == userName));
         }
     }
 }

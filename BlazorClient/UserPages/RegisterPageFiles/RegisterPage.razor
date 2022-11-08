@@ -1,23 +1,16 @@
 ﻿@page "/register"
 @inherits RegisterPageBase
 
-<UserLoginDataInput ButtonName="Register" GetUserLoginData="RegisterUser">
+<UserLoginDataInput ButtonName="Register" GetUserLoginDataInput="RegisterUser">
     <Title>
         <h1>
             Register
         </h1>
         <h6>
-            (Name and Password should be 30 characters max)
+            (Name and Password should be 30 characters max and name has to be unique)
         </h6>
     </Title>
 </UserLoginDataInput>
 
 <div>@RegisterMessage</div>
 
-
-<style>
-    body {
-        background-color: black;
-        color: white;
-    }
-</style>

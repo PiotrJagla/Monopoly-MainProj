@@ -37,11 +37,6 @@ namespace Services.Database_services
             InsertQuery = new MySqlInsert(DatabaseConnection);
         }
 
-        public User GetUserData(int ID)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool InsertUser(UserLoginData UserDataToRegister)
         {
             return InsertQuery.InsertUser(UserDataToRegister);

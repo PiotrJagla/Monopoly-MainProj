@@ -14,7 +14,15 @@
           "Validation.dll": {}
         }
       },
+      "Enums/1.0.0": {
+        "runtime": {
+          "Enums.dll": {}
+        }
+      },
       "Models/1.0.0": {
+        "dependencies": {
+          "Enums": "1.0.0"
+        },
         "runtime": {
           "Models.dll": {}
         }
@@ -23,6 +31,11 @@
   },
   "libraries": {
     "Validation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Enums/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

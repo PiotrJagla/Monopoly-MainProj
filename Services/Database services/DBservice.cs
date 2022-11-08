@@ -9,8 +9,6 @@ namespace Services.Database_services
 {
     public interface DBservice
     {
-        User GetUserData(int ID);
-
         bool UserExist(UserLoginData userLoginData);
 
         bool InsertUser(UserLoginData UserDataToRegister);

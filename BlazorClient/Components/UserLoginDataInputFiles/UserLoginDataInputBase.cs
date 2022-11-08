@@ -10,7 +10,7 @@ namespace BlazorClient.Components.UserLoginDataInputFiles
 
 
         [Parameter]
-        public EventCallback<UserLoginData> GetUserLoginData { get; set; }
+        public EventCallback<UserLoginData> GetUserLoginDataInput { get; set; }
 
         [Parameter]
         public RenderFragment Title { get; set; }
@@ -23,9 +23,9 @@ namespace BlazorClient.Components.UserLoginDataInputFiles
             userLoginDataInput = new UserLoginData();
         }
 
-        protected void SendUserLoginData()
+        protected void SendUserLoginDataInput()
         {
-            GetUserLoginData.InvokeAsync(userLoginDataInput);
+            GetUserLoginDataInput.InvokeAsync(userLoginDataInput);
         }
     }
 }

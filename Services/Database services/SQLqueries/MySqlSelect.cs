@@ -46,13 +46,13 @@ namespace Services.Database_services.SQLqueries
             return result;
         }
 
-        public User SelectWithCriteria(UserLoginData userLoginData)
+        public User SelectWithCriteria(UserLoginData UserLoginDataInput)
         {
             User result = null;
             DatabaseConnection.Open();
 
             MySqlCommand getUserId = new MySqlCommand(
-                $"SELECT * FROM users WHERE Name='{userLoginData.Name}' AND Password='{userLoginData.Password}';",
+                $"SELECT * FROM users WHERE Name='{UserLoginDataInput.Name}' AND Password='{UserLoginDataInput.Password}';",
                 DatabaseConnection);
 
             MySqlDataReader dataReader = getUserId.ExecuteReader();
@@ -68,5 +68,6 @@ namespace Services.Database_services.SQLqueries
             DatabaseConnection.Close();
             return result;
         }
+        
     }
 }

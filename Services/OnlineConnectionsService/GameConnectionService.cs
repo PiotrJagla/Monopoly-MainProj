@@ -12,7 +12,7 @@ namespace Services.OnlineConnectionsService
         void addOnlinePlayer(string userName, string connId);
         bool findEnemy(string userName);
 
-        Tuple<Player, Player> getTwoUsersGameRoomWithGiveName(string userName);
-        Player getEnemyWithGivenUserName(string userName);
+        Tuple<Player, Player> findGameRoomByOneName(string userName);
+        Player getUserEnemy(string userName);
     }
 }

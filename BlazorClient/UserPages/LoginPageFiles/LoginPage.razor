@@ -1,7 +1,7 @@
 ﻿@page "/login"
 @inherits LoginPageBase
 
-<UserLoginDataInput ButtonName="Login" GetUserLoginData="LoginUser">
+<UserLoginDataInput ButtonName="Login" GetUserLoginDataInput="LoginUser">
     <Title>
         <h3>Login in</h3>
     </Title>
@@ -9,10 +9,3 @@
 
 
 <div>@LoginMessage</div>
-
-<style>
-    body {
-        background-color: black;
-        color: white;
-    }
-</style>

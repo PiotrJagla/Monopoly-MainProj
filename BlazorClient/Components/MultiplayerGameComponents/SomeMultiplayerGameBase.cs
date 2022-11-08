@@ -19,45 +19,46 @@ namespace BlazorClient.Components.MultiplayerGameComponents
 
         public int enemyPoints { get; set; }
 
-        public bool isEnemyFound { get; set; }
+
+        public bool IsEnemyFound{ get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             allPoints = 0;
-            isEnemyFound = false;
-        }
+            IsEnemyFound = false;
 
-        protected async Task OnUserButtonClick()
-        {
-            ++allPoints;
-            await multiplayerGameHubConn.SendAsync("SendToEnemyUserButtonPoints", loggedUserName, allPoints);
-        }
-
-        protected async Task Connect()
-        {
             multiplayerGameHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}/multihub")).WithAutomaticReconnect().Build();
-            
-            multiplayerGameHubConn.On<bool>("IsEnemyFound", (isEnemyFound) =>
-            {
-                this.isEnemyFound = isEnemyFound;
-                InvokeAsync(StateHasChanged);
-            });
+
             multiplayerGameHubConn.On<int>("RecieveEnemyPoints", (enemyPoints) =>
             {
                 this.enemyPoints = enemyPoints;
                 InvokeAsync(StateHasChanged);
             });
+            multiplayerGameHubConn.On<bool>("IsEnemyFound", (isEnemyFound) =>
+            {
+                IsEnemyFound = isEnemyFound;
+                InvokeAsync(StateHasChanged);
+            });
 
             await multiplayerGameHubConn.StartAsync();
-            await multiplayerGameHubConn.SendAsync("OnPlayerConnected",loggedUserName, multiplayerGameHubConn.ConnectionId);
-            
+            await multiplayerGameHubConn.SendAsync("OnUserConnected", loggedUserName, multiplayerGameHubConn.ConnectionId);
         }
 
-        protected bool IsConnected() { return multiplayerGameHubConn != null && multiplayerGameHubConn.ConnectionId != null; }
+        protected async Task OnUserButtonClick()
+        {
+            if (IsGameStarted() == true)
+            {
+                ++allPoints;
+                await multiplayerGameHubConn.SendAsync("SendToEnemyUserButtonPoints", loggedUserName, allPoints);
+            }
+        }
+
+        protected bool IsGameStarted() { return IsEnemyFound == true; }
+
 
         protected async Task FindEnemy()
         {
-            await multiplayerGameHubConn.SendAsync("FindEnemyForPlayer", loggedUserName);
+            await multiplayerGameHubConn.SendAsync("FindEnemyForUser", loggedUserName);
         }
     }
 }

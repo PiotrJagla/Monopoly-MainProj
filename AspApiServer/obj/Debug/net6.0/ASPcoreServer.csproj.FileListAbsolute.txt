@@ -60,3 +60,5 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\System.IO.Pipelines.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\AspApiServer\bin\Debug\net6.0\Enums.pdb

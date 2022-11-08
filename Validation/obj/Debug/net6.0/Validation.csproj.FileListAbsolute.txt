@@ -13,3 +13,5 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Validation\obj\De
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Validation\obj\Debug\net6.0\refint\Validation.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Validation\obj\Debug\net6.0\Validation.pdb
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Validation\obj\Debug\net6.0\ref\Validation.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Validation\bin\Debug\net6.0\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Validation\bin\Debug\net6.0\Enums.pdb
