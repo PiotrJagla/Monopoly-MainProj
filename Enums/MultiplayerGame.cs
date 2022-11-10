@@ -8,14 +8,14 @@ namespace Enums
 {
     public enum MultiplayerGame
     {
-        Statki,
+        Battleship,
         DemoButtonClickingGame,
         NoGame
     }
 
     public static class MultiplayerGameMethods
     {
-        private const string StatkiGameString = "Statki";
+        private const string BattleshipGameString = "Battleship";
         private const string DemoButtonCLickingGameString= "Demo button clicking game";
 
 
@@ -23,21 +23,21 @@ namespace Enums
         {
             switch(multiplayerGame)
             {
-                case MultiplayerGame.Statki:
-                    return StatkiGameString;
+                case MultiplayerGame.Battleship:
+                    return BattleshipGameString;
                 case MultiplayerGame.DemoButtonClickingGame:
                     return DemoButtonCLickingGameString;
                 default:
                     return "There is no such game";
             }
         }
-
+        
         public static MultiplayerGame ToEnum(string multiplayerGame)
         {
             switch(multiplayerGame)
             {
-                case StatkiGameString:
-                    return MultiplayerGame.Statki;
+                case BattleshipGameString:
+                    return MultiplayerGame.Battleship;
                 case DemoButtonCLickingGameString:
                     return MultiplayerGame.DemoButtonClickingGame;
                 default:

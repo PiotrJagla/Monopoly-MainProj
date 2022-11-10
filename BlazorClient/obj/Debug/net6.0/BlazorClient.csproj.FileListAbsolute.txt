@@ -1754,3 +1754,4 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\2aAXr+ql.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\rSAYDbYt.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\SomeMultiplayerGame.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\BattleshipComponentFiles\BattleshipGame.razor.rz.scp.css

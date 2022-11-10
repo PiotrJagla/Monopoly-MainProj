@@ -9,7 +9,7 @@ namespace Models.BattleshipDataStructures
 {
     public class Cell
     {
-        CellState state;
+        public CellState state { get; set; }
 
         public Cell()
         {

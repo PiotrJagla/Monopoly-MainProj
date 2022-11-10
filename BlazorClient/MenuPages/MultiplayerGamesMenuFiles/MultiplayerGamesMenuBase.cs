@@ -18,7 +18,7 @@ namespace BlazorClient.MenuPages.MultiplayerGamesMenuFiles
         {
             AllAddedMultiplayerGames = new List<MultiplayerGame>();
 
-            AllAddedMultiplayerGames.Add(MultiplayerGame.Statki);
+            AllAddedMultiplayerGames.Add(MultiplayerGame.Battleship);
             AllAddedMultiplayerGames.Add(MultiplayerGame.DemoButtonClickingGame);
         }
 

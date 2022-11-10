@@ -30,6 +30,7 @@ app.UseCors(policy =>
 ); 
 
 app.MapHub<SomeMultiplayerGameHub>("/multihub");
+app.MapHub<BattleshipHub>("/battleshiphub");
 
 app.UseHttpsRedirection();
  

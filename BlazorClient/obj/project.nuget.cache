@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "jEwrNlDsCD57l6IzKn1SzLAz1JCVCeQ4n+Cq4AOpzAIaxVpYwNV0ruhNH3OAEXDBUlQL3ITx6mhhUkd58/vqXw==",
-  "success": true,
+  "dgSpecHash": "py+pDx8jdYtXFdZYz3PoVdL18cUc3D8FG4VAdMABTZ6IbRGBzq0uKQBjONB1uqxWxL9w97JM5b0m/L2OxvXPhw==",
+  "success": false,
   "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\BlazorClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
@@ -62,5 +62,16 @@
     "C:\\Users\\piotr\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.9\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.9.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Wykryto obniżenie wersji pakietu: Microsoft.AspNetCore.SignalR.Client z 7.0.0 na 6.0.10. Aby wybrać inną wersję, odwołaj się do pakietu bezpośrednio z projektu. \r\n BlazorClient -> Services -> Microsoft.AspNetCore.SignalR.Client (>= 7.0.0) \r\n BlazorClient -> Microsoft.AspNetCore.SignalR.Client (>= 6.0.10)",
+      "libraryId": "Microsoft.AspNetCore.SignalR.Client",
+      "targetGraphs": [
+        "net6.0",
+        "net6.0/browser-wasm"
+      ]
+    }
+  ]
 }

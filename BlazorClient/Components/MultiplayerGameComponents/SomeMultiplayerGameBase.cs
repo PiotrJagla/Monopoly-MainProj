@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentFiles;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using System.Security.Permissions;
@@ -6,7 +7,9 @@ using System.Security.Permissions;
 namespace BlazorClient.Components.MultiplayerGameComponents
 {
     public class SomeMultiplayerGameBase : ComponentBase
-    { 
+    {
+        public BattleshipHubService MyProperty { get; set; }
+
         [Inject]
         public NavigationManager NavManager { get; set; }
 

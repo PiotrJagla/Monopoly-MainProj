@@ -26,6 +26,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipGame.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXEJhdHRsZXNoaXBDb21wb25lbnRGaWxlc1xCYXR0bGVzaGlwR2FtZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-lgfqz1pbro
+
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/SomeMultiplayerGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXFNvbWVNdWx0aXBsYXllckdhbWUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-2ju8nm3woe

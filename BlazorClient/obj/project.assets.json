@@ -986,6 +986,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31"
         },
@@ -1926,6 +1927,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31"
         },
@@ -3528,5 +3530,17 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Wykryto obniżenie wersji pakietu: Microsoft.AspNetCore.SignalR.Client z 7.0.0 na 6.0.10. Aby wybrać inną wersję, odwołaj się do pakietu bezpośrednio z projektu. \r\n BlazorClient -> Services -> Microsoft.AspNetCore.SignalR.Client (>= 7.0.0) \r\n BlazorClient -> Microsoft.AspNetCore.SignalR.Client (>= 6.0.10)",
+      "libraryId": "Microsoft.AspNetCore.SignalR.Client",
+      "targetGraphs": [
+        "net6.0",
+        "net6.0/browser-wasm"
+      ]
+    }
+  ]
 }
