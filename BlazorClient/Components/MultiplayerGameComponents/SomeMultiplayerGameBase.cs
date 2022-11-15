@@ -8,7 +8,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents
 {
     public class SomeMultiplayerGameBase : ComponentBase
     {
-        public BattleshipHubService MyProperty { get; set; }
 
         [Inject]
         public NavigationManager NavManager { get; set; }
@@ -49,6 +48,12 @@ namespace BlazorClient.Components.MultiplayerGameComponents
 
         protected async Task OnUserButtonClick()
         {
+            multiplayerGameHubConn.On<bool>("IsEnemyFound", (isEnemyFound) =>
+            {
+                IsEnemyFound = isEnemyFound;
+                InvokeAsync(StateHasChanged);
+            });
+
             if (IsGameStarted() == true)
             {
                 ++allPoints;

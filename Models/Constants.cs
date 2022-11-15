@@ -10,5 +10,7 @@ namespace Models
     {
         public static string MySQLConnectionString => "server=localhost;port=3306;database=bazaDanych;user=root;password=1234";
         public static string ServerURL => "https://localhost:7268";
+
+        public static Point2D BattleshipBoardSize = new Point2D(10, 10);
     }
 }

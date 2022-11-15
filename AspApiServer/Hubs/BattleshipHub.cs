@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
+using Services.GamesServices.Battleships;
 using Services.OnlineConnectionsService;
 
 namespace ASPcoreServer.Hubs
@@ -9,6 +10,7 @@ namespace ASPcoreServer.Hubs
     {
         private static GameConnectionService PlayersGameConnection = new PlayersConnection();
 
+        private static BattleshipService BattleshipLogic = new BattleshipGameLogic();
 
         public void OnUserConnected(string userName, string userConnId)
         {

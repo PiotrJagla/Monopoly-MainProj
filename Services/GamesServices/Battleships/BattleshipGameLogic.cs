@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Enums.BattleshipEnums;
+using Enums;
 using Models;
-using Models.BattleshipDataStructures;
 
 namespace Services.GamesServices.Battleships
 {
     public class BattleshipGameLogic : BattleshipService
     {
-        private static List<List<Cell>> UserBoard;
-        private static List<List<Cell>> EnemyBoard;
+        private static List<List<BattleshipCell>> UserBoard;
+        private static List<List<BattleshipCell>> EnemyBoard;
 
         public BattleshipGameLogic()
         {
@@ -20,45 +19,59 @@ namespace Services.GamesServices.Battleships
             InitBoard(EnemyBoard);
         }
 
-        private void InitBoard(List<List<Cell>> board)
+        private void InitBoard(List<List<BattleshipCell>> board)
         {
-            board = new List<List<Cell>>();
-            for (int iii = 0; iii < 10; ++iii)
+            board = new List<List<BattleshipCell>>();
+            for (int iii = 0; iii < Constants.BattleshipBoardSize.y; ++iii)
             {
-                board.Add(new List<Cell>());
-                for (int kkk = 0; kkk < 10; ++kkk)
+                board.Add(new List<BattleshipCell>());
+                for (int kkk = 0; kkk < Constants.BattleshipBoardSize.x; ++kkk)
                 {
-                    board[iii].Add(new Cell());
+                    board[iii].Add(new BattleshipCell());
                 }
             }
         }
 
-        public List<List<Cell>> GetUserBoard()
+        public BattleshipCell GetUserBoardCell(Point2D OnPosition)
         {
-            return UserBoard;
+            return UserBoard[OnPosition.y][OnPosition.x];
         }
 
-        public List<List<Cell>> GetUserEnemy()
+        public BattleshipCell GetEnemyBoardCell(Point2D OnPosition)
         {
-            return EnemyBoard;
+            return EnemyBoard[OnPosition.y][OnPosition.x];
         }
 
         public void UserBoardClicked(Point2D ClickPoint)
         {
             if(IsEmpty(UserBoard, ClickPoint))
-                UserBoard[ClickPoint.x][ClickPoint.y].state = CellState.Ship;
+                UserBoard[ClickPoint.y][ClickPoint.x].state = BattleshipCellState.Ship;
             else
-                UserBoard[ClickPoint.x][ClickPoint.y].state = CellState.Empty;
+                UserBoard[ClickPoint.y][ClickPoint.x].state = BattleshipCellState.Empty;
         }
 
-        private bool IsThereAShip(List<List<Cell>> board, Point2D point)
+        private bool IsThereAShip(List<List<BattleshipCell>> board, Point2D point)
         {
-            return board[point.y][point.x].state == CellState.Ship;
+            return board[point.y][point.x].state == BattleshipCellState.Ship;
         }
-        private bool IsEmpty(List<List<Cell>> board, Point2D point)
+        private bool IsEmpty(List<List<BattleshipCell>> board, Point2D point)
         {
-            return board[point.y][point.x].state == CellState.Empty;
+            return board[point.y][point.x].state == BattleshipCellState.Empty;
         }
 
+        public bool IsUserBoardCorrect()
+        {
+            return false;
+        }
+
+        public List<List<BattleshipCell>> GetUserBoard()
+        {
+            return UserBoard;
+        }
+
+        public List<List<BattleshipCell>> GetEnemyBoard()
+        {
+            return EnemyBoard;
+        }
     }
 }

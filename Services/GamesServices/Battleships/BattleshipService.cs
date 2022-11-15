@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
-using Models.BattleshipDataStructures;
 
 namespace Services.GamesServices.Battleships
 {
     public interface BattleshipService
     {
-        List<List<Cell>> GetUserBoard();
-        List<List<Cell>> GetUserEnemy();
+        BattleshipCell GetUserBoardCell(Point2D OnPosition);
+        BattleshipCell GetEnemyBoardCell(Point2D OnPosition);
+
+        List<List<BattleshipCell>> GetUserBoard(); 
+        List<List<BattleshipCell>> GetEnemyBoard(); 
 
         void UserBoardClicked(Point2D ClickPoint);
+
+        bool IsUserBoardCorrect();
     }
 }
