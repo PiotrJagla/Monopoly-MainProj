@@ -17,7 +17,6 @@ namespace UnitTests
             Assert.IsTrue(databaseService.UserExist(new UserLoginData("Piotrr", "12345")) == false);
             Assert.IsTrue(databaseService.UserExist(new UserLoginData("Ziemniak", "ziemniak")) == true);
         }
-
         
     }
 }

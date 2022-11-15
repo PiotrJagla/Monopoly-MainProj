@@ -50,6 +50,11 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
 
         protected void UserBoardClicked(Point2D OnPoint)
         {
+            BattleshipLogic.UserBoardClicked(OnPoint);
+        }
+
+        protected void EnemyBoardClicked(Point2D OnPoint)
+        {
             Console.WriteLine($"X: {OnPoint.x} : Y: {OnPoint.y}");
         }
     }

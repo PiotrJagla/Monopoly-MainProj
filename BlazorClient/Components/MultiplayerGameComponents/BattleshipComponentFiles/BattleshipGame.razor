@@ -6,6 +6,12 @@
     </Title>
 </BattleshipBoard>
 
+<BattleshipBoard Board="BattleshipLogic.GetEnemyBoard()" ButtonClickEvent="EnemyBoardClicked">
+    <Title>
+        Enemy Board
+    </Title>
+</BattleshipBoard>
+
 <button @onclick="FindEnemy">Play</button>
 
 <div>@UserMessage</div>

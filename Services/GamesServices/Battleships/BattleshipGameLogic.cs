@@ -15,11 +15,11 @@ namespace Services.GamesServices.Battleships
 
         public BattleshipGameLogic()
         {
-            InitBoard(UserBoard);
-            InitBoard(EnemyBoard);
+            InitBoard(ref UserBoard);
+            InitBoard(ref EnemyBoard);
         }
 
-        private void InitBoard(List<List<BattleshipCell>> board)
+        private void InitBoard(ref List<List<BattleshipCell>> board)
         {
             board = new List<List<BattleshipCell>>();
             for (int iii = 0; iii < Constants.BattleshipBoardSize.y; ++iii)
@@ -44,10 +44,10 @@ namespace Services.GamesServices.Battleships
 
         public void UserBoardClicked(Point2D ClickPoint)
         {
-            if(IsEmpty(UserBoard, ClickPoint))
-                UserBoard[ClickPoint.y][ClickPoint.x].state = BattleshipCellState.Ship;
+            if (IsEmpty(UserBoard, ClickPoint))
+                UserBoard[ClickPoint.y][ClickPoint.x].ChangeState(BattleshipCellState.Ship);
             else
-                UserBoard[ClickPoint.y][ClickPoint.x].state = BattleshipCellState.Empty;
+                UserBoard[ClickPoint.y][ClickPoint.x].ChangeState(BattleshipCellState.Empty);
         }
 
         private bool IsThereAShip(List<List<BattleshipCell>> board, Point2D point)

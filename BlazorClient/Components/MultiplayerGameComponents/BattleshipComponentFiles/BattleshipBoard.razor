@@ -7,7 +7,9 @@
         @for(int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
         {
             Point2D pointOnBoard = new Point2D(x, y);
-            <button class="btn btn-primary" @onclick="(() => SendClickedPoint(new Point2D( pointOnBoard.x, pointOnBoard.y)))">X</button>
+            <button class="btn btn-primary" @onclick="(() => SendClickedPoint(new Point2D( pointOnBoard.x, pointOnBoard.y)))">
+                @Board[pointOnBoard.y][pointOnBoard.x].OnCellDisplay
+            </button>
         }
         <br />
     }
