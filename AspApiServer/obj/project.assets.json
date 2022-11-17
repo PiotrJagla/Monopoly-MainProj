@@ -769,7 +769,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
-          "MySql.Data": "8.0.31"
+          "MySql.Data": "8.0.31",
+          "Validation": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Services.dll": {}

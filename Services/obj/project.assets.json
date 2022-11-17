@@ -675,6 +675,19 @@
         "runtime": {
           "bin/placeholder/Models.dll": {}
         }
+      },
+      "Validation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Validation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Validation.dll": {}
+        }
       }
     }
   },
@@ -1768,13 +1781,19 @@
       "type": "project",
       "path": "../Models/Models.csproj",
       "msbuildProject": "../Models/Models.csproj"
+    },
+    "Validation/1.0.0": {
+      "type": "project",
+      "path": "../Validation/Validation.csproj",
+      "msbuildProject": "../Validation/Validation.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Microsoft.AspNetCore.SignalR.Client >= 7.0.0",
       "Models >= 1.0.0",
-      "MySql.Data >= 8.0.31"
+      "MySql.Data >= 8.0.31",
+      "Validation >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1806,6 +1825,9 @@
           "projectReferences": {
             "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj"
+            },
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj"
             }
           }
         }

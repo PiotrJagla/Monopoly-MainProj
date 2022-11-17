@@ -238,3 +238,5 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\UnitTests\bin\Deb
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\UnitTests\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\UnitTests\bin\Debug\net6.0\Enums.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\UnitTests\bin\Debug\net6.0\Enums.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\UnitTests\bin\Debug\net6.0\Validation.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\UnitTests\bin\Debug\net6.0\Validation.pdb

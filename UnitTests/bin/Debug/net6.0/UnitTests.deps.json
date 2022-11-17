@@ -13,6 +13,7 @@
           "Microsoft.NET.Test.Sdk": "17.1.0",
           "Models": "1.0.0",
           "Services": "1.0.0",
+          "Validation": "1.0.0",
           "coverlet.collector": "3.1.2"
         },
         "runtime": {
@@ -1483,10 +1484,19 @@
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
-          "MySql.Data": "8.0.31"
+          "MySql.Data": "8.0.31",
+          "Validation": "1.0.0"
         },
         "runtime": {
           "Services.dll": {}
+        }
+      },
+      "Validation/1.0.0": {
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "Validation.dll": {}
         }
       }
     }
@@ -2369,6 +2379,11 @@
       "sha512": ""
     },
     "Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Validation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

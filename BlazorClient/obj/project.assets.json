@@ -975,13 +975,27 @@
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
-          "MySql.Data": "8.0.31"
+          "MySql.Data": "8.0.31",
+          "Validation": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Services.dll": {}
         },
         "runtime": {
           "bin/placeholder/Services.dll": {}
+        }
+      },
+      "Validation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Validation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Validation.dll": {}
         }
       }
     },
@@ -1903,13 +1917,27 @@
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
-          "MySql.Data": "8.0.31"
+          "MySql.Data": "8.0.31",
+          "Validation": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Services.dll": {}
         },
         "runtime": {
           "bin/placeholder/Services.dll": {}
+        }
+      },
+      "Validation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Validation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Validation.dll": {}
         }
       }
     }
@@ -3443,6 +3471,11 @@
       "type": "project",
       "path": "../Services/Services.csproj",
       "msbuildProject": "../Services/Services.csproj"
+    },
+    "Validation/1.0.0": {
+      "type": "project",
+      "path": "../Validation/Validation.csproj",
+      "msbuildProject": "../Validation/Validation.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -12,7 +12,7 @@ namespace Models
         public int y { get; set; }
 
 
-        public Point2D(int x, int y)
+        public Point2D(int x = 0, int y = 0)
         {
             this.x = x;
             this.y = y;

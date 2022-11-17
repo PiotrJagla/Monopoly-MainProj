@@ -31,40 +31,109 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void ShipsDistributionValidationTest()
+        public void ShipsDistributionValidationTest1()
         {
             BattleshipService BattleshipLogic = new BattleshipGameLogic();
 
-            List<Point2D> FirstBadDistribution = new List<Point2D> {
-                new Point2D(6, 2), new Point2D(1, 2), new Point2D(2, 2), new Point2D(3, 2), new Point2D(6, 4), new Point2D(6, 5), new Point2D(2, 5), new Point2D(3, 6)
+            List<string> BadDistributionVisualization = new List<string>
+            {
+                "-XX-------",
+                "----X--X--",
+                "-XX---X---",
+                "----------",
+                "-X------X-",
+                "-X-X----X-",
+                "-X-X----X-",
+                "----------",
+                "-XXXX-----",
+                "---------X",
             };
 
-            List<Point2D> SecoundBadDistribution = new List<Point2D> {
-                new Point2D(1, 0), new Point2D(2, 0), new Point2D(6, 1), new Point2D(1, 2), new Point2D(2, 2), new Point2D(3, 2), new Point2D(8, 2), new Point2D(8, 3),
-                new Point2D(8, 4), new Point2D(6, 4), new Point2D(6, 5), new Point2D(2, 5), new Point2D(3, 6), new Point2D(7, 7), new Point2D(8, 7), new Point2D(9, 9),
-                new Point2D(1, 8), new Point2D(2, 8), new Point2D(3, 8), new Point2D(4, 8)
-            };
+            List<Point2D> BadDistribution = new List<Point2D>();
 
-            List<Point2D> FirstValidDistribution = new List<Point2D> {
-                new Point2D(1, 0), new Point2D(2, 0), new Point2D(6, 1), new Point2D(1, 2), new Point2D(2, 2), new Point2D(3, 2), new Point2D(8, 2), new Point2D(8, 3),
-                new Point2D(8, 4), new Point2D(6, 4), new Point2D(6, 5), new Point2D(2, 5), new Point2D(4, 6), new Point2D(7, 7), new Point2D(8, 7), new Point2D(9, 9),
-                new Point2D(1, 8), new Point2D(2, 8), new Point2D(3, 8), new Point2D(4, 8)
-            };
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                {
+                    if (BadDistributionVisualization[y].ElementAt(x) == 'X')
+                        BadDistribution.Add(new Point2D(x, y));
+                }
+            }
 
-            for (int iii = 0; iii < FirstBadDistribution.Count; ++iii)
-                BattleshipLogic.UserBoardClicked(FirstBadDistribution[iii]);
+            for (int iii = 0; iii < BadDistribution.Count; ++iii)
+                BattleshipLogic.UserBoardClicked(BadDistribution[iii]);
 
             Assert.IsFalse(BattleshipLogic.IsUserBoardCorrect());
+        }
 
-            BattleshipLogic = new BattleshipGameLogic(); //overwriting object to reset all board
-            for (int iii = 0; iii < SecoundBadDistribution.Count; ++iii)
-                BattleshipLogic.UserBoardClicked(SecoundBadDistribution[iii]);
+        [TestMethod]
+        public void ShipsDistributionValidationTest2()
+        {
+            BattleshipService BattleshipLogic = new BattleshipGameLogic();
+
+            List<string> BadDistributionVisualization = new List<string>
+            {
+                "-XX-------",
+                "----X--X--",
+                "-XX-------",
+                "----------",
+                "-X------X-",
+                "-X-X----X-",
+                "-X-X----X-",
+                "----------",
+                "-XXXX-----",
+                "---X-----X",
+            };
+
+            List<Point2D> BadDsitribution = new List<Point2D>();
+
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                {
+                    if (BadDistributionVisualization[y].ElementAt(x) == 'X')
+                        BadDsitribution.Add(new Point2D(x, y));
+                }
+            }
+
+            for (int iii = 0; iii < BadDsitribution.Count; ++iii)
+                BattleshipLogic.UserBoardClicked(BadDsitribution[iii]);
 
             Assert.IsFalse(BattleshipLogic.IsUserBoardCorrect());
+        }
 
-            BattleshipLogic = new BattleshipGameLogic(); 
-            for (int iii = 0; iii < FirstValidDistribution.Count; ++iii)
-                BattleshipLogic.UserBoardClicked(FirstValidDistribution[iii]);
+        [TestMethod]
+        public void ShipsDistributionValidationTest3()
+        {
+            BattleshipService BattleshipLogic = new BattleshipGameLogic();
+
+            List<string> ValidDistributionVisualization = new List<string>
+            {
+                "-XX-------",
+                "----X--X--",
+                "-XX-------",
+                "-----X----",
+                "-X------X-",
+                "-X-X----X-",
+                "-X-X----X-",
+                "----------",
+                "-XXXX-----",
+                "---------X",
+            };
+
+            List<Point2D> ValidDsitribution = new List<Point2D>();
+
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                {
+                    if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
+                        ValidDsitribution.Add(new Point2D(x, y));
+                }
+            }
+
+            for (int iii = 0; iii < ValidDsitribution.Count; ++iii)
+                BattleshipLogic.UserBoardClicked(ValidDsitribution[iii]);
 
             Assert.IsTrue(BattleshipLogic.IsUserBoardCorrect());
         }
