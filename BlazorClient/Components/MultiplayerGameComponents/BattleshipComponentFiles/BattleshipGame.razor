@@ -1,6 +1,6 @@
 ﻿@inherits BattleshipGameBase
 
-<BattleshipBoard Board="BattleshipLogic.GetUserBoard()" ButtonClickEvent="UserBoardClicked">
+<BattleshipBoard AreButtonsClickable="IsEnemyFound == false" Board="BattleshipLogic.GetUserBoard()" ButtonClickEvent="UserBoardClicked">
     <Title>
         User Board
     </Title>
@@ -12,7 +12,7 @@
     </Title>
 </BattleshipBoard>
 
-<button @onclick="FindEnemy">Play</button>
+<button disabled="@(IsEnemyFound == true)" @onclick="FindEnemy">Play</button>
 
 <div>@UserMessage</div>
 

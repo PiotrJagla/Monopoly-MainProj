@@ -130,31 +130,12 @@ namespace Services.GamesServices.Battleships
             int ShipsFound= 0;
             List<Point2D> CheckedShipsPositions = new List<Point2D>();
 
-            foreach (Point2D ShipPos in AllShipsPositions)
+            foreach (Point2D ShipPosition in AllShipsPositions)
             {
-                //if (CheckedShipsPositions.FirstOrDefault(Pos => Pos.x == ShipPos.x && Pos.y == ShipPos.y) == null)
-                //{
-                //    Point2D NextShipTileDir = GetNextShipTileDirection(ShipPos, AllShipsPositions);
-
-                //    int ShipTiles = 0;
-                //    Point2D NextShipPos = new Point2D(ShipPos.x, ShipPos.y);
-                //    while (AllShipsPositions.FirstOrDefault(Pos => Pos.x == NextShipPos.x && Pos.y == NextShipPos.y) != null)
-                //    {
-                //        CheckedShipsPositions.Add(new Point2D(NextShipPos.x, NextShipPos.y));
-                //        NextShipPos.x += NextShipTileDir.x;
-                //        NextShipPos.y += NextShipTileDir.y;
-                //        ++ShipTiles;
-                //        //if (NextShipPos.x == ShipPos.x && NextShipPos.y == ShipPos.y) break;
-                //    }
-
-                //    if (ShipTiles == ShipSize)
-                //        ++ShipsFound;
-                //}
-
-                if (GetShipSize(ShipPos, AllShipsPositions, ref CheckedShipsPositions) == ShipSize)
+                if (GetShipSize(ShipPosition, AllShipsPositions, ref CheckedShipsPositions) == ShipSize)
                     ++ShipsFound;
-            }            
-
+            }
+            
             int ShipsExpectedNumber = 5 - ShipSize;
             return ShipsFound == ShipsExpectedNumber;
         }
@@ -163,22 +144,26 @@ namespace Services.GamesServices.Battleships
         {
             if (CheckedPositions.FirstOrDefault(Pos => Pos.x == FirstShipPosition.x && Pos.y == FirstShipPosition.y) == null)
             {
-                Point2D NextShipTileDir = GetNextShipTileDirection(FirstShipPosition, AllShipsPositions);
-
-                int ShipTiles = 0;
-                Point2D NextShipPos = new Point2D(FirstShipPosition.x, FirstShipPosition.y);
-                while (AllShipsPositions.FirstOrDefault(Pos => Pos.x == NextShipPos.x && Pos.y == NextShipPos.y) != null)
-                {
-                    CheckedPositions.Add(new Point2D(NextShipPos.x, NextShipPos.y));
-                    NextShipPos.x += NextShipTileDir.x;
-                    NextShipPos.y += NextShipTileDir.y;
-                    ++ShipTiles;
-                }
-
-                return ShipTiles;
+                return CountShipTiles(
+                    new Point2D(FirstShipPosition.x, FirstShipPosition.y),GetNextShipTileDirection(FirstShipPosition, AllShipsPositions),
+                    AllShipsPositions, ref CheckedPositions
+                );
             }
             else
                 return 0;
+        }
+
+        private int CountShipTiles(Point2D NextShipPosition,in Point2D NextPositionDirection, in List<Point2D> AllShipsPositions, ref List<Point2D> CheckedPositions)
+        {
+            int ShipTiles = 0;
+            while (AllShipsPositions.FirstOrDefault(Pos => Pos.x == NextShipPosition.x && Pos.y == NextShipPosition.y) != null)
+            {
+                CheckedPositions.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
+                NextShipPosition.x += NextPositionDirection.x;
+                NextShipPosition.y += NextPositionDirection.y;
+                ++ShipTiles;
+            }
+            return ShipTiles;
         }
 
         private Point2D GetNextShipTileDirection(Point2D shipPosition, in List<Point2D> AllShipsPositions)
@@ -195,8 +180,7 @@ namespace Services.GamesServices.Battleships
                 if (AllShipsPositions.FirstOrDefault(Point => Point.x == NextShipTile.x && Point.y == NextShipTile.y) != null)
                     return Direction;
             }
-
-            Point2D OneTileShip = new Point2D(Constants.BattleshipBoardSize.x + 1, Constants.BattleshipBoardSize.y + 1);
+            Point2D OneTileShip = new Point2D(1,1);
             return OneTileShip;
         }
 
