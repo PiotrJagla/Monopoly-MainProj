@@ -137,5 +137,45 @@ namespace UnitTests
 
             Assert.IsTrue(BattleshipLogic.IsUserBoardCorrect());
         }
+        [TestMethod]
+        public void ShipsDistributionValidationTest4()
+        {
+            BattleshipService BattleshipLogic = new BattleshipGameLogic();
+
+            List<string> ValidDistributionVisualization = new List<string>
+            {
+                "XX--------",
+                "-------XXX",
+                "----X-----",
+                "----X---X-",
+                "X---------",
+                "X--X-X----",
+                "X----X----",
+                "X--X------",
+                "--------X-",
+                "XXX-------",
+            };
+
+            List<Point2D> ValidDsitribution = new List<Point2D>();
+
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                {
+                    if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
+                        ValidDsitribution.Add(new Point2D(x, y));
+                }
+            }
+
+            for (int iii = 0; iii < ValidDsitribution.Count; ++iii)
+                BattleshipLogic.UserBoardClicked(ValidDsitribution[iii]);
+
+            Assert.IsTrue(BattleshipLogic.IsUserBoardCorrect());
+        }
+
     }
+
+    
+
+
 }
