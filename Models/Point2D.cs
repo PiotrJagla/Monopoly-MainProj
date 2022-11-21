@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Models
 {
     public class Point2D
@@ -17,5 +18,11 @@ namespace Models
             this.x = x;
             this.y = y;
         }
+
+        //public Point2D(Point2D NewPoint)
+        //{
+        //    x = NewPoint.x;
+        //    y = NewPoint.y;
+        //}
     }
 }

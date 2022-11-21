@@ -17,6 +17,8 @@ namespace Services.GamesServices.Battleships
 
         void UserBoardClicked(Point2D ClickPoint);
 
+        void EnemyAttack(Point2D OnPoint);
+
         bool IsUserBoardCorrect();
     }
 }

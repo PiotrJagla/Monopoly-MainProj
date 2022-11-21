@@ -16,11 +16,6 @@ namespace ASPcoreServer.Hubs
             Clients.Client(enemy.ConnectionId).SendAsync("RecieveEnemyPoints", userPoints);
         }
 
-        public void CheckShipsDistribution(string UserConnId, List<List<BattleshipCell>> Board)
-        {
-
-        }
-
         public void OnUserConnected(string userName, string userConnId)
         {
             PlayersGameConnection.addOnlinePlayer(userName, userConnId);

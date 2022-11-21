@@ -32,6 +32,10 @@ namespace Models
                     return '-';
                 case BattleshipCellState.Ship:
                     return 'O';
+                case BattleshipCellState.Checked:
+                    return '~';
+                case BattleshipCellState.DestroyedShip:
+                    return 'X';
                 default:
                     return '!';
             }

@@ -52,14 +52,54 @@ namespace Services.GamesServices.Battleships
                 UserBoard[ClickPoint.y][ClickPoint.x].ChangeState(BattleshipCellState.Empty);
         }
 
-        
+        public void EnemyAttack(Point2D OnPoint)
+        {
+            if (IsEmpty(UserBoard, OnPoint))
+                UserBoard[OnPoint.y][OnPoint.x].ChangeState(BattleshipCellState.Checked);
+            else if(IsThereAShip(UserBoard, OnPoint))
+                UserBoard[OnPoint.y][OnPoint.x].ChangeState(BattleshipCellState.DestroyedShip);
+        }
+
+
         private bool IsEmpty(List<List<BattleshipCell>> board, Point2D point)
         {
             return board[point.y][point.x].state == BattleshipCellState.Empty;
         }
 
+        private void DefaultShipsPositions()
+        {
+            List<string> ValidDistributionVisualization = new List<string>
+            {
+                "XX--------",
+                "-------XXX",
+                "----X-----",
+                "----X---X-",
+                "X---------",
+                "X--X-X----",
+                "X----X----",
+                "X--X------",
+                "--------X-",
+                "XXX-------",
+            };
+
+            List<Point2D> ValidDsitribution = new List<Point2D>();
+
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                {
+                    if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
+                        ValidDsitribution.Add(new Point2D(x, y));
+                }
+            }
+
+            for (int iii = 0; iii < ValidDsitribution.Count; ++iii)
+                UserBoardClicked(ValidDsitribution[iii]);
+        }
+
         public bool IsUserBoardCorrect()
         {
+            DefaultShipsPositions();
             List<Point2D> AllShipsPositions = GetShipsPositionsFrom(UserBoard);
             return IsShipsDistributionCorrect(UserBoard, AllShipsPositions) && IsShipsNumberCorrect(UserBoard, AllShipsPositions);
         }
@@ -158,7 +198,7 @@ namespace Services.GamesServices.Battleships
             int ShipTiles = 0;
             while (AllShipsPositions.FirstOrDefault(Pos => Pos.x == NextShipPosition.x && Pos.y == NextShipPosition.y) != null)
             {
-                CheckedPositions.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
+                CheckedPositions.Add(new Point2D(NextShipPosition.x, NextPositionDirection.y));
                 NextShipPosition.x += NextPositionDirection.x;
                 NextShipPosition.y += NextPositionDirection.y;
                 ++ShipTiles;
@@ -193,5 +233,7 @@ namespace Services.GamesServices.Battleships
         {
             return EnemyBoard;
         }
+
+        
     }
 }

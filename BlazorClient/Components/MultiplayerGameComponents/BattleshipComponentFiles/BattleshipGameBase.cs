@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Enums;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using Services.GamesServices.Battleships;
@@ -14,27 +15,35 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
         public BattleshipService BattleshipLogic { get; set; }
 
         [Parameter]
-        public string loggedUserName { get; set; }
+        public string LoggedUserName { get; set; }
 
-        private HubConnection multiplayerGameHubConn;
+        private HubConnection BattleshipHubConn;
 
         public string UserMessage { get; private set; }
 
         public bool IsEnemyFound { get; set; }
+        public bool IsYourTurn { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             UserMessage = "";
-            multiplayerGameHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}/battleshiphub")).WithAutomaticReconnect().Build();
+            BattleshipHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}/battleshiphub")).WithAutomaticReconnect().Build();
 
-            multiplayerGameHubConn.On<bool>("IsEnemyFound", (isEnemyFound) =>
+            BattleshipHubConn.On<bool, bool>("IsEnemyFound", (isEnemyFound, IsYourTurn) =>
             {
                 IsEnemyFound = isEnemyFound;
+                this.IsYourTurn = IsYourTurn;
                 InvokeAsync(StateHasChanged);
             });
 
-            await multiplayerGameHubConn.StartAsync();
-            await multiplayerGameHubConn.SendAsync("OnUserConnected", loggedUserName, multiplayerGameHubConn.ConnectionId);
+            BattleshipHubConn.On<Point2D>("EnemyAttack", (OnPoint) =>
+            {
+                BattleshipLogic.EnemyAttack(OnPoint);
+                InvokeAsync(StateHasChanged);
+            });
+
+            await BattleshipHubConn.StartAsync();
+            await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName, BattleshipHubConn.ConnectionId);
         }
 
         protected bool IsGameStarted() { return IsEnemyFound == true; }
@@ -43,7 +52,10 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
         protected async Task FindEnemy()
         {
             if (BattleshipLogic.IsUserBoardCorrect())
-                await multiplayerGameHubConn.SendAsync("FindEnemyForUser", loggedUserName);
+            {
+                await BattleshipHubConn.SendAsync("FindEnemyForUser", LoggedUserName);
+                UserMessage = "";
+            }
             else
                 UserMessage = "Ships distribution is not correct";
         }
@@ -53,9 +65,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
             BattleshipLogic.UserBoardClicked(OnPoint);
         }
 
-        protected void EnemyBoardClicked(Point2D OnPoint)
+        protected async Task EnemyBoardClicked(Point2D OnPoint)
         {
-            Console.WriteLine($"X: {OnPoint.x} : Y: {OnPoint.y}");
+            await BattleshipHubConn.SendAsync("UserAttack", OnPoint, LoggedUserName);
         }
     }
 }
