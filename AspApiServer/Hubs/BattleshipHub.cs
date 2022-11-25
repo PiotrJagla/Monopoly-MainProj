@@ -34,5 +34,13 @@ namespace ASPcoreServer.Hubs
             await Clients.Client(enemy.ConnectionId).SendAsync("EnemyAttack", OnPoint);
         }
 
+        public async Task SendAttackedCell(BattleshipCell AttackedCell, string userName)
+        {
+            Player enemy = PlayersGameConnection.getUserEnemy(userName);
+            await Clients.Client(enemy.ConnectionId).SendAsync("RecieveAttackedCell", AttackedCell);
+        }
+
+
+
     }
 }

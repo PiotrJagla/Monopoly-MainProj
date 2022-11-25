@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using Services.GamesServices.Battleships;
+using System.Runtime.Serialization.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentFiles
 {
@@ -28,6 +30,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
         {
             UserMessage = "";
             BattleshipHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}/battleshiphub")).WithAutomaticReconnect().Build();
+            await BattleshipHubConn.StartAsync();
 
             BattleshipHubConn.On<bool, bool>("IsEnemyFound", (isEnemyFound, IsYourTurn) =>
             {
@@ -39,10 +42,19 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
             BattleshipHubConn.On<Point2D>("EnemyAttack", (OnPoint) =>
             {
                 BattleshipLogic.EnemyAttack(OnPoint);
+                BattleshipHubConn.SendAsync("SendAttackedCell", BattleshipLogic.GetUserBoardCell(OnPoint), LoggedUserName);
+                IsYourTurn = !IsYourTurn;
+                InvokeAsync(StateHasChanged);                
+            });
+
+            BattleshipHubConn.On<BattleshipCell>("RecieveAttackedCell", (AttackedCell) =>
+            {
+                Console.WriteLine($"You Attacked: X: {AttackedCell.CellPoint.x} Y: {AttackedCell.CellPoint.y}");
+                IsYourTurn = !IsYourTurn;
                 InvokeAsync(StateHasChanged);
             });
 
-            await BattleshipHubConn.StartAsync();
+            
             await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName, BattleshipHubConn.ConnectionId);
         }
 

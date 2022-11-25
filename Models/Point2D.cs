@@ -19,6 +19,11 @@ namespace Models
             this.y = y;
         }
 
+        public bool isSameAs(Point2D PointToCompare)
+        {
+            return x == PointToCompare.x && y == PointToCompare.y;
+        }
+
         //public Point2D(Point2D NewPoint)
         //{
         //    x = NewPoint.x;

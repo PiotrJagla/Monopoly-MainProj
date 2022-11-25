@@ -10,10 +10,12 @@ namespace Models
     public class BattleshipCell
     {
         public BattleshipCellState state { get; set; }
+        public Point2D CellPoint { get; set; }
         public char OnCellDisplay { get; set; }
 
         public BattleshipCell()
         {
+            CellPoint = new Point2D();
             OnCellDisplay = '-';
             state = BattleshipCellState.Empty;
         }
@@ -21,10 +23,10 @@ namespace Models
         public void ChangeState(BattleshipCellState state)
         {
             this.state = state;
-            OnCellDisplay = GetCorrespondingDisplayToState(state);
+            OnCellDisplay = GetStateDisplay(state);
         }
 
-        private char GetCorrespondingDisplayToState(BattleshipCellState state)
+        private char GetStateDisplay(BattleshipCellState state)
         {
             switch(state)
             {

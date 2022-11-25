@@ -30,6 +30,8 @@ namespace Services.GamesServices.Battleships
                 for (int kkk = 0; kkk < Constants.BattleshipBoardSize.x; ++kkk)
                 {
                     board[iii].Add(new BattleshipCell());
+                    board[iii][kkk].CellPoint.x = kkk;
+                    board[iii][kkk].CellPoint.y = iii;
                 }
             }
         }
@@ -56,14 +58,82 @@ namespace Services.GamesServices.Battleships
         {
             if (IsEmpty(UserBoard, OnPoint))
                 UserBoard[OnPoint.y][OnPoint.x].ChangeState(BattleshipCellState.Checked);
-            else if(IsThereAShip(UserBoard, OnPoint))
-                UserBoard[OnPoint.y][OnPoint.x].ChangeState(BattleshipCellState.DestroyedShip);
+            else if (IsThereAShip(UserBoard, OnPoint))
+                ShipHit(OnPoint);
+        }
+
+        private void ShipHit(Point2D OnPoint)
+        {
+            UserBoard[OnPoint.y][OnPoint.x].ChangeState(BattleshipCellState.DestroyedShip);
+            IsShipDestroyed(OnPoint);
+        }
+
+        private bool IsShipDestroyed(Point2D ShipPoint)
+        {
+            List<Point2D> ShipPoints = new List<Point2D>();
+            Point2D NextTileDirection = GetNextShipTileDirection(ShipPoint);
+            Point2D NextTileOppositeDirection = GetNextShipTileDirection(ShipPoint);
+            NextTileOppositeDirection.x *= -1;
+            NextTileOppositeDirection.y *= -1;
+
+            if(NextTileDirection.isSameAs(new Point2D(1,1)))
+            {//This is 1-Tile ship if Direction is (1,1)
+                ShipPoints.Add(new Point2D(ShipPoint.x, ShipPoint.y));
+                return true;
+            }
+
+            Point2D NextShipPosition = ShipPoint;
+
+            while(true)
+            {
+                if (IsThereAShip(UserBoard, NextShipPosition))
+                    return false;
+                else
+                    ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
+
+                NextShipPosition.x += NextTileDirection.x;
+                NextShipPosition.y += NextTileDirection.y;
+
+                if (IsEmpty(UserBoard, NextShipPosition))
+                    break;
+            }
+
+            NextTileDirection = ShipPoint;
+
+            while (true)
+            {
+                NextShipPosition.x += NextTileOppositeDirection.x;
+                NextShipPosition.y += NextTileOppositeDirection.y;
+
+                if (IsThereAShip(UserBoard, NextShipPosition))
+                    return false;
+                else
+                    ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
+
+                if (IsEmpty(UserBoard, NextShipPosition))
+                    break;
+            }
+
+            RevealAdjancedPointsToShip(ShipPoints);
+            return true;
+        }
+
+        private void RevealAdjancedPointsToShip(in List<Point2D> Ship)
+        {
+            Ship.Sort(
+                (point1, point2) => point1.x);
+        }
+
+        public void AttackOnEnemyBoard(Point2D AttackPoint)
+        {
+
         }
 
 
         private bool IsEmpty(List<List<BattleshipCell>> board, Point2D point)
         {
-            return board[point.y][point.x].state == BattleshipCellState.Empty;
+            return board[point.y][point.x].state == BattleshipCellState.Empty ||
+                   board[point.y][point.x].state == BattleshipCellState.Checked;
         }
 
         private void DefaultShipsPositions()
@@ -99,7 +169,7 @@ namespace Services.GamesServices.Battleships
 
         public bool IsUserBoardCorrect()
         {
-            DefaultShipsPositions();
+            //DefaultShipsPositions();
             List<Point2D> AllShipsPositions = GetShipsPositionsFrom(UserBoard);
             return IsShipsDistributionCorrect(UserBoard, AllShipsPositions) && IsShipsNumberCorrect(UserBoard, AllShipsPositions);
         }
@@ -185,7 +255,8 @@ namespace Services.GamesServices.Battleships
             if (CheckedPositions.FirstOrDefault(Pos => Pos.x == FirstShipPosition.x && Pos.y == FirstShipPosition.y) == null)
             {
                 return CountShipTiles(
-                    new Point2D(FirstShipPosition.x, FirstShipPosition.y),GetNextShipTileDirection(FirstShipPosition, AllShipsPositions),
+                    new Point2D(FirstShipPosition.x, FirstShipPosition.y),
+                    GetNextShipTileDirection(FirstShipPosition),
                     AllShipsPositions, ref CheckedPositions
                 );
             }
@@ -198,7 +269,7 @@ namespace Services.GamesServices.Battleships
             int ShipTiles = 0;
             while (AllShipsPositions.FirstOrDefault(Pos => Pos.x == NextShipPosition.x && Pos.y == NextShipPosition.y) != null)
             {
-                CheckedPositions.Add(new Point2D(NextShipPosition.x, NextPositionDirection.y));
+                CheckedPositions.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
                 NextShipPosition.x += NextPositionDirection.x;
                 NextShipPosition.y += NextPositionDirection.y;
                 ++ShipTiles;
@@ -206,7 +277,7 @@ namespace Services.GamesServices.Battleships
             return ShipTiles;
         }
 
-        private Point2D GetNextShipTileDirection(Point2D shipPosition, in List<Point2D> AllShipsPositions)
+        private Point2D GetNextShipTileDirection(Point2D shipPosition)
         {
             List<Point2D> PossibleDirections = new List<Point2D>
             {
@@ -216,13 +287,14 @@ namespace Services.GamesServices.Battleships
             foreach(Point2D Direction in PossibleDirections)
             {
                 Point2D NextShipTile = new Point2D(shipPosition.x + Direction.x, shipPosition.y + Direction.y);
-
-                if (AllShipsPositions.FirstOrDefault(Point => Point.x == NextShipTile.x && Point.y == NextShipTile.y) != null)
+                
+                if (ValidateIndex.IsWithin2DArray(NextShipTile, Constants.BattleshipBoardSize) && IsThereAShip(UserBoard, NextShipTile))
                     return Direction;
             }
             Point2D OneTileShip = new Point2D(1,1);
             return OneTileShip;
         }
+
 
         public List<List<BattleshipCell>> GetUserBoard()
         {
