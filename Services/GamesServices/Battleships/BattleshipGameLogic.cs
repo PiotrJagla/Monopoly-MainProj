@@ -71,50 +71,12 @@ namespace Services.GamesServices.Battleships
         private bool IsShipDestroyed(Point2D ShipPosition)
         {
             List<Point2D> ShipPoints = new List<Point2D>();
+
             Point2D NextTileDirection = GetNextShipTileDirection(ShipPosition);
-            Point2D NextTileOppositeDirection = new Point2D(NextTileDirection.x, NextTileDirection.y);
-            NextTileOppositeDirection.x *= -1;
-            NextTileOppositeDirection.y *= -1;
-
-            if(NextTileDirection.isSameAs(new Point2D(1,1)))
-            {//This is 1-Tile ship if Direction is (1,1)
-                ShipPoints.Add(new Point2D(ShipPosition.x, ShipPosition.y));
-            }
-
-            //Point2D NextShipPosition = new Point2D(ShipPosition.x, ShipPosition.y);
-
-            //while(true)
-            //{
-            //    if (ValidateIndex.IsWithin2DArray(NextShipPosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipPosition))
-            //        break;
-
-            //    if (IsThereFloatingShip(UserBoard, NextShipPosition))
-            //        return false;
-            //    else
-            //        ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
-
-            //    NextShipPosition.x += NextTileDirection.x;
-            //    NextShipPosition.y += NextTileDirection.y;
-            //}
-
-            //NextShipPosition = new Point2D(ShipPosition.x, ShipPosition.y); ;
-
-            //while (true)
-            //{
-            //    NextShipPosition.x += NextTileOppositeDirection.x;
-            //    NextShipPosition.y += NextTileOppositeDirection.y;
-
-            //    if (ValidateIndex.IsWithin2DArray(NextShipPosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipPosition))
-            //        break;
-
-            //    if (IsThereFloatingShip(UserBoard, NextShipPosition))
-            //        return false;
-            //    else
-            //        ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
-            //}
             if (IsFloatingShipFound(ShipPosition, NextTileDirection, ref ShipPoints))
                 return false;
 
+            Point2D NextTileOppositeDirection = new Point2D(NextTileDirection.x * (-1), NextTileDirection.y * (-1));
             if (IsFloatingShipFound(ShipPosition, NextTileOppositeDirection, ref ShipPoints))
                 return false;
 
@@ -124,21 +86,17 @@ namespace Services.GamesServices.Battleships
 
         private bool IsFloatingShipFound(in Point2D StartingPoint, in Point2D MovingDirection, ref List<Point2D> ShipPoints)
         {
-            Point2D NextShipPosition = new Point2D(StartingPoint.x, StartingPoint.y);
+            Point2D NextShipTilePosition = new Point2D(StartingPoint.x, StartingPoint.y);
 
-            while (true)
+            while ( !(ValidateIndex.IsWithin2DArray(NextShipTilePosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipTilePosition)) )
             {
-
-                if (ValidateIndex.IsWithin2DArray(NextShipPosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipPosition))
-                    break;
-
-                if (IsThereFloatingShip(UserBoard, NextShipPosition))
+                if (IsThereFloatingShip(UserBoard, NextShipTilePosition))
                     return true;
-                else
-                    ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
+                else if(IsThereDestroyedShip(UserBoard,NextShipTilePosition))
+                    ShipPoints.Add(new Point2D(NextShipTilePosition.x, NextShipTilePosition.y));
 
-                NextShipPosition.x += MovingDirection.x;
-                NextShipPosition.y += MovingDirection.y;
+                NextShipTilePosition.x += MovingDirection.x;
+                NextShipTilePosition.y += MovingDirection.y;
             }
 
             return false;
@@ -146,7 +104,7 @@ namespace Services.GamesServices.Battleships
 
         private void RevealAdjancedPointsToShip(ref List<Point2D> Ship)
         {
-            Ship = Ship.GroupBy(point => new { point.x, point.y }).Select(g => g.First()).ToList();
+            Ship = Ship.GroupBy(point => new { point.x, point.y }).Select(g => g.First()).ToList(); //Removing Duplicates
             Ship.Sort((point1, point2) => point1.x.CompareTo(point2.x));
             Ship.Sort((point1, point2) => point1.y.CompareTo(point2.y));
 
