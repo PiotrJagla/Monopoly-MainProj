@@ -58,7 +58,7 @@ namespace Services.GamesServices.Battleships
         {
             if (IsEmpty(UserBoard, OnPoint))
                 UserBoard[OnPoint.y][OnPoint.x].ChangeState(BattleshipCellState.Checked);
-            else if (IsThereAShip(UserBoard, OnPoint))
+            else if (IsThereFloatingShip(UserBoard, OnPoint))
                 ShipHit(OnPoint);
         }
 
@@ -72,46 +72,45 @@ namespace Services.GamesServices.Battleships
         {
             List<Point2D> ShipPoints = new List<Point2D>();
             Point2D NextTileDirection = GetNextShipTileDirection(ShipPoint);
-            Point2D NextTileOppositeDirection = GetNextShipTileDirection(ShipPoint);
+            Point2D NextTileOppositeDirection = new Point2D(NextTileDirection.x, NextTileDirection.y);
             NextTileOppositeDirection.x *= -1;
             NextTileOppositeDirection.y *= -1;
 
             if(NextTileDirection.isSameAs(new Point2D(1,1)))
             {//This is 1-Tile ship if Direction is (1,1)
                 ShipPoints.Add(new Point2D(ShipPoint.x, ShipPoint.y));
-                return true;
             }
 
-            Point2D NextShipPosition = ShipPoint;
+            Point2D NextShipPosition = new Point2D(ShipPoint.x, ShipPoint.y);
 
             while(true)
             {
-                if (IsThereAShip(UserBoard, NextShipPosition))
+                if (ValidateIndex.IsWithin2DArray(NextShipPosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipPosition))
+                    break;
+
+                if (IsThereFloatingShip(UserBoard, NextShipPosition))
                     return false;
                 else
                     ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
 
                 NextShipPosition.x += NextTileDirection.x;
                 NextShipPosition.y += NextTileDirection.y;
-
-                if (IsEmpty(UserBoard, NextShipPosition))
-                    break;
             }
 
-            NextTileDirection = ShipPoint;
+            NextShipPosition = new Point2D(ShipPoint.x, ShipPoint.y); ;
 
             while (true)
             {
                 NextShipPosition.x += NextTileOppositeDirection.x;
                 NextShipPosition.y += NextTileOppositeDirection.y;
 
-                if (IsThereAShip(UserBoard, NextShipPosition))
+                if (ValidateIndex.IsWithin2DArray(NextShipPosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipPosition))
+                    break;
+
+                if (IsThereFloatingShip(UserBoard, NextShipPosition))
                     return false;
                 else
                     ShipPoints.Add(new Point2D(NextShipPosition.x, NextShipPosition.y));
-
-                if (IsEmpty(UserBoard, NextShipPosition))
-                    break;
             }
 
             RevealAdjancedPointsToShip(ShipPoints);
@@ -120,8 +119,20 @@ namespace Services.GamesServices.Battleships
 
         private void RevealAdjancedPointsToShip(in List<Point2D> Ship)
         {
-            Ship.Sort(
-                (point1, point2) => point1.x);
+            Ship.Sort((point1, point2) => point1.x.CompareTo(point2.x));
+            Ship.Sort((point1, point2) => point1.y.CompareTo(point2.y));
+
+            for(int y = Ship[0].y - 1; y <= Ship.Last().y + 1; ++y)
+            {
+                for(int x = Ship[0].x - 1; x <= Ship.Last().x + 1; ++x)
+                {
+                    if(Ship.FirstOrDefault(point => point.x == x && point.y == y) == null &&
+                        ValidateIndex.IsWithin2DArray(new Point2D(x,y), Constants.BattleshipBoardSize))
+                    {
+                        UserBoard[y][x].ChangeState(BattleshipCellState.Checked);
+                    }
+                }
+            }
         }
 
         public void AttackOnEnemyBoard(Point2D AttackPoint)
@@ -169,7 +180,7 @@ namespace Services.GamesServices.Battleships
 
         public bool IsUserBoardCorrect()
         {
-            //DefaultShipsPositions();
+            DefaultShipsPositions();
             List<Point2D> AllShipsPositions = GetShipsPositionsFrom(UserBoard);
             return IsShipsDistributionCorrect(UserBoard, AllShipsPositions) && IsShipsNumberCorrect(UserBoard, AllShipsPositions);
         }
@@ -183,7 +194,7 @@ namespace Services.GamesServices.Battleships
                 for(int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
                 {
                     Point2D CurrentPoint = new Point2D(x, y);
-                    if (IsThereAShip(board, CurrentPoint))
+                    if (IsThereFloatingShip(board, CurrentPoint))
                         Result.Add(CurrentPoint);
                 }
             }
@@ -191,10 +202,21 @@ namespace Services.GamesServices.Battleships
             return Result;
         }
 
-        private bool IsThereAShip(in List<List<BattleshipCell>> board, Point2D point)
+        private bool IsThereFloatingShip(in List<List<BattleshipCell>> board, Point2D point)
         {
             return board[point.y][point.x].state == BattleshipCellState.Ship;
         }
+
+        private bool IsThereDestroyedShip(in List<List<BattleshipCell>> board, Point2D point)
+        {
+            return board[point.y][point.x].state == BattleshipCellState.DestroyedShip;
+        }
+
+        private bool IsThereAShip(in List<List<BattleshipCell>> board, Point2D point)
+        {
+            return IsThereDestroyedShip(board, point) || IsThereFloatingShip(board,point);
+        }
+
 
         private bool IsShipsDistributionCorrect(in List<List<BattleshipCell>> board, in List<Point2D> AllShipsPositions)
         {
@@ -218,7 +240,7 @@ namespace Services.GamesServices.Battleships
             foreach(Point2D IncorrectPosition in PositionsToCheck)
             {
                 if(ValidateIndex.IsWithin2DArray(IncorrectPosition, Constants.BattleshipBoardSize) &&
-                    IsThereAShip(board, IncorrectPosition))
+                    IsThereFloatingShip(board, IncorrectPosition))
                 {
                     return true;
                 }
@@ -288,7 +310,7 @@ namespace Services.GamesServices.Battleships
             {
                 Point2D NextShipTile = new Point2D(shipPosition.x + Direction.x, shipPosition.y + Direction.y);
                 
-                if (ValidateIndex.IsWithin2DArray(NextShipTile, Constants.BattleshipBoardSize) && IsThereAShip(UserBoard, NextShipTile))
+                if (ValidateIndex.IsWithin2DArray(NextShipTile, Constants.BattleshipBoardSize) && IsThereAShip(UserBoard,NextShipTile))
                     return Direction;
             }
             Point2D OneTileShip = new Point2D(1,1);
@@ -306,6 +328,9 @@ namespace Services.GamesServices.Battleships
             return EnemyBoard;
         }
 
-        
+        public bool IsShipHit(Point2D OnPoint)
+        {
+            return IsThereAShip(UserBoard, OnPoint);
+        }
     }
 }

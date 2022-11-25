@@ -20,5 +20,7 @@ namespace Services.GamesServices.Battleships
         void EnemyAttack(Point2D OnPoint);
 
         bool IsUserBoardCorrect();
+
+        bool IsShipHit(Point2D OnPoint);
     }
 }

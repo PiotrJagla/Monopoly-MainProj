@@ -43,19 +43,26 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
             {
                 BattleshipLogic.EnemyAttack(OnPoint);
                 BattleshipHubConn.SendAsync("SendAttackedCell", BattleshipLogic.GetUserBoardCell(OnPoint), LoggedUserName);
-                IsYourTurn = !IsYourTurn;
+                ChangeTurn(BattleshipLogic.IsShipHit(OnPoint));
                 InvokeAsync(StateHasChanged);                
             });
 
             BattleshipHubConn.On<BattleshipCell>("RecieveAttackedCell", (AttackedCell) =>
             {
-                Console.WriteLine($"You Attacked: X: {AttackedCell.CellPoint.x} Y: {AttackedCell.CellPoint.y}");
-                IsYourTurn = !IsYourTurn;
+                //Console.WriteLine($"You Attacked: X: {AttackedCell.CellPoint.x} Y: {AttackedCell.CellPoint.y}");
+                //IsYourTurn = !IsYourTurn;
+                ChangeTurn(AttackedCell.state == BattleshipCellState.DestroyedShip);
                 InvokeAsync(StateHasChanged);
             });
 
             
-            await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName, BattleshipHubConn.ConnectionId);
+            
+        }
+
+        private void ChangeTurn(bool IsShipHit)
+        {
+            if (IsShipHit == false)
+                IsYourTurn = !IsYourTurn;
         }
 
         protected bool IsGameStarted() { return IsEnemyFound == true; }
@@ -63,6 +70,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
 
         protected async Task FindEnemy()
         {
+            await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName, BattleshipHubConn.ConnectionId);
+
             if (BattleshipLogic.IsUserBoardCorrect())
             {
                 await BattleshipHubConn.SendAsync("FindEnemyForUser", LoggedUserName);
