@@ -39,19 +39,22 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
                 InvokeAsync(StateHasChanged);
             });
 
-            BattleshipHubConn.On<Point2D>("EnemyAttack", (OnPoint) =>
+            BattleshipHubConn.On<Point2D>("EnemyAttack" ,(OnPoint) =>
             {
                 BattleshipLogic.EnemyAttack(OnPoint);
-                BattleshipHubConn.SendAsync("SendAttackedCell", BattleshipLogic.GetUserBoardCell(OnPoint), LoggedUserName);
-                ChangeTurn(BattleshipLogic.IsShipHit(OnPoint));
+
+                BattleshipCell AttackedCell = BattleshipLogic.GetUserBoardCell(OnPoint);
+                bool IsShipDestroyed = BattleshipLogic.DoesEnemyDestroyedShip(OnPoint);
+                BattleshipHubConn.SendAsync("SendAttackedCell",AttackedCell, IsShipDestroyed, LoggedUserName);
+
+                ChangeTurnIfTrue(BattleshipLogic.IsShipHit(OnPoint) == false);
                 InvokeAsync(StateHasChanged);                
             });
 
-            BattleshipHubConn.On<BattleshipCell>("RecieveAttackedCell", (AttackedCell) =>
+            BattleshipHubConn.On<BattleshipCell, bool>("RecieveAttackedCell", (AttackedCell, IsShipDestroyed) =>
             {
-                //Console.WriteLine($"You Attacked: X: {AttackedCell.CellPoint.x} Y: {AttackedCell.CellPoint.y}");
-                //IsYourTurn = !IsYourTurn;
-                ChangeTurn(AttackedCell.state == BattleshipCellState.DestroyedShip);
+                ChangeTurnIfTrue(AttackedCell.state != BattleshipCellState.DestroyedShip);
+                BattleshipLogic.AttackOnEnemyBoard(AttackedCell, IsShipDestroyed);
                 InvokeAsync(StateHasChanged);
             });
 
@@ -59,9 +62,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
             
         }
 
-        private void ChangeTurn(bool IsShipHit)
+        private void ChangeTurnIfTrue(bool IsTurnChanged)
         {
-            if (IsShipHit == false)
+            if (IsTurnChanged == true)
                 IsYourTurn = !IsYourTurn;
         }
 

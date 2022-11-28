@@ -22,5 +22,10 @@ namespace Services.GamesServices.Battleships
         bool IsUserBoardCorrect();
 
         bool IsShipHit(Point2D OnPoint);
+
+        void AttackOnEnemyBoard(BattleshipCell AttackPoint, bool IsThisShipDestroyed);
+
+        bool DoesEnemyDestroyedShip(Point2D ShipPosition);
+
     }
 }

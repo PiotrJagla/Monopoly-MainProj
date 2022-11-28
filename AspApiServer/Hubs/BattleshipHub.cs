@@ -34,10 +34,10 @@ namespace ASPcoreServer.Hubs
             await Clients.Client(enemy.ConnectionId).SendAsync("EnemyAttack", OnPoint);
         }
 
-        public async Task SendAttackedCell(BattleshipCell AttackedCell, string userName)
+        public async Task SendAttackedCell(BattleshipCell AttackedCell, bool IsShipDestroyed, string userName)
         {
             Player enemy = PlayersGameConnection.getUserEnemy(userName);
-            await Clients.Client(enemy.ConnectionId).SendAsync("RecieveAttackedCell", AttackedCell);
+            await Clients.Client(enemy.ConnectionId).SendAsync("RecieveAttackedCell", AttackedCell, IsShipDestroyed);
         }
 
 
