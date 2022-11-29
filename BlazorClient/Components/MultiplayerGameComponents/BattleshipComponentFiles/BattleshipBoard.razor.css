@@ -3,6 +3,7 @@
 
 }
 
-.btn btn-primary{
-    background-color:red;
+.BattleshipButton {
+    display: inline-block;
+    width: 30px;
 }

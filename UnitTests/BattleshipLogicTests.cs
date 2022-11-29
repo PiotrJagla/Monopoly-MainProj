@@ -300,6 +300,8 @@ namespace UnitTests
             for (int iii = 0; iii < ValidDsitribution.Count; ++iii)
                 BattleshipLogic.UserBoardClicked(ValidDsitribution[iii]);
 
+
+
             BattleshipLogic.EnemyAttack(new Point2D(5, 5));
             BattleshipLogic.EnemyAttack(new Point2D(5, 6));
             BattleshipLogic.EnemyAttack(new Point2D(5, 7));
