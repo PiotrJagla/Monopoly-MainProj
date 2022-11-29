@@ -27,5 +27,7 @@ namespace Services.GamesServices.Battleships
 
         bool DoesEnemyDestroyedShip(Point2D ShipPosition);
 
+        bool IsGameOver();
+
     }
 }

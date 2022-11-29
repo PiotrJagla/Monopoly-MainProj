@@ -322,5 +322,91 @@ namespace UnitTests
 
 
         }
+
+        [TestMethod]
+        public void UserGameOverTest()
+        {
+            BattleshipService BattleshipLogic = new BattleshipGameLogic();
+
+            List<string> ValidDistributionVisualization = new List<string>
+            {
+                "XX--------",
+                "-------XXX",
+                "----X-----",
+                "----X---X-",
+                "----------",
+                "X--X-X----",
+                "X----X----",
+                "---X-X----",
+                "-----X--X-",
+                "XXX-------",
+            
+            };
+
+            Point2D[] AttackedCells= {
+                new Point2D(5, 5), new Point2D(5, 6),new Point2D(5, 7),new Point2D(5, 8),new Point2D(0, 9),new Point2D(1, 9),new Point2D(2, 9),new Point2D(7, 1),
+                new Point2D(8, 1),new Point2D(9, 1),new Point2D(0, 0),new Point2D(1, 0),new Point2D(0, 5),new Point2D(0, 6),new Point2D(4, 2),new Point2D(4, 3),
+                new Point2D(8, 3),new Point2D(3, 5),new Point2D(3, 7),new Point2D(8, 8) };
+
+            int AttackedCellsNumber = 20;
+            for (int i = 0; i < AttackedCellsNumber; i++)
+            {
+                BattleshipLogic.EnemyAttack(AttackedCells[i]);
+            }
+
+            Assert.IsTrue(BattleshipLogic.IsGameOver());
+        }
+        [TestMethod]
+        public void EnemyGameOverTest()
+        {
+            BattleshipService BattleshipLogic = new BattleshipGameLogic();
+
+            List<string> ValidDistributionVisualization = new List<string>
+            {
+                "XX--------",
+                "-------XXX",
+                "----X-----",
+                "----X---X-",
+                "----------",
+                "X--X-X----",
+                "X----X----",
+                "---X-X----",
+                "-----X--X-",
+                "XXX-------",
+
+            };
+
+            List<Point2D> ValidDsitribution = new List<Point2D>();
+
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                {
+                    if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
+                        ValidDsitribution.Add(new Point2D(x, y));
+                }
+            }
+
+            for (int iii = 0; iii < ValidDsitribution.Count; ++iii)
+                BattleshipLogic.UserBoardClicked(ValidDsitribution[iii]);
+
+            BattleshipCell cell = new BattleshipCell();
+            Point2D[] CellPositionsToAttack = { 
+                new Point2D(5, 5), new Point2D(5, 6),new Point2D(5, 7),new Point2D(5, 8),new Point2D(0, 9),new Point2D(1, 9),new Point2D(2, 9),new Point2D(7, 1),
+                new Point2D(8, 1),new Point2D(9, 1),new Point2D(0, 0),new Point2D(1, 0),new Point2D(0, 5),new Point2D(0, 6),new Point2D(4, 2),new Point2D(4, 3),
+                new Point2D(8, 3),new Point2D(3, 5),new Point2D(3, 7),new Point2D(8, 8) };
+
+            int AttackedCellsNumber = 20;
+            for(int iii = 0; iii < AttackedCellsNumber; ++iii)
+            {
+                BattleshipCell Cell = new BattleshipCell();
+                Cell.CellPoint = CellPositionsToAttack[iii];
+                Cell.ChangeState(BattleshipCellState.DestroyedShip);
+                BattleshipLogic.AttackOnEnemyBoard(Cell, false);
+            }
+
+            Assert.IsTrue(BattleshipLogic.IsGameOver());
+        }
+
     }
 }

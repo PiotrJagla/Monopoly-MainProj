@@ -46,6 +46,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
                 BattleshipCell AttackedCell = BattleshipLogic.GetUserBoardCell(OnPoint);
                 bool IsShipDestroyed = BattleshipLogic.DoesEnemyDestroyedShip(OnPoint);
                 BattleshipHubConn.SendAsync("SendAttackedCell",AttackedCell, IsShipDestroyed, LoggedUserName);
+               
 
                 ChangeTurnIfTrue(BattleshipLogic.IsShipHit(OnPoint) == false);
                 InvokeAsync(StateHasChanged);                
@@ -53,8 +54,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
 
             BattleshipHubConn.On<BattleshipCell, bool>("RecieveAttackedCell", (AttackedCell, IsShipDestroyed) =>
             {
-                ChangeTurnIfTrue(AttackedCell.state != BattleshipCellState.DestroyedShip);
                 BattleshipLogic.AttackOnEnemyBoard(AttackedCell, IsShipDestroyed);
+
+                ChangeTurnIfTrue(AttackedCell.state != BattleshipCellState.DestroyedShip);
                 InvokeAsync(StateHasChanged);
             });
 
@@ -66,6 +68,16 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
         {
             if (IsTurnChanged == true)
                 IsYourTurn = !IsYourTurn;
+
+            CheckIfGameIsOver();
+        }
+        private void CheckIfGameIsOver()
+        {
+            if (BattleshipLogic.IsGameOver())
+            {
+                IsYourTurn = false;
+                UserMessage = "Game Has Ended!";
+            }
         }
 
         protected bool IsGameStarted() { return IsEnemyFound == true; }

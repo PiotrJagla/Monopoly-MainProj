@@ -334,5 +334,38 @@ namespace Services.GamesServices.Battleships
         {
             return IsThereAShip(UserBoard, ShipPosition) && IsShipDestroyed(ShipPosition, ref UserBoard);
         }
+
+        public bool IsGameOver()
+        {
+            return CheckIfUserLost() || CheckIfEnemyLost();
+        }
+
+        private bool CheckIfUserLost()
+        {
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; y++)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; x++)
+                {
+                    if (IsThereFloatingShip(UserBoard, new Point2D(x, y)))
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        private bool CheckIfEnemyLost()
+        {
+            int DestroyedShipsNumber = 0;
+            for (int y = 0; y < Constants.BattleshipBoardSize.y; y++)
+            {
+                for (int x = 0; x < Constants.BattleshipBoardSize.x; x++)
+                {
+                    if (IsThereDestroyedShip(EnemyBoard, new Point2D(x, y)))
+                        DestroyedShipsNumber++;
+                }
+            }
+            int ExpectedShipTilesNumber = 20;
+            return ExpectedShipTilesNumber == DestroyedShipsNumber;
+        }
     }
 }
