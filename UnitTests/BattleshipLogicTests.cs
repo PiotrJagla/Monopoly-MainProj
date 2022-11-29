@@ -219,6 +219,8 @@ namespace UnitTests
 
         }
 
+        
+
         [TestMethod]
         public void ShipDestroyedTest2()
         {
@@ -321,6 +323,59 @@ namespace UnitTests
             Assert.IsTrue(BattleshipLogic.GetUserBoardCell(new Point2D(6, 9)).state == BattleshipCellState.Checked);
 
 
+        }
+
+        [TestMethod]
+        public void ShipDestroyedTest4()
+        {
+            BattleshipService BattleshipLogic = new BattleshipGameLogic();
+
+            List<string> EnemyShips = new List<string>
+            {
+                "----X-X--X",
+                "-X-X-X--X",
+                "-X--------",
+                "-X---X----",
+                "-X--------",
+                "----XXX---",
+                "----------",
+                "-X--XXX---",
+                "----------",
+                "X--X------",
+            };
+
+
+
+            BattleshipCell AttackCell = new BattleshipCell();
+            AttackCell.CellPoint = new Point2D(1, 1);
+            AttackCell.ChangeState(BattleshipCellState.DestroyedShip);
+            BattleshipLogic.AttackOnEnemyBoard(AttackCell, false);
+
+            AttackCell.CellPoint = new Point2D(1, 2);
+            AttackCell.ChangeState(BattleshipCellState.DestroyedShip);
+            BattleshipLogic.AttackOnEnemyBoard(AttackCell, false);
+
+            AttackCell.CellPoint = new Point2D(1, 3);
+            AttackCell.ChangeState(BattleshipCellState.DestroyedShip);
+            BattleshipLogic.AttackOnEnemyBoard(AttackCell, false);
+
+            AttackCell.CellPoint = new Point2D(1, 4);
+            AttackCell.ChangeState(BattleshipCellState.DestroyedShip);
+            BattleshipLogic.AttackOnEnemyBoard(AttackCell, true);
+
+
+
+            for (int y = 0; y < 6; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    if (x!=1)
+                        Assert.IsTrue(BattleshipLogic.GetEnemyBoardCell(new Point2D(x, y)).state == BattleshipCellState.Checked);
+                }
+            }
+
+            Assert.IsTrue(BattleshipLogic.GetEnemyBoardCell(new Point2D(1, 0)).state == BattleshipCellState.Checked);
+            Assert.IsTrue(BattleshipLogic.GetEnemyBoardCell(new Point2D(1, 5)).state == BattleshipCellState.Checked);
         }
 
         [TestMethod]

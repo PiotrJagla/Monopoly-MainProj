@@ -72,7 +72,7 @@ namespace Services.GamesServices.Battleships
         {
             List<Point2D> ShipPoints = new List<Point2D>();
 
-            Point2D NextTileDirection = GetNextShipTileDirection(ShipPosition);
+            Point2D NextTileDirection = GetNextShipTileDirection(ShipPosition,ref Board);
             if (IsFloatingShipFound(ShipPosition, NextTileDirection, ref ShipPoints, Board))
                 return false;
 
@@ -88,7 +88,7 @@ namespace Services.GamesServices.Battleships
         {
             Point2D NextShipTilePosition = new Point2D(StartingPoint.x, StartingPoint.y);
 
-            while ( !(ValidateIndex.IsWithin2DArray(NextShipTilePosition, Constants.BattleshipBoardSize) == false || IsEmpty(UserBoard, NextShipTilePosition)) )
+            while ( !(ValidateIndex.IsWithin2DArray(NextShipTilePosition, Constants.BattleshipBoardSize) == false || IsEmpty(Board, NextShipTilePosition)) )
             {
                 if (IsThereFloatingShip(Board, NextShipTilePosition))
                     return true;
@@ -148,14 +148,14 @@ namespace Services.GamesServices.Battleships
         {
             List<string> ValidDistributionVisualization = new List<string>
             {
-                "XX--------",
+                "--XXXX----",
                 "-------XXX",
-                "----X-----",
-                "----X---X-",
-                "X---------",
-                "X--X-X----",
-                "X----X----",
-                "X--X------",
+                "X---X-----",
+                "X---X---X-",
+                "----------",
+                "---X-X----",
+                "-----X----",
+                "---X------",
                 "--------X-",
                 "XXX-------",
             };
@@ -177,7 +177,7 @@ namespace Services.GamesServices.Battleships
 
         public bool IsUserBoardCorrect()
         {
-            DefaultShipsPositions();
+            //DefaultShipsPositions();
             List<Point2D> AllShipsPositions = GetShipsPositionsFrom(UserBoard);
             return IsShipsDistributionCorrect(UserBoard, AllShipsPositions) && IsShipsNumberCorrect(UserBoard, AllShipsPositions);
         }
@@ -275,7 +275,7 @@ namespace Services.GamesServices.Battleships
             {
                 return CountShipTiles(
                     new Point2D(FirstShipPosition.x, FirstShipPosition.y),
-                    GetNextShipTileDirection(FirstShipPosition),
+                    GetNextShipTileDirection(FirstShipPosition, ref UserBoard),
                     AllShipsPositions, ref CheckedPositions
                 );
             }
@@ -296,7 +296,7 @@ namespace Services.GamesServices.Battleships
             return ShipTiles;
         }
 
-        private Point2D GetNextShipTileDirection(Point2D shipPosition)
+        private Point2D GetNextShipTileDirection(Point2D shipPosition, ref List<List<BattleshipCell>> board)
         {
             List<Point2D> PossibleDirections = new List<Point2D>
             {
@@ -307,7 +307,7 @@ namespace Services.GamesServices.Battleships
             {
                 Point2D NextShipTile = new Point2D(shipPosition.x + Direction.x, shipPosition.y + Direction.y);
                 
-                if (ValidateIndex.IsWithin2DArray(NextShipTile, Constants.BattleshipBoardSize) && IsThereAShip(UserBoard,NextShipTile))
+                if (ValidateIndex.IsWithin2DArray(NextShipTile, Constants.BattleshipBoardSize) && IsThereAShip(board,NextShipTile))
                     return Direction;
             }
             Point2D OneTileShip = new Point2D(1,1);

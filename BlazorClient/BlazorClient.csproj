@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\SinglplayerGameComponentFiles\" />
+  </ItemGroup>
+
 </Project>
