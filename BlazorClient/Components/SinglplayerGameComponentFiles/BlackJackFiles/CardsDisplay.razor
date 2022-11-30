@@ -1,0 +1,24 @@
+﻿<h2>@Title</h2>
+
+<div>
+    <ul>
+        @for (int i = 0; i < Cards.Count; i++)
+        {
+            <li>
+                <CardDisplay card="Cards[i]"></CardDisplay>
+            </li>        
+        }
+    </ul>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public List<Card> Cards { get; set; }
+
+    [Parameter]
+    public RenderFragment Title { get; set; }
+
+}

@@ -1,8 +1,32 @@
 ﻿@inherits BlackJackGameBase
 
+<label>Max Points Is: @Constants.BlackJackMaxPoints</label>
+
+<button disabled="@(UserMessage=="")" @onclick="StartGame">Start Game</button>
+<button disabled="@(UserMessage!="")" @onclick="DrawCard">Draw Card</button>
+<button disabled="@(UserMessage!="")" @onclick="DealerTurn">Dealer Turn</button>
+
+<label>@UserMessage</label>
+
+<CardsDisplay Cards="BlackJackLogic.GetUserCards()">
+    <Title>
+        Your Cards
+    </Title>
+</CardsDisplay>
+
+<div>
+    Your Points: @BlackJackLogic.GetUserPoints()
+</div>
+<br />
 
 
+<CardsDisplay Cards="BlackJackLogic.GetDealerCards()">
+    <Title>
+        Dealer Cards
+    </Title>
+</CardsDisplay>
 
-@code {
+<div>
+    Dealer Points: @BlackJackLogic.GetDealerPoints()
+</div>
 
-}

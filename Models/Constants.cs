@@ -12,5 +12,8 @@ namespace Models
         public static string ServerURL => "https://localhost:7268";
 
         public static Point2D BattleshipBoardSize = new Point2D(10, 10);
+
+        public static int BlackJackMaxPoints = 31;
+        public static int BlackJackMinPoints = 27;
     }
 }
