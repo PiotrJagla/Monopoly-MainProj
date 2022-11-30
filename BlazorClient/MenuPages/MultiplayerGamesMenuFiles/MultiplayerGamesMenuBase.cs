@@ -12,19 +12,19 @@ namespace BlazorClient.MenuPages.MultiplayerGamesMenuFiles
         [Parameter]
         public string loggedUserName { get; set; }
 
-        public List<MultiplayerGame> AllAddedMultiplayerGames { get; private set; }
+        public List<MultiplayerGame> AllGames { get; private set; }
 
         protected override void OnInitialized()
         {
-            AllAddedMultiplayerGames = new List<MultiplayerGame>();
+            AllGames = new List<MultiplayerGame>();
 
-            AllAddedMultiplayerGames.Add(MultiplayerGame.Battleship);
-            AllAddedMultiplayerGames.Add(MultiplayerGame.DemoButtonClickingGame);
+            AllGames.Add(MultiplayerGame.Battleship);
+            AllGames.Add(MultiplayerGame.DemoButtonClickingGame);
         }
 
-        protected void NavigateToMultiplayerGame(MultiplayerGame multiplayerGame)
+        protected void NavigateToMultiplayerGame(MultiplayerGame game)
         {
-            NavManager.NavigateTo($"/MultiplayerGame/{MultiplayerGameMethods.ToString(multiplayerGame)}/{loggedUserName}");
+            NavManager.NavigateTo($"/MultiplayerGame/{MultiplayerGameMethods.ToString(game)}/{loggedUserName}");
         }
 
     }

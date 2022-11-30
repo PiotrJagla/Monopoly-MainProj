@@ -1,6 +1,12 @@
 ﻿@page "/SinglplayerGamesMenu"
+@page "/SinglplayerGamesMenu/{LoggedUserName}"
+@inherits SingleplayerGamesMenuBase
 
 <h3>Singleplayer games</h3>
 
 
-
+@for (int iii = 0; iii < AllGames.Count; ++iii)
+{
+    SinglplayerGame game = AllGames[iii];
+    <button @onclick="(() => NavigateToSinglplayerGame(game))">@SinglplayerGameMethods.ToString(game)</button>
+}

@@ -38,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope = b-lgfqz1pbro
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXFNvbWVNdWx0aXBsYXllckdhbWUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-2ju8nm3woe
 
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/BlackJackGame.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xCbGFja0phY2tHYW1lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-e0v772pvu9
+
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UserLoginDataInputFiles/UserLoginDataInput.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVc2VyTG9naW5EYXRhSW5wdXRGaWxlc1xVc2VyTG9naW5EYXRhSW5wdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-dj9qcnb75s

@@ -12,7 +12,7 @@ namespace BlazorClient.MenuPages.MainMenuFiles
 
         protected void NavigateToSingleplayerGamesMenu()
         {
-            NavManager.NavigateTo("/SinglplayerGamesMenu");
+            NavManager.NavigateTo($"/SinglplayerGamesMenu/{loggedUserName}");
         }
 
         protected void NavigateToMultiplayerGamesMenu()

@@ -6,10 +6,10 @@
 <h3>Multiplayer games</h3>
 
 
-@for(int iii = 0; iii < AllAddedMultiplayerGames.Count; ++iii)
+@for(int iii = 0; iii < AllGames.Count; ++iii)
 {
-    MultiplayerGame multiplayerGame = AllAddedMultiplayerGames[iii];
-    <button @onclick="(() => NavigateToMultiplayerGame(multiplayerGame))">@MultiplayerGameMethods.ToString(multiplayerGame)</button>
+    MultiplayerGame game = AllGames[iii];
+    <button @onclick="(() => NavigateToMultiplayerGame(game))">@MultiplayerGameMethods.ToString(game)</button>
 }
 
 

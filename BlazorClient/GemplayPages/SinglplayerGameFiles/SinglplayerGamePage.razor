@@ -1,5 +1,15 @@
 ﻿@page "/SinglplayerGame"
+@page "/SinglplayerGame/{GameName}/{LoggedUserName}"
 @inherits SinglplayerGamePageBase
 
-<h3>Play Singplayer Game</h3>
+<h3>Play Singplayer Game: @SinglplayerGameMethods.ToString(Game)</h3>
 
+@switch(Game)
+{
+    case SinglplayerGame.BalckJack:
+        <BlackJackGame LoggedUserName="@LoggedUserName"></BlackJackGame>
+        break;
+    default:
+        <div> there is no such game</div>
+        break;
+}
