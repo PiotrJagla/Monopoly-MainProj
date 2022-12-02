@@ -10,13 +10,15 @@ namespace Enums
     {
         Battleship,
         DemoButtonClickingGame,
+        Monopoly,
         NoGame
     }
 
     public static class MultiplayerGameMethods
     {
         private const string BattleshipGameString = "Battleship";
-        private const string DemoButtonCLickingGameString= "Demo button clicking game";
+        private const string DemoButtonCLickingGameString = "Demo button clicking game";
+        private const string MonopolyString = "Monopoly";
 
 
         public static string ToString(MultiplayerGame multiplayerGame)
@@ -27,6 +29,8 @@ namespace Enums
                     return BattleshipGameString;
                 case MultiplayerGame.DemoButtonClickingGame:
                     return DemoButtonCLickingGameString;
+                case MultiplayerGame.Monopoly:
+                    return MonopolyString;
                 default:
                     return "There is no such game";
             }
@@ -40,6 +44,8 @@ namespace Enums
                     return MultiplayerGame.Battleship;
                 case DemoButtonCLickingGameString:
                     return MultiplayerGame.DemoButtonClickingGame;
+                case MonopolyString:
+                    return MultiplayerGame.Monopoly;
                 default:
                     return MultiplayerGame.NoGame;
                         

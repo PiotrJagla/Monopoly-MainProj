@@ -15,5 +15,11 @@ namespace Models
 
         public static int BlackJackMaxPoints = 31;
         public static int BlackJackMinPoints = 27;
+
+        public static Point2D TicTacToeBoardSize = new Point2D(3, 3);
+        public static char TicTacToePlayer = 'X';
+        public static char TicTacToeEnemy = 'O';
+        public static char TicTacToeEmpty = ' ';
+        public static char TicTacToeTie = '#';
     }
 }

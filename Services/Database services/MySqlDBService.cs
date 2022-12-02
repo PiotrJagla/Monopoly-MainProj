@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Services.Database_services.SQLqueries;
+using Models.UsersManagment;
 
 namespace Services.Database_services
 {

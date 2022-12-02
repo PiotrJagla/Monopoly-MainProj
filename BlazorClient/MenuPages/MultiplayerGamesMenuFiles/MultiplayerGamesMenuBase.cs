@@ -20,6 +20,7 @@ namespace BlazorClient.MenuPages.MultiplayerGamesMenuFiles
 
             AllGames.Add(MultiplayerGame.Battleship);
             AllGames.Add(MultiplayerGame.DemoButtonClickingGame);
+            AllGames.Add(MultiplayerGame.Monopoly);
         }
 
         protected void NavigateToMultiplayerGame(MultiplayerGame game)

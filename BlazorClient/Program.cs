@@ -5,6 +5,7 @@ using Models;
 using Services.APIservices;
 using Services.GamesServices.Battleships;
 using Services.GamesServices.BlackJack;
+using Services.GamesServices.TicTacToe;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -15,6 +16,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(Constant
 builder.Services.AddScoped<ApiDBService, ApiUsersDBService>();
 builder.Services.AddScoped<BattleshipService, BattleshipGameLogic>();
 builder.Services.AddScoped<BlackJackService, BlackJackGameLogic>();
+builder.Services.AddScoped<TicTacToeService, TicTacToeGameLogic>();
 
 
 await builder.Build().RunAsync();

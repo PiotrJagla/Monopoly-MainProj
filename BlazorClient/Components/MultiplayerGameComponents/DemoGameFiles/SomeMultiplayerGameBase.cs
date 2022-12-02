@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using System.Security.Permissions;
 
-namespace BlazorClient.Components.MultiplayerGameComponents
+namespace BlazorClient.Components.MultiplayerGameComponents.DemoGameFiles
 {
     public class SomeMultiplayerGameBase : ComponentBase
     {
@@ -22,7 +22,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents
         public int enemyPoints { get; set; }
 
 
-        public bool IsEnemyFound{ get; set; }
+        public bool IsEnemyFound { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

@@ -11,11 +11,29 @@ body[b-c4v01dt967] {
 /* /Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipGame.razor.rz.scp.css */
 body[b-lgfqz1pbro] {
 }
-/* /Components/MultiplayerGameComponents/SomeMultiplayerGame.razor.rz.scp.css */
-body[b-2ju8nm3woe] {
+/* /Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor.rz.scp.css */
+body[b-96z8mir036] {
+}
+/* /Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor.rz.scp.css */
+body[b-mjuwvihxnd] {
 }
 /* /Components/SinglplayerGameComponentFiles/BlackJackFiles/BlackJackGame.razor.rz.scp.css */
 body[b-e0v772pvu9] {
+}
+/* /Components/SinglplayerGameComponentFiles/TicTacToeFiles/TicTacToeGame.razor.rz.scp.css */
+body[b-v3jrkzpd71] {
+}
+
+
+
+.TicTacToeButton[b-v3jrkzpd71] {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.ButtonText[b-v3jrkzpd71]{
+    font-size: 50px;
 }
 /* /Components/UserLoginDataInputFiles/UserLoginDataInput.razor.rz.scp.css */
 body[b-dj9qcnb75s] {

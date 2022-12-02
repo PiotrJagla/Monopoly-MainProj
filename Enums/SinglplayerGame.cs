@@ -3,12 +3,14 @@
     public enum SinglplayerGame
     {
         BalckJack,
+        TicTacToe,
         NoGame
     }
 
     public static class SinglplayerGameMethods
     {
         private const string BlackJackString = "Black Jack";
+        private const string TicTacToeString= "Tic Tac Toe";
 
 
         public static string ToString(SinglplayerGame game)
@@ -17,6 +19,8 @@
             {
                 case SinglplayerGame.BalckJack:
                     return BlackJackString;
+                case SinglplayerGame.TicTacToe:
+                    return TicTacToeString;
                 default:
                     return "There is no such game";
             }
@@ -28,6 +32,8 @@
             {
                 case BlackJackString:
                     return SinglplayerGame.BalckJack;
+                case TicTacToeString:
+                    return SinglplayerGame.TicTacToe;
                 default:
                     return SinglplayerGame.NoGame;
 

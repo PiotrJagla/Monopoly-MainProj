@@ -1,0 +1,14 @@
+﻿body {
+}
+
+
+
+.TicTacToeButton {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.ButtonText{
+    font-size: 50px;
+}

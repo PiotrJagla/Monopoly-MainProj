@@ -4,12 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace Models.UsersManagment
 {
-    public class User
+    public class UserLoginData
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+
+        public UserLoginData(string name = "", string password = "")
+        {
+            Password = password;
+            Name = name;
+        }
     }
 }

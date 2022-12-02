@@ -4,6 +4,7 @@ using Enums;
 using Models;
 using Services.GamesServices.Battleships;
 using Services.OnlineConnectionsService;
+using Models.Battleship;
 
 namespace ASPcoreServer.Hubs
 {

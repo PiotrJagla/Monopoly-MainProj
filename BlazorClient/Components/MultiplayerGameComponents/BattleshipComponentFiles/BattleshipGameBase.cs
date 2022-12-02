@@ -1,7 +1,8 @@
-﻿using Enums;
+﻿using Enums.Battleship;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
+using Models.Battleship;
 using Services.GamesServices.Battleships;
 using System.Runtime.Serialization.Json;
 using System.Text.Json.Serialization;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Enums;
+using Enums.Battleship;
 
-namespace Models
+namespace Models.Battleship
 {
     public class BattleshipCell
     {
@@ -28,7 +28,7 @@ namespace Models
 
         private char GetStateDisplay(BattleshipCellState state)
         {
-            switch(state)
+            switch (state)
             {
                 case BattleshipCellState.Empty:
                     return '-';

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using Enums;
+using Models.Battleship;
 using Models;
 using Validation;
+using Enums.Battleship;
 
 namespace Services.GamesServices.Battleships
 {

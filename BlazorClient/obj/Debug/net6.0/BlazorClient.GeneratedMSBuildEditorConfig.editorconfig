@@ -42,13 +42,21 @@ build_metadata.AdditionalFiles.CssScope = b-c4v01dt967
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXEJhdHRsZXNoaXBDb21wb25lbnRGaWxlc1xCYXR0bGVzaGlwR2FtZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-lgfqz1pbro
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/SomeMultiplayerGame.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXFNvbWVNdWx0aXBsYXllckdhbWUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-2ju8nm3woe
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXERlbW9HYW1lRmlsZXNcU29tZU11bHRpcGxheWVyR2FtZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-96z8mir036
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcTW9ub3BvbHlHYW1lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-mjuwvihxnd
 
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/BlackJackGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xCbGFja0phY2tHYW1lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-e0v772pvu9
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/TicTacToeFiles/TicTacToeGame.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xUaWNUYWNUb2VGaWxlc1xUaWNUYWNUb2VHYW1lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-v3jrkzpd71
 
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UserLoginDataInputFiles/UserLoginDataInput.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVc2VyTG9naW5EYXRhSW5wdXRGaWxlc1xVc2VyTG9naW5EYXRhSW5wdXQucmF6b3I=

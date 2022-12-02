@@ -19,6 +19,7 @@ namespace BlazorClient.MenuPages.SingleplayerGamesMenuFiles
             AllGames = new List<SinglplayerGame>();
 
             AllGames.Add(SinglplayerGame.BalckJack);
+            AllGames.Add(SinglplayerGame.TicTacToe);
         }
 
         protected void NavigateToSinglplayerGame(SinglplayerGame game)

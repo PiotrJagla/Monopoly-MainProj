@@ -1,12 +1,12 @@
-﻿using Models;
-using Services.Database_services;
+﻿using Services.Database_services;
 using Services.GamesServices.Battleships;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Enums;
+using Models.Battleship;
+using Enums.Battleship;
 
 namespace UnitTests
 {
