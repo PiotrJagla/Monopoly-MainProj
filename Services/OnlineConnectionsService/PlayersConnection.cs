@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Models.MultiplayerConnection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace Services.OnlineConnectionsService
     {
         private static List<Player> ConnectedPlayers = new List<Player>();
         private static List<Tuple<Player,Player>> TwoUsersGameRooms = new List<Tuple<Player, Player>>();
+        private static List<Room> GameRooms = new List<Room>();
         
 
         public void addOnlinePlayer(string userName, string connId)
@@ -36,6 +37,30 @@ namespace Services.OnlineConnectionsService
                 }
             }
 
+            return false;
+        }
+
+        public bool JoinToRoom(string userName)
+        {
+            if(IsRoomToJoin(userName) == false)
+            {
+                GameRooms.Add(new Room());
+                GameRooms.Last().AddToRoom(ConnectedPlayers.FirstOrDefault(user => user.Name == userName));
+            }
+
+            return false;
+        }
+
+        private bool IsRoomToJoin(string userName)
+        {
+            foreach (Room room in GameRooms)
+            {
+                if (room.IsFull() == false)
+                {
+                    room.AddToRoom(ConnectedPlayers.FirstOrDefault(user => user.Name == userName));
+                    return true;
+                }
+            }
             return false;
         }
 

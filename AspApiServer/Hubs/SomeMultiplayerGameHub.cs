@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 using Services.OnlineConnectionsService;
-using Models;
+using Models.MultiplayerConnection;
 
 namespace ASPcoreServer.Hubs
 {

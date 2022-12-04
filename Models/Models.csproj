@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Enums\Enums.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Monopoly\" />
+  </ItemGroup>
+
 </Project>

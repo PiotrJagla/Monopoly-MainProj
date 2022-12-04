@@ -5,6 +5,7 @@ using Models;
 using Services.GamesServices.Battleships;
 using Services.OnlineConnectionsService;
 using Models.Battleship;
+using Models.MultiplayerConnection;
 
 namespace ASPcoreServer.Hubs
 {
@@ -12,9 +13,9 @@ namespace ASPcoreServer.Hubs
     {
         private static GameConnectionService PlayersGameConnection = new PlayersConnection();
 
-        public void OnUserConnected(string userName, string userConnId)
+        public void OnUserConnected(string userName)
         {
-            PlayersGameConnection.addOnlinePlayer(userName, userConnId);
+            PlayersGameConnection.addOnlinePlayer(userName,Context.ConnectionId);
         }
 
         public void FindEnemyForUser(string userName)

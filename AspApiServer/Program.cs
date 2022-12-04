@@ -1,5 +1,6 @@
 using ASPcoreServer.Hubs;
 using Microsoft.Net.Http.Headers;
+using Models;
 using Services.Database_services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,8 +30,9 @@ app.UseCors(policy =>
     .WithHeaders(HeaderNames.ContentType)
 ); 
 
-app.MapHub<SomeMultiplayerGameHub>("/multihub");
-app.MapHub<BattleshipHub>("/battleshiphub");
+app.MapHub<SomeMultiplayerGameHub>(Constants.DemoButtonsHubURL);
+app.MapHub<BattleshipHub>(Constants.BattleshipHubURL);
+app.MapHub<MonopolyHub>(Constants.MonopolyHubURL);
 
 app.UseHttpsRedirection();
  

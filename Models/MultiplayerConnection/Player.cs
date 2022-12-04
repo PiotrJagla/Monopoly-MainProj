@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace Models.MultiplayerConnection
 {
     public class Player
     {
         public string Name { get; set; }
         public string ConnectionId { get; set; }
-        public bool IsWaitingForGame{ get; set; }
+        public bool IsWaitingForGame { get; set; }
 
         public Player()
         {

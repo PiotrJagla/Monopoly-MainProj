@@ -5,6 +5,7 @@ using Models;
 using Services.APIservices;
 using Services.GamesServices.Battleships;
 using Services.GamesServices.BlackJack;
+using Services.GamesServices.Monopoly;
 using Services.GamesServices.TicTacToe;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -17,6 +18,7 @@ builder.Services.AddScoped<ApiDBService, ApiUsersDBService>();
 builder.Services.AddScoped<BattleshipService, BattleshipGameLogic>();
 builder.Services.AddScoped<BlackJackService, BlackJackGameLogic>();
 builder.Services.AddScoped<TicTacToeService, TicTacToeGameLogic>();
+builder.Services.AddScoped<MonopolyService, MonopolyGameLogic>();
 
 
 await builder.Build().RunAsync();

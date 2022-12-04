@@ -30,7 +30,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
         protected override async Task OnInitializedAsync()
         {
             UserMessage = "";
-            BattleshipHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}/battleshiphub")).WithAutomaticReconnect().Build();
+            BattleshipHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}{Constants.BattleshipHubURL}")).WithAutomaticReconnect().Build();
             await BattleshipHubConn.StartAsync();
             OnMessageRecieve();
         }
@@ -98,7 +98,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
 
             if (BattleshipLogic.IsUserBoardCorrect())
             {
-                await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName, BattleshipHubConn.ConnectionId);
+                await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName);
                 await BattleshipHubConn.SendAsync("FindEnemyForUser", LoggedUserName);
                 UserMessage = "";
             }
