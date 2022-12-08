@@ -3,3 +3,15 @@
 <h3>Dziala!!</h3>
 
 <button @onclick="EnterRoom">Join To Room</button>
+<button @onclick="SendMessage">Send Message</button>
+<button @onclick="Ready">Ready</button>
+
+<br />
+<br />
+<MonopolyBoard Board="@MonopolyLogic.GetBoard()" PlayersPositions="@MonopolyLogic.GetPlayersPositions()"></MonopolyBoard>
+
+<button @onclick="Move">Throw Dice</button>
+
+<br />
+<br />
+<ShowMessages Messages="@Messages"></ShowMessages>

@@ -1767,3 +1767,4 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\SinglplayerGameComponentFiles\TicTacToeFiles\TicTacToeGame.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\MonopolyFiles\MonopolyGame.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\DemoGameFiles\SomeMultiplayerGame.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\MonopolyFiles\GameSpecificComponents\MonopolyBoard.razor.rz.scp.css

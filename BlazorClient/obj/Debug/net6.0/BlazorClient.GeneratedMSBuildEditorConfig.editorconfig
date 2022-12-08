@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xDYXJkc0Rpc3BsYXkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UIComponents/ShowMessages.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVSUNvbXBvbmVudHNcU2hvd01lc3NhZ2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -45,6 +49,10 @@ build_metadata.AdditionalFiles.CssScope = b-lgfqz1pbro
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXERlbW9HYW1lRmlsZXNcU29tZU11bHRpcGxheWVyR2FtZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-96z8mir036
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/MonopolyBoard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcR2FtZVNwZWNpZmljQ29tcG9uZW50c1xNb25vcG9seUJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-h30zlhl9a5
 
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcTW9ub3BvbHlHYW1lLnJhem9y

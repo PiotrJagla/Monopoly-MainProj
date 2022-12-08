@@ -11,13 +11,16 @@ namespace Models.MultiplayerConnection
     {
         public string Name { get; set; }
         public string ConnectionId { get; set; }
-        public bool IsWaitingForGame { get; set; }
+        public bool NotReady { get; set; }
+
+        public string InRoom { get; set; }
 
         public Player()
         {
+            InRoom = "";
             Name = "";
             ConnectionId = "";
-            IsWaitingForGame = true;
+            NotReady = true;
         }
     }
 }

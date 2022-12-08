@@ -1,0 +1,15 @@
+body[b-h30zlhl9a5] {
+}
+
+
+.board[b-h30zlhl9a5]{
+    outline-width: 2px;
+    outline-color: white;
+}
+
+.cell[b-h30zlhl9a5] {
+    outline: solid;
+    outline-width: 2px;
+    outline-color: white;
+    width:60px;
+}

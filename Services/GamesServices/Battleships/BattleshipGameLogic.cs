@@ -37,15 +37,7 @@ namespace Services.GamesServices.Battleships
             }
         }
 
-        public BattleshipCell GetUserBoardCell(Point2D OnPosition)
-        {
-            return UserBoard[OnPosition.y][OnPosition.x];
-        }
-
-        public BattleshipCell GetEnemyBoardCell(Point2D OnPosition)
-        {
-            return EnemyBoard[OnPosition.y][OnPosition.x];
-        }
+       
 
         public void UserBoardClicked(Point2D ClickPoint)
         {
@@ -137,13 +129,7 @@ namespace Services.GamesServices.Battleships
         {
             IsShipDestroyed(ShipPosition,ref Board);
         }
-
-
-        private bool IsEmpty(List<List<BattleshipCell>> board, Point2D point)
-        {
-            return board[point.y][point.x].state == BattleshipCellState.Empty ||
-                   board[point.y][point.x].state == BattleshipCellState.Checked;
-        }
+        
 
         private void DefaultShipsPositions()
         {
@@ -178,12 +164,11 @@ namespace Services.GamesServices.Battleships
 
         public bool IsUserBoardCorrect()
         {
-            //DefaultShipsPositions();
-            List<Point2D> AllShipsPositions = GetShipsPositionsFrom(UserBoard);
+            List<Point2D> AllShipsPositions = GetShipsPositions();
             return IsShipsDistributionCorrect(UserBoard, AllShipsPositions) && IsShipsNumberCorrect(UserBoard, AllShipsPositions);
         }
 
-        private List<Point2D> GetShipsPositionsFrom(in List<List<BattleshipCell>> board)
+        private List<Point2D> GetShipsPositions()
         {
             List<Point2D> Result = new List<Point2D>();
 
@@ -192,7 +177,7 @@ namespace Services.GamesServices.Battleships
                 for(int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
                 {
                     Point2D CurrentPoint = new Point2D(x, y);
-                    if (IsThereFloatingShip(board, CurrentPoint))
+                    if (IsThereFloatingShip(UserBoard, CurrentPoint))
                         Result.Add(CurrentPoint);
                 }
             }
@@ -200,20 +185,7 @@ namespace Services.GamesServices.Battleships
             return Result;
         }
 
-        private bool IsThereFloatingShip(in List<List<BattleshipCell>> board, Point2D point)
-        {
-            return board[point.y][point.x].state == BattleshipCellState.Ship;
-        }
-
-        private bool IsThereDestroyedShip(in List<List<BattleshipCell>> board, Point2D point)
-        {
-            return board[point.y][point.x].state == BattleshipCellState.DestroyedShip;
-        }
-
-        private bool IsThereAShip(in List<List<BattleshipCell>> board, Point2D point)
-        {
-            return IsThereDestroyedShip(board, point) || IsThereFloatingShip(board,point);
-        }
+        
 
 
         private bool IsShipsDistributionCorrect(in List<List<BattleshipCell>> board, in List<Point2D> AllShipsPositions)
@@ -315,27 +287,6 @@ namespace Services.GamesServices.Battleships
             return OneTileShip;
         }
 
-
-        public List<List<BattleshipCell>> GetUserBoard()
-        {
-            return UserBoard;
-        }
-
-        public List<List<BattleshipCell>> GetEnemyBoard()
-        {
-            return EnemyBoard;
-        }
-
-        public bool IsShipHit(Point2D OnPoint)
-        {
-            return IsThereAShip(UserBoard, OnPoint);
-        }
-
-        public bool DoesEnemyDestroyedShip(Point2D ShipPosition)
-        {
-            return IsThereAShip(UserBoard, ShipPosition) && IsShipDestroyed(ShipPosition, ref UserBoard);
-        }
-
         public bool IsGameOver()
         {
             return CheckIfUserLost() || CheckIfEnemyLost();
@@ -367,6 +318,57 @@ namespace Services.GamesServices.Battleships
             }
             int ExpectedShipTilesNumber = 20;
             return ExpectedShipTilesNumber == DestroyedShipsNumber;
+        }
+
+        public bool IsShipHit(Point2D OnPoint)
+        {
+            return IsThereAShip(UserBoard, OnPoint);
+        }
+
+        public bool DoesEnemyDestroyedShip(Point2D ShipPosition)
+        {
+            return IsThereAShip(UserBoard, ShipPosition) && IsShipDestroyed(ShipPosition, ref UserBoard);
+        }
+
+        private bool IsThereAShip(in List<List<BattleshipCell>> board, Point2D point)
+        {
+            return IsThereDestroyedShip(board, point) || IsThereFloatingShip(board, point);
+        }
+
+        private bool IsThereFloatingShip(in List<List<BattleshipCell>> board, Point2D point)
+        {
+            return board[point.y][point.x].state == BattleshipCellState.Ship;
+        }
+
+        private bool IsThereDestroyedShip(in List<List<BattleshipCell>> board, Point2D point)
+        {
+            return board[point.y][point.x].state == BattleshipCellState.DestroyedShip;
+        }
+
+        private bool IsEmpty(List<List<BattleshipCell>> board, Point2D point)
+        {
+            return board[point.y][point.x].state == BattleshipCellState.Empty ||
+                   board[point.y][point.x].state == BattleshipCellState.Checked;
+        }
+
+        public BattleshipCell GetUserBoardCell(Point2D OnPosition)
+        {
+            return UserBoard[OnPosition.y][OnPosition.x];
+        }
+
+        public BattleshipCell GetEnemyBoardCell(Point2D OnPosition)
+        {
+            return EnemyBoard[OnPosition.y][OnPosition.x];
+        }
+
+        public List<List<BattleshipCell>> GetUserBoard()
+        {
+            return UserBoard;
+        }
+
+        public List<List<BattleshipCell>> GetEnemyBoard()
+        {
+            return EnemyBoard;
         }
     }
 }

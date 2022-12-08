@@ -14,6 +14,22 @@ body[b-lgfqz1pbro] {
 /* /Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor.rz.scp.css */
 body[b-96z8mir036] {
 }
+/* /Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/MonopolyBoard.razor.rz.scp.css */
+body[b-h30zlhl9a5] {
+}
+
+
+.board[b-h30zlhl9a5]{
+    outline-width: 2px;
+    outline-color: white;
+}
+
+.cell[b-h30zlhl9a5] {
+    outline: solid;
+    outline-width: 2px;
+    outline-color: white;
+    width:60px;
+}
 /* /Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor.rz.scp.css */
 body[b-mjuwvihxnd] {
 }

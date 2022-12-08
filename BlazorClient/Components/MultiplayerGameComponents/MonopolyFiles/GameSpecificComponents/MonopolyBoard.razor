@@ -1,0 +1,31 @@
+﻿
+
+<div class="board">
+    @for (int i = 0; i < Board.Count; i++)
+    {
+        <div class="cell">        
+        @*@foreach (PlayerKey player in Board[i].PlayersOnCell)
+        {
+            <label>|@((int)player)|</label>
+        }*@
+        @foreach (var playerPos in PlayersPositions.GetPlayersPositions())
+        {
+            if(playerPos.Position == i)
+            {
+                <label>|@playerPos.Player|</label>
+            }
+        }
+        <br />
+        <label>@Board[i].Number</label>
+        </div>
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public List<MonopolyCell> Board { get; set; }
+
+    [Parameter]
+    public PlayersPositionsData PlayersPositions { get; set; }
+}
