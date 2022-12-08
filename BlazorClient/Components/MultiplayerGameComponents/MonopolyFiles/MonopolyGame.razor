@@ -10,7 +10,7 @@
 <br />
 <MonopolyBoard Board="@MonopolyLogic.GetBoard()" PlayersPositions="@MonopolyLogic.GetPlayersPositions()"></MonopolyBoard>
 
-<button @onclick="Move">Throw Dice</button>
+<button @onclick="Move" disabled="@(MonopolyLogic.IsYourTurn() == false)">Throw Dice</button>
 
 <br />
 <br />

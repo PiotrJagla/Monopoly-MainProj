@@ -14,18 +14,24 @@ namespace Services.GamesServices.Monopoly
     {
         private static List<MonopolyPlayer> Players = new List<MonopolyPlayer>();
         private static int MainPlayerIndex = -1;
+        private static int WhosTurnIndex = -1;
 
         
         private static MonopolyBoard BoardService = new MonopolyBoard();
 
         public void StartGame(List<Player> PlayersInGame)
         {
+            if (Players.Count != 0)
+                return;
+
             for (int i = 0; i < PlayersInGame.Count; i++)
             {
                 Players.Add(new MonopolyPlayer());
                 Players.Last().Key = (PlayerKey)(i);
                 Players.Last().OnCellIndex = 0;
             }
+
+            WhosTurnIndex = 0;
             
         }
 
@@ -53,20 +59,22 @@ namespace Services.GamesServices.Monopoly
             return PlayersPositions;
         }
 
-        public void UpdatePlayersPositions(PlayersPositionsData UpdatedPositions)
+        public void UpdatePlayersPositions(List<PlayerPosition> UpdatedPositions)
         {
-            for (int i = 0; i < UpdatedPositions.GetPlayersPositions().Count; i++)
+            for (int i = 0; i < UpdatedPositions.Count; i++)
             {
-                Players[i].OnCellIndex = UpdatedPositions.GetPlayerPosition(i).Position;
+                Players[i].OnCellIndex = UpdatedPositions[i].Position;
             }
         }
 
-        public Point2D GetPoint()
+        public bool IsYourTurn()
         {
-            Point2D newPoint = new Point2D();
-            newPoint.x = 60;
-            newPoint.y = 69;
-            return newPoint;
+            return WhosTurnIndex == MainPlayerIndex;
+        }
+
+        public void NextTurn()
+        {
+            WhosTurnIndex = (++WhosTurnIndex) % Players.Count;
         }
     }
 }

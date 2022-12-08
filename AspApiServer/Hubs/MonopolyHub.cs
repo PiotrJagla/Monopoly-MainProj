@@ -37,29 +37,23 @@ namespace ASPcoreServer.Hubs
             return Clients.Group(RoomKey).SendAsync("RecieveMessage", message);
         }
 
-        public Task UserReady()
+        public async Task UserReady()
         {
+            
             ConnectionService.GetPlayer(Context.ConnectionId).NotReady = false;
 
             string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
             List<Player> ReadyPlayersInRoom = ConnectionService.GetPlayersWithCriteria(PlayersSelectCriteria.ReadyPlayers, Context.ConnectionId);
 
-            return Clients.Group(RoomKey).SendAsync("ReadyPlayers", ReadyPlayersInRoom);
+            await Clients.Group(RoomKey).SendAsync("ReadyPlayers", ReadyPlayersInRoom);
+            
         }
 
-        public Task UpdatePlayersPositions(PlayersPositionsData NewPositions)
+        public Task UpdatePlayersPositions(List<PlayerPosition> NewPositions)
         {
             string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
             return Clients.Group(RoomKey).SendAsync("UpdatePositions", NewPositions);
         }
-
-        public Task TestPoint(Point2D point)
-        {
-            string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
-            return Clients.Group(RoomKey).SendAsync("Test", point);
-        }
-
-
 
     }
 }

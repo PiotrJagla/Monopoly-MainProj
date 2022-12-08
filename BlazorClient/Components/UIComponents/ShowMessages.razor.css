@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.messages{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.message{
+
+}

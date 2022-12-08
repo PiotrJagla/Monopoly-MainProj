@@ -53,16 +53,17 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 InvokeAsync(StateHasChanged);
             });
 
-            MonopolyHubConn.On<PlayersPositionsData>("UpdatePositions", (NewPositions) =>
+            MonopolyHubConn.On<List<PlayerPosition>>("UpdatePositions", (NewPositions) =>
             {
                 MonopolyLogic.UpdatePlayersPositions(NewPositions);
+                MonopolyLogic.NextTurn();
                 InvokeAsync(StateHasChanged);
             });
         }
 
         private void IsEveryoneReady(List<Player> ReadyPlayers)
         {
-            if(((float)ReadyPlayers.Count / RoomPlayersNumber) == 1)
+            if(ReadyPlayers.Count == RoomPlayersNumber)
             {
                 MonopolyLogic.StartGame(ReadyPlayers);
                 Messages.Add("Everyone is Ready");
@@ -90,10 +91,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         protected async Task Move()
         {
             MonopolyLogic.Move(GetRandom.number.Next(1, 3));
-            //PlayersPositionsData UpdatedPositions = MonopolyLogic.GetPlayersPositions();
-            await MonopolyHubConn.SendAsync("UpdatePlayersPositions", MonopolyLogic.GetPlayersPositions());
-            InvokeAsync(StateHasChanged);
-            //await MonopolyHubConn.SendAsync("TestPoint", MonopolyLogic.GetPoint());
+            PlayersPositionsData UpdatedPositions = MonopolyLogic.GetPlayersPositions();
+            await MonopolyHubConn.SendAsync("UpdatePlayersPositions", UpdatedPositions.GetPlayersPositions());
         }
     }
 }

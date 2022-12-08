@@ -12,11 +12,6 @@ namespace Services.GamesServices.Monopoly
     {
         private List<PlayerPosition> PlayersKeyPositions;
 
-        public PlayersPositionsData()
-        {
-
-        }
-
         public List<PlayerPosition> GetPlayersPositions()
         {
             return PlayersKeyPositions;

@@ -9,13 +9,13 @@ namespace Models.Monopoly
 {
     public class PlayerPosition
     {
-        public int Position { get; set; }
         public PlayerKey Player{ get; set; }
+        public int Position { get; set; }
 
         public PlayerPosition()
         {
-            Position = 0;
             Player = PlayerKey.LastNumber;
+            Position = -1;
         }
     }
 }

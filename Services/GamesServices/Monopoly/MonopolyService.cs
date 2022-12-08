@@ -17,12 +17,15 @@ namespace Services.GamesServices.Monopoly
 
         PlayersPositionsData GetPlayersPositions();
 
-        void UpdatePlayersPositions(PlayersPositionsData UpdatedPositions);
+        void UpdatePlayersPositions(List<PlayerPosition> UpdatedPositions);
 
         void Move(int amount);
 
         void SetMainPlayerIndex(int index);
 
-        Point2D GetPoint();
+        bool IsYourTurn();
+
+        void NextTurn();
+
     }
 }

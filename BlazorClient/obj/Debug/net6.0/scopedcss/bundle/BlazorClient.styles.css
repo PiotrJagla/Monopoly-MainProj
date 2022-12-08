@@ -51,6 +51,20 @@ body[b-v3jrkzpd71] {
 .ButtonText[b-v3jrkzpd71]{
     font-size: 50px;
 }
+/* /Components/UIComponents/ShowMessages.razor.rz.scp.css */
+body[b-1kd2glwlgy] {
+}
+
+.messages[b-1kd2glwlgy]{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.message[b-1kd2glwlgy]{
+
+}
 /* /Components/UserLoginDataInputFiles/UserLoginDataInput.razor.rz.scp.css */
 body[b-dj9qcnb75s] {
 }
