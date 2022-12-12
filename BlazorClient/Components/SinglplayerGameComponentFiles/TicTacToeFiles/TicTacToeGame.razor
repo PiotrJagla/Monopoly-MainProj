@@ -1,9 +1,9 @@
 ﻿@inherits TicTacToeGameBase
 
 <div class="board">
-    @for (int y = 0; y < Constants.TicTacToeBoardSize.y; y++)
+    @for (int y = 0; y < Consts.TicTacToe.BoardSize.y; y++)
     {
-        for (int x = 0; x < Constants.TicTacToeBoardSize.x; x++)
+        for (int x = 0; x < Consts.TicTacToe.BoardSize.x; x++)
         {
             Point2D point = new Point2D(x, y);
             <button disabled="@(UserMessage!="")" @onclick="() => OnUserBoardClick(point)" class="TicTacToeButton">
@@ -16,8 +16,8 @@
 <style>
     .board{
         display: grid;
-        grid-template-columns: repeat(@Constants.TicTacToeBoardSize.x, 1fr);
-        grid-template-columns: repeat(@Constants.TicTacToeBoardSize.x, 100px);
+        grid-template-columns: repeat(@Consts.TicTacToe.BoardSize.x, 1fr);
+        grid-template-columns: repeat(@Consts.TicTacToe.BoardSize.x, 100px);
     }
 </style>
 

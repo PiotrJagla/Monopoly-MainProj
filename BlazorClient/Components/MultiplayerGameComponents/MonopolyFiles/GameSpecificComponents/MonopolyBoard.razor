@@ -8,7 +8,7 @@
         {
             <label>|@((int)player)|</label>
         }*@
-        @foreach (var playerPos in PlayersPositions.GetPlayersPositions())
+        @foreach (var playerPos in PlayersPositions.GetPlayersUpdatedData())
         {
             if(playerPos.Position == i)
             {
@@ -27,5 +27,5 @@
     public List<MonopolyCell> Board { get; set; }
 
     [Parameter]
-    public PlayersPositionsData PlayersPositions { get; set; }
+    public PlayersUpdateData PlayersPositions { get; set; }
 }

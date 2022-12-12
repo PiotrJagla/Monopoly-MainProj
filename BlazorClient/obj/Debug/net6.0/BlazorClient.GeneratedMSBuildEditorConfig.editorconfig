@@ -22,12 +22,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/DisplayPlayersMoney.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcR2FtZVNwZWNpZmljQ29tcG9uZW50c1xEaXNwbGF5UGxheWVyc01vbmV5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/CardDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xDYXJkRGlzcGxheS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/CardsDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xDYXJkc0Rpc3BsYXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UIComponents/YesOrNoModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVSUNvbXBvbmVudHNcWWVzT3JOb01vZGFsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/_Imports.razor]

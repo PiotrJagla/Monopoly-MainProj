@@ -1,4 +1,5 @@
 ﻿@inherits MonopolyGameBase
+@inject IModalService modal
 
 <h3>Dziala!!</h3>
 
@@ -8,9 +9,15 @@
 
 <br />
 <br />
-<MonopolyBoard Board="@MonopolyLogic.GetBoard()" PlayersPositions="@MonopolyLogic.GetPlayersPositions()"></MonopolyBoard>
+<MonopolyBoard Board="@MonopolyLogic.GetBoard()" PlayersPositions="@MonopolyLogic.GetPlayersUpdatedData()"></MonopolyBoard>
 
 <button @onclick="Move" disabled="@(MonopolyLogic.IsYourTurn() == false)">Throw Dice</button>
+<button @onclick="@(() =>
+{
+    modal.Show<YesOrNoModal>();
+})">ShowModal</button>
+
+<DisplayPlayersMoney PlayersMoney="@MonopolyLogic.GetPlayersUpdatedData()"></DisplayPlayersMoney>
 
 <br />
 <br />

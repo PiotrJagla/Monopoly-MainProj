@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XyyjXxKCWFgOsMcpa2sjkkJEumeWcMdrXyFlI3HyIgXkbZekfJcqbaaLfvlFvugOKn4dGYwwCdvgZZ7eA2/+fA==",
+  "dgSpecHash": "Hp1bx9P4OyfIGkv07wLXwXDJo2X/nOYpU9nasdNfA/05drSHVsbwFxmS957dDQ7EIlbeCLXhRi3f76mjZDvzhw==",
   "success": true,
   "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\BlazorClient.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\piotr\\.nuget\\packages\\blazored.modal\\7.1.0\\blazored.modal.7.1.0.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\k4os.compression.lz4.streams\\1.2.6\\k4os.compression.lz4.streams.1.2.6.nupkg.sha512",

@@ -1,4 +1,6 @@
-﻿using Models.Monopoly;
+﻿using Models;
+using Models.Monopoly;
+using Enums.Monopoly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,9 @@ namespace Services.GamesServices.Monopoly
             {
                 Board.Add(new MonopolyCell());
                 Board.Last().Number = i;
+                Board.Last().CellCosts.Buy = Consts.Monopoly.BuyCost;
+                Board.Last().CellCosts.Stay = Consts.Monopoly.StayCost;
+                Board.Last().OwnedBy = PlayerKey.LastNumber;
             }
         }
 

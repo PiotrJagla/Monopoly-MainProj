@@ -33,11 +33,11 @@ namespace BlazorClient.Components.SinglplayerGameComponentFiles.TicTacToeFiles
 
         private bool IsGameOver()
         {
-            if (TicTacToeLogic.CheckWinner() == Constants.TicTacToePlayer)
-                UserMessage = $"{Constants.TicTacToePlayer} Wins!";
-            else if (TicTacToeLogic.CheckWinner() == Constants.TicTacToeEnemy)
-                UserMessage = $"{Constants.TicTacToeEnemy} Wins!";
-            else if(TicTacToeLogic.CheckWinner() == Constants.TicTacToeTie)
+            if (TicTacToeLogic.CheckWinner() == Consts.TicTacToe.Player)
+                UserMessage = $"{Consts.TicTacToe.Player} Wins!";
+            else if (TicTacToeLogic.CheckWinner() == Consts.TicTacToe.Enemy)
+                UserMessage = $"{Consts.TicTacToe.Enemy} Wins!";
+            else if(TicTacToeLogic.CheckWinner() == Consts.TicTacToe.Tie)
                 UserMessage = "Tie";
             else
                 return false;

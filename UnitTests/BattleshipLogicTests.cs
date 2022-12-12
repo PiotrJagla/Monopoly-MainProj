@@ -51,9 +51,9 @@ namespace UnitTests
 
             List<Point2D> BadDistribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (BadDistributionVisualization[y].ElementAt(x) == 'X')
                         BadDistribution.Add(new Point2D(x, y));
@@ -87,9 +87,9 @@ namespace UnitTests
 
             List<Point2D> BadDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (BadDistributionVisualization[y].ElementAt(x) == 'X')
                         BadDsitribution.Add(new Point2D(x, y));
@@ -123,9 +123,9 @@ namespace UnitTests
 
             List<Point2D> ValidDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
                         ValidDsitribution.Add(new Point2D(x, y));
@@ -158,9 +158,9 @@ namespace UnitTests
 
             List<Point2D> ValidDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
                         ValidDsitribution.Add(new Point2D(x, y));
@@ -194,9 +194,9 @@ namespace UnitTests
 
             List<Point2D> ValidDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
                         ValidDsitribution.Add(new Point2D(x, y));
@@ -242,9 +242,9 @@ namespace UnitTests
 
             List<Point2D> ValidDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
                         ValidDsitribution.Add(new Point2D(x, y));
@@ -288,9 +288,9 @@ namespace UnitTests
 
             List<Point2D> ValidDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
                         ValidDsitribution.Add(new Point2D(x, y));
@@ -435,9 +435,9 @@ namespace UnitTests
 
             List<Point2D> ValidDsitribution = new List<Point2D>();
 
-            for (int y = 0; y < Constants.BattleshipBoardSize.y; ++y)
+            for (int y = 0; y < Consts.Battleship.BoardSize.y; ++y)
             {
-                for (int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+                for (int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
                 {
                     if (ValidDistributionVisualization[y].ElementAt(x) == 'X')
                         ValidDsitribution.Add(new Point2D(x, y));

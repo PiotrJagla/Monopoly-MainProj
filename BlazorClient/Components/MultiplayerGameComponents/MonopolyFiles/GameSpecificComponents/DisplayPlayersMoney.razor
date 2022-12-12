@@ -1,0 +1,16 @@
+﻿<div>
+    <label>Players Money:</label>
+</div>
+
+<div>
+    @foreach (var playerMoney in PlayersMoney.GetPlayersUpdatedData())
+    {
+        <label>@playerMoney.Player : @playerMoney.Money</label>
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public PlayersUpdateData PlayersMoney { get; set; }
+}

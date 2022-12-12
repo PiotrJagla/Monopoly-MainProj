@@ -1,6 +1,6 @@
 ﻿@inherits BlackJackGameBase
 
-<label>Max Points Is: @Constants.BlackJackMaxPoints</label>
+<label>Max Points Is: @Consts.BlackJack.MaxPoints</label>
 
 <button disabled="@(UserMessage=="")" @onclick="StartGame">Start Game</button>
 <button disabled="@(UserMessage!="")" @onclick="DrawCard">Draw Card</button>

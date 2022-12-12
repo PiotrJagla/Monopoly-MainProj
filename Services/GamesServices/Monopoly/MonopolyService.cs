@@ -15,9 +15,9 @@ namespace Services.GamesServices.Monopoly
 
         List<MonopolyCell> GetBoard();
 
-        PlayersPositionsData GetPlayersPositions();
+        PlayersUpdateData GetPlayersUpdatedData();
 
-        void UpdatePlayersPositions(List<PlayerPosition> UpdatedPositions);
+        void UpdatePlayersData(List<PlayerUpdateData> UpdatedData);
 
         void Move(int amount);
 

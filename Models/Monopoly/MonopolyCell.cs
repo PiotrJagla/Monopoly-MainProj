@@ -10,10 +10,15 @@ namespace Models.Monopoly
     public class MonopolyCell
     {
         public int Number { get; set; }
+        public PlayerKey OwnedBy { get; set; }
+
+        public Costs CellCosts { get; set; }
+
 
 
         public MonopolyCell()
         {
+            CellCosts = new Costs();
             Number = 0;
         }
     }

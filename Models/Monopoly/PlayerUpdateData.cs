@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace Models.Monopoly
 {
-    public class PlayerPosition
+    public class PlayerUpdateData
     {
         public PlayerKey Player{ get; set; }
         public int Position { get; set; }
+        public int Money { get; set; }
 
-        public PlayerPosition()
+        public PlayerUpdateData()
         {
             Player = PlayerKey.LastNumber;
             Position = -1;
+            Money = 0;
         }
     }
 }

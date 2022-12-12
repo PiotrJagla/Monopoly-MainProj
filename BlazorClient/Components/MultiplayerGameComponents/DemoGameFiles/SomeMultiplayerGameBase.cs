@@ -29,7 +29,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.DemoGameFiles
             allPoints = 0;
             IsEnemyFound = false;
 
-            multiplayerGameHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Constants.ServerURL}/multihub")).WithAutomaticReconnect().Build();
+            multiplayerGameHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}/multihub")).WithAutomaticReconnect().Build();
 
             multiplayerGameHubConn.On<int>("RecieveEnemyPoints", (enemyPoints) =>
             {

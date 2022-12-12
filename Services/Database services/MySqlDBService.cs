@@ -25,7 +25,7 @@ namespace Services.Database_services
 
         private void ConnectToDatabase()
         {
-            DatabaseConnection = new MySqlConnection(Constants.MySQLConnectionString);
+            DatabaseConnection = new MySqlConnection(Consts.MySQLConnectionString);
         }
 
         private void InitSqlSelect()

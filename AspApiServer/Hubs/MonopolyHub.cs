@@ -49,10 +49,10 @@ namespace ASPcoreServer.Hubs
             
         }
 
-        public Task UpdatePlayersPositions(List<PlayerPosition> NewPositions)
+        public Task UpdatePlayersData(List<PlayerUpdateData> NewData)
         {
             string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
-            return Clients.Group(RoomKey).SendAsync("UpdatePositions", NewPositions);
+            return Clients.Group(RoomKey).SendAsync("UpdatePlayersData", NewData);
         }
 
     }

@@ -2,9 +2,9 @@
 
 
 <div>
-    @for(int y = 0 ; y < Constants.BattleshipBoardSize.y ; ++y)
+    @for(int y = 0 ; y < Consts.Battleship.BoardSize.y ; ++y)
     {
-        @for(int x = 0; x < Constants.BattleshipBoardSize.x; ++x)
+        @for(int x = 0; x < Consts.Battleship.BoardSize.x; ++x)
         {
             Point2D pointOnBoard = new Point2D(x, y);
             <button disabled="@(AreButtonsClickable == false)" class="BattleshipButton" @onclick="(() => SendClickedPoint(new Point2D( pointOnBoard.x, pointOnBoard.y)))">

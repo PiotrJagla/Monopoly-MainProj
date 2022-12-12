@@ -1,0 +1,30 @@
+﻿
+<div>
+    <label>@Title</label>
+    <button @onclick="@(() => SubmitForm(true))">YES</button>
+    <button @onclick="@(() => SubmitForm(false))">NO</button>
+    <button @onclick="@Cancel">Close</button>
+</div>
+
+@code {
+
+    public string Title { get; set; }
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Title = "";
+        BlazoredModal.SetTitle("Yes Or No");
+    }
+
+    private async Task SubmitForm(bool Decision)
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Ok(Decision));
+    }
+
+    private async Task Cancel()
+    {
+        await BlazoredModal.CancelAsync();
+    }
+}

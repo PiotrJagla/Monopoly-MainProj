@@ -61,10 +61,10 @@ namespace Services.GamesServices.BlackJack
 
         public bool UserWon()
         {
-            if (GetUserPoints() > Constants.BlackJackMaxPoints)
+            if (GetUserPoints() > Consts.BlackJack.MaxPoints)
                 return false;
 
-            if (GetDealerPoints() > Constants.BlackJackMaxPoints)
+            if (GetDealerPoints() > Consts.BlackJack.MaxPoints)
                 return true;
 
             if (GetUserPoints() > GetDealerPoints())
@@ -83,7 +83,7 @@ namespace Services.GamesServices.BlackJack
             while(true)
             {
                 DealerCards.Add(new Card());
-                if (GetDealerPoints() >= Constants.BlackJackMinPoints)
+                if (GetDealerPoints() >= Consts.BlackJack.MinPoints)
                     return;
             }
         }

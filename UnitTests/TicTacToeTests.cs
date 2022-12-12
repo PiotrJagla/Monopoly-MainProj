@@ -19,7 +19,7 @@ namespace UnitTests
             TicTacToe.PlayerTurn(new Point2D(1,1));
             TicTacToe.PlayerTurn(new Point2D(2,2));
 
-            Assert.IsTrue(TicTacToe.CheckWinner() == Constants.TicTacToePlayer);
+            Assert.IsTrue(TicTacToe.CheckWinner() == Consts.TicTacToe.Player);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace UnitTests
             TicTacToe.PlayerTurn(new Point2D(1, 1));
             TicTacToe.PlayerTurn(new Point2D(0, 2));
 
-            Assert.IsTrue(TicTacToe.CheckWinner() == Constants.TicTacToePlayer);
+            Assert.IsTrue(TicTacToe.CheckWinner() == Consts.TicTacToe.Player);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace UnitTests
             TicTacToe.PlayerTurn(new Point2D(1, 1));
             TicTacToe.PlayerTurn(new Point2D(1, 2));
 
-            Assert.IsTrue(TicTacToe.CheckWinner() == Constants.TicTacToePlayer);
+            Assert.IsTrue(TicTacToe.CheckWinner() == Consts.TicTacToe.Player);
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace UnitTests
             TicTacToe.PlayerTurn(new Point2D(1, 2));
             TicTacToe.PlayerTurn(new Point2D(2, 2));
 
-            Assert.IsTrue(TicTacToe.CheckWinner() == Constants.TicTacToePlayer);
+            Assert.IsTrue(TicTacToe.CheckWinner() == Consts.TicTacToe.Player);
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace UnitTests
             TicTacToe.EnemyTurn();
             TicTacToe.PlayerTurn(new Point2D(2, 2));
 
-            Assert.IsTrue(TicTacToe.CheckWinner() == Constants.TicTacToeTie);
+            Assert.IsTrue(TicTacToe.CheckWinner() == Consts.TicTacToe.Tie);
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace UnitTests
             TicTacToe.EnemyTurn();
             
 
-            Assert.IsTrue(TicTacToe.GetPoint(new Point2D(2,2)) == Constants.TicTacToeEnemy);
+            Assert.IsTrue(TicTacToe.GetPoint(new Point2D(2,2)) == Consts.TicTacToe.Enemy);
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace UnitTests
             TicTacToe.EnemyTurn();
 
 
-            Assert.IsTrue(TicTacToe.GetPoint(new Point2D(1, 2)) == Constants.TicTacToeEnemy);
+            Assert.IsTrue(TicTacToe.GetPoint(new Point2D(1, 2)) == Consts.TicTacToe.Enemy);
         }
 
 

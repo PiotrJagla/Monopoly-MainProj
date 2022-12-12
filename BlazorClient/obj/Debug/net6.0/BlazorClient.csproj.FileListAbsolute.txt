@@ -1769,3 +1769,7 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\DemoGameFiles\SomeMultiplayerGame.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\MonopolyFiles\GameSpecificComponents\MonopolyBoard.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\ShowMessages.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\Blazored.Modal.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\Blazored.Modal.dll.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\Blazored.Modal.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\5zS6cKEu.gz

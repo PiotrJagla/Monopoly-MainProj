@@ -30,9 +30,9 @@ app.UseCors(policy =>
     .WithHeaders(HeaderNames.ContentType)
 ); 
 
-app.MapHub<SomeMultiplayerGameHub>(Constants.DemoButtonsHubURL);
-app.MapHub<BattleshipHub>(Constants.BattleshipHubURL);
-app.MapHub<MonopolyHub>(Constants.MonopolyHubURL);
+app.MapHub<SomeMultiplayerGameHub>(Consts.HubUrl.DemoButtons);
+app.MapHub<BattleshipHub>(Consts.HubUrl.Battleship);
+app.MapHub<MonopolyHub>(Consts.HubUrl.Monopoly);
 
 app.UseHttpsRedirection();
  
