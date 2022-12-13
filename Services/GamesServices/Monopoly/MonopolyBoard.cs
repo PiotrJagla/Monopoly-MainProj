@@ -26,7 +26,7 @@ namespace Services.GamesServices.Monopoly
                 Board.Last().Number = i;
                 Board.Last().CellCosts.Buy = Consts.Monopoly.BuyCost;
                 Board.Last().CellCosts.Stay = Consts.Monopoly.StayCost;
-                Board.Last().OwnedBy = PlayerKey.LastNumber;
+                Board.Last().OwnedBy = PlayerKey.NoOne;
             }
         }
 

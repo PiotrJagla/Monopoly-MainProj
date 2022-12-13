@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Enums.Monopoly;
 using Models;
 using Models.Monopoly;
 using Models.MultiplayerConnection;
@@ -19,7 +20,7 @@ namespace Services.GamesServices.Monopoly
 
         void UpdatePlayersData(List<PlayerUpdateData> UpdatedData);
 
-        void Move(int amount);
+        MoveResult Move(int amount);
 
         void SetMainPlayerIndex(int index);
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using Models.Monopoly;
 using Models.MultiplayerConnection;
+using Org.BouncyCastle.Asn1.X509;
 using Services.GamesServices.Monopoly;
 
 namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
@@ -19,8 +20,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         [Inject]
         public MonopolyService MonopolyLogic { get; set; }
 
-        //[Inject]
-        //public IModalService ModalService { get; set; }
+        [Inject]
+        public IModalService ModalService { get; set; }
 
         [Parameter]
         public string loggerUserName { get; set; }
@@ -94,18 +95,35 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             await MonopolyHubConn.SendAsync("UserReady");
         }
 
-        //protected void ShowModal()
-        //{
-        //    ModalService.Show<YesOrNoModal>();
-        //}
-
         protected async Task Move()
         {
-            MonopolyLogic.Move(GetRandom.number.Next(1, 3));
-            
+            await PlayersMove();
+            await BrodcastUpdatedInformations();
+        }
+        private async Task PlayersMove()
+        {
+            if(MonopolyLogic.Move(GetRandom.number.Next(1, 3)) == MoveResult.OnNobodysCell)
+            {
+                ModalParameters parameters = new ModalParameters();
+                parameters.Add(nameof(YesOrNoModal.Title), "Do you want to buy this?");
+                
+                ModalService.Show<YesOrNoModal>("Passing Data", parameters);
+            }
+            else
+            {
 
+            }
+        }
+
+        private async Task BrodcastUpdatedInformations()
+        {
             PlayersUpdateData UpdatedData = MonopolyLogic.GetPlayersUpdatedData();
             await MonopolyHubConn.SendAsync("UpdatePlayersData", UpdatedData.GetPlayersUpdatedData());
+        }
+
+        private void PlayerBuyingCell()
+        {
+
         }
     }
 }

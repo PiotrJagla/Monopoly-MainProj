@@ -47,11 +47,19 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetBoard();   
         }
 
-        public void Move(int amount)
+        public MoveResult Move(int amount)
         {
             OnStartCellCrossed(amount);
             Players[PlayersIndexes.MainPlayer].OnCellIndex = (Players[PlayersIndexes.MainPlayer].OnCellIndex + amount) % BoardService.GetBoard().Count;
+            return IsOnSomeonesCell() ? MoveResult.OnSomeonesCell : MoveResult.OnNobodysCell;
         }
+
+        private bool IsOnSomeonesCell()
+        {
+            return BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != PlayerKey.NoOne;
+        }
+            
+
 
         private void OnStartCellCrossed(int MoveAmount)
         {

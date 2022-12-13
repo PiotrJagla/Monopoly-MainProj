@@ -15,7 +15,7 @@ namespace Models.Monopoly
 
         public PlayerUpdateData()
         {
-            Player = PlayerKey.LastNumber;
+            Player = PlayerKey.NoOne;
             Position = -1;
             Money = 0;
         }

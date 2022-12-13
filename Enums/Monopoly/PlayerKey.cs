@@ -12,6 +12,6 @@ namespace Enums.Monopoly
         Secound,
         Third,
         Fourth,
-        LastNumber
+        NoOne
     }
 }
