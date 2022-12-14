@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly
+namespace Services.GamesServices.Monopoly.Update
 {
     public class MonopolyBoardUpdateData
     {

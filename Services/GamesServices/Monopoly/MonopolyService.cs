@@ -7,6 +7,7 @@ using Enums.Monopoly;
 using Models;
 using Models.Monopoly;
 using Models.MultiplayerConnection;
+using Services.GamesServices.Monopoly.Update;
 
 namespace Services.GamesServices.Monopoly
 {

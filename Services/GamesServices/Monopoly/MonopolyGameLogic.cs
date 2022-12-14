@@ -9,6 +9,7 @@ using Models.Monopoly;
 using Models;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Services.GamesServices.Monopoly.Update;
 
 namespace Services.GamesServices.Monopoly
 {
@@ -48,8 +49,6 @@ namespace Services.GamesServices.Monopoly
         {
             return BoardService.GetBoard();   
         }
-
-        
 
         public MonopolyUpdateMessage GetUpdatedData()
         {

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.SignalR;
 using Services.OnlineConnectionsService;
 using Models.MultiplayerConnection;
 using Enums.MultiplayerConnection;
-using Services.GamesServices.Monopoly;
 using Models.Monopoly;
 using Models;
+using Services.GamesServices.Monopoly.Update;
 
 namespace ASPcoreServer.Hubs
 {
@@ -29,12 +29,6 @@ namespace ASPcoreServer.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, RoomKey);
             await Clients.Group(RoomKey).SendAsync("UserJoined", AllPlayersInRoom.Count);
         
-        }
-
-        public Task SendMessageToGroup(string message)
-        {
-            string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
-            return Clients.Group(RoomKey).SendAsync("RecieveMessage", message);
         }
 
         public async Task UserReady()

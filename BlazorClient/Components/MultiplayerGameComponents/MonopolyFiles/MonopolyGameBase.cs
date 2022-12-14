@@ -9,6 +9,7 @@ using Models.Monopoly;
 using Models.MultiplayerConnection;
 using Org.BouncyCastle.Asn1.X509;
 using Services.GamesServices.Monopoly;
+using Services.GamesServices.Monopoly.Update;
 using StringManipulationLib;
 
 namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
@@ -39,12 +40,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             Messages = new List<string>();
             MonopolyHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}{Consts.HubUrl.Monopoly}")).WithAutomaticReconnect().Build();
             await MonopolyHubConn.StartAsync();
-            
-            MonopolyHubConn.On<string>("RecieveMessage", (message) =>
-            {
-                Messages.Add(message);
-                InvokeAsync(StateHasChanged);
-            });
 
             MonopolyHubConn.On<int>("UserJoined", (AllPlayersInRoom) =>
             {
@@ -86,11 +81,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             InvokeAsync(StateHasChanged);
         }
 
-        protected async Task SendMessage()
-        {
-            await MonopolyHubConn.SendAsync("SendMessageToGroup", "Message from user");
-        }
-
         protected async Task Ready()
         {
             await MonopolyHubConn.SendAsync("UserReady");
@@ -109,7 +99,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             }
             else
             {
-
+                //TODO: Owes money to someone
             }
         }
 
@@ -142,7 +132,5 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             MonopolyUpdateMessage UpdatedData = MonopolyLogic.GetUpdatedData();
             await MonopolyHubConn.SendAsync("UpdateData", UpdatedData);
         }
-
-        
     }
 }

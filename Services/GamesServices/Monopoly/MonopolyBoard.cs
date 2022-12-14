@@ -30,13 +30,10 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-
         public List<MonopolyCell> GetBoard()
         {
             return Board;
         }
-
-        
 
         public bool CanAffordBuying(int MoneyAmount, int CellIndex)
         {
