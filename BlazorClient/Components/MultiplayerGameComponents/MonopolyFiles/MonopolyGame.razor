@@ -8,11 +8,11 @@
 
 <br />
 <br />
-<MonopolyBoard Board="@MonopolyLogic.GetBoard()" PlayersPositions="@MonopolyLogic.GetPlayersUpdatedData()"></MonopolyBoard>
+<MonopolyBoard Board="@MonopolyLogic.GetBoard()" PlayersPositions="@MonopolyLogic.GetUpdatedData().PlayersData"></MonopolyBoard>
 
 <button @onclick="Move" disabled="@(MonopolyLogic.IsYourTurn() == false)">Throw Dice</button>
 
-<DisplayPlayersMoney PlayersMoney="@MonopolyLogic.GetPlayersUpdatedData()"></DisplayPlayersMoney>
+<DisplayPlayersMoney PlayersMoney="@MonopolyLogic.GetUpdatedData().PlayersData"></DisplayPlayersMoney>
 
 <br />
 <br />

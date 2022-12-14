@@ -49,10 +49,10 @@ namespace ASPcoreServer.Hubs
             
         }
 
-        public Task UpdatePlayersData(List<PlayerUpdateData> NewData)
+        public Task UpdateData(MonopolyUpdateMessage NewData)
         {
             string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
-            return Clients.Group(RoomKey).SendAsync("UpdatePlayersData", NewData);
+            return Clients.Group(RoomKey).SendAsync("UpdateData", NewData);
         }
 
     }

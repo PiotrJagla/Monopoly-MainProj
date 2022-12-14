@@ -1774,3 +1774,11 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\Blazored.Modal.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\5zS6cKEu.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\YesOrNoModal.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\StringManipulationLib.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\StringManipulationLib.dll.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\wwwroot\_framework\StringManipulationLib.pdb.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\StringManipulationLib.pdb
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\+yU5oSle.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\HHejYwgz.gz

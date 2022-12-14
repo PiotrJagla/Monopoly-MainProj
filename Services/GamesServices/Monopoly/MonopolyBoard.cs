@@ -35,5 +35,16 @@ namespace Services.GamesServices.Monopoly
         {
             return Board;
         }
+
+        
+
+        public bool CanAffordBuying(int MoneyAmount, int CellIndex)
+        {
+            return MoneyAmount >= CellBuyCost(CellIndex);
+        }
+        private int CellBuyCost(int index)
+        {
+            return Board[index].CellCosts.Buy;
+        }
     }
 }

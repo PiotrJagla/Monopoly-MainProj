@@ -14,8 +14,6 @@ namespace Models.Monopoly
 
         public Costs CellCosts { get; set; }
 
-
-
         public MonopolyCell()
         {
             CellCosts = new Costs();

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zlyjG5RXtJTbc5nNQsC7iZamTjavha/W7WvSSNqJmHI=",
+  "Hash": "lPIRV6NRuTJnGV3IT4J5hIYutKCziAn4MOE1vglp7Tk=",
   "Source": "BlazorClient",
   "BasePath": "/",
   "Mode": "Root",
@@ -1103,6 +1103,40 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\bin\\Debug\\net6.0\\Services.pdb"
+    },
+    {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\StringManipulationLib.dll",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/StringManipulationLib.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\bin\\Debug\\net6.0\\StringManipulationLib.dll"
+    },
+    {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\StringManipulationLib.pdb",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/StringManipulationLib.pdb",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "symbol",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\bin\\Debug\\net6.0\\StringManipulationLib.pdb"
     },
     {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.AppContext.dll",
@@ -4080,6 +4114,23 @@
       "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Security.Cryptography.Primitives.dll"
     },
     {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\+yU5oSle.gz",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/StringManipulationLib.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\StringManipulationLib.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\StringManipulationLib.dll"
+    },
+    {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\0bRYXcmt.gz",
       "SourceId": "BlazorClient",
       "SourceType": "Computed",
@@ -5727,6 +5778,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Security.Cryptography.Cng.dll"
+    },
+    {
+      "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\HHejYwgz.gz",
+      "SourceId": "BlazorClient",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/StringManipulationLib.pdb.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\StringManipulationLib.pdb",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\bin\\Debug\\net6.0\\wwwroot\\_framework\\StringManipulationLib.pdb"
     },
     {
       "Identity": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\Debug\\net6.0\\build-gz\\HKj1cYCb.gz",

@@ -7,6 +7,8 @@ using Enums.Monopoly;
 using System.Threading.Tasks;
 using Models.Monopoly;
 using Models;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Services.GamesServices.Monopoly
 {
@@ -47,19 +49,78 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetBoard();   
         }
 
+        
+
+        public MonopolyUpdateMessage GetUpdatedData()
+        {
+            MonopolyUpdateMessage UpdatedData = new MonopolyUpdateMessage();
+            UpdatedData.PlayersData = MakePlayersUpdateData().GetPlayersUpdatedData();
+            UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsOwners();
+            return UpdatedData;
+        }
+
+        private PlayersUpdateData MakePlayersUpdateData()
+        {
+            PlayersUpdateData PlayersUpdatedData = new PlayersUpdateData();
+            PlayersUpdatedData.FormatPlayersUpdateData(Players);
+            return PlayersUpdatedData;
+        }
+
+        private MonopolyBoardUpdateData MakeBoardUpdateData()
+        {
+            MonopolyBoardUpdateData BoardUpdatedData = new MonopolyBoardUpdateData();
+            BoardUpdatedData.FormatBoardUpdateData(BoardService.GetBoard());
+            return BoardUpdatedData;
+        }
+
+        public void UpdateData(MonopolyUpdateMessage UpdatedData)
+        {
+            UpdatePlayersData(UpdatedData.PlayersData);
+            UpdateBoardData(UpdatedData.CellsOwners);
+        }
+
+        private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData)
+        {
+            for (int i = 0; i < PlayersUpdatedData.Count; i++)
+            {
+                Players[i].OnCellIndex = PlayersUpdatedData[i].Position;
+                Players[i].MoneyOwned = PlayersUpdatedData[i].Money;
+                
+            }
+        }
+
+        private void UpdateBoardData(List<MonopolyCellOwner> BoardUpdatedData)
+        {
+            for (int i = 0; i < BoardUpdatedData.Count; i++)
+            {
+                BoardService.GetBoard()[i].OwnedBy = BoardUpdatedData[i].Owner;
+            }
+        }
+
+        public void BuyCellIfPossible()
+        {
+            int MainPlayerBoardPos = Players[PlayersIndexes.MainPlayer].OnCellIndex;
+            int MainPlayerMoney = Players[PlayersIndexes.MainPlayer].MoneyOwned;
+            
+            if (BoardService.CanAffordBuying(MainPlayerMoney, MainPlayerBoardPos))
+            {
+                BuyCell(MainPlayerBoardPos);
+            }
+        }
+
+        private void BuyCell(int MainPlayerBoardPos)
+        {
+            PlayerKey MainPlayerKey = Players[PlayersIndexes.MainPlayer].Key;
+            BoardService.GetBoard()[MainPlayerBoardPos].OwnedBy = MainPlayerKey;
+            Players[PlayersIndexes.MainPlayer].MoneyOwned -= BoardService.GetBoard()[MainPlayerBoardPos].CellCosts.Buy;
+        }
+
         public MoveResult Move(int amount)
         {
             OnStartCellCrossed(amount);
             Players[PlayersIndexes.MainPlayer].OnCellIndex = (Players[PlayersIndexes.MainPlayer].OnCellIndex + amount) % BoardService.GetBoard().Count;
             return IsOnSomeonesCell() ? MoveResult.OnSomeonesCell : MoveResult.OnNobodysCell;
         }
-
-        private bool IsOnSomeonesCell()
-        {
-            return BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != PlayerKey.NoOne;
-        }
-            
-
 
         private void OnStartCellCrossed(int MoveAmount)
         {
@@ -74,27 +135,9 @@ namespace Services.GamesServices.Monopoly
             return (Players[PlayersIndexes.MainPlayer].OnCellIndex + MoveAmount) >= BoardService.GetBoard().Count;
         }
 
-        public void SetMainPlayerIndex(int index)
+        private bool IsOnSomeonesCell()
         {
-            if(PlayersIndexes.MainPlayer == -1)
-                PlayersIndexes.MainPlayer = index;
-        }
-
-
-        public PlayersUpdateData GetPlayersUpdatedData()
-        {
-            PlayersUpdateData PlayersData = new PlayersUpdateData();
-            PlayersData.FormatPlayersUpdateData(Players);
-            return PlayersData;
-        }
-
-        public void UpdatePlayersData(List<PlayerUpdateData> UpdatedData)
-        {
-            for (int i = 0; i < UpdatedData.Count; i++)
-            {
-                Players[i].OnCellIndex = UpdatedData[i].Position;
-                Players[i].MoneyOwned = UpdatedData[i].Money;
-            }
+            return BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != PlayerKey.NoOne;
         }
 
         public bool IsYourTurn()
@@ -105,6 +148,12 @@ namespace Services.GamesServices.Monopoly
         public void NextTurn()
         {
             PlayersIndexes.WhosTurn = (++PlayersIndexes.WhosTurn) % Players.Count;
+        }
+
+        public void SetMainPlayerIndex(int index)
+        {
+            if (PlayersIndexes.MainPlayer == -1)
+                PlayersIndexes.MainPlayer = index;
         }
     }
 }

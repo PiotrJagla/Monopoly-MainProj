@@ -5,7 +5,7 @@
 </div>
 
 <div>
-    @foreach (var playerMoney in PlayersMoney.GetPlayersUpdatedData())
+    @foreach (var playerMoney in PlayersMoney)
     {
         <label>@playerMoney.Player : @playerMoney.Money</label>
     }
@@ -13,5 +13,5 @@
 
 @code {
     [Parameter]
-    public PlayersUpdateData PlayersMoney { get; set; }
+    public List<PlayerUpdateData> PlayersMoney { get; set; }
 }

@@ -1006,6 +1006,16 @@
           "bin/placeholder/Services.dll": {}
         }
       },
+      "StringManipulationLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        }
+      },
       "Validation/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1967,6 +1977,16 @@
         },
         "runtime": {
           "bin/placeholder/Services.dll": {}
+        }
+      },
+      "StringManipulationLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StringManipulationLib.dll": {}
         }
       },
       "Validation/1.0.0": {
@@ -3533,6 +3553,11 @@
       "path": "../Services/Services.csproj",
       "msbuildProject": "../Services/Services.csproj"
     },
+    "StringManipulationLib/1.0.0": {
+      "type": "project",
+      "path": "../StringManipulationLib/StringManipulationLib.csproj",
+      "msbuildProject": "../StringManipulationLib/StringManipulationLib.csproj"
+    },
     "Validation/1.0.0": {
       "type": "project",
       "path": "../Validation/Validation.csproj",
@@ -3547,7 +3572,8 @@
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.9",
       "Microsoft.AspNetCore.SignalR.Client >= 7.0.0",
       "Models >= 1.0.0",
-      "Services >= 1.0.0"
+      "Services >= 1.0.0",
+      "StringManipulationLib >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3585,6 +3611,9 @@
             },
             "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj"
+            },
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj"
             }
           }
         }

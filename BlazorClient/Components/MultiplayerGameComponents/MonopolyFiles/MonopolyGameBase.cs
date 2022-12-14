@@ -9,6 +9,7 @@ using Models.Monopoly;
 using Models.MultiplayerConnection;
 using Org.BouncyCastle.Asn1.X509;
 using Services.GamesServices.Monopoly;
+using StringManipulationLib;
 
 namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 {
@@ -38,7 +39,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             Messages = new List<string>();
             MonopolyHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}{Consts.HubUrl.Monopoly}")).WithAutomaticReconnect().Build();
             await MonopolyHubConn.StartAsync();
-
+            
             MonopolyHubConn.On<string>("RecieveMessage", (message) =>
             {
                 Messages.Add(message);
@@ -60,9 +61,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 InvokeAsync(StateHasChanged);
             });
 
-            MonopolyHubConn.On<List<PlayerUpdateData>>("UpdatePlayersData", (NewPositions) =>
+            MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", (NewData) =>
             {
-                MonopolyLogic.UpdatePlayersData(NewPositions);
+                MonopolyLogic.UpdateData(NewData);
                 MonopolyLogic.NextTurn();
                 InvokeAsync(StateHasChanged);
             });
@@ -104,10 +105,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         {
             if(MonopolyLogic.Move(GetRandom.number.Next(1, 3)) == MoveResult.OnNobodysCell)
             {
-                ModalParameters parameters = new ModalParameters();
-                parameters.Add(nameof(YesOrNoModal.Title), "Do you want to buy this?");
-                
-                ModalService.Show<YesOrNoModal>("Passing Data", parameters);
+                await CellBuyingProcess();    
             }
             else
             {
@@ -115,15 +113,36 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             }
         }
 
+        private async Task CellBuyingProcess()
+        {
+            if (await IsCellBought())
+            {
+                MonopolyLogic.BuyCellIfPossible();
+            }
+        }
+
+        private async Task<bool> IsCellBought()
+        {
+            ModalParameters parameters = new ModalParameters();
+            parameters.Add(nameof(YesOrNoModal.Title), "Do you want to buy this?");
+
+            var ModalResponse = ModalService.Show<YesOrNoModal>("Passing Data", parameters);
+            var Response = await ModalResponse.Result;
+
+            if(Response.Confirmed)
+            {
+                return StringConvert.StringToBool(Response.Data.ToString());
+            }
+
+            return false;
+        }
+
         private async Task BrodcastUpdatedInformations()
         {
-            PlayersUpdateData UpdatedData = MonopolyLogic.GetPlayersUpdatedData();
-            await MonopolyHubConn.SendAsync("UpdatePlayersData", UpdatedData.GetPlayersUpdatedData());
+            MonopolyUpdateMessage UpdatedData = MonopolyLogic.GetUpdatedData();
+            await MonopolyHubConn.SendAsync("UpdateData", UpdatedData);
         }
 
-        private void PlayerBuyingCell()
-        {
-
-        }
+        
     }
 }

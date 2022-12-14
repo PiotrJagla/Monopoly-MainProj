@@ -16,9 +16,9 @@ namespace Services.GamesServices.Monopoly
 
         List<MonopolyCell> GetBoard();
 
-        PlayersUpdateData GetPlayersUpdatedData();
+        MonopolyUpdateMessage GetUpdatedData();
 
-        void UpdatePlayersData(List<PlayerUpdateData> UpdatedData);
+        void UpdateData(MonopolyUpdateMessage UpdatedData);
 
         MoveResult Move(int amount);
 
@@ -27,6 +27,8 @@ namespace Services.GamesServices.Monopoly
         bool IsYourTurn();
 
         void NextTurn();
+
+        void BuyCellIfPossible();
 
     }
 }
