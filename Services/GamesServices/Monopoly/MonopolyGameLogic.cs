@@ -55,6 +55,7 @@ namespace Services.GamesServices.Monopoly
             MonopolyUpdateMessage UpdatedData = new MonopolyUpdateMessage();
             UpdatedData.PlayersData = MakePlayersUpdateData().GetPlayersUpdatedData();
             UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsOwners();
+            UpdatedData.MoneyBond = MakeMoneyBond();
             return UpdatedData;
         }
 
@@ -72,10 +73,34 @@ namespace Services.GamesServices.Monopoly
             return BoardUpdatedData;
         }
 
+        private MoneyObligation MakeMoneyBond()
+        {
+            MoneyObligation result = new MoneyObligation();
+
+            if (GameIsAlreadyStarted() == false) return result;
+
+            //if (BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != PlayerKey.NoOne &&
+            //    BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != Players[PlayersIndexes.MainPlayer].Key)
+            //{
+            //    result.ObligatedToPay = Players[PlayersIndexes.MainPlayer].Key;
+            //    result.PlayerGettingMoney = BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy;
+            //    result.ObligationAmount = BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].CellCosts.Stay;
+            //}
+
+            result.ObligatedToPay = PlayerKey.NoOne;
+            result.PlayerGettingMoney = PlayerKey.NoOne;
+            result.ObligationAmount = 0;
+
+            return result;
+        }
+
+
+
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
         {
             UpdatePlayersData(UpdatedData.PlayersData);
             UpdateBoardData(UpdatedData.CellsOwners);
+            UpdateMoneyObligation(UpdatedData.MoneyBond);
         }
 
         private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData)
@@ -94,6 +119,11 @@ namespace Services.GamesServices.Monopoly
             {
                 BoardService.GetBoard()[i].OwnedBy = BoardUpdatedData[i].Owner;
             }
+        }
+
+        private void UpdateMoneyObligation(MoneyObligation obligation)
+        {
+            Players.FirstOrDefault(p => p.Key == obligation.PlayerGettingMoney).MoneyOwned += obligation.ObligationAmount;
         }
 
         public void BuyCellIfPossible()

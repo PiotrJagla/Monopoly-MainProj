@@ -58,7 +58,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
             MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", (NewData) =>
             {
-                MonopolyLogic.UpdateData(NewData);
+                Console.WriteLine("TO SIE DZIEJE");
+                MonopolyLogic.UpdateData(NewData); // Coś tutaj jest nie tak 
+                Console.WriteLine("TO SIE DZIEJE NAPRAWDE");
                 MonopolyLogic.NextTurn();
                 InvokeAsync(StateHasChanged);
             });
