@@ -28,7 +28,7 @@ namespace Services.GamesServices.Monopoly.Update
             {
                 CellsOwners.Add(new MonopolyCellOwner());
                 CellsOwners.Last().Owner = cell.OwnedBy;
-                CellsOwners.Last().OfCellIndex = cell.Number;
+                CellsOwners.Last().OfCellIndex = Board.IndexOf(cell);
             }
         }
     }

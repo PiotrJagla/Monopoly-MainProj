@@ -11,10 +11,10 @@ namespace Models.Monopoly
         public int Buy { get; set; }
         public int Stay { get; set; }
 
-        public Costs()
+        public Costs(int Buy = 0, int Stay = 0)
         {
-            Buy = 0;
-            Stay = 0;
+            this.Buy = Buy;
+            this.Stay = Stay;
         }
     }
 }

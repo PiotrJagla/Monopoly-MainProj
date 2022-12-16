@@ -11,6 +11,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Services.GamesServices.Monopoly.Update;
 using MySqlX.XDevAPI.Common;
+using Services.GamesServices.Monopoly.Board;
 
 namespace Services.GamesServices.Monopoly
 {
@@ -89,7 +90,7 @@ namespace Services.GamesServices.Monopoly
             {
                 MonopolyCell CellMainPlayerSteppedOn = BoardService.GetCell(Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex);
                 result.PlayerGettingMoney = CellMainPlayerSteppedOn.OwnedBy;
-                result.ObligationAmount = CellMainPlayerSteppedOn.CellCosts.Stay;
+                result.ObligationAmount = CellMainPlayerSteppedOn.MoneyNeededFor.Stay;
             }
             return result;
         }
@@ -108,7 +109,6 @@ namespace Services.GamesServices.Monopoly
             {
                 Players[i].OnCellIndex = PlayersUpdatedData[i].Position;
                 Players[i].MoneyOwned = PlayersUpdatedData[i].Money;
-                
             }
         }
 
@@ -142,7 +142,7 @@ namespace Services.GamesServices.Monopoly
         {
             PlayerKey MainPlayerKey = Players[ PlayersSpecialIndexes.MainPlayer ].Key;
             BoardService.GetCell(MainPlayerBoardPos).OwnedBy = MainPlayerKey;
-            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).CellCosts.Buy;
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).MoneyNeededFor.Buy;
         }
 
         public MoveResult Move(int amount)
