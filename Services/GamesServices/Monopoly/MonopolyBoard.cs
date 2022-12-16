@@ -43,5 +43,15 @@ namespace Services.GamesServices.Monopoly
         {
             return Board[index].CellCosts.Buy;
         }
+
+        public bool DidStepOnSomeonesCell(MonopolyPlayer MainPlayer)
+        {
+            return Board[MainPlayer.OnCellIndex].OwnedBy != PlayerKey.NoOne && Board[MainPlayer.OnCellIndex].OwnedBy != MainPlayer.Key;
+        }
+
+        public MonopolyCell GetCell(int Index)
+        {
+            return Board[Index];
+        }
     }
 }

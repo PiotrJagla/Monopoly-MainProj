@@ -58,9 +58,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
             MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", (NewData) =>
             {
-                Console.WriteLine("TO SIE DZIEJE");
-                MonopolyLogic.UpdateData(NewData); // Coś tutaj jest nie tak 
-                Console.WriteLine("TO SIE DZIEJE NAPRAWDE");
+                MonopolyLogic.UpdateData(NewData);
                 MonopolyLogic.NextTurn();
                 InvokeAsync(StateHasChanged);
             });
@@ -95,13 +93,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         }
         private async Task PlayersMove()
         {
-            if(MonopolyLogic.Move(GetRandom.number.Next(1, 3)) == MoveResult.OnNobodysCell)
+            if (MonopolyLogic.Move(GetRandom.number.Next(1, 3)) == MoveResult.OnNobodysCell)
             {
-                await CellBuyingProcess();    
-            }
-            else
-            {
-                //TODO: Owes money to someone
+                await CellBuyingProcess();
             }
         }
 

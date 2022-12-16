@@ -10,13 +10,14 @@ using Models;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Services.GamesServices.Monopoly.Update;
+using MySqlX.XDevAPI.Common;
 
 namespace Services.GamesServices.Monopoly
 {
     public class MonopolyGameLogic : MonopolyService
     {
         private static List<MonopolyPlayer> Players = new List<MonopolyPlayer>();
-        private static SpecialIndexes PlayersIndexes = new SpecialIndexes();
+        private static SpecialIndexes PlayersSpecialIndexes = new SpecialIndexes();
 
         private static MonopolyBoard BoardService = new MonopolyBoard();
 
@@ -29,7 +30,7 @@ namespace Services.GamesServices.Monopoly
             {
                 AddPlayer((PlayerKey)i);
             }
-            PlayersIndexes.WhosTurn = 0;
+            PlayersSpecialIndexes.WhosTurn = 0;
         }
 
         private bool GameIsAlreadyStarted()
@@ -75,25 +76,23 @@ namespace Services.GamesServices.Monopoly
 
         private MoneyObligation MakeMoneyBond()
         {
-            MoneyObligation result = new MoneyObligation();
+            if (GameIsAlreadyStarted() == false) 
+                return new MoneyObligation();
 
-            if (GameIsAlreadyStarted() == false) return result;
-
-            //if (BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != PlayerKey.NoOne &&
-            //    BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != Players[PlayersIndexes.MainPlayer].Key)
-            //{
-            //    result.ObligatedToPay = Players[PlayersIndexes.MainPlayer].Key;
-            //    result.PlayerGettingMoney = BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy;
-            //    result.ObligationAmount = BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].CellCosts.Stay;
-            //}
-
-            result.ObligatedToPay = PlayerKey.NoOne;
-            result.PlayerGettingMoney = PlayerKey.NoOne;
-            result.ObligationAmount = 0;
-
-            return result;
+            return CalculateBond();
         }
 
+        private MoneyObligation CalculateBond()
+        {
+            MoneyObligation result = new MoneyObligation();
+            if (BoardService.DidStepOnSomeonesCell(Players[PlayersSpecialIndexes.MainPlayer]))
+            {
+                MonopolyCell CellMainPlayerSteppedOn = BoardService.GetCell(Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex);
+                result.PlayerGettingMoney = CellMainPlayerSteppedOn.OwnedBy;
+                result.ObligationAmount = CellMainPlayerSteppedOn.CellCosts.Stay;
+            }
+            return result;
+        }
 
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
@@ -123,13 +122,15 @@ namespace Services.GamesServices.Monopoly
 
         private void UpdateMoneyObligation(MoneyObligation obligation)
         {
-            Players.FirstOrDefault(p => p.Key == obligation.PlayerGettingMoney).MoneyOwned += obligation.ObligationAmount;
+            MonopolyPlayer PlayerGettingMoney = Players.FirstOrDefault(p => p.Key == obligation.PlayerGettingMoney);
+            if(PlayerGettingMoney != null)
+                PlayerGettingMoney.MoneyOwned += obligation.ObligationAmount;
         }
 
         public void BuyCellIfPossible()
         {
-            int MainPlayerBoardPos = Players[PlayersIndexes.MainPlayer].OnCellIndex;
-            int MainPlayerMoney = Players[PlayersIndexes.MainPlayer].MoneyOwned;
+            int MainPlayerBoardPos = Players[ PlayersSpecialIndexes.MainPlayer ].OnCellIndex;
+            int MainPlayerMoney = Players[ PlayersSpecialIndexes.MainPlayer ].MoneyOwned;
             
             if (BoardService.CanAffordBuying(MainPlayerMoney, MainPlayerBoardPos))
             {
@@ -139,50 +140,45 @@ namespace Services.GamesServices.Monopoly
 
         private void BuyCell(int MainPlayerBoardPos)
         {
-            PlayerKey MainPlayerKey = Players[PlayersIndexes.MainPlayer].Key;
-            BoardService.GetBoard()[MainPlayerBoardPos].OwnedBy = MainPlayerKey;
-            Players[PlayersIndexes.MainPlayer].MoneyOwned -= BoardService.GetBoard()[MainPlayerBoardPos].CellCosts.Buy;
+            PlayerKey MainPlayerKey = Players[ PlayersSpecialIndexes.MainPlayer ].Key;
+            BoardService.GetCell(MainPlayerBoardPos).OwnedBy = MainPlayerKey;
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).CellCosts.Buy;
         }
 
         public MoveResult Move(int amount)
         {
             OnStartCellCrossed(amount);
-            Players[PlayersIndexes.MainPlayer].OnCellIndex = (Players[PlayersIndexes.MainPlayer].OnCellIndex + amount) % BoardService.GetBoard().Count;
-            return IsOnSomeonesCell() ? MoveResult.OnSomeonesCell : MoveResult.OnNobodysCell;
+            Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex = (Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex + amount) % BoardService.GetBoard().Count;
+            return BoardService.DidStepOnSomeonesCell( Players[PlayersSpecialIndexes.MainPlayer] ) ? MoveResult.OnSomeonesCell : MoveResult.OnNobodysCell;
         }
 
         private void OnStartCellCrossed(int MoveAmount)
         {
             if (DidCrossedStartCell(MoveAmount))
             {
-                Players[PlayersIndexes.MainPlayer].MoneyOwned += Consts.Monopoly.OnStartCrossedMoneyGiven;
+                Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned += Consts.Monopoly.OnStartCrossedMoneyGiven;
             }
         }
 
         private bool DidCrossedStartCell(int MoveAmount)
         {
-            return (Players[PlayersIndexes.MainPlayer].OnCellIndex + MoveAmount) >= BoardService.GetBoard().Count;
-        }
-
-        private bool IsOnSomeonesCell()
-        {
-            return BoardService.GetBoard()[Players[PlayersIndexes.MainPlayer].OnCellIndex].OwnedBy != PlayerKey.NoOne;
+            return (Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex + MoveAmount) >= BoardService.GetBoard().Count;
         }
 
         public bool IsYourTurn()
         {
-            return PlayersIndexes.WhosTurn == PlayersIndexes.MainPlayer;
+            return PlayersSpecialIndexes.WhosTurn == PlayersSpecialIndexes.MainPlayer;
         }
 
         public void NextTurn()
         {
-            PlayersIndexes.WhosTurn = (++PlayersIndexes.WhosTurn) % Players.Count;
+            PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
         }
 
         public void SetMainPlayerIndex(int index)
         {
-            if (PlayersIndexes.MainPlayer == -1)
-                PlayersIndexes.MainPlayer = index;
+            if (PlayersSpecialIndexes.MainPlayer == -1)
+                PlayersSpecialIndexes.MainPlayer = index;
         }
     }
 }
