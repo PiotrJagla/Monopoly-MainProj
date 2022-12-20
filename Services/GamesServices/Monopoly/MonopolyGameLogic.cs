@@ -86,11 +86,12 @@ namespace Services.GamesServices.Monopoly
         private MoneyObligation CalculateBond()
         {
             MoneyObligation result = new MoneyObligation();
-            if (BoardService.DidStepOnSomeonesCell(Players[PlayersSpecialIndexes.MainPlayer]))
+            if (BoardService.DoesCellHaveAnotherOwner(Players[PlayersSpecialIndexes.MainPlayer]))
             {
                 MonopolyCell CellMainPlayerSteppedOn = BoardService.GetCell(Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex);
-                result.PlayerGettingMoney = CellMainPlayerSteppedOn.OwnedBy;
-                result.ObligationAmount = CellMainPlayerSteppedOn.MoneyNeededFor.Stay;
+                result.PlayerGettingMoney = CellMainPlayerSteppedOn.GetOwner();
+                result.PlayerLosingMoney = Players[PlayersSpecialIndexes.MainPlayer].Key;
+                result.ObligationAmount = CellMainPlayerSteppedOn.GetCosts().Stay;
             }
             return result;
         }
@@ -116,15 +117,19 @@ namespace Services.GamesServices.Monopoly
         {
             for (int i = 0; i < BoardUpdatedData.Count; i++)
             {
-                BoardService.GetBoard()[i].OwnedBy = BoardUpdatedData[i].Owner;
+                BoardService.GetBoard()[i].SetOwner(BoardUpdatedData[i].Owner);
             }
         }
 
         private void UpdateMoneyObligation(MoneyObligation obligation)
         {
             MonopolyPlayer PlayerGettingMoney = Players.FirstOrDefault(p => p.Key == obligation.PlayerGettingMoney);
-            if(PlayerGettingMoney != null)
+            MonopolyPlayer PlayerLosingMoney = Players.FirstOrDefault(p => p.Key == obligation.PlayerLosingMoney);
+            if (PlayerGettingMoney != null && PlayerLosingMoney != null)
+            {
                 PlayerGettingMoney.MoneyOwned += obligation.ObligationAmount;
+                PlayerLosingMoney.MoneyOwned -= obligation.ObligationAmount;
+            }
         }
 
         public void BuyCellIfPossible()
@@ -141,15 +146,16 @@ namespace Services.GamesServices.Monopoly
         private void BuyCell(int MainPlayerBoardPos)
         {
             PlayerKey MainPlayerKey = Players[ PlayersSpecialIndexes.MainPlayer ].Key;
-            BoardService.GetCell(MainPlayerBoardPos).OwnedBy = MainPlayerKey;
-            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).MoneyNeededFor.Buy;
+            BoardService.GetCell(MainPlayerBoardPos).SetOwner(MainPlayerKey);
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).GetCosts().Buy;
         }
 
         public MoveResult Move(int amount)
         {
             OnStartCellCrossed(amount);
-            Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex = (Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex + amount) % BoardService.GetBoard().Count;
-            return BoardService.DidStepOnSomeonesCell( Players[PlayersSpecialIndexes.MainPlayer] ) ? MoveResult.OnSomeonesCell : MoveResult.OnNobodysCell;
+            MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
+            MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
+            return BoardService.IsNoOneCell( MainPlayer.OnCellIndex ) ? MoveResult.OnNobodysCell : MoveResult.OnSomeonesCell;
         }
 
         private void OnStartCellCrossed(int MoveAmount)

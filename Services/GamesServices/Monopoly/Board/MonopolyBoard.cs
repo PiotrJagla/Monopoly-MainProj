@@ -20,33 +20,14 @@ namespace Services.GamesServices.Monopoly.Board
 
         private void InitBoard()
         {
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    Board.Add(new MonopolyCell());
-            //    Board.Last().MoneyNeededFor.Buy =  Consts.Monopoly.BuyCost;
-            //    Board.Last().MoneyNeededFor.Stay = Consts.Monopoly.StayCost;
-            //    Board.Last().OwnedBy = PlayerKey.NoOne;
-            //}
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Poland));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Poland));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
-            Board.Add(new MonopolyCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
-        }
-
-        private MonopolyCell AddCell(int Number, int MoneyForBuy, int MoneyForStay, PlayerKey Owner, Nation nation)
-        {
-            //This is not in constructor of monopolycell because then
-            MonopolyCell result = new MonopolyCell();
-            //result.Number = Number;
-            result.MoneyNeededFor.Buy = MoneyForBuy;
-            result.MoneyNeededFor.Stay = MoneyForStay;
-            result.OwnedBy = Owner;
-            result.OfNation = nation;
-            return result;
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Poland));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Poland));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
+            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
         }
 
         public List<MonopolyCell> GetBoard()
@@ -60,12 +41,22 @@ namespace Services.GamesServices.Monopoly.Board
         }
         private int CellBuyCost(int index)
         {
-            return Board[index].MoneyNeededFor.Buy;
+            return Board[index].GetCosts().Buy;
         }
 
-        public bool DidStepOnSomeonesCell(MonopolyPlayer MainPlayer)
+        public bool DoesCellHaveAnotherOwner(MonopolyPlayer PlayerStepped)
         {
-            return Board[MainPlayer.OnCellIndex].OwnedBy != PlayerKey.NoOne && Board[MainPlayer.OnCellIndex].OwnedBy != MainPlayer.Key;
+            return IsNoOneCell(PlayerStepped.OnCellIndex) == false && IsPlayerCellOwner(PlayerStepped) == false;
+        }
+
+        public bool IsNoOneCell(int CellIndex)
+        {
+            return Board[CellIndex].GetOwner() == PlayerKey.NoOne;
+        }
+
+        private bool IsPlayerCellOwner(MonopolyPlayer Player)
+        {
+            return Board[Player.OnCellIndex].GetOwner() == Player.Key;
         }
 
         public MonopolyCell GetCell(int Index)
