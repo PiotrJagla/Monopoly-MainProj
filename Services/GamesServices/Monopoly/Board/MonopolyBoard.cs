@@ -20,14 +20,14 @@ namespace Services.GamesServices.Monopoly.Board
 
         private void InitBoard()
         {
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Poland));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Poland));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.France));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
-            Board.Add(new MonopolyNationCell(new Costs(Consts.Monopoly.BuyCost, Consts.Monopoly.StayCost), PlayerKey.NoOne, Nation.Argentina));
+            Board.Add(new MonopolyNationCell(new Costs(50,30), Nation.Poland));
+            Board.Add(new MonopolyNationCell(new Costs(70, 40), Nation.Poland));
+            Board.Add(new MonopolyNationCell(new Costs(130,70), Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(150,100), Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(180, 140), Nation.Argentina));
+            Board.Add(new MonopolyNationCell(new Costs(250,200), Nation.Argentina));
+            Board.Add(new MonopolyNationCell(new Costs(210, 150), Nation.Argentina));
         }
 
         public List<MonopolyCell> GetBoard()
@@ -35,10 +35,18 @@ namespace Services.GamesServices.Monopoly.Board
             return Board;
         }
 
-        public bool CanAffordBuying(int MoneyAmount, int CellIndex)
+        
+
+        public bool IsPossibleToBuyCell(MonopolyPlayer buyer)
         {
-            return MoneyAmount >= CellBuyCost(CellIndex);
+            return CanAffordBuying(buyer) && DoesCellHaveAnotherOwner(buyer) == false;
         }
+
+        private bool CanAffordBuying(MonopolyPlayer buyer)
+        {
+            return buyer.MoneyOwned >= CellBuyCost(buyer.OnCellIndex);
+        }
+
         private int CellBuyCost(int index)
         {
             return Board[index].GetCosts().Buy;
@@ -63,5 +71,38 @@ namespace Services.GamesServices.Monopoly.Board
         {
             return Board[Index];
         }
+
+        public void CheckForMonopolOf(MonopolyPlayer aPlayer)
+        {
+            if(DoHaveMonopol(aPlayer))
+            {
+                ApplyMonopolCostsChanges(Board[aPlayer.OnCellIndex].GetNation());
+            }
+        }
+
+        private bool DoHaveMonopol(MonopolyPlayer aPlayer)
+        {
+            foreach (var cell in Board)
+            {
+                if(cell.GetNation() == Board[aPlayer.OnCellIndex].GetNation() &&
+                    cell.GetOwner() != aPlayer.Key)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void ApplyMonopolCostsChanges(Nation OnNation)
+        {
+            List<MonopolyCell> MonopolNationCells = Board.FindAll(cell => cell.GetNation() == OnNation);
+            foreach (var cell in MonopolNationCells)
+            {
+                int MonopolCostMultiplayer = 2;
+                cell.SetCosts(new Costs( cell.GetCosts().Buy, cell.GetCosts().Stay*MonopolCostMultiplayer ));
+            }
+        }
+
+        
     }
 }

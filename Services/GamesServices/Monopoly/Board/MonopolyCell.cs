@@ -16,6 +16,7 @@ namespace Models.Monopoly
         void SetOwner(PlayerKey NewOwner);
 
         Costs GetCosts();
+        void SetCosts(Costs costs);
 
         string OnDisplay();
     }

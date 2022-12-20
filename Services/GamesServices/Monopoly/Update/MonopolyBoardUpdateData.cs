@@ -9,26 +9,27 @@ namespace Services.GamesServices.Monopoly.Update
 {
     public class MonopolyBoardUpdateData
     {
-        private List<MonopolyCellOwner> CellsOwners;
+        private List<MonopolyCellUpdate> CellsUpdate;
 
-        public List<MonopolyCellOwner> GetCellsOwners()
+        public List<MonopolyCellUpdate> GetCellsUpdate()
         {
-            return CellsOwners;
+            return CellsUpdate;
         }
 
-        public MonopolyCellOwner GetCellOwner(int index)
+        public MonopolyCellUpdate GetCellUpdate(int index)
         {
-            return CellsOwners[index];
+            return CellsUpdate[index];
         }
 
         public void FormatBoardUpdateData(List<MonopolyCell> Board)
         {
-            CellsOwners = new List<MonopolyCellOwner>();
+            CellsUpdate = new List<MonopolyCellUpdate>();
             foreach (var cell in Board)
             {
-                CellsOwners.Add(new MonopolyCellOwner());
-                CellsOwners.Last().Owner = cell.GetOwner();
-                CellsOwners.Last().OfCellIndex = Board.IndexOf(cell);
+                CellsUpdate.Add(new MonopolyCellUpdate());
+                CellsUpdate.Last().Owner = cell.GetOwner();
+                CellsUpdate.Last().OfCellIndex = Board.IndexOf(cell);
+                CellsUpdate.Last().NewCosts = cell.GetCosts();
             }
         }
     }

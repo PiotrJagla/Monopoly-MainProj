@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Models.Monopoly
 {
-    public class MonopolyCellOwner
+    public class MonopolyCellUpdate
     {
         public PlayerKey Owner{ get; set; }
         public int OfCellIndex { get; set; }
 
-        public MonopolyCellOwner()
+        public Costs NewCosts { get; set; }
+
+        public MonopolyCellUpdate()
         {
+            NewCosts = new Costs();
             Owner = PlayerKey.NoOne;
             OfCellIndex = -1;
         }

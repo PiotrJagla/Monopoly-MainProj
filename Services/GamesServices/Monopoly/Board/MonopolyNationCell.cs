@@ -12,16 +12,18 @@ namespace Services.GamesServices.Monopoly.Board
     {
         public PlayerKey OwnedBy { get; set; }
 
-        public Costs MoneyNeededFor { get; set; }
+        public Costs ActualCosts { get; set; }
+        public Costs BaseCosts { get; set; }
 
         public Nation OfNation { get; set; }
 
 
-        public MonopolyNationCell(Costs costs = null, PlayerKey owner = PlayerKey.NoOne, Nation nation = Nation.NoNation)
+        public MonopolyNationCell(Costs costs = null, Nation nation = Nation.NoNation)
         {
-            MoneyNeededFor = costs;
+            ActualCosts = new Costs(costs.Buy, costs.Stay);
+            BaseCosts = new Costs(costs.Buy, costs.Stay);
             OfNation = nation;
-            OwnedBy = owner;
+            OwnedBy = PlayerKey.NoOne;
         }
 
         public Nation GetNation()
@@ -36,7 +38,13 @@ namespace Services.GamesServices.Monopoly.Board
 
         public Costs GetCosts()
         {
-            return MoneyNeededFor;
+            return ActualCosts;
+        }
+
+        public void SetCosts(Costs costs)
+        {
+            ActualCosts.Stay = costs.Stay;
+            ActualCosts.Buy = costs.Buy;
         }
 
         public string OnDisplay()
@@ -44,8 +52,8 @@ namespace Services.GamesServices.Monopoly.Board
             string result = "";
             result += $" Owner: {OwnedBy.ToString()} |";
             result += $" Nation: {OfNation.ToString()} |";
-            result += $" Buy For: {MoneyNeededFor.Buy} |";
-            result += $" Stay Cost: {MoneyNeededFor.Stay} ";
+            result += $" Buy For: {ActualCosts.Buy} |";
+            result += $" Stay Cost: {ActualCosts.Stay} ";
             return result;
         }
 
