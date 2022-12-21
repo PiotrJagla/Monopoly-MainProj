@@ -17,6 +17,8 @@ namespace Services.GamesServices.Monopoly
 
         List<MonopolyCell> GetBoard();
 
+        List<MonopolyCell> GetMainPlayerCells();
+
         MonopolyUpdateMessage GetUpdatedData();
 
         void UpdateData(MonopolyUpdateMessage UpdatedData);
@@ -30,6 +32,10 @@ namespace Services.GamesServices.Monopoly
         void NextTurn();
 
         void BuyCellIfPossible();
+
+        bool DontHaveMoneyToPay();
+
+        void SellCell(string CellToSellDisplay);
 
     }
 }

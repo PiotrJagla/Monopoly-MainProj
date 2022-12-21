@@ -52,6 +52,13 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetBoard();   
         }
 
+        public List<MonopolyCell> GetMainPlayerCells()
+        {
+            List<MonopolyCell> cells = BoardService.GetBoard().FindAll(cell => cell.GetOwner() == Players[PlayersSpecialIndexes.MainPlayer].Key);
+
+            return cells;
+        }
+
         public MonopolyUpdateMessage GetUpdatedData()
         {
             MonopolyUpdateMessage UpdatedData = new MonopolyUpdateMessage();
@@ -155,6 +162,11 @@ namespace Services.GamesServices.Monopoly
         {
             //Move(GetRandom.number.Next(1, 3));
             Move(1);
+            return MakeTurnResult();
+        }
+
+        private MonopolyTurnResult MakeTurnResult()
+        {
             return BoardService.IsPossibleToBuyCell(Players[PlayersSpecialIndexes.MainPlayer]) ?
                 MonopolyTurnResult.CanBuyCell :
                 MonopolyTurnResult.CannotBuyCell;
@@ -204,5 +216,26 @@ namespace Services.GamesServices.Monopoly
             if (PlayersSpecialIndexes.MainPlayer == -1)
                 PlayersSpecialIndexes.MainPlayer = index;
         }
+
+        public bool DontHaveMoneyToPay()
+        {
+            return BoardService.DontHaveMoneyToPay(Players[PlayersSpecialIndexes.MainPlayer]);
+        }
+
+        public void SellCell(string CellToSellDisplay)
+        {
+            MonopolyCell CellToSellRef = BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == CellToSellDisplay);
+            MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
+
+            if (CellToSellRef != null)
+            {
+                CellToSellRef.SetOwner(PlayerKey.NoOne);
+                MainPlayer.MoneyOwned += CellToSellRef.GetCosts().Buy;
+            }
+        }
+
+        
+
+        
     }
 }

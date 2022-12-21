@@ -89,6 +89,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         protected async Task Move()
         {
             await PlayersMove();
+            await CheckForBanckrupcy();
             await BrodcastUpdatedInformations();
         }
         private async Task PlayersMove()
@@ -121,6 +122,41 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             }
 
             return false;
+        }
+
+        private async Task CheckForBanckrupcy()
+        {
+            //while(MonopolyLogic.DontHaveMoneyToPay() == true)
+            //{
+            //    MonopolyLogic.SellCell(await ChooseCellToSell());
+            //}
+            if (MonopolyLogic.DontHaveMoneyToPay() == true)
+            {
+                MonopolyLogic.SellCell(await ChooseCellToSell());
+            }
+        }
+
+        private async Task<string> ChooseCellToSell()
+        {
+            ModalParameters parameters = new ModalParameters();
+            parameters.Add(
+                nameof(ChooseCellToSellModal.Title),
+                "Choose Cell To Sell"
+            );
+            parameters.Add(
+                nameof(ChooseCellToSellModal.PossibleCellsToSell),
+                MonopolyLogic.GetMainPlayerCells()
+            );
+
+            var ModalResponse = ModalService.Show<ChooseCellToSellModal>("Passing Data", parameters);
+            var Response = await ModalResponse.Result;
+
+            if (Response.Confirmed)
+            {
+                return Response.Data.ToString();
+            }
+
+            return "";
         }
 
         private async Task BrodcastUpdatedInformations()

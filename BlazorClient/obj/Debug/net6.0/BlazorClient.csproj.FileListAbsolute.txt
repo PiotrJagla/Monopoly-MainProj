@@ -1782,3 +1782,4 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\Debug\net6.0\StringManipulationLib.pdb
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\+yU5oSle.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\HHejYwgz.gz
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\ChooseCellToSellModal.razor.rz.scp.css

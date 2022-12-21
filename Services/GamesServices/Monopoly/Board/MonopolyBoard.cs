@@ -35,7 +35,10 @@ namespace Services.GamesServices.Monopoly.Board
             return Board;
         }
 
-        
+        public bool DontHaveMoneyToPay(MonopolyPlayer Debtor)
+        {
+            return CanAffordBuying(Debtor) == false && DoesCellHaveAnotherOwner(Debtor) == true;
+        }
 
         public bool IsPossibleToBuyCell(MonopolyPlayer buyer)
         {

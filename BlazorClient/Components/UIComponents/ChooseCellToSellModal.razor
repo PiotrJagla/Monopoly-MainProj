@@ -1,0 +1,32 @@
+﻿
+
+<div>
+    <p class="Title">@Title</p>
+    @foreach (var Cell in PossibleCellsToSell)
+    {
+        <button class="btn btn-primary" @onclick="@(() =>SubmitForm(Cell.OnDisplay()))">
+            <label>@Cell.OnDisplay()</label>
+            <label>Sell for: @Cell.GetCosts().Buy</label>
+        </button>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public List<MonopolyCell> PossibleCellsToSell { get; set; }
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        BlazoredModal.SetTitle("Yes Or No");
+    }
+
+    private async Task SubmitForm(string CellToSellDisplay)
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Ok(CellToSellDisplay));
+    }
+}
