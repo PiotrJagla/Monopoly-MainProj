@@ -11,10 +11,11 @@ namespace Services.GamesServices.Monopoly.Board
 {
     public class MonopolyBoard
     {
-        private static List<MonopolyCell> Board = new List<MonopolyCell>();
+        private List<MonopolyCell> Board = new List<MonopolyCell>();
 
         public MonopolyBoard()
         {
+            Board = new List<MonopolyCell>();
             InitBoard();
         }
 

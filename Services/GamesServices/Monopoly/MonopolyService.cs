@@ -25,7 +25,7 @@ namespace Services.GamesServices.Monopoly
 
         void UpdateData(MonopolyUpdateMessage UpdatedData);
 
-        MonopolyTurnResult ExecuteTurn();
+        MonopolyTurnResult ExecuteTurn(int MoveAmount);
 
         void SetMainPlayerIndex(int index);
 

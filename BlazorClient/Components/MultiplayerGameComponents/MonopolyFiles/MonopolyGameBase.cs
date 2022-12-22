@@ -36,6 +36,10 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected override async Task OnInitializedAsync()
         {
+            
+
+
+
             RoomPlayersNumber = 0;
             Messages = new List<string>();
             MonopolyHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}{Consts.HubUrl.Monopoly}")).WithAutomaticReconnect().Build();
@@ -112,7 +116,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         }
         private async Task PlayersMove()
         {
-            if (MonopolyLogic.ExecuteTurn() == MonopolyTurnResult.CanBuyCell)
+            if (MonopolyLogic.ExecuteTurn(1) == MonopolyTurnResult.CanBuyCell)
             {
                 await CellBuyingProcess();
             }
@@ -183,7 +187,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         protected bool CanMove()
         {
             return MonopolyLogic.IsYourTurn() == true &&
-                MonopolyLogic.WhoWon() != PlayerKey.NoOne;
+                MonopolyLogic.WhoWon() == PlayerKey.NoOne;
         }
     }
 }

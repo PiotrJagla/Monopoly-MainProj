@@ -17,10 +17,16 @@ namespace Services.GamesServices.Monopoly
 {
     public class MonopolyGameLogic : MonopolyService
     {
-        private static List<MonopolyPlayer> Players = new List<MonopolyPlayer>();
-        private static SpecialIndexes PlayersSpecialIndexes = new SpecialIndexes();
+        private List<MonopolyPlayer> Players;
+        private SpecialIndexes PlayersSpecialIndexes;
+        private MonopolyBoard BoardService;
 
-        private static MonopolyBoard BoardService = new MonopolyBoard();
+        public MonopolyGameLogic()
+        {
+            Players = new List<MonopolyPlayer>();
+            PlayersSpecialIndexes = new SpecialIndexes();
+            BoardService = new MonopolyBoard();
+        }
 
         public void StartGame(List<Player> PlayersInGame)
         {
@@ -206,10 +212,9 @@ namespace Services.GamesServices.Monopoly
             BoardService.CheckForMonopolOf(Players[PlayersSpecialIndexes.MainPlayer]);
         }
 
-        public MonopolyTurnResult ExecuteTurn()
+        public MonopolyTurnResult ExecuteTurn(int MoveAmount)
         {
-            //Move(GetRandom.number.Next(1, 3));
-            Move(1);
+            Move(MoveAmount);
             return MakeTurnResult();
         }
 

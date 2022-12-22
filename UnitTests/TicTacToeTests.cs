@@ -83,23 +83,7 @@ namespace UnitTests
             Assert.IsTrue(TicTacToe.CheckWinner() == null);
         }
 
-        [TestMethod]
-        public void CheckWinnerTest7()
-        {
-            TicTacToeService TicTacToe = new TicTacToeGameLogic();
-
-            TicTacToe.PlayerTurn(new Point2D(1, 1));
-            TicTacToe.EnemyTurn();
-            TicTacToe.PlayerTurn(new Point2D(0, 1));
-            TicTacToe.EnemyTurn();
-            TicTacToe.PlayerTurn(new Point2D(2, 0));
-            TicTacToe.EnemyTurn();
-            TicTacToe.PlayerTurn(new Point2D(1, 2));
-            TicTacToe.EnemyTurn();
-            TicTacToe.PlayerTurn(new Point2D(2, 2));
-
-            Assert.IsTrue(TicTacToe.CheckWinner() == Consts.TicTacToe.Tie);
-        }
+        
 
         [TestMethod]
         public void EnemyTurnTest1()
