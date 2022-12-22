@@ -21,6 +21,8 @@ namespace Services.GamesServices.Monopoly
 
         MonopolyUpdateMessage GetUpdatedData();
 
+        int GetDebtAmount();
+
         void UpdateData(MonopolyUpdateMessage UpdatedData);
 
         MonopolyTurnResult ExecuteTurn();
@@ -36,6 +38,8 @@ namespace Services.GamesServices.Monopoly
         bool DontHaveMoneyToPay();
 
         void SellCell(string CellToSellDisplay);
+
+        PlayerKey WhoWon();
 
     }
 }

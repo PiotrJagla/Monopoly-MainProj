@@ -1,4 +1,5 @@
-﻿using Models.Monopoly;
+﻿using Enums.Monopoly;
+using Models.Monopoly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,14 @@ namespace Services.GamesServices.Monopoly.Update
         public List<MonopolyCellUpdate> CellsOwners { get; set; }
         public MoneyObligation MoneyBond { get; set; }
 
+        public PlayerKey BankruptPlayer { get; set; }
+
         public MonopolyUpdateMessage()
         {
             PlayersData = new List<PlayerUpdateData>();
             CellsOwners = new List<MonopolyCellUpdate>();
             MoneyBond = new MoneyObligation();
+            BankruptPlayer = PlayerKey.NoOne;
         }
     }
 }

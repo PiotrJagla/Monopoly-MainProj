@@ -58,7 +58,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
             MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", (NewData) =>
             {
-                MonopolyLogic.UpdateData(NewData);
+                Update(NewData);
                 MonopolyLogic.NextTurn();
                 InvokeAsync(StateHasChanged);
             });
@@ -70,6 +70,24 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             {
                 MonopolyLogic.StartGame(ReadyPlayers);
                 Messages.Add("Everyone is Ready");
+            }
+        }
+
+        private void Update(MonopolyUpdateMessage NewData)
+        {
+            MonopolyLogic.UpdateData(NewData);
+            PlayerBankruptMessage(NewData.BankruptPlayer);
+            if(MonopolyLogic.WhoWon() != PlayerKey.NoOne)
+            {
+                Messages.Add($"Player: {MonopolyLogic.WhoWon().ToString()} Has Won!!");
+            }
+        }
+
+        private void PlayerBankruptMessage(PlayerKey BankruptPlayer)
+        {
+            if(BankruptPlayer != PlayerKey.NoOne)
+            {
+                Messages.Add($"Player: {BankruptPlayer.ToString()} went bankrupt");
             }
         }
 
@@ -126,11 +144,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         private async Task CheckForBanckrupcy()
         {
-            //while(MonopolyLogic.DontHaveMoneyToPay() == true)
-            //{
-            //    MonopolyLogic.SellCell(await ChooseCellToSell());
-            //}
-            if (MonopolyLogic.DontHaveMoneyToPay() == true)
+            while (MonopolyLogic.DontHaveMoneyToPay() == true && 
+                MonopolyLogic.GetMainPlayerCells().Count != 0)
             {
                 MonopolyLogic.SellCell(await ChooseCellToSell());
             }
@@ -140,15 +155,15 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         {
             ModalParameters parameters = new ModalParameters();
             parameters.Add(
-                nameof(ChooseCellToSellModal.Title),
-                "Choose Cell To Sell"
+                nameof(PayOffDebtModal.DebtAmount),
+                MonopolyLogic.GetDebtAmount()
             );
             parameters.Add(
-                nameof(ChooseCellToSellModal.PossibleCellsToSell),
+                nameof(PayOffDebtModal.PossibleCellsToSell),
                 MonopolyLogic.GetMainPlayerCells()
             );
 
-            var ModalResponse = ModalService.Show<ChooseCellToSellModal>("Passing Data", parameters);
+            var ModalResponse = ModalService.Show<PayOffDebtModal>("Passing Data", parameters);
             var Response = await ModalResponse.Result;
 
             if (Response.Confirmed)
@@ -163,6 +178,12 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         {
             MonopolyUpdateMessage UpdatedData = MonopolyLogic.GetUpdatedData();
             await MonopolyHubConn.SendAsync("UpdateData", UpdatedData);
+        }
+
+        protected bool CanMove()
+        {
+            return MonopolyLogic.IsYourTurn() == true &&
+                MonopolyLogic.WhoWon() != PlayerKey.NoOne;
         }
     }
 }

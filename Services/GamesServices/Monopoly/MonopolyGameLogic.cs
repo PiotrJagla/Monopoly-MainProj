@@ -55,16 +55,26 @@ namespace Services.GamesServices.Monopoly
         public List<MonopolyCell> GetMainPlayerCells()
         {
             List<MonopolyCell> cells = BoardService.GetBoard().FindAll(cell => cell.GetOwner() == Players[PlayersSpecialIndexes.MainPlayer].Key);
-
+            
             return cells;
+        }
+
+        public int GetDebtAmount()
+        {
+            int MainPlayerPos = Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex;
+            return BoardService.GetCell(MainPlayerPos).GetCosts().Stay;
         }
 
         public MonopolyUpdateMessage GetUpdatedData()
         {
             MonopolyUpdateMessage UpdatedData = new MonopolyUpdateMessage();
-            UpdatedData.PlayersData = MakePlayersUpdateData().GetPlayersUpdatedData();
-            UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsUpdate();
-            UpdatedData.MoneyBond = MakeMoneyBond();
+            if (GameIsAlreadyStarted() == true)
+            {
+                UpdatedData.PlayersData = MakePlayersUpdateData().GetPlayersUpdatedData();
+                UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsUpdate();
+                UpdatedData.MoneyBond = MakeMoneyBond();
+                UpdatedData.BankruptPlayer = CheckForBankruptPlayer(ref UpdatedData);
+            }
             return UpdatedData;
         }
 
@@ -84,10 +94,14 @@ namespace Services.GamesServices.Monopoly
 
         private MoneyObligation MakeMoneyBond()
         {
-            if (GameIsAlreadyStarted() == false) 
+            try
+            {
+                return CalculateBond();
+            }
+            catch
+            {
                 return new MoneyObligation();
-
-            return CalculateBond();
+            }
         }
 
         private MoneyObligation CalculateBond()
@@ -103,12 +117,34 @@ namespace Services.GamesServices.Monopoly
             return result;
         }
 
+        private PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData)
+        {
+            //There is copy of MoneyObligation Because lambda doesnt accept references
+            MoneyObligation BondCopy = new MoneyObligation();
+            BondCopy.PlayerLosingMoney = UpdateData.MoneyBond.PlayerLosingMoney;
+
+            MonopolyPlayer PlayerObligatedToPay = Players.FirstOrDefault(p => p.Key == BondCopy.PlayerLosingMoney);
+            int PlayerObligatedToPayMoney = 0;
+            if (PlayerObligatedToPay != null)
+            {
+                PlayerObligatedToPayMoney = PlayerObligatedToPay.MoneyOwned;
+            }
+            
+
+            if (PlayerObligatedToPayMoney < UpdateData.MoneyBond.ObligationAmount)
+            {
+                UpdateData.MoneyBond.ObligationAmount = PlayerObligatedToPayMoney;
+                return UpdateData.MoneyBond.PlayerLosingMoney;
+            }
+            return PlayerKey.NoOne;
+        }
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
         {
             UpdatePlayersData(UpdatedData.PlayersData);
             UpdateBoardData(UpdatedData.CellsOwners);
             UpdateMoneyObligation(UpdatedData.MoneyBond);
+            UpdateBankruptPlayer(UpdatedData.BankruptPlayer);
         }
 
         private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData)
@@ -140,6 +176,18 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
+        private void UpdateBankruptPlayer(PlayerKey BankruptPlayer)
+        {
+            CheckIfMainPlayerWentBankrupt(BankruptPlayer);
+            Players.Remove( Players.FirstOrDefault(p => p.Key == BankruptPlayer) );
+        }
+
+        private void CheckIfMainPlayerWentBankrupt(PlayerKey BankruptPlayer)
+        {
+            if (BankruptPlayer == Players[PlayersSpecialIndexes.MainPlayer].Key)
+                PlayersSpecialIndexes.MainPlayer = -1;
+        }
+
         public void BuyCellIfPossible()
         {
             MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
@@ -165,18 +213,18 @@ namespace Services.GamesServices.Monopoly
             return MakeTurnResult();
         }
 
-        private MonopolyTurnResult MakeTurnResult()
-        {
-            return BoardService.IsPossibleToBuyCell(Players[PlayersSpecialIndexes.MainPlayer]) ?
-                MonopolyTurnResult.CanBuyCell :
-                MonopolyTurnResult.CannotBuyCell;
-        }
-
         private void Move(int amount)
         {
             OnStartCellCrossed(amount);
             MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
             MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
+        }
+
+        private MonopolyTurnResult MakeTurnResult()
+        {
+            return BoardService.IsPossibleToBuyCell(Players[PlayersSpecialIndexes.MainPlayer]) ?
+                MonopolyTurnResult.CanBuyCell :
+                MonopolyTurnResult.CannotBuyCell;
         }
 
         private void OnStartCellCrossed(int MoveAmount)
@@ -211,6 +259,11 @@ namespace Services.GamesServices.Monopoly
             PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
         }
 
+        private bool IsBankrupt()
+        {
+            return PlayersSpecialIndexes.MainPlayer == -1;
+        }
+
         public void SetMainPlayerIndex(int index)
         {
             if (PlayersSpecialIndexes.MainPlayer == -1)
@@ -234,8 +287,12 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        
+        public PlayerKey WhoWon()
+        {
+            if (Players.Count == 1)
+                return Players[0].Key;
 
-        
+            return PlayerKey.NoOne;
+        }
     }
 }

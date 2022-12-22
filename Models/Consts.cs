@@ -37,7 +37,7 @@ namespace Models
         public static class Monopoly
         {
             public static int StartMoneyAmount = 400;
-            public static int OnStartCrossedMoneyGiven = 300;
+            public static int OnStartCrossedMoneyGiven = 50;
             public static int StayCost = 100;
             public static int BuyCost = 200;
         }

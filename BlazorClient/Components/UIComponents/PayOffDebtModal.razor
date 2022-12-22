@@ -1,24 +1,30 @@
 ﻿
 
 <div>
-    <p class="Title">@Title</p>
+    <div class="Title">
+        <label>Choose Cell To Sell</label>
+        <br />
+        <label>Debt Amount: @DebtAmount</label>
+    </div>
     @foreach (var Cell in PossibleCellsToSell)
     {
         <button class="btn btn-primary" @onclick="@(() =>SubmitForm(Cell.OnDisplay()))">
             <label>@Cell.OnDisplay()</label>
             <label>Sell for: @Cell.GetCosts().Buy</label>
         </button>
+        <br />
     }
 </div>
 
 @code {
     [Parameter]
-    public string Title { get; set; }
+    public int DebtAmount { get; set; }
 
     [Parameter]
     public List<MonopolyCell> PossibleCellsToSell { get; set; }
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
