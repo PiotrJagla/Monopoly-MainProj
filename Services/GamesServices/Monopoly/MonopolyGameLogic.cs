@@ -130,16 +130,16 @@ namespace Services.GamesServices.Monopoly
             BondCopy.PlayerLosingMoney = UpdateData.MoneyBond.PlayerLosingMoney;
 
             MonopolyPlayer PlayerObligatedToPay = Players.FirstOrDefault(p => p.Key == BondCopy.PlayerLosingMoney);
-            int PlayerObligatedToPayMoney = 0;
+            int PlayerObligatedToPayMoneyOwned = 0;
             if (PlayerObligatedToPay != null)
             {
-                PlayerObligatedToPayMoney = PlayerObligatedToPay.MoneyOwned;
+                PlayerObligatedToPayMoneyOwned = PlayerObligatedToPay.MoneyOwned;
             }
             
 
-            if (PlayerObligatedToPayMoney < UpdateData.MoneyBond.ObligationAmount)
+            if (PlayerObligatedToPayMoneyOwned < UpdateData.MoneyBond.ObligationAmount)
             {
-                UpdateData.MoneyBond.ObligationAmount = PlayerObligatedToPayMoney;
+                UpdateData.MoneyBond.ObligationAmount = PlayerObligatedToPayMoneyOwned;
                 return UpdateData.MoneyBond.PlayerLosingMoney;
             }
             return PlayerKey.NoOne;
