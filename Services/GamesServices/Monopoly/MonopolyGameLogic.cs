@@ -128,21 +128,42 @@ namespace Services.GamesServices.Monopoly
             //There is copy of MoneyObligation Because lambda doesnt accept references
             MoneyObligation BondCopy = new MoneyObligation();
             BondCopy.PlayerLosingMoney = UpdateData.MoneyBond.PlayerLosingMoney;
+            int PlayerObligatedToPayMoneyOwned = GetPlayerObligatedToPayMoneyOwned(BondCopy);
 
-            MonopolyPlayer PlayerObligatedToPay = Players.FirstOrDefault(p => p!=null && (p.Key == BondCopy.PlayerLosingMoney));
+            int ObligationAmount = UpdateData.MoneyBond.ObligationAmount;
+
+            ChangeMoneyBondIfBankrupt(ref UpdateData, PlayerObligatedToPayMoneyOwned);
+            return GetBankruptPlayer(UpdateData, PlayerObligatedToPayMoneyOwned, ObligationAmount);
+        }
+
+
+        private void ChangeMoneyBondIfBankrupt(ref MonopolyUpdateMessage UpdateData, int PlayerObligatedToPayMoneyOwned)
+        {
+            if (PlayerObligatedToPayMoneyOwned < UpdateData.MoneyBond.ObligationAmount)
+            {
+                UpdateData.MoneyBond.ObligationAmount = PlayerObligatedToPayMoneyOwned;
+            }
+        }
+        private PlayerKey GetBankruptPlayer(MonopolyUpdateMessage UpdateData, int PlayerObligatedToPayMoneyOwned, int ObligationAmount)
+        {
+            if (PlayerObligatedToPayMoneyOwned < ObligationAmount)
+            {
+                return UpdateData.MoneyBond.PlayerLosingMoney;
+            }
+
+            return PlayerKey.NoOne;
+        }
+
+        private int GetPlayerObligatedToPayMoneyOwned(MoneyObligation BondCopy)
+        {
             int PlayerObligatedToPayMoneyOwned = 0;
+            MonopolyPlayer PlayerObligatedToPay = Players.FirstOrDefault(p => p != null && (p.Key == BondCopy.PlayerLosingMoney));
             if (PlayerObligatedToPay != null)
             {
                 PlayerObligatedToPayMoneyOwned = PlayerObligatedToPay.MoneyOwned;
             }
-            
 
-            if (PlayerObligatedToPayMoneyOwned < UpdateData.MoneyBond.ObligationAmount)
-            {
-                UpdateData.MoneyBond.ObligationAmount = PlayerObligatedToPayMoneyOwned;
-                return UpdateData.MoneyBond.PlayerLosingMoney;
-            }
-            return PlayerKey.NoOne;
+            return PlayerObligatedToPayMoneyOwned;
         }
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
@@ -188,9 +209,7 @@ namespace Services.GamesServices.Monopoly
         private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey)
         {
             CheckIfMainPlayerWentBankrupt(BankruptPlayerKey);
-            //Players.Remove( Players.FirstOrDefault(p => p.Key == BankruptPlayerKey) );
-            //MonopolyPlayer Bankrupt = Players.FirstOrDefault(p => p.Key == BankruptPlayerKey);
-            //Bankrupt = null;
+
             MonopolyPlayer BankruptPlayer = Players.FirstOrDefault(p => p != null && ( p.Key == BankruptPlayerKey));
             int BankruptPlayerIndex = Players.IndexOf(BankruptPlayer);
             if(BankruptPlayerIndex != -1)
@@ -268,8 +287,6 @@ namespace Services.GamesServices.Monopoly
 
             while (Players[PlayersSpecialIndexes.WhosTurn] == null)
                 PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
-
-            //Console.WriteLine($"This is turn: {PlayersSpecialIndexes.WhosTurn}");
         }
 
         public void SetMainPlayerIndex(int index)

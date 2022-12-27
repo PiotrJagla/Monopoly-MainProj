@@ -133,7 +133,7 @@ namespace UnitTests.MonopolyTests
             Clients.Add(FirstClient);
             Clients.Add(SecoundClient);
             Clients.Add(ThirdClient);
-            MonopolyDataPrepareForTests.ExecuteTurnsNumber(5, ref Clients);
+            MonopolyDataPrepareForTests.ExecuteTurnsNumber(6, ref Clients);
 
             MonopolyUpdateMessage CheckSecound = SecoundClient.GetUpdatedData();
             MonopolyUpdateMessage CheckThird = ThirdClient.GetUpdatedData();
@@ -154,7 +154,7 @@ namespace UnitTests.MonopolyTests
             Clients.Add(FirstClient);
             Clients.Add(SecoundClient);
             Clients.Add(ThirdClient);
-            MonopolyDataPrepareForTests.ExecuteTurnsNumber(5, ref Clients);
+            MonopolyDataPrepareForTests.ExecuteTurnsNumber(6, ref Clients);
 
             FirstClient.NextTurn();
             ThirdClient.NextTurn();
@@ -174,7 +174,7 @@ namespace UnitTests.MonopolyTests
             Clients.Add(FirstClient);
             Clients.Add(SecoundClient);
             Clients.Add(ThirdClient);
-            MonopolyDataPrepareForTests.ExecuteTurnsNumber(5, ref Clients);
+            MonopolyDataPrepareForTests.ExecuteTurnsNumber(6, ref Clients);
 
             PlayerKey Winner = FirstClient.WhoWon();
 
@@ -184,3 +184,5 @@ namespace UnitTests.MonopolyTests
         
     }
 }
+  
+  
