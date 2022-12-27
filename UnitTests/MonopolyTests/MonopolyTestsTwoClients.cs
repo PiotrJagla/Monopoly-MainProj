@@ -19,15 +19,15 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void MoneyOwnedAfterTurn1Test()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
             
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(1, ref Clients);
 
-            List<PlayerUpdateData> PlayersMoney = MonopolyClientFirst.GetUpdatedData().PlayersData;
+            List<PlayerUpdateData> PlayersMoney = FirstClient.GetUpdatedData().PlayersData;
 
             Assert.IsTrue(PlayersMoney[0].Money == 370);
             Assert.IsTrue(PlayersMoney[1].Money == 360);
@@ -38,15 +38,15 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void MoneyOwnedAfterTurn2Test()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
 
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(2, ref Clients);
 
-            List<PlayerUpdateData> PlayersMoney = MonopolyClientFirst.GetUpdatedData().PlayersData;
+            List<PlayerUpdateData> PlayersMoney = FirstClient.GetUpdatedData().PlayersData;
 
             Assert.IsTrue(PlayersMoney[0].Money == 370);
             Assert.IsTrue(PlayersMoney[1].Money == 230);
@@ -57,15 +57,15 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void MoneyOwnedAfterTurn3Test()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
 
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(3, ref Clients);
 
-            List<PlayerUpdateData> PlayersMoney = MonopolyClientFirst.GetUpdatedData().PlayersData;
+            List<PlayerUpdateData> PlayersMoney = FirstClient.GetUpdatedData().PlayersData;
 
             Assert.IsTrue(PlayersMoney[0].Money == 370);
             Assert.IsTrue(PlayersMoney[1].Money == 120);
@@ -76,15 +76,15 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void MoneyOwnedAfterTurn4Test()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
 
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(4, ref Clients);
 
-            List<PlayerUpdateData> PlayersMoney = MonopolyClientFirst.GetUpdatedData().PlayersData;
+            List<PlayerUpdateData> PlayersMoney = FirstClient.GetUpdatedData().PlayersData;
 
             Assert.IsTrue(PlayersMoney[0].Money == 320);
             Assert.IsTrue(PlayersMoney[1].Money == 130);
@@ -95,15 +95,15 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void MoneyOwnedAfterTurn5Test()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
 
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(5, ref Clients);
 
-            List<PlayerUpdateData> PlayersMoney = MonopolyClientFirst.GetUpdatedData().PlayersData;
+            List<PlayerUpdateData> PlayersMoney = FirstClient.GetUpdatedData().PlayersData;
 
             Assert.IsTrue(PlayersMoney[0].Money == 280);
             Assert.IsTrue(PlayersMoney[1].Money == 120);
@@ -114,33 +114,33 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BankruptTest()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
 
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(6, ref Clients);
 
-            MonopolyUpdateMessage CheckBankrupcy = MonopolyClientSecound.GetUpdatedData();
+            MonopolyUpdateMessage CheckBankrupcy = SecoundClient.GetUpdatedData();
             Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Secound);
         }
 
         [TestMethod]
         public void WinnerTest()
         {
-            MonopolyService MonopolyClientFirst = new MonopolyGameLogic();
-            MonopolyService MonopolyClientSecound = new MonopolyGameLogic();
+            MonopolyService FirstClient = new MonopolyGameLogic();
+            MonopolyService SecoundClient = new MonopolyGameLogic();
 
             List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(MonopolyClientFirst);
-            Clients.Add(MonopolyClientSecound);
+            Clients.Add(FirstClient);
+            Clients.Add(SecoundClient);
             MonopolyDataPrepareForTests.ExecuteTurnsNumber(6, ref Clients);
 
-            MonopolyClientSecound.UpdateData(MonopolyClientSecound.GetUpdatedData());
+            SecoundClient.UpdateData(SecoundClient.GetUpdatedData());
 
-            Assert.IsTrue(MonopolyClientFirst.WhoWon() == PlayerKey.First);
-            Assert.IsTrue(MonopolyClientSecound.WhoWon() == PlayerKey.First);
+            Assert.IsTrue(FirstClient.WhoWon() == PlayerKey.First);
+            Assert.IsTrue(SecoundClient.WhoWon() == PlayerKey.First);
         }
     }
 }

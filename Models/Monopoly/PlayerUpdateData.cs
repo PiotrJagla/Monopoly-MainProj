@@ -13,10 +13,13 @@ namespace Models.Monopoly
         public int Position { get; set; }
         public int Money { get; set; }
 
+        public int PlayerIndex { get; set; }
+
         public PlayerUpdateData()
         {
             Player = PlayerKey.NoOne;
             Position = -1;
+            PlayerIndex = -1;
             Money = 0;
         }
     }

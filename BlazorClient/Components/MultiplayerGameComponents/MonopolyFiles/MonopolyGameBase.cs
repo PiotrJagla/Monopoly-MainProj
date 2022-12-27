@@ -36,10 +36,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected override async Task OnInitializedAsync()
         {
-            
-
-
-
             RoomPlayersNumber = 0;
             Messages = new List<string>();
             MonopolyHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}{Consts.HubUrl.Monopoly}")).WithAutomaticReconnect().Build();

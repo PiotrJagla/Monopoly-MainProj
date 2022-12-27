@@ -41,9 +41,14 @@ namespace Services.GamesServices.Monopoly.Board
             return CanAffordBuying(Debtor) == false && DoesCellHaveAnotherOwner(Debtor) == true;
         }
 
+        public bool DoesCellHaveAnotherOwner(MonopolyPlayer PlayerStepped)
+        {
+            return IsNoOneCell(PlayerStepped.OnCellIndex) == false && IsPlayerCellOwner(PlayerStepped) == false;
+        }
+
         public bool IsPossibleToBuyCell(MonopolyPlayer buyer)
         {
-            return CanAffordBuying(buyer) && DoesCellHaveAnotherOwner(buyer) == false;
+            return CanAffordBuying(buyer) && IsNoOneCell(buyer.OnCellIndex);
         }
 
         private bool CanAffordBuying(MonopolyPlayer buyer)
@@ -54,11 +59,6 @@ namespace Services.GamesServices.Monopoly.Board
         private int CellBuyCost(int index)
         {
             return Board[index].GetCosts().Buy;
-        }
-
-        public bool DoesCellHaveAnotherOwner(MonopolyPlayer PlayerStepped)
-        {
-            return IsNoOneCell(PlayerStepped.OnCellIndex) == false && IsPlayerCellOwner(PlayerStepped) == false;
         }
 
         public bool IsNoOneCell(int CellIndex)

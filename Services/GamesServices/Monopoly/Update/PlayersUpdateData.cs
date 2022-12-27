@@ -1,5 +1,6 @@
 ﻿using Enums.Monopoly;
 using Models.Monopoly;
+using Models.MultiplayerConnection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,17 @@ namespace Services.GamesServices.Monopoly.Update
         public void FormatPlayersUpdateData(List<MonopolyPlayer> Players)
         {
             PlayersData = new List<PlayerUpdateData>();
-            foreach (var player in Players)
+            
+            for (int i = 0; i < Players.Count; i++)
             {
-                PlayersData.Add(new PlayerUpdateData());
-                PlayersData.Last().Position = player.OnCellIndex;
-                PlayersData.Last().Money = player.MoneyOwned;
-                PlayersData.Last().Player = player.Key;
+                if (Players[i] != null)
+                {
+                    PlayersData.Add(new PlayerUpdateData());
+                    PlayersData.Last().Position = Players[i].OnCellIndex;
+                    PlayersData.Last().Money = Players[i].MoneyOwned;
+                    PlayersData.Last().Player = Players[i].Key;
+                    PlayersData.Last().PlayerIndex = i;
+                }
             }
         }
     }
