@@ -1,5 +1,7 @@
 ﻿using Enums.Monopoly;
+using Models;
 using Models.Monopoly;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +62,36 @@ namespace Services.GamesServices.Monopoly.Board
         public void SetOwner(PlayerKey NewOwner)
         {
             OwnedBy = NewOwner;
+        }
+
+        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
+        {
+            List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
+            UpdatedBoard = Board;
+            
+            List<MonopolyCell> SingleNationCells = UpdatedBoard.FindAll(
+                c => c.GetNation() == OfNation
+            );
+
+            PlayerKey SingleNationCellOwner = SingleNationCells[0].GetOwner();
+
+            List<MonopolyCell> SingleNationCellsWithSameOwner = SingleNationCells.FindAll(
+                c => c.GetOwner() == SingleNationCellOwner
+            );
+
+            if(SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
+            {
+                foreach (var monopolCell in SingleNationCells)
+                {
+                    UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].SetCosts(
+                        new Costs(
+                            UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Buy,
+                            (int)(UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Stay * Consts.Monopoly.MonopolMultiplayer)
+                        )
+                    );
+                }
+            }
+            return UpdatedBoard;
         }
     }
 }

@@ -52,7 +52,7 @@ namespace UnitTests.MonopolyTests
                     break;
             }
             
-            Assert.IsTrue(Client.GetBoard()[1].GetCosts().Stay == PolandCostsWithoutMonopol*2);
+            Assert.IsTrue(Client.GetBoard()[1].GetCosts().Stay == PolandCostsWithoutMonopol*Consts.Monopoly.MonopolMultiplayer);
         }
     }
 }

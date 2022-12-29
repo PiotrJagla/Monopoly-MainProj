@@ -40,6 +40,7 @@ namespace Models
             public static int OnStartCrossedMoneyGiven = 50;
             public static int StayCost = 100;
             public static int BuyCost = 200;
+            public static float MonopolMultiplayer = 2.0f;
         }
     }
 }

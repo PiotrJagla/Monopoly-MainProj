@@ -25,6 +25,13 @@ namespace Services.GamesServices.Monopoly.Board
             return PlayerKey.NoOne;
         }
 
+        
+
+        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
+        {
+            throw new NotImplementedException();
+        }
+
         public string OnDisplay()
         {
             return "Start!";

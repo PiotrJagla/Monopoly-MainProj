@@ -21,13 +21,19 @@ namespace Services.GamesServices.Monopoly.Board
 
         private void InitBoard()
         {
-            //Board.Add(new MonopolyNationCell(new Costs(50,30), Nation.Poland));
             Board.Add(new StartCell());
+
             Board.Add(new MonopolyNationCell(new Costs(50,30), Nation.Poland));
             Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));
+
+            Board.Add(new MonopolyBeachCell(new Costs(80, 40), Beach.Dubaj));
+
             Board.Add(new MonopolyNationCell(new Costs(130,70), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(150,100), Nation.France));
+
+            Board.Add(new MonopolyBeachCell(new Costs(150,100), Beach.Bali));
+
             Board.Add(new MonopolyNationCell(new Costs(180, 140), Nation.Argentina));
             Board.Add(new MonopolyNationCell(new Costs(250,200), Nation.Argentina));
             Board.Add(new MonopolyNationCell(new Costs(210, 150), Nation.Argentina));
@@ -80,10 +86,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void CheckForMonopolOf(MonopolyPlayer aPlayer)
         {
-            if(DoHaveMonopol(aPlayer))
-            {
-                ApplyMonopolCostsChanges(Board[aPlayer.OnCellIndex].GetNation());
-            }
+            Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board);
         }
 
         private bool DoHaveMonopol(MonopolyPlayer aPlayer)
