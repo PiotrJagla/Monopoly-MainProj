@@ -115,70 +115,166 @@ namespace UnitTests.MonopolyTests
             List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(5, ref Clients);
 
             List<PlayerUpdateData> ActualMoney = FirstClient.GetUpdatedData().PlayersData;
+            List<int> ExpectedMoney = MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow);
 
-            Assert.IsTrue(ActualMoney[0].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[0]);
-            Assert.IsTrue(ActualMoney[1].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[1]);
-            Assert.IsTrue(ActualMoney[2].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[2]);
+            Assert.IsTrue(ActualMoney[0].Money == ExpectedMoney[0]);
+            Assert.IsTrue(ActualMoney[1].Money == ExpectedMoney[1]);
+            Assert.IsTrue(ActualMoney[2].Money == ExpectedMoney[2]);
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void BankrupcyTest1()
         {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
 
+            MonopolyService FirstClient = null;
+            MonopolyService SecoundClient = null;
+            MonopolyService ThirdClient = null;
+            List<MonopolyService> Clients = null;
+            List<MoneyFlow> PlayersMoneyFlow = null;
 
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            MonopolyDataPrepare.ExecuteTurnsNumber(6, ref Clients);
+            for (int i = 1; ; i++)
+            {
+                FirstClient = new MonopolyGameLogic();
+                SecoundClient = new MonopolyGameLogic();
+                ThirdClient = new MonopolyGameLogic();
 
-            MonopolyUpdateMessage CheckSecound = SecoundClient.GetUpdatedData();
-            MonopolyUpdateMessage CheckThird = ThirdClient.GetUpdatedData();
+                Clients = new List<MonopolyService>();
+                Clients.Add(FirstClient);
+                Clients.Add(SecoundClient);
+                Clients.Add(ThirdClient);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
 
-            Assert.IsTrue(CheckSecound.BankruptPlayer == PlayerKey.Secound);
-            Assert.IsTrue(CheckThird.BankruptPlayer == PlayerKey.Third);
+                if (PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[2].Loss)
+                {
+                    break;
+                }
+            }
+
+            MonopolyUpdateMessage CheckBankrupcy = ThirdClient.GetUpdatedData();
+            
+            Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Third);
         }
 
-        //[TestMethod]
+        [TestMethod]
+        public void BankrupcyTest2()
+        {
+
+            MonopolyService FirstClient = null;
+            MonopolyService SecoundClient = null;
+            MonopolyService ThirdClient = null;
+            List<MonopolyService> Clients = null;
+            List<MoneyFlow> PlayersMoneyFlow = null;
+
+            for (int i = 1; ; i++)
+            {
+                FirstClient = new MonopolyGameLogic();
+                SecoundClient = new MonopolyGameLogic();
+                ThirdClient = new MonopolyGameLogic();
+
+                Clients = new List<MonopolyService>();
+                Clients.Add(FirstClient);
+                Clients.Add(SecoundClient);
+                Clients.Add(ThirdClient);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
+
+                if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
+                {
+                    break;
+                }
+            }
+
+            MonopolyUpdateMessage CheckBankrupcy = SecoundClient.GetUpdatedData();
+
+            Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Secound);
+        }
+
+        [TestMethod]
         public void WhosTurnTest()
         {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
+            MonopolyService FirstClient = null;
+            MonopolyService SecoundClient = null;
+            MonopolyService ThirdClient = null;
+            List<MonopolyService> Clients = null;
+            List<MoneyFlow> PlayersMoneyFlow = null;
 
+            FirstClient = new MonopolyGameLogic();
+            SecoundClient = new MonopolyGameLogic();
+            ThirdClient = new MonopolyGameLogic();
 
-            List<MonopolyService> Clients = new List<MonopolyService>();
+            Clients = new List<MonopolyService>();
             Clients.Add(FirstClient);
             Clients.Add(SecoundClient);
             Clients.Add(ThirdClient);
-            MonopolyDataPrepare.ExecuteTurnsNumber(6, ref Clients);
 
-            FirstClient.NextTurn();
-            ThirdClient.NextTurn();
+            MonopolyDataPrepare.PrepareClientsData(ref Clients);
 
-            Assert.IsTrue(ThirdClient.IsYourTurn() == true);
+            while(true)
+            {
+                Clients[0].ExecuteTurn(1);
+                Clients[0].BuyCellIfPossible();
+
+                MonopolyService CurrentClient = Clients[0];
+                MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
+
+                Clients[1].ExecuteTurn(1);
+
+                CurrentClient = Clients[1];
+                MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
+
+                if (Clients[0].GetUpdatedData().PlayersData.Count == 2)
+                    break;
+
+            }
+            Clients[1].UpdateData(Clients[1].GetUpdatedData());
+
+            Assert.IsTrue(Clients[2].IsYourTurn() == true);
+            Assert.IsTrue(Clients[1].IsYourTurn() == false);
+            Assert.IsTrue(Clients[0].IsYourTurn() == false);
+
+            Clients[0].NextTurn();
+            Clients[2].NextTurn();
+
+            
+
+            Assert.IsTrue(Clients[2].IsYourTurn() == false);
+            Assert.IsTrue(Clients[1].IsYourTurn() == false);
+            Assert.IsTrue(Clients[0].IsYourTurn() == true);
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void WinnerTest()
         {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
+            MonopolyService FirstClient = null;
+            MonopolyService SecoundClient = null;
+            MonopolyService ThirdClient = null;
+            List<MonopolyService> Clients = null;
+            List<MoneyFlow> PlayersMoneyFlow = null;
 
+            for (int i = 1; ; i++)
+            {
+                FirstClient = new MonopolyGameLogic();
+                SecoundClient = new MonopolyGameLogic();
+                ThirdClient = new MonopolyGameLogic();
 
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            MonopolyDataPrepare.ExecuteTurnsNumber(6, ref Clients);
+                Clients = new List<MonopolyService>();
+                Clients.Add(FirstClient);
+                Clients.Add(SecoundClient);
+                Clients.Add(ThirdClient);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
 
-            PlayerKey Winner = FirstClient.WhoWon();
+                if (PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[2].Loss &&
+                    PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
+                {
+                    break;
+                }
+            }
 
-            Assert.IsTrue(Winner == PlayerKey.First);
+            SecoundClient.UpdateData(SecoundClient.GetUpdatedData());
+            ThirdClient.UpdateData(ThirdClient.GetUpdatedData());
+
+            Assert.IsTrue(FirstClient.WhoWon() == PlayerKey.First);
+            Assert.IsTrue(SecoundClient.WhoWon() == PlayerKey.First);
+            Assert.IsTrue(ThirdClient.WhoWon() == PlayerKey.First);
         }
 
         
