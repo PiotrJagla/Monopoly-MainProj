@@ -9,10 +9,24 @@ using System.Threading.Tasks;
 
 namespace UnitTests.MonopolyTests
 {
-    public class MonopolyDataPrepareForTests
+    public class MoneyFlow
     {
+        public int Income { get; set; }
+        public int Loss { get; set; }
+
+        public MoneyFlow()
+        {
+            Income = 0;
+            Loss = 0;
+        }
+    }
+
+    public class MonopolyDataPrepare
+    {
+
         private static PlayerKey[] PlayersBuyingOrder_TwoClients = new PlayerKey[] {
-                PlayerKey.First, PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First,PlayerKey.First
+                PlayerKey.First, PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.NoOne,
+                PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
             };
 
         private static Tuple<int, PlayerKey>[] PlayersSellingOrder_TwoClients = new Tuple<int, PlayerKey>[] {
@@ -21,11 +35,15 @@ namespace UnitTests.MonopolyTests
                 new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
                 new Tuple<int,PlayerKey>(3,PlayerKey.Secound),
                 new Tuple<int,PlayerKey>(2,PlayerKey.Secound),
+                new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
+                new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
+                new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
                 new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne)
             };
 
         private static PlayerKey[] PlayersBuyingOrder_ThreeClient = new PlayerKey[] {
-                PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First
+                PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.NoOne,
+                PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne
             };
 
         private static Tuple<int, PlayerKey>[] PlayersSellingOrder_ThreeClient = new Tuple<int, PlayerKey>[] {
@@ -34,16 +52,22 @@ namespace UnitTests.MonopolyTests
                 new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
                 new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
                 new Tuple<int,PlayerKey>(2,PlayerKey.Third),
-                new Tuple<int,PlayerKey>(1,PlayerKey.Secound)
+                new Tuple<int,PlayerKey>(1,PlayerKey.Secound),
+                new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
+                new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne),
+                new Tuple<int,PlayerKey>(-1,PlayerKey.NoOne)
             };
 
         private static PlayerKey[] PlayersBuyingOrderOnTurns = new PlayerKey[] { };
         private static Tuple<int, PlayerKey>[] PlayersSellingOrderOnTurns = new Tuple<int, PlayerKey>[] { };
 
-        public static void ExecuteTurnsNumber(int TurnsAmount, ref List<MonopolyService> Clients)
+        private static List<MoneyFlow> PlayersMoneyFlow;
+
+        public static List<MoneyFlow> ExecuteTurnsNumber(int TurnsAmount, ref List<MonopolyService> Clients)
         {
             PrepareClientsData(ref Clients);
             ExecuteTurns(TurnsAmount, ref Clients);
+            return PlayersMoneyFlow;
         }
 
         private static void PrepareClientsData(ref List<MonopolyService> Clients)
@@ -91,8 +115,10 @@ namespace UnitTests.MonopolyTests
 
         private static void StartClientsGame(ref List<MonopolyService> Clients, List<Player> Players)
         {
+            PlayersMoneyFlow = new List<MoneyFlow>();            
             for (int i = 0; i < Clients.Count; i++)
             {
+                PlayersMoneyFlow.Add(new MoneyFlow());
                 Clients[i].StartGame(Players);
             }
         }
@@ -109,7 +135,16 @@ namespace UnitTests.MonopolyTests
                     SellCell(turn, clientIndex,ref CurrentClient);
                     UpdateOthers(ref Clients,ref CurrentClient);
                 }
-
+                for (int i = 0; i < Clients.Count; i++)
+                {
+                    int CellIndex = (turn + 1) % Clients[0].GetBoard().Count;
+                    if ((int)(Clients[0].GetBoard()[CellIndex].GetOwner()) < i)
+                    {
+                        PlayersMoneyFlow[i].Loss += Clients[0].GetBoard()[turn + 1].GetCosts().Stay;
+                        PlayersMoneyFlow[(int)(Clients[0].GetBoard()[turn + 1].GetOwner())].Income += Clients[0].GetBoard()[turn + 1].GetCosts().Stay;
+                    }
+                }
+                
             }
         }
 
@@ -129,6 +164,7 @@ namespace UnitTests.MonopolyTests
         {
             if (PlayersSellingOrderOnTurns[turn].Item2 == (PlayerKey)clientIndex)
             {
+                PlayersMoneyFlow[clientIndex].Income += CurrentClient.GetBoard()[PlayersSellingOrderOnTurns[turn].Item1].GetCosts().Buy;
                 CurrentClient.SellCell(CurrentClient.GetBoard()[PlayersSellingOrderOnTurns[turn].Item1].OnDisplay());
             }
         }
@@ -137,8 +173,21 @@ namespace UnitTests.MonopolyTests
         {
             if (PlayersBuyingOrderOnTurns[turn] == (PlayerKey)clientIndex)
             {
+                PlayersMoneyFlow[clientIndex].Loss += CurrentClient.GetBoard()[turn+1].GetCosts().Buy;
                 CurrentClient.BuyCellIfPossible();
             }
+        }
+
+        public static List<int> GetExpectedMoney(List<MoneyFlow> MoneyFlows)
+        {
+            List<int> result = new List<int>();
+            for (int i = 0; i < MoneyFlows.Count; i++)
+            {
+                result.Add(Consts.Monopoly.StartMoneyAmount);
+                result[i] += MoneyFlows[i].Income;
+                result[i] -= MoneyFlows[i].Loss;
+            }
+            return result;
         }
     }
 }
