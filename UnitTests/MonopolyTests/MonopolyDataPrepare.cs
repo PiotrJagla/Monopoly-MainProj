@@ -1,9 +1,11 @@
 ﻿using Enums.Monopoly;
+using Models.Monopoly;
 using Models.MultiplayerConnection;
 using Services.GamesServices.Monopoly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,24 +25,21 @@ namespace UnitTests.MonopolyTests
 
     public class MonopolyDataPrepare
     {
-
-        private static PlayerKey[] PlayersBuyingOrder_TwoClients = new PlayerKey[] {
+        private static PlayerKey[][] PlayersBuyingOrderInTurns_XClients = new PlayerKey[][]
+        {
+            new PlayerKey[]{ },
+            new PlayerKey[]{ },
+            new PlayerKey[]{
                 PlayerKey.First, PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
                 PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
-                PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne
-            };
-
-        
-
-        private static PlayerKey[] PlayersBuyingOrder_ThreeClient = new PlayerKey[] {
+            },
+            new PlayerKey[]{ 
                 PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
                 PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne
-            };
-
-        
+            }
+        };
 
         private static PlayerKey[] PlayersBuyingOrderOnTurns = new PlayerKey[] { };
-        private static Tuple<int, PlayerKey>[] PlayersSellingOrderOnTurns = new Tuple<int, PlayerKey>[] { };
 
         private static List<MoneyFlow> PlayersMoneyFlow;
 
@@ -61,15 +60,7 @@ namespace UnitTests.MonopolyTests
 
         private static void ChooseBuyingOrder(int ClientsNumber)
         {
-            switch (ClientsNumber)
-            {
-                case 2:
-                    PlayersBuyingOrderOnTurns = PlayersBuyingOrder_TwoClients;
-                    break;
-                case 3:
-                    PlayersBuyingOrderOnTurns = PlayersBuyingOrder_ThreeClient;
-                    break;
-            }
+            PlayersBuyingOrderOnTurns = PlayersBuyingOrderInTurns_XClients[ClientsNumber];
         }
 
 
@@ -177,6 +168,16 @@ namespace UnitTests.MonopolyTests
                 result[i] -= MoneyFlows[i].Loss;
             }
             return result;
+        }
+
+        public static bool CompareMoneyAmount(in List<int> Expected,in List<PlayerUpdateData> Actual)
+        {
+            for (int i = 0; i < Actual.Count && i < Expected.Count; i++)
+            {
+                if (Expected[i] != Actual[i].Money)
+                    return false;
+            }
+            return true;
         }
     }
 }

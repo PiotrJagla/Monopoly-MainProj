@@ -17,109 +17,21 @@ namespace UnitTests.MonopolyTests
     public class MonopolyTestsThreeClients
     {
         [TestMethod]
-        public void MoneyOwnedAfterTurn1()
+        public void PlayersMoneyOwnedAfterTurn1To5Test()
         {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
+            int TurnsToTest = 5;
+            for (int turn = 1; turn <= TurnsToTest; turn++)
+            {
+                List<MonopolyService> Clients = new List<MonopolyService>();
+                Clients.Add(new MonopolyGameLogic());
+                Clients.Add(new MonopolyGameLogic());
+                Clients.Add(new MonopolyGameLogic());
+                List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(turn, ref Clients);
 
-
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(1, ref Clients);
-
-            List<PlayerUpdateData> ActualMoney = FirstClient.GetUpdatedData().PlayersData;
-
-            Assert.IsTrue(ActualMoney[0].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[0]);
-            Assert.IsTrue(ActualMoney[1].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[1]);
-            Assert.IsTrue(ActualMoney[2].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[2]);
-        }
-
-        [TestMethod]
-        public void MoneyOwnedAfterTurn2()
-        {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
-
-
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(2, ref Clients);
-
-            List<PlayerUpdateData> ActualMoney = FirstClient.GetUpdatedData().PlayersData;
-
-            Assert.IsTrue(ActualMoney[0].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[0]);
-            Assert.IsTrue(ActualMoney[1].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[1]);
-            Assert.IsTrue(ActualMoney[2].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[2]);
-        }
-
-        [TestMethod]
-        public void MoneyOwnedAfterTurn3()
-        {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
-
-
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(3, ref Clients);
-
-            List<PlayerUpdateData> ActualMoney = FirstClient.GetUpdatedData().PlayersData;
-
-            Assert.IsTrue(ActualMoney[0].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[0]);
-            Assert.IsTrue(ActualMoney[1].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[1]);
-            Assert.IsTrue(ActualMoney[2].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[2]);
-        }
-
-        [TestMethod]
-        public void MoneyOwnedAfterTurn4()
-        {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
-
-
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(4, ref Clients);
-
-            List<PlayerUpdateData> ActualMoney = FirstClient.GetUpdatedData().PlayersData;
-
-            Assert.IsTrue(ActualMoney[0].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[0]);
-            Assert.IsTrue(ActualMoney[1].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[1]);
-            Assert.IsTrue(ActualMoney[2].Money == MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow)[2]);
-        }
-
-        [TestMethod]
-        public void MoneyOwnedAfterTurn5()
-        {
-            MonopolyService FirstClient = new MonopolyGameLogic();
-            MonopolyService SecoundClient = new MonopolyGameLogic();
-            MonopolyService ThirdClient = new MonopolyGameLogic();
-
-
-            List<MonopolyService> Clients = new List<MonopolyService>();
-            Clients.Add(FirstClient);
-            Clients.Add(SecoundClient);
-            Clients.Add(ThirdClient);
-            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(5, ref Clients);
-
-            List<PlayerUpdateData> ActualMoney = FirstClient.GetUpdatedData().PlayersData;
-            List<int> ExpectedMoney = MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow);
-
-            Assert.IsTrue(ActualMoney[0].Money == ExpectedMoney[0]);
-            Assert.IsTrue(ActualMoney[1].Money == ExpectedMoney[1]);
-            Assert.IsTrue(ActualMoney[2].Money == ExpectedMoney[2]);
+                List<PlayerUpdateData> ActualMoney = Clients[0].GetUpdatedData().PlayersData;
+                List<int> ExpectedMoney = MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow);
+                Assert.IsTrue(MonopolyDataPrepare.CompareMoneyAmount(ExpectedMoney, ActualMoney));
+            }
         }
 
         [TestMethod]

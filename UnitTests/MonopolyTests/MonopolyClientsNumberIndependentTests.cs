@@ -29,10 +29,7 @@ namespace UnitTests.MonopolyTests
                 Client.ExecuteTurn(1);
             }
 
-
             Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
-                      
-
         }
 
         [TestMethod]
@@ -56,9 +53,6 @@ namespace UnitTests.MonopolyTests
             }
             
             Assert.IsTrue(Client.GetBoard()[1].GetCosts().Stay == PolandCostsWithoutMonopol*2);
-            
-
-
         }
     }
 }
