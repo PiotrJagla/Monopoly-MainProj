@@ -81,17 +81,22 @@ namespace Services.GamesServices.Monopoly.Board
 
             if(SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
             {
-                foreach (var monopolCell in SingleNationCells)
-                {
-                    UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].SetCosts(
-                        new Costs(
-                            UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Buy,
-                            (int)(UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Stay * Consts.Monopoly.MonopolMultiplayer)
-                        )
-                    );
-                }
+                ApplyMonopol(ref UpdatedBoard, SingleNationCells);
             }
             return UpdatedBoard;
+        }
+
+        private void ApplyMonopol(ref List<MonopolyCell> UpdatedBoard, List<MonopolyCell> SingleNationCells)
+        {
+            foreach (var monopolCell in SingleNationCells)
+            {
+                UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].SetCosts(
+                    new Costs(
+                        UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Buy,
+                        (int)(UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Stay * Consts.Monopoly.MonopolMultiplayer)
+                    )
+                );
+            }
         }
     }
 }

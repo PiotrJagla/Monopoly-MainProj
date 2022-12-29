@@ -29,7 +29,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
         {
-            throw new NotImplementedException();
+            return Board;
         }
 
         public string OnDisplay()

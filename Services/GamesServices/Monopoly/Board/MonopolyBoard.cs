@@ -26,13 +26,13 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(50,30), Nation.Poland));
             Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));
 
-            Board.Add(new MonopolyBeachCell(new Costs(80, 40), Beach.Dubaj));
+            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
 
             Board.Add(new MonopolyNationCell(new Costs(130,70), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(150,100), Nation.France));
 
-            Board.Add(new MonopolyBeachCell(new Costs(150,100), Beach.Bali));
+            Board.Add(new MonopolyBeachCell(new Costs(100,30), Beach.Bali));
 
             Board.Add(new MonopolyNationCell(new Costs(180, 140), Nation.Argentina));
             Board.Add(new MonopolyNationCell(new Costs(250,200), Nation.Argentina));
@@ -88,30 +88,5 @@ namespace Services.GamesServices.Monopoly.Board
         {
             Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board);
         }
-
-        private bool DoHaveMonopol(MonopolyPlayer aPlayer)
-        {
-            foreach (var cell in Board)
-            {
-                if(cell.GetNation() == Board[aPlayer.OnCellIndex].GetNation() &&
-                    cell.GetOwner() != aPlayer.Key)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private void ApplyMonopolCostsChanges(Nation OnNation)
-        {
-            List<MonopolyCell> MonopolNationCells = Board.FindAll(cell => cell.GetNation() == OnNation);
-            foreach (var cell in MonopolNationCells)
-            {
-                int MonopolCostMultiplayer = 2;
-                cell.SetCosts(new Costs( cell.GetCosts().Buy, cell.GetCosts().Stay*MonopolCostMultiplayer ));
-            }
-        }
-
-        
     }
 }

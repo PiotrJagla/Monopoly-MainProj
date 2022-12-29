@@ -120,6 +120,7 @@ namespace UnitTests.MonopolyTests
 
             MonopolyDataPrepare.PrepareClientsData(ref Clients);
 
+            int i = 0;
             while(true)
             {
                 Clients[0].ExecuteTurn(1);
@@ -133,24 +134,31 @@ namespace UnitTests.MonopolyTests
                 CurrentClient = Clients[1];
                 MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
 
+                Clients[2].ExecuteTurn(0);
+
+                CurrentClient = Clients[2];
+                MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
+
                 if (Clients[0].GetUpdatedData().PlayersData.Count == 2)
                     break;
-
+                ++i;
             }
-            Clients[1].UpdateData(Clients[1].GetUpdatedData());
 
-            Assert.IsTrue(Clients[2].IsYourTurn() == true);
+            Clients[1].UpdateData(Clients[1].GetUpdatedData());
+            
+
+            Assert.IsTrue(Clients[2].IsYourTurn() == false);
             Assert.IsTrue(Clients[1].IsYourTurn() == false);
-            Assert.IsTrue(Clients[0].IsYourTurn() == false);
+            Assert.IsTrue(Clients[0].IsYourTurn() == true);
 
             Clients[0].NextTurn();
             Clients[2].NextTurn();
 
             
 
-            Assert.IsTrue(Clients[2].IsYourTurn() == false);
+            Assert.IsTrue(Clients[2].IsYourTurn() == true);
             Assert.IsTrue(Clients[1].IsYourTurn() == false);
-            Assert.IsTrue(Clients[0].IsYourTurn() == true);
+            Assert.IsTrue(Clients[0].IsYourTurn() == false);
         }
 
         [TestMethod]
