@@ -23,20 +23,22 @@ namespace Services.GamesServices.Monopoly.Board
         {
             Board.Add(new StartCell());
 
-            Board.Add(new MonopolyNationCell(new Costs(50,30), Nation.Poland));
+            Board.Add(new MonopolyNationCell(new Costs(50, 30), Nation.Poland));
             Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));
 
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
 
-            Board.Add(new MonopolyNationCell(new Costs(130,70), Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(130, 70), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
-            Board.Add(new MonopolyNationCell(new Costs(150,100), Nation.France));
+            Board.Add(new MonopolyNationCell(new Costs(150, 100), Nation.France));
 
-            Board.Add(new MonopolyBeachCell(new Costs(100,30), Beach.Bali));
+            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Bali));
 
             Board.Add(new MonopolyNationCell(new Costs(180, 140), Nation.Argentina));
-            Board.Add(new MonopolyNationCell(new Costs(250,200), Nation.Argentina));
+            Board.Add(new MonopolyNationCell(new Costs(250, 200), Nation.Argentina));
             Board.Add(new MonopolyNationCell(new Costs(210, 150), Nation.Argentina));
+
+            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Cypr));
         }
 
         public List<MonopolyCell> GetBoard()
@@ -61,7 +63,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public bool IsPossibleToBuyCell(MonopolyPlayer buyer)
         {
-            return CanAffordBuying(buyer) && IsNoOneCell(buyer.OnCellIndex);
+            return CanAffordBuying(buyer) && IsNoOneCell(buyer.OnCellIndex) && IsBuyableCell(buyer.OnCellIndex);
         }
 
         private bool CanAffordBuying(MonopolyPlayer buyer)
@@ -72,6 +74,12 @@ namespace Services.GamesServices.Monopoly.Board
         public bool IsNoOneCell(int CellIndex)
         {
             return Board[CellIndex].GetOwner() == PlayerKey.NoOne;
+        }
+
+        private bool IsBuyableCell(int CellIndex)
+        {
+            return Board[CellIndex].GetNation() != Nation.NoNation ||
+                   Board[CellIndex].GetBeachName() != Beach.NoBeach;
         }
 
         private bool IsPlayerCellOwner(MonopolyPlayer Player)

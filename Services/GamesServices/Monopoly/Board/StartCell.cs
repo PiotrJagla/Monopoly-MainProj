@@ -10,6 +10,11 @@ namespace Services.GamesServices.Monopoly.Board
 {
     internal class StartCell : MonopolyCell
     {
+        public Beach GetBeachName()
+        {
+            return Beach.NoBeach;
+        }
+
         public Costs GetCosts()
         {
             return new Costs();
@@ -30,6 +35,11 @@ namespace Services.GamesServices.Monopoly.Board
         public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
         {
             return Board;
+        }
+
+        public void MultiplyStayCostAmount(float Multiplayer)
+        {
+            
         }
 
         public string OnDisplay()

@@ -1,4 +1,5 @@
 ﻿using Enums.Monopoly;
+using Models;
 using Models.Monopoly;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,46 @@ namespace Services.GamesServices.Monopoly.Board
 
         public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
         {
-            List<MonopolyCell> UpdatedBoard = Board;
+            List<MonopolyCell> NewBoard = Board;
 
-            return UpdatedBoard;
+            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c.GetBeachName() != Beach.NoBeach);
+
+            List<PlayerKey> CheckedOwners = new List<PlayerKey>();
+            foreach (var BeachCell in AllBeaches)
+            {
+                CheckBeachCellMonopol(ref NewBoard,ref CheckedOwners, BeachCell.GetOwner());
+            }
+
+            return NewBoard;
+        }
+
+        private void CheckBeachCellMonopol(
+            ref List<MonopolyCell> NewBoard,ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
+        {
+            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c.GetBeachName() != Beach.NoBeach);
+            if (CheckedOwners.IndexOf(CurrentBeachCellOwner) == -1)
+            {
+                List<MonopolyCell> AllBeachesWithSameOwner = new List<MonopolyCell>();
+                AllBeachesWithSameOwner = AllBeaches.FindAll(b => b.GetOwner() == CurrentBeachCellOwner);
+
+                if (AllBeachesWithSameOwner.Count >= 2)
+                {
+                    ApplyMonopol(ref NewBoard, AllBeachesWithSameOwner);
+                }
+
+                CheckedOwners.Add(CurrentBeachCellOwner);
+            }
+        }
+
+        public void ApplyMonopol(ref List<MonopolyCell> NewBoard,in List<MonopolyCell> AllBeachesWithSameOwner)
+        {
+            foreach (var BeachCell in AllBeachesWithSameOwner)
+            {
+                int CellIndexToUpdate = NewBoard.IndexOf(BeachCell);
+                NewBoard[CellIndexToUpdate].MultiplyStayCostAmount(
+                    Consts.Monopoly.BeachesOwnedMultiplayer[AllBeachesWithSameOwner.Count]
+                );
+            }
         }
 
         public string OnDisplay()
@@ -64,6 +102,16 @@ namespace Services.GamesServices.Monopoly.Board
         public void SetOwner(PlayerKey NewOwner)
         {
             OwnedBy = NewOwner;
+        }
+
+        public Beach GetBeachName()
+        {
+            return BeachName;
+        }
+
+        public void MultiplyStayCostAmount(float Multiplayer)
+        {
+            ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
         }
     }
 }

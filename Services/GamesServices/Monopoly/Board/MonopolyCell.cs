@@ -10,6 +10,7 @@ namespace Models.Monopoly
     public interface MonopolyCell 
     {
         Nation GetNation();
+        Beach GetBeachName();
 
         PlayerKey GetOwner();
         void SetOwner(PlayerKey NewOwner);
@@ -17,6 +18,7 @@ namespace Models.Monopoly
         Costs GetCosts();
         void SetCosts(Costs costs);
         List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board);
+        void MultiplyStayCostAmount(float Multiplayer);
 
         string OnDisplay();
     }

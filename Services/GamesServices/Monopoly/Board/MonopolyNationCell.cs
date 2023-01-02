@@ -90,13 +90,18 @@ namespace Services.GamesServices.Monopoly.Board
         {
             foreach (var monopolCell in SingleNationCells)
             {
-                UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].SetCosts(
-                    new Costs(
-                        UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Buy,
-                        (int)(UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetCosts().Stay * Consts.Monopoly.MonopolMultiplayer)
-                    )
-                );
+                UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].MultiplyStayCostAmount(Consts.Monopoly.MonopolMultiplayer);
             }
+        }
+
+        public Beach GetBeachName()
+        {
+            return Beach.NoBeach;
+        }
+
+        public void MultiplyStayCostAmount(float Multiplayer)
+        {
+            ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
         }
     }
 }

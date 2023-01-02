@@ -41,6 +41,8 @@ namespace Models
             public static int StayCost = 100;
             public static int BuyCost = 200;
             public static float MonopolMultiplayer = 2.0f;
+
+            public static float[] BeachesOwnedMultiplayer = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
         }
     }
 }
