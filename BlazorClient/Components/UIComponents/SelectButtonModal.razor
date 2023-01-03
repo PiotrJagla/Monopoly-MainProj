@@ -1,0 +1,33 @@
+﻿
+
+<div>
+    <div class="Title">
+        <label>@StringParameters.Title</label>
+        <br />
+    </div>
+    @foreach (var button in StringParameters.ButtonsContent)
+    {
+        <button class="btn btn-primary" @onclick="@(() =>SubmitForm(button))">
+            <label>@button</label>
+        </button>
+        <br />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public StringModalParameters StringParameters{ get; set; }
+
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        BlazoredModal.SetTitle("Yes Or No");
+    }
+
+    private async Task SubmitForm(string CellToSellDisplay)
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Ok(CellToSellDisplay));
+    }
+}

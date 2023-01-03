@@ -1,4 +1,5 @@
 ﻿using Enums.Monopoly;
+using Microsoft.Extensions.Logging.Abstractions;
 using Models;
 using Models.Monopoly;
 using MySql.Data.MySqlClient;
@@ -102,6 +103,11 @@ namespace Services.GamesServices.Monopoly.Board
         public void MultiplyStayCostAmount(float Multiplayer)
         {
             ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
+        }
+
+        public StringModalParameters GetModalParameters()
+        {
+            return null;
         }
     }
 }

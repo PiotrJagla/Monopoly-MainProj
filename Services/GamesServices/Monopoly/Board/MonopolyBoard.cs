@@ -21,6 +21,8 @@ namespace Services.GamesServices.Monopoly.Board
 
         private void InitBoard()
         {
+            //TODO: dodać bezludną wyspę gdzie jak sie tam stanie to czeka sie 3 tury, ewentualnie rzuca kostką zeby wyrzucic 6 i tym samym sie uwolnic
+            //albo zapłacic ileś pienięszy zeby się uwolnić
             Board.Add(new StartCell());
 
             Board.Add(new MonopolyNationCell(new Costs(50, 30), Nation.Poland));
@@ -31,6 +33,8 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(130, 70), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(150, 100), Nation.France));
+
+            Board.Add(new MonopolyIslandCell());
 
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Bali));
 
@@ -95,6 +99,11 @@ namespace Services.GamesServices.Monopoly.Board
         public void CheckForMonopolOf(MonopolyPlayer aPlayer)
         {
             Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board);
+        }
+
+        public StringModalParameters GetCellModalParameters(int CellIndex)
+        {
+            return Board[CellIndex].GetModalParameters();
         }
     }
 }

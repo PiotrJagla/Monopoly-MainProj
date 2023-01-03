@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services.GamesServices.Monopoly.Board
 {
-    internal class StartCell : MonopolyCell
+    public class MonopolyIslandCell : MonopolyCell
     {
         public Beach GetBeachName()
         {
@@ -23,7 +23,12 @@ namespace Services.GamesServices.Monopoly.Board
 
         public StringModalParameters GetModalParameters()
         {
-            return null;
+            StringModalParameters Result = new StringModalParameters();
+            Result.Title = "You Are On Desert Island For 3 Turns";
+            Result.ButtonsContent.Add($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Result.ButtonsContent.Add("Throw Dice(Excape if 1 is Rolled)");
+            Result.ButtonsContent.Add("Wait");
+            return Result;
         }
 
         public Nation GetNation()
@@ -35,8 +40,6 @@ namespace Services.GamesServices.Monopoly.Board
         {
             return PlayerKey.NoOne;
         }
-
-        
 
         public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
         {
@@ -50,7 +53,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public string OnDisplay()
         {
-            return "Start!";
+            return Consts.Monopoly.IslandDiaplsy;
         }
 
         public void SetCosts(Costs costs)

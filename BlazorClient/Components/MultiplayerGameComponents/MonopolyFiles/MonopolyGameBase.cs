@@ -11,6 +11,7 @@ using Org.BouncyCastle.Asn1.X509;
 using Services.GamesServices.Monopoly;
 using Services.GamesServices.Monopoly.Update;
 using StringManipulationLib;
+using System.Net.NetworkInformation;
 
 namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 {
@@ -115,6 +116,18 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             if (MonopolyLogic.ExecuteTurn(1) == MonopolyTurnResult.CanBuyCell)
             {
                 await CellBuyingProcess();
+            }
+
+            if(MonopolyLogic.GetModalParameters() != null)
+            {
+                ModalParameters parameters = new ModalParameters();
+                parameters.Add(nameof(SelectButtonModal.StringParameters), MonopolyLogic.GetModalParameters());
+                var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
+                var Response = await ModalResponse.Result;
+                if(Response.Confirmed)
+                {
+                    MonopolyLogic.ModalResponse(Response.Data.ToString());
+                }
             }
         }
 

@@ -12,12 +12,14 @@ namespace Models.Monopoly
         public PlayerKey Key { get; set; }
         public int OnCellIndex { get; set; }
         public int MoneyOwned { get; set; }
+        public int TurnsOnIslandRemaining { get; set; }
 
         public MonopolyPlayer()
         {
             Key = PlayerKey.First;
             OnCellIndex = 0;
             MoneyOwned = 0;
+            TurnsOnIslandRemaining = 0;
         }
     }
 }

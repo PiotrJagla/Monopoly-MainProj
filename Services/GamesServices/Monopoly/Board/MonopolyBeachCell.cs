@@ -55,8 +55,7 @@ namespace Services.GamesServices.Monopoly.Board
             return NewBoard;
         }
 
-        private void CheckBeachCellMonopol(
-            ref List<MonopolyCell> NewBoard,ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
+        private void CheckBeachCellMonopol(ref List<MonopolyCell> NewBoard,ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
         {
             List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c.GetBeachName() != Beach.NoBeach);
             if (CheckedOwners.IndexOf(CurrentBeachCellOwner) == -1)
@@ -112,6 +111,11 @@ namespace Services.GamesServices.Monopoly.Board
         public void MultiplyStayCostAmount(float Multiplayer)
         {
             ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
+        }
+
+        public StringModalParameters GetModalParameters()
+        {
+            return null;
         }
     }
 }

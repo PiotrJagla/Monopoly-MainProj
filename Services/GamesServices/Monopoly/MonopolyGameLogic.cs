@@ -250,8 +250,15 @@ namespace Services.GamesServices.Monopoly
 
         private void Move(int amount)
         {
-            OnStartCellCrossed(amount);
             MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
+
+            if (MainPlayer.TurnsOnIslandRemaining>0)
+            {
+                MainPlayer.TurnsOnIslandRemaining--;
+                return;
+            }
+
+            OnStartCellCrossed(amount);
             MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
         }
 
@@ -320,6 +327,18 @@ namespace Services.GamesServices.Monopoly
             return PlayerKey.NoOne;
         }
 
-        
+        public StringModalParameters GetModalParameters()
+        {
+            int MainPlayerPos = Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex;
+            return BoardService.GetCellModalParameters(MainPlayerPos);
+        }
+
+        public void ModalResponse(string StringResponse)
+        {
+            if(StringResponse == "Wait")
+            {
+                Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining = 3;
+            }
+        }
     }
 }

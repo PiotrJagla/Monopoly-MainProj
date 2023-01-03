@@ -21,5 +21,7 @@ namespace Models.Monopoly
         void MultiplyStayCostAmount(float Multiplayer);
 
         string OnDisplay();
+
+        StringModalParameters GetModalParameters();
     }
 }

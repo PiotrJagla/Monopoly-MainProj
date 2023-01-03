@@ -36,11 +36,14 @@ namespace Models
         }
         public static class Monopoly
         {
+            public static int IslandEscapeCost = 50;
             public static int StartMoneyAmount = 400;
             public static int OnStartCrossedMoneyGiven = 50;
             public static int StayCost = 100;
             public static int BuyCost = 200;
             public static float MonopolMultiplayer = 2.0f;
+
+            public static string IslandDiaplsy = "Desert Island";
 
             public static float[] BeachesOwnedMultiplayer = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
         }

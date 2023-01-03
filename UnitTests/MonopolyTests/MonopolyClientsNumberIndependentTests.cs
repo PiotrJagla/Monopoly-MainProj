@@ -134,5 +134,61 @@ namespace UnitTests.MonopolyTests
 
             Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
         }
+
+        [TestMethod]
+        public void IsntAbleToMoveAfterStepingOnIsland()
+        {
+            MonopolyService Client = new MonopolyGameLogic();
+            List<Player> Players = new List<Player>();
+            Players.Add(new Player());
+            Client.StartGame(Players);
+            Client.SetMainPlayerIndex(0);
+
+            int BoardSize = Client.GetBoard().Count;
+
+            for (int i = 1; i < Client.GetBoard().Count; i++)
+            {
+                Client.ExecuteTurn(1);
+                if (Client.GetBoard()[i].OnDisplay() == Consts.Monopoly.IslandDiaplsy)
+                {
+                    Client.ModalResponse("Wait");
+                    break;
+                }
+            }
+
+            Client.ExecuteTurn(BoardSize - 2);
+
+            Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount);
+        }
+
+        [TestMethod]
+        public void IsAbleToMoveFromIslandAfter3Turns()
+        {
+            MonopolyService Client = new MonopolyGameLogic();
+            List<Player> Players = new List<Player>();
+            Players.Add(new Player());
+            Client.StartGame(Players);
+            Client.SetMainPlayerIndex(0);
+
+            int BoardSize = Client.GetBoard().Count;
+
+            for (int i = 1; i < Client.GetBoard().Count; i++)
+            {
+                Client.ExecuteTurn(1);
+                if (Client.GetBoard()[i].OnDisplay() == Consts.Monopoly.IslandDiaplsy)
+                {
+                    Client.ModalResponse("Wait");
+                    break;
+                }
+            }
+
+            Client.ExecuteTurn(1);
+            Client.ExecuteTurn(1);
+            Client.ExecuteTurn(1);
+            Client.ExecuteTurn(BoardSize - 2);
+
+            Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven);
+        }
     }
+
 }

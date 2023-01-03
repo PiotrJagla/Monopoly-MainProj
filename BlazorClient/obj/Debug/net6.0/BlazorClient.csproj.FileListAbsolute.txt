@@ -1783,3 +1783,4 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\bin\
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\+yU5oSle.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\build-gz\HHejYwgz.gz
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\PayOffDebtModal.razor.rz.scp.css
+D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\SelectButtonModal.razor.rz.scp.css
