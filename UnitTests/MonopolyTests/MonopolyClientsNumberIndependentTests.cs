@@ -14,41 +14,32 @@ namespace UnitTests.MonopolyTests
     [TestClass]
     public class MonopolyClientsNumberIndependentTests
     {
+        private MonopolyService Client;
+
+        [TestInitialize]
+        public void TestsSetup()
+        {
+            Client = MonopolyDataPrepare.InitClients(1)[0];
+        }
+
+
         [TestMethod]
         public void TestBuyingOwnCell()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
             Client.ExecuteTurn(1);
             Client.BuyCellIfPossible();
 
-            for (int i = 2; Client.GetBoard()[i].GetOwner() != PlayerKey.First ; i = (i++)%Client.GetBoard().Count)
+            for (int i = 2; Client.GetBoard()[i].GetOwner() != PlayerKey.First ; i = (++i)%Client.GetBoard().Count)
             {
-                Client.ExecuteTurn(1);
-                if (Client.GetBoard()[i] is MonopolyIslandCell)
-                {
-                    Client.ExecuteTurn(1);
-                    Client.ExecuteTurn(1);
-                    Client.ExecuteTurn(1);
-                }
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
-
+            
             Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
         }
 
         [TestMethod]
         public void NationMonopolTest()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
             int PolandCostsWithoutMonopol = Client.GetBoard()[1].GetCosts().Stay;
             
             for (int i = 1;  ; i++)
@@ -66,18 +57,12 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BeachMonopolTest_TwoBeachesOwned()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
             List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p.GetBeachName() != Beach.NoBeach);
             int FirstBeachStayCost = BeachCells[0].GetCosts().Stay;
 
             for (int i = 1; ; i++)
             {
-                Client.ExecuteTurn(1);
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
 
                 if (Client.GetBoard()[i].GetBeachName() != Beach.NoBeach)
                     Client.BuyCellIfPossible();
@@ -96,18 +81,12 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BeachMonopolTest_ThreeBeachesOwned()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
             List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p.GetBeachName() != Beach.NoBeach);
             int FirstBeachStayCost = BeachCells[0].GetCosts().Stay;
 
             for (int i = 1; ; i++)
             {
-                Client.ExecuteTurn(1);
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
                 
                 if (Client.GetBoard()[i].GetBeachName() != Beach.NoBeach)
                     Client.BuyCellIfPossible();
@@ -126,18 +105,10 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void IsAbleToBuyStartCell_ShouldBeNo()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
-
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
-                Client.ExecuteTurn(1);
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
-            
 
             Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
         }
@@ -145,12 +116,6 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void IsntAbleToMoveAfterStepingOnIsland()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
             int BoardSize = Client.GetBoard().Count;
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
@@ -162,7 +127,6 @@ namespace UnitTests.MonopolyTests
                     break;
                 }
             }
-
             Client.ExecuteTurn(BoardSize - 2);
 
             Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount);
@@ -171,30 +135,20 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void IsAbleToMoveFromIslandAfter3Turns()
         {
-            MonopolyService Client = new MonopolyGameLogic();
-            List<Player> Players = new List<Player>();
-            Players.Add(new Player());
-            Client.StartGame(Players);
-            Client.SetMainPlayerIndex(0);
-
             int BoardSize = Client.GetBoard().Count;
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
                 Client.ExecuteTurn(1);
-                if (Client.GetBoard()[i].OnDisplay() == Consts.Monopoly.IslandDiaplsy)
+                if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
-                    Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
                     break;
                 }
             }
 
             Client.ExecuteTurn(1);
-            Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
             Client.ExecuteTurn(1);
-            Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
             Client.ExecuteTurn(1);
-            Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
 
             Client.ExecuteTurn(BoardSize - 2);
 

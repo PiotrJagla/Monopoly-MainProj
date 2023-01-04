@@ -35,19 +35,14 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BankruptTest()
         {
-            MonopolyService FirstClient = null;
-            MonopolyService SecoundClient = null;
             List<MonopolyService> Clients = null;
             List<MoneyFlow> PlayersMoneyFlow = null;
 
             for (int i = 1; ; i++)
             {
-                FirstClient = new MonopolyGameLogic();
-                SecoundClient = new MonopolyGameLogic();
-
                 Clients = new List<MonopolyService>();
-                Clients.Add(FirstClient);
-                Clients.Add(SecoundClient);
+                Clients.Add(new MonopolyGameLogic());
+                Clients.Add(new MonopolyGameLogic());
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
 
                 if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
@@ -56,7 +51,7 @@ namespace UnitTests.MonopolyTests
                 }
             }
 
-            MonopolyUpdateMessage CheckBankrupcy = SecoundClient.GetUpdatedData();
+            MonopolyUpdateMessage CheckBankrupcy = Clients[1].GetUpdatedData();
 
             Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Secound);
         }
@@ -64,19 +59,14 @@ namespace UnitTests.MonopolyTests
        [TestMethod]
         public void WinnerTest()
         {
-            MonopolyService FirstClient = null;
-            MonopolyService SecoundClient = null;
             List<MonopolyService> Clients = null;
             List<MoneyFlow> PlayersMoneyFlow = null;
 
             for (int i = 1; ; i++)
             {
-                FirstClient = new MonopolyGameLogic();
-                SecoundClient = new MonopolyGameLogic();
-
                 Clients = new List<MonopolyService>();
-                Clients.Add(FirstClient);
-                Clients.Add(SecoundClient);
+                Clients.Add(new MonopolyGameLogic());
+                Clients.Add(new MonopolyGameLogic());
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
 
                 if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
@@ -85,10 +75,10 @@ namespace UnitTests.MonopolyTests
                 }
             }
 
-            SecoundClient.UpdateData(SecoundClient.GetUpdatedData());
+            Clients[1].UpdateData(Clients[1].GetUpdatedData());
 
-            Assert.IsTrue(FirstClient.WhoWon() == PlayerKey.First);
-            Assert.IsTrue(SecoundClient.WhoWon() == PlayerKey.First);
+            Assert.IsTrue(Clients[0].WhoWon() == PlayerKey.First);
+            Assert.IsTrue(Clients[1].WhoWon() == PlayerKey.First);
         }
     }
 }

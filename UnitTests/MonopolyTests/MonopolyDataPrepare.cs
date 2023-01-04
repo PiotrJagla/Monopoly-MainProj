@@ -1,7 +1,9 @@
 ﻿using Enums.Monopoly;
 using Models.Monopoly;
 using Models.MultiplayerConnection;
+using MySqlX.XDevAPI;
 using Services.GamesServices.Monopoly;
+using Services.GamesServices.Monopoly.Board;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,11 +58,28 @@ namespace UnitTests.MonopolyTests
             List<Player> Players = AddPlayers(ref Clients);
             StartClientsGame(ref Clients, Players);
             SetMainPlayersIndex(ref Clients);
+            List<MonopolyService> Clients2 = InitClients(Clients.Count);
+            Clients = Clients2;
         }
+
+
 
         private static void ChooseBuyingOrder(int ClientsNumber)
         {
             PlayersBuyingOrderOnTurns = PlayersBuyingOrderInTurns_XClients[ClientsNumber];
+        }
+
+        public static List<MonopolyService> InitClients(int HowMany)
+        {
+            List<MonopolyService> Result = new List<MonopolyService>();
+            for (int i = 0; i < HowMany; i++)
+            {
+                Result.Add(new MonopolyGameLogic());
+            }
+            List<Player> Players = AddPlayers(ref Result);
+            StartClientsGame(ref Result, Players);
+            SetMainPlayersIndex(ref Result);
+            return Result;
         }
 
 
@@ -106,7 +125,7 @@ namespace UnitTests.MonopolyTests
             for (int clientIndex = 0; clientIndex < Clients.Count; clientIndex++)
             {
                 MonopolyService CurrentClient = Clients[clientIndex];
-                CurrentClient.ExecuteTurn(1);
+                ExecuteClientTestTurn(ref CurrentClient, turn);
                 BuyCell(turn, clientIndex, ref CurrentClient);
                 SellCell(turn, clientIndex, ref CurrentClient);
                 UpdateExpectedMoneyFlow(Clients, turn, clientIndex);
@@ -179,5 +198,18 @@ namespace UnitTests.MonopolyTests
             }
             return true;
         }
+
+        public static void ExecuteClientTestTurn(ref MonopolyService Client, int turn)
+        {
+            Client.ExecuteTurn(1);
+            if (Client.GetBoard()[turn] is MonopolyIslandCell)
+            {
+                Client.ExecuteTurn(1);
+                Client.ExecuteTurn(1);
+            }
+        }
+
+        
+        
     }
 }
