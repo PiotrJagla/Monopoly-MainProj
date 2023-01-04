@@ -57,11 +57,12 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 InvokeAsync(StateHasChanged);
             });
 
-            MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", (NewData) =>
+            MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", async (NewData) =>
             {
                 Update(NewData);
                 MonopolyLogic.NextTurn();
-                InvokeAsync(StateHasChanged);
+                await ExecuteBeforeMoveActions();
+                await InvokeAsync(StateHasChanged);
             });
         }
 
@@ -91,6 +92,24 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 Messages.Add($"Player: {BankruptPlayer.ToString()} went bankrupt");
             }
         }
+        protected async Task ExecuteBeforeMoveActions()
+        {
+            if (MonopolyLogic.IsYourTurn() == true)
+            {
+                MonopolyModalParameters StringParameters = MonopolyLogic.GetModalParameters();
+                if (StringParameters != null && StringParameters.WhenShowModal == ModalShow.BeforeMove)
+                {
+                    ModalParameters parameters = new ModalParameters();
+                    parameters.Add(nameof(SelectButtonModal.StringParameters), StringParameters);
+                    var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
+                    var Response = await ModalResponse.Result;
+                    if (Response.Confirmed)
+                    {
+                        MonopolyLogic.ModalResponse(Response.Data.ToString());
+                    }
+                }
+            }
+        }
 
         protected async Task EnterRoom()
         {
@@ -105,6 +124,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             await MonopolyHubConn.SendAsync("UserReady");
         }
 
+        
+
         protected async Task Move()
         {
             await PlayersMove();
@@ -116,18 +137,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             if (MonopolyLogic.ExecuteTurn(1) == MonopolyTurnResult.CanBuyCell)
             {
                 await CellBuyingProcess();
-            }
-
-            if(MonopolyLogic.GetModalParameters() != null)
-            {
-                ModalParameters parameters = new ModalParameters();
-                parameters.Add(nameof(SelectButtonModal.StringParameters), MonopolyLogic.GetModalParameters());
-                var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
-                var Response = await ModalResponse.Result;
-                if(Response.Confirmed)
-                {
-                    MonopolyLogic.ModalResponse(Response.Data.ToString());
-                }
             }
         }
 

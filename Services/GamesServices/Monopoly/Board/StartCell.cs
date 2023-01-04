@@ -21,7 +21,7 @@ namespace Services.GamesServices.Monopoly.Board
             return new Costs();
         }
 
-        public StringModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters()
         {
             return null;
         }

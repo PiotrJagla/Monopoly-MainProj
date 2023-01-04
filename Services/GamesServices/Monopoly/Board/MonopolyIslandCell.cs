@@ -11,6 +11,13 @@ namespace Services.GamesServices.Monopoly.Board
 {
     public class MonopolyIslandCell : MonopolyCell
     {
+        private int TurnsRemaining;
+
+        public MonopolyIslandCell()
+        {
+            TurnsRemaining = 0;
+        }
+
         public Beach GetBeachName()
         {
             return Beach.NoBeach;
@@ -21,14 +28,23 @@ namespace Services.GamesServices.Monopoly.Board
             return new Costs();
         }
 
-        public StringModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters()
         {
             StringModalParameters Result = new StringModalParameters();
-            Result.Title = "You Are On Desert Island For 3 Turns";
+            Result.Title = $"You Are On Desert Island For {GetTurnsRemaining()} Turns";
             Result.ButtonsContent.Add($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
             Result.ButtonsContent.Add("Throw Dice(Excape if 1 is Rolled)");
-            Result.ButtonsContent.Add("Wait");
-            return Result;
+            return new MonopolyModalParameters(Result, ModalShow.BeforeMove);
+        }
+
+        private int GetTurnsRemaining()
+        {
+            if (TurnsRemaining <= 1)
+                TurnsRemaining = 3;
+            else
+                TurnsRemaining--;
+
+            return TurnsRemaining;
         }
 
         public Nation GetNation()

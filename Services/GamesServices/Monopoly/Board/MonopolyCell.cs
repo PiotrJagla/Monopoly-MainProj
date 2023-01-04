@@ -22,6 +22,6 @@ namespace Models.Monopoly
 
         string OnDisplay();
 
-        StringModalParameters GetModalParameters();
+        MonopolyModalParameters GetModalParameters();
     }
 }

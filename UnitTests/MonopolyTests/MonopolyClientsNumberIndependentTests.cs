@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Models.MultiplayerConnection;
 using Enums.Monopoly;
 using Models.Monopoly;
+using Services.GamesServices.Monopoly.Board;
 
 namespace UnitTests.MonopolyTests
 {
@@ -25,9 +26,15 @@ namespace UnitTests.MonopolyTests
             Client.ExecuteTurn(1);
             Client.BuyCellIfPossible();
 
-            for (int i = 1; i < Client.GetBoard().Count; i++)
+            for (int i = 2; Client.GetBoard()[i].GetOwner() != PlayerKey.First ; i = (i++)%Client.GetBoard().Count)
             {
                 Client.ExecuteTurn(1);
+                if (Client.GetBoard()[i] is MonopolyIslandCell)
+                {
+                    Client.ExecuteTurn(1);
+                    Client.ExecuteTurn(1);
+                    Client.ExecuteTurn(1);
+                }
             }
 
             Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
@@ -177,14 +184,18 @@ namespace UnitTests.MonopolyTests
                 Client.ExecuteTurn(1);
                 if (Client.GetBoard()[i].OnDisplay() == Consts.Monopoly.IslandDiaplsy)
                 {
-                    Client.ModalResponse("Wait");
+                    Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
                     break;
                 }
             }
 
             Client.ExecuteTurn(1);
+            Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
             Client.ExecuteTurn(1);
+            Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
             Client.ExecuteTurn(1);
+            Client.ModalResponse("Throw Dice(Excape if 1 is Rolled)");
+
             Client.ExecuteTurn(BoardSize - 2);
 
             Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven);

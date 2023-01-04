@@ -34,7 +34,6 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(150, 100), Nation.France));
 
-            Board.Add(new MonopolyIslandCell());
 
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Bali));
 
@@ -42,6 +41,7 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(250, 200), Nation.Argentina));
             Board.Add(new MonopolyNationCell(new Costs(210, 150), Nation.Argentina));
 
+            Board.Add(new MonopolyIslandCell());
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Cypr));
         }
 
@@ -101,9 +101,14 @@ namespace Services.GamesServices.Monopoly.Board
             Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board);
         }
 
-        public StringModalParameters GetCellModalParameters(int CellIndex)
+        public MonopolyModalParameters GetCellModalParameters(int CellIndex)
         {
             return Board[CellIndex].GetModalParameters();
+        }
+
+        public bool SteppedOnIsland(int CellIndex)
+        {
+            return Board[CellIndex] is MonopolyIslandCell;
         }
     }
 }

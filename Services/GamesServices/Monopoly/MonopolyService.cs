@@ -41,7 +41,7 @@ namespace Services.GamesServices.Monopoly
 
         PlayerKey WhoWon();
 
-        StringModalParameters GetModalParameters();
+        MonopolyModalParameters GetModalParameters();
         void ModalResponse(string StringResponse);
 
     }

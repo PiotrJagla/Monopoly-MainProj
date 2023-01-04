@@ -113,7 +113,7 @@ namespace Services.GamesServices.Monopoly.Board
             ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
         }
 
-        public StringModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters()
         {
             return null;
         }

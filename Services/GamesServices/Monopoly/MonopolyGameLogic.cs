@@ -245,29 +245,28 @@ namespace Services.GamesServices.Monopoly
         public MonopolyTurnResult ExecuteTurn(int MoveAmount)
         {
             Move(MoveAmount);
+            CheckEvents();
             return MakeTurnResult();
         }
+
+        
 
         private void Move(int amount)
         {
             MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
 
-            if (MainPlayer.TurnsOnIslandRemaining>0)
+            if (MainPlayer.TurnsOnIslandRemaining>1)
             {
                 MainPlayer.TurnsOnIslandRemaining--;
                 return;
             }
+            else
+            {
+                MainPlayer.TurnsOnIslandRemaining = 0;
+            }
 
             OnStartCellCrossed(amount);
             MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
-        }
-
-        private MonopolyTurnResult MakeTurnResult()
-        {
-            if (BoardService.IsPossibleToBuyCell(Players[PlayersSpecialIndexes.MainPlayer]))
-                return MonopolyTurnResult.CanBuyCell;
-
-            return MonopolyTurnResult.CannotBuyCell;
         }
 
         private void OnStartCellCrossed(int MoveAmount)
@@ -276,6 +275,23 @@ namespace Services.GamesServices.Monopoly
             {
                 Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned += Consts.Monopoly.OnStartCrossedMoneyGiven;
             }
+        }
+
+        private void CheckEvents()
+        {
+            MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
+            if(BoardService.SteppedOnIsland(MainPlayer.OnCellIndex) && MainPlayer.TurnsOnIslandRemaining == 0)
+            {
+                MainPlayer.TurnsOnIslandRemaining = 3;
+            }
+        }
+
+        private MonopolyTurnResult MakeTurnResult()
+        {
+            if (BoardService.IsPossibleToBuyCell(Players[PlayersSpecialIndexes.MainPlayer]))
+                return MonopolyTurnResult.CanBuyCell;
+
+            return MonopolyTurnResult.CannotBuyCell;
         }
 
         private bool DidCrossedStartCell(int MoveAmount)
@@ -327,7 +343,7 @@ namespace Services.GamesServices.Monopoly
             return PlayerKey.NoOne;
         }
 
-        public StringModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters()
         {
             int MainPlayerPos = Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex;
             return BoardService.GetCellModalParameters(MainPlayerPos);
@@ -335,9 +351,12 @@ namespace Services.GamesServices.Monopoly
 
         public void ModalResponse(string StringResponse)
         {
-            if(StringResponse == "Wait")
+            if(StringResponse == "Throw Dice(Excape if 1 is Rolled)")
             {
-                Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining = 3;
+                if(GetRandom.number.Next(1,6) == 1)
+                {
+                    Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining = 0;
+                }
             }
         }
     }
