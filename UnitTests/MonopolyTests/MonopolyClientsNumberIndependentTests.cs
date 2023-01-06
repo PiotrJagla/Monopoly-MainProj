@@ -154,6 +154,61 @@ namespace UnitTests.MonopolyTests
 
             Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven);
         }
+
+        [TestMethod]
+        public void IsAbleToMoveFromIslandAfterPaying()
+        {
+            int BoardSize = Client.GetBoard().Count;
+
+            for (int i = 1; i < Client.GetBoard().Count; i++)
+            {
+                Client.ExecuteTurn(1);
+                if (Client.GetBoard()[i] is MonopolyIslandCell)
+                {
+                    break;
+                }
+            }
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+
+            Client.ExecuteTurn(BoardSize - 2);
+
+            int ExpectedMoney = Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven - Consts.Monopoly.IslandEscapeCost;
+            int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
+            Assert.IsTrue(ExpectedMoney == ActualMoney);
+            
+        }
+
+        [TestMethod]
+        public void IsAbleToMoveFromIslandAfterPaying_DontHaveMoney()
+        {
+            int BoardSize = Client.GetBoard().Count;
+
+            for (int i = 1; i < Client.GetBoard().Count; i++)
+            {
+                Client.ExecuteTurn(1);
+                Client.BuyCellIfPossible();
+                if (Client.GetBoard()[i] is MonopolyIslandCell)
+                {
+                    break;
+                }
+            }
+            //i am called many times because one time is not enough to test whether client is able to pay
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+
+            Client.ExecuteTurn(BoardSize - 2);
+
+            int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
+            Assert.IsTrue(ActualMoney >= 0);
+
+        }
     }
 
 }

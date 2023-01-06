@@ -13,3 +13,15 @@ body[b-h30zlhl9a5] {
     outline-color: white;
     width:600px;
 }
+
+.PlayerDisplay[b-h30zlhl9a5]{
+    color:darkturquoise;
+}
+
+.CellInfoDisplay[b-h30zlhl9a5]{
+    color:darkorange;
+}
+
+.CellIndexDisplay[b-h30zlhl9a5]{
+    color:gold;
+}

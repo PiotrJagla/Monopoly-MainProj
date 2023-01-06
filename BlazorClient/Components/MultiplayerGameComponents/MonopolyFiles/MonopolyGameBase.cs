@@ -100,7 +100,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 if (StringParameters != null && StringParameters.WhenShowModal == ModalShow.BeforeMove)
                 {
                     ModalParameters parameters = new ModalParameters();
-                    parameters.Add(nameof(SelectButtonModal.StringParameters), StringParameters);
+                    parameters.Add(nameof(SelectButtonModal.StringParameters), StringParameters.Parameters);
                     var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
                     var Response = await ModalResponse.Result;
                     if (Response.Confirmed)
@@ -128,9 +128,16 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected async Task Move()
         {
-            await PlayersMove();
-            await CheckForBanckrupcy();
-            await BrodcastUpdatedInformations();
+            try
+            {
+                await PlayersMove();
+                await CheckForBanckrupcy();
+                await BrodcastUpdatedInformations();
+            }
+            catch
+            {
+                Messages.Add("Game has not started yet");
+            }
         }
         private async Task PlayersMove()
         {

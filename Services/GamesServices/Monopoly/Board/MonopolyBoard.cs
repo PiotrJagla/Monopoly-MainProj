@@ -28,11 +28,11 @@ namespace Services.GamesServices.Monopoly.Board
 
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
 
-            Board.Add(new MonopolyIslandCell());
             Board.Add(new MonopolyNationCell(new Costs(130, 70), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(150, 100), Nation.France));
 
+            Board.Add(new MonopolyIslandCell());
 
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Bali));
 

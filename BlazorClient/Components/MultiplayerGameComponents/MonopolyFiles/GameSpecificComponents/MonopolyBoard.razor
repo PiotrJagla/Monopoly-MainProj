@@ -3,17 +3,21 @@
 <div class="board">
     @for (int i = 0; i < Board.Count; i++)
     {
-        <div class="cell">        
+        <div class="cell">
+            <label class="CellIndexDisplay">@(i + 1) |</label>
             @foreach (var playerPos in PlayersPositions)
             {
                 if(playerPos.Position == i)
                 {
-                    <label>-|@playerPos.Player|-</label>
+                    <label>
+                        -|
+                        <label class="PlayerDisplay">@playerPos.Player</label>
+                        |-
+                    </label>
+                    
                 }
             }
-            @*<label>____________</label>*@
-            <label>@(i+1) |</label>
-            <label>@Board[i].OnDisplay()</label>
+            <label class="CellInfoDisplay">@Board[i].OnDisplay()</label>
         </div>
     }
 </div>

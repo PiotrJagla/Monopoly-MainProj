@@ -60,8 +60,9 @@ namespace Services.GamesServices.Monopoly
 
         public List<MonopolyCell> GetMainPlayerCells()
         {
-            List<MonopolyCell> cells = BoardService.GetBoard().FindAll(cell => cell.GetOwner() == Players[PlayersSpecialIndexes.MainPlayer].Key);
-            
+            List<MonopolyCell> cells = BoardService.GetBoard().FindAll(
+                cell => cell.GetOwner() == Players[PlayersSpecialIndexes.MainPlayer].Key
+            );
             return cells;
         }
 
@@ -253,20 +254,26 @@ namespace Services.GamesServices.Monopoly
 
         private void Move(int amount)
         {
-            MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
+            if (IsAbleToMove() == false) return;
 
-            if (MainPlayer.TurnsOnIslandRemaining>1)
+            MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
+            OnStartCellCrossed(amount);
+            MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
+        }
+
+        private bool IsAbleToMove()
+        {
+            if (Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining > 1)
             {
-                MainPlayer.TurnsOnIslandRemaining--;
-                return;
+                Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining--;
+                return false;
             }
             else
             {
-                MainPlayer.TurnsOnIslandRemaining = 0;
+                Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining = 0;
             }
 
-            OnStartCellCrossed(amount);
-            MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
+            return true;
         }
 
         private void OnStartCellCrossed(int MoveAmount)
@@ -279,11 +286,22 @@ namespace Services.GamesServices.Monopoly
 
         private void CheckEvents()
         {
+            CheckIfSteppedOnIsland();
+        }
+
+        private void CheckIfSteppedOnIsland()
+        {
             MonopolyPlayer MainPlayer = Players[PlayersSpecialIndexes.MainPlayer];
-            if(BoardService.SteppedOnIsland(MainPlayer.OnCellIndex) && MainPlayer.TurnsOnIslandRemaining == 0)
+            if (WillStayOnIsland())
             {
                 MainPlayer.TurnsOnIslandRemaining = 3;
             }
+        }
+
+        private bool WillStayOnIsland()
+        {
+            return BoardService.SteppedOnIsland(Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex) &&
+                   Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining == 0;
         }
 
         private MonopolyTurnResult MakeTurnResult()
@@ -358,6 +376,20 @@ namespace Services.GamesServices.Monopoly
                     Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining = 0;
                 }
             }
+            else if(StringResponse == $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave")
+            {
+                if (IsAbleToPayForEscapingFromIsland())
+                {
+                    Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= Consts.Monopoly.IslandEscapeCost;
+                    Players[PlayersSpecialIndexes.MainPlayer].TurnsOnIslandRemaining = 0;
+                }
+
+            }
+        }
+
+        private bool IsAbleToPayForEscapingFromIsland()
+        {
+            return Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned >= Consts.Monopoly.IslandEscapeCost;
         }
     }
 }

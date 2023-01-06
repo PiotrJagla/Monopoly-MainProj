@@ -13,3 +13,15 @@
     outline-color: white;
     width:600px;
 }
+
+.PlayerDisplay{
+    color:darkturquoise;
+}
+
+.CellInfoDisplay{
+    color:darkorange;
+}
+
+.CellIndexDisplay{
+    color:gold;
+}
