@@ -1,7 +1,7 @@
 ﻿using Enums;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorClient.GemplayPages.MultiplayerGameFiles
+namespace ClientSide.GemplayPages.MultiplayerGameFiles
 {
     public class MultiplayerGamePageBase : ComponentBase
     {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "82CLw6hF3EaayGBUkTSk/arnzUU3uqPEoVysGz9BW4gBcjIJIRn6aD8rKdWNxgX9gYPHZG8ME2hVCtkQ5PTxkQ==",
+  "dgSpecHash": "GkPvvWxi6mLxU5rFzEZHKcVkxd2fk9ia+qWX8G7EeohCvcWmarQca+O0iDxImnd4NlkiNf4VXuuTTIw8PfkIMA==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

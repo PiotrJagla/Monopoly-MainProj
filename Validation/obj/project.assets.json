@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj",
       "projectName": "Validation",
-      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -71,8 +71,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj"
             }
           }
         }

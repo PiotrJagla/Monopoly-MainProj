@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Niza+vP0K/hqK8H3IGkJuetcApfyqRFv3LdSzph0r+P/bMAmdPQYdB5GrNGR95xjIzF7DRITd5VgDYrN4ytusA==",
+  "dgSpecHash": "XqktfLNHX7o2qT5uba8c7gb6uMm4xky5U5MhIEVB8Y4OZ9UjQeISZEeiI6gI6LkwIbSa2WksPfsfjdc7AUG1hQ==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ServerSide.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\AspApiServer\\ServerSide.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj": {}
+    "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj": {}
   },
   "projects": {
-    "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj": {
+    "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj",
+        "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj",
         "projectName": "StringManipulationLib",
-        "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj",
+        "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj",
         "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-        "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\obj\\",
+        "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",

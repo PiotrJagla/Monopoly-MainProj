@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yu551J6xTGlyvSMuouEFbMb+L5f61ozsjenMBtMOmOAdW6xuXFzBiaivCThMNhpRMtp0+H7KamrfbDtkAM4k4w==",
+  "dgSpecHash": "vpnzQ7YQm5u1jcae8UEfqxwZZ3fWkjT70dXCoXssvoOgnbPlRNHAbcqXrfhBt3+SAfEnBFtMvPFgZ3T7XmDYUw==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\UnitTests\\UnitTests.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\UnitTests\\UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",

@@ -1,7 +1,7 @@
 ﻿using Enums;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorClient.MenuPages.SingleplayerGamesMenuFiles
+namespace ClientSide.MenuPages.SingleplayerGamesMenuFiles
 {
     public class SingleplayerGamesMenuBase : ComponentBase
     {

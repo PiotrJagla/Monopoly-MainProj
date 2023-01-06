@@ -1,9 +1,9 @@
-﻿using BlazorClient.Components.UserLoginDataInputFiles;
+﻿using ClientSide.Components.UserLoginDataInputFiles;
 using Microsoft.AspNetCore.Components;
 using Models.UsersManagment;
 using Services.APIservices;
 
-namespace BlazorClient.UserPages.LoginPageFiles
+namespace ClientSide.UserPages.LoginPageFiles
 {
     public class LoginPageBase : ComponentBase
     {

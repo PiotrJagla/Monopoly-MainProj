@@ -10,3 +10,15 @@ D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Enums\obj\Debug\n
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Enums\obj\Debug\net6.0\refint\Enums.dll
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Enums\obj\Debug\net6.0\Enums.pdb
 D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\Enums\obj\Debug\net6.0\ref\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\bin\Debug\net6.0\Enums.deps.json
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\bin\Debug\net6.0\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\bin\Debug\net6.0\Enums.pdb
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.csproj.AssemblyReference.cache
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.GeneratedMSBuildEditorConfig.editorconfig
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.AssemblyInfoInputs.cache
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.AssemblyInfo.cs
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.csproj.CoreCompileInputs.cache
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\refint\Enums.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\Enums.pdb
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Enums\obj\Debug\net6.0\ref\Enums.dll

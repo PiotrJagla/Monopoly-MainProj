@@ -3582,11 +3582,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\ClientSide.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\BlazorClient\\ClientSide.csproj",
       "projectName": "ClientSide",
-      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\ClientSide.csproj",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\BlazorClient\\ClientSide.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\BlazorClient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3603,17 +3603,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\Enums.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\Enums.csproj"
             },
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj"
             },
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Services\\Services.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Services\\Services.csproj"
             },
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\StringManipulationLib\\StringManipulationLib.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj"
             }
           }
         }

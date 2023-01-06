@@ -2036,11 +2036,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ServerSide.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\AspApiServer\\ServerSide.csproj",
       "projectName": "ServerSide",
-      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ServerSide.csproj",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\AspApiServer\\ServerSide.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\obj\\",
+      "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\AspApiServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2057,14 +2057,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj"
             },
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Services\\Services.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Services\\Services.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Services\\Services.csproj"
             },
-            "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj": {
-              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj"
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj"
             }
           }
         }

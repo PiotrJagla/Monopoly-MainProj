@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 
 
-namespace BlazorClient.MenuPages.MultiplayerGamesMenuFiles
+namespace ClientSide.MenuPages.MultiplayerGamesMenuFiles
 {
     public class MultiplayerGamesMenuBase : ComponentBase
     {

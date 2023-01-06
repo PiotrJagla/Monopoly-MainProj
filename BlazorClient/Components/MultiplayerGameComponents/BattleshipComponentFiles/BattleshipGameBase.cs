@@ -7,7 +7,7 @@ using Services.GamesServices.Battleships;
 using System.Runtime.Serialization.Json;
 using System.Text.Json.Serialization;
 
-namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentFiles
+namespace ClientSide.Components.MultiplayerGameComponents.BattleshipComponentFiles
 {
     public class BattleshipGameBase : ComponentBase
     {

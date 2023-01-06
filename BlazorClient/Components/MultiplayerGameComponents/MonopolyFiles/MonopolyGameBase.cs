@@ -1,4 +1,4 @@
-﻿using BlazorClient.Components.UIComponents;
+﻿using ClientSide.Components.UIComponents;
 using Blazored.Modal;
 using Blazored.Modal.Services;
 using Enums.Monopoly;
@@ -13,7 +13,7 @@ using Services.GamesServices.Monopoly.Update;
 using StringManipulationLib;
 using System.Net.NetworkInformation;
 
-namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
+namespace ClientSide.Components.MultiplayerGameComponents.MonopolyFiles
 {
     public class MonopolyGameBase : ComponentBase
     {
@@ -79,7 +79,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         {
             MonopolyLogic.UpdateData(NewData);
             PlayerBankruptMessage(NewData.BankruptPlayer);
-            if(MonopolyLogic.WhoWon() != PlayerKey.NoOne)
+            if (MonopolyLogic.WhoWon() != PlayerKey.NoOne)
             {
                 Messages.Add($"Player: {MonopolyLogic.WhoWon().ToString()} Has Won!!");
             }
@@ -87,7 +87,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         private void PlayerBankruptMessage(PlayerKey BankruptPlayer)
         {
-            if(BankruptPlayer != PlayerKey.NoOne)
+            if (BankruptPlayer != PlayerKey.NoOne)
             {
                 Messages.Add($"Player: {BankruptPlayer.ToString()} went bankrupt");
             }
@@ -124,7 +124,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             await MonopolyHubConn.SendAsync("UserReady");
         }
 
-        
+
 
         protected async Task Move()
         {
@@ -163,7 +163,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             var ModalResponse = ModalService.Show<YesOrNoModal>("Passing Data", parameters);
             var Response = await ModalResponse.Result;
 
-            if(Response.Confirmed)
+            if (Response.Confirmed)
             {
                 return StringConvert.StringToBool(Response.Data.ToString());
             }
@@ -173,7 +173,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         private async Task CheckForBanckrupcy()
         {
-            while (MonopolyLogic.DontHaveMoneyToPay() == true && 
+            while (MonopolyLogic.DontHaveMoneyToPay() == true &&
                 MonopolyLogic.GetMainPlayerCells().Count != 0)
             {
                 MonopolyLogic.SellCell(await ChooseCellToSell());

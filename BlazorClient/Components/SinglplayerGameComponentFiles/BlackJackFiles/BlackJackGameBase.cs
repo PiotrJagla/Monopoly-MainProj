@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Services.GamesServices.BlackJack;
 
-namespace BlazorClient.Components.SinglplayerGameComponentFiles.BlackJackFiles
+namespace ClientSide.Components.SinglplayerGameComponentFiles.BlackJackFiles
 {
     public class BlackJackGameBase : ComponentBase
     {

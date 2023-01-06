@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj": {}
+    "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\Enums.csproj": {}
   },
   "projects": {
-    "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj": {
+    "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\Enums.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj",
+        "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\Enums.csproj",
         "projectName": "Enums",
-        "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\Enums.csproj",
+        "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\Enums.csproj",
         "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-        "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Enums\\obj\\",
+        "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Enums\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",

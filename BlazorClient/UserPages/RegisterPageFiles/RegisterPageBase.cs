@@ -2,7 +2,7 @@
 using Models.UsersManagment;
 using Services.APIservices;
 
-namespace BlazorClient.UserPages.RegisterPageFiles
+namespace ClientSide.UserPages.RegisterPageFiles
 {
     public class RegisterPageBase : ComponentBase
     {

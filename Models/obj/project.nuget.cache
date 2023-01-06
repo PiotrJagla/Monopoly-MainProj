@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KQgMb2HOtRc5WKASKX9bqAeg/nSIWEI+x3sPRene6Y7SksqewLAlvhWHtARzk+Qrsa65WpRbatl2cvfNxMvDBg==",
+  "dgSpecHash": "uQtK+wqPyQF4K01aiZ7CTqES2BJpTU3IVfOq4GLwORR9mpNAKoDcbm0rV4Do3AFWy9btg9ESoEaoD+E9O6Mlkg==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Models\\Models.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

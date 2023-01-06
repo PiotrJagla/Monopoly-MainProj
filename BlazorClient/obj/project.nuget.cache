@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l4KhwmtCzlb9qkLRaxqPqxB7GOaJRBaKDBVup8iWqS83zA6gnPOrWqnLTmPxjsvKUemP/zKikI78RObtIO7zGA==",
+  "dgSpecHash": "2Zg59CMv87oGid33Jl6upJIzbaUYGkvfhCXWGIH+spaPh9IiXr65qL4nQ1k3dSAUrPyFUdX8qIBbZfok/9CteA==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\BlazorClient\\ClientSide.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\BlazorClient\\ClientSide.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\piotr\\.nuget\\packages\\blazored.modal\\7.1.0\\blazored.modal.7.1.0.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DP1ZKwuhyQxvqhvEvmA7McXTNvfaPqmQkDfs3sto8PY+gbFBPiLWANlPdKdbUq98BXch3PzLL2xSzSmdILFinQ==",
+  "dgSpecHash": "yGazsHd+nUjHuZyF39WlUy5jXvf46997HB3q/etYjJefS/GgkLKPZ0N4oAKpp2b+dLybXZI7Y6AtSr0Ivdq0Pg==",
   "success": true,
-  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\Validation\\Validation.csproj",
+  "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

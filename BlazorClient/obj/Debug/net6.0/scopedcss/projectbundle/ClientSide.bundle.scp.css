@@ -1,0 +1,214 @@
+/* /Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipBoard.razor.rz.scp.css */
+body[b-c4v01dt967] {
+
+
+}
+
+.BattleshipButton[b-c4v01dt967] {
+    display: inline-block;
+    width: 30px;
+}
+/* /Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipGame.razor.rz.scp.css */
+body[b-lgfqz1pbro] {
+}
+/* /Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor.rz.scp.css */
+body[b-96z8mir036] {
+}
+/* /Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/MonopolyBoard.razor.rz.scp.css */
+body[b-h30zlhl9a5] {
+}
+
+
+.board[b-h30zlhl9a5]{
+    outline-width: 2px;
+    outline-color: white;
+}
+
+.cell[b-h30zlhl9a5] {
+    outline: solid;
+    outline-width: 2px;
+    outline-color: white;
+    width:600px;
+}
+
+.PlayerDisplay[b-h30zlhl9a5]{
+    color:darkturquoise;
+}
+
+.CellInfoDisplay[b-h30zlhl9a5]{
+    color:darkorange;
+}
+
+.CellIndexDisplay[b-h30zlhl9a5]{
+    color:gold;
+}
+/* /Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor.rz.scp.css */
+body[b-mjuwvihxnd] {
+}
+/* /Components/SinglplayerGameComponentFiles/BlackJackFiles/BlackJackGame.razor.rz.scp.css */
+body[b-e0v772pvu9] {
+}
+/* /Components/SinglplayerGameComponentFiles/TicTacToeFiles/TicTacToeGame.razor.rz.scp.css */
+body[b-v3jrkzpd71] {
+}
+
+
+
+.TicTacToeButton[b-v3jrkzpd71] {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.ButtonText[b-v3jrkzpd71]{
+    font-size: 50px;
+}
+/* /Components/UIComponents/PayOffDebtModal.razor.rz.scp.css */
+body[b-otbsg9v7l7] {
+    
+}
+
+.Title[b-otbsg9v7l7] {
+    color: black;
+}
+/* /Components/UIComponents/SelectButtonModal.razor.rz.scp.css */
+body[b-l7xk2f58l8] {
+}
+
+.Title[b-l7xk2f58l8] {
+    color: black;
+}
+/* /Components/UIComponents/ShowMessages.razor.rz.scp.css */
+body[b-1kd2glwlgy] {
+}
+
+.messages[b-1kd2glwlgy]{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.message[b-1kd2glwlgy]{
+
+}
+/* /Components/UIComponents/YesOrNoModal.razor.rz.scp.css */
+body[b-ydrln2ev8w] {
+}
+
+.Title[b-ydrln2ev8w]{
+    color: black;
+}
+/* /Components/UserLoginDataInputFiles/UserLoginDataInput.razor.rz.scp.css */
+body[b-dj9qcnb75s] {
+}
+/* /GemplayPages/MultiplayerGameFiles/MultiplayerGamePage.razor.rz.scp.css */
+body[b-yvqbs4tw3f] {
+}
+/* /GemplayPages/SinglplayerGameFiles/SinglplayerGamePage.razor.rz.scp.css */
+body[b-eabm3hqr5q] {
+}
+/* /MenuPages/CommunityMenuFiles/CommunityMenu.razor.rz.scp.css */
+body[b-23um2tq0j9] {
+}
+/* /MenuPages/MainMenuFiles/MainMenu.razor.rz.scp.css */
+body[b-oslpidixnz] {
+}
+/* /MenuPages/MultiplayerGamesMenuFiles/MultiplayerGamesMenu.razor.rz.scp.css */
+body[b-gjuxj1glgo] {
+}
+/* /MenuPages/SingleplayerGamesMenuFiles/SingleplayerGamesMenu.razor.rz.scp.css */
+body[b-55tx1sjkv0] {
+}
+/* /MenuPages/StartupPageFiles/StartupPage.razor.rz.scp.css */
+.buttonStyle[b-4kvv8nvjde]{
+
+}
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-lor2elsqal] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-lor2elsqal] {
+    flex: 1;
+}
+
+.sidebar[b-lor2elsqal] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-lor2elsqal] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-lor2elsqal]  a, .top-row[b-lor2elsqal]  .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+    .top-row[b-lor2elsqal]  a:hover, .top-row[b-lor2elsqal]  .btn-link:hover {
+        text-decoration: underline;
+    }
+
+    .top-row[b-lor2elsqal]  a:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-lor2elsqal] {
+        display: none;
+    }
+
+    .top-row.auth[b-lor2elsqal] {
+        justify-content: space-between;
+    }
+
+    .top-row[b-lor2elsqal]  a, .top-row[b-lor2elsqal]  .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-lor2elsqal] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-lor2elsqal] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-lor2elsqal] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row.auth[b-lor2elsqal]  a:first-child {
+        flex: 1;
+        text-align: right;
+        width: 0;
+    }
+
+    .top-row[b-lor2elsqal], article[b-lor2elsqal] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* /UserPages/LoginPageFiles/LoginPage.razor.rz.scp.css */
+body[b-seqggc6fm2] {
+}
+/* /UserPages/RegisterPageFiles/RegisterPage.razor.rz.scp.css */
+body[b-gn72gdfilv] {
+}
