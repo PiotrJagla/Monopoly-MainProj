@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace ClientSide.MenuPages.MainMenuFiles
+namespace BlazorClient.MenuPages.MainMenuFiles
 {
     public class MainMenuBase : ComponentBase
     {

@@ -1,4 +1,4 @@
-using ClientSide;
+using BlazorClient;
 using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components.Web;

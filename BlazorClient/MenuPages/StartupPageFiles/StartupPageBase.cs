@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace ClientSide.MenuPages.StartupPageFiles
+namespace BlazorClient.MenuPages.StartupPageFiles
 {
     public class StartupPageBase : ComponentBase
     {

@@ -2,7 +2,7 @@
 using Models;
 using Services.GamesServices.TicTacToe;
 
-namespace ClientSide.Components.SinglplayerGameComponentFiles.TicTacToeFiles
+namespace BlazorClient.Components.SinglplayerGameComponentFiles.TicTacToeFiles
 {
     public class TicTacToeGameBase : ComponentBase
     {

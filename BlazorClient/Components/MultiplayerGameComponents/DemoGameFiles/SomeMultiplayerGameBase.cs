@@ -1,10 +1,10 @@
-﻿using ClientSide.Components.MultiplayerGameComponents.BattleshipComponentFiles;
+﻿using BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentFiles;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using System.Security.Permissions;
 
-namespace ClientSide.Components.MultiplayerGameComponents.DemoGameFiles
+namespace BlazorClient.Components.MultiplayerGameComponents.DemoGameFiles
 {
     public class SomeMultiplayerGameBase : ComponentBase
     {

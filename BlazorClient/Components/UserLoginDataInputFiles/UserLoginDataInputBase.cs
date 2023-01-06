@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Models.UsersManagment;
 
-namespace ClientSide.Components.UserLoginDataInputFiles
+namespace BlazorClient.Components.UserLoginDataInputFiles
 {
     public class UserLoginDataInputBase : ComponentBase
     {

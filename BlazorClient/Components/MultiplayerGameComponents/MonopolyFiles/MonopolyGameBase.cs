@@ -1,4 +1,4 @@
-﻿using ClientSide.Components.UIComponents;
+﻿using BlazorClient.Components.UIComponents;
 using Blazored.Modal;
 using Blazored.Modal.Services;
 using Enums.Monopoly;
@@ -13,7 +13,7 @@ using Services.GamesServices.Monopoly.Update;
 using StringManipulationLib;
 using System.Net.NetworkInformation;
 
-namespace ClientSide.Components.MultiplayerGameComponents.MonopolyFiles
+namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 {
     public class MonopolyGameBase : ComponentBase
     {
