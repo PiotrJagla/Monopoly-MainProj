@@ -11,117 +11,117 @@ build_property.EnableTrimAnalyzer = true
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = BlazorClient
 build_property.RootNamespace = BlazorClient
-build_property.ProjectDir = D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient\
+build_property.ProjectDir = D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Program Files (x86)\GitHub\MiniGamesAnsOthersAspNetCoreSite\BlazorClient
+build_property.MSBuildProjectDirectory = D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/App.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/DisplayPlayersMoney.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/DisplayPlayersMoney.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcR2FtZVNwZWNpZmljQ29tcG9uZW50c1xEaXNwbGF5UGxheWVyc01vbmV5LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/CardDisplay.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/CardDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xDYXJkRGlzcGxheS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/CardsDisplay.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/CardsDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xDYXJkc0Rpc3BsYXkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/_Imports.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipBoard.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipBoard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXEJhdHRsZXNoaXBDb21wb25lbnRGaWxlc1xCYXR0bGVzaGlwQm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-c4v01dt967
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipGame.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/MultiplayerGameComponents/BattleshipComponentFiles/BattleshipGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXEJhdHRsZXNoaXBDb21wb25lbnRGaWxlc1xCYXR0bGVzaGlwR2FtZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-lgfqz1pbro
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/MultiplayerGameComponents/DemoGameFiles/SomeMultiplayerGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXERlbW9HYW1lRmlsZXNcU29tZU11bHRpcGxheWVyR2FtZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-96z8mir036
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/MonopolyBoard.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/GameSpecificComponents/MonopolyBoard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcR2FtZVNwZWNpZmljQ29tcG9uZW50c1xNb25vcG9seUJvYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-h30zlhl9a5
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/MultiplayerGameComponents/MonopolyFiles/MonopolyGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNdWx0aXBsYXllckdhbWVDb21wb25lbnRzXE1vbm9wb2x5RmlsZXNcTW9ub3BvbHlHYW1lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-mjuwvihxnd
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/BlackJackGame.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/SinglplayerGameComponentFiles/BlackJackFiles/BlackJackGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xCbGFja0phY2tGaWxlc1xCbGFja0phY2tHYW1lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-e0v772pvu9
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/SinglplayerGameComponentFiles/TicTacToeFiles/TicTacToeGame.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/SinglplayerGameComponentFiles/TicTacToeFiles/TicTacToeGame.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaW5nbHBsYXllckdhbWVDb21wb25lbnRGaWxlc1xUaWNUYWNUb2VGaWxlc1xUaWNUYWNUb2VHYW1lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-v3jrkzpd71
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UIComponents/PayOffDebtModal.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/UIComponents/PayOffDebtModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVSUNvbXBvbmVudHNcUGF5T2ZmRGVidE1vZGFsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-otbsg9v7l7
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UIComponents/SelectButtonModal.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/UIComponents/SelectButtonModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVSUNvbXBvbmVudHNcU2VsZWN0QnV0dG9uTW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-l7xk2f58l8
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UIComponents/ShowMessages.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/UIComponents/ShowMessages.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVSUNvbXBvbmVudHNcU2hvd01lc3NhZ2VzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-1kd2glwlgy
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UIComponents/YesOrNoModal.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/UIComponents/YesOrNoModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVSUNvbXBvbmVudHNcWWVzT3JOb01vZGFsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-ydrln2ev8w
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Components/UserLoginDataInputFiles/UserLoginDataInput.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Components/UserLoginDataInputFiles/UserLoginDataInput.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVc2VyTG9naW5EYXRhSW5wdXRGaWxlc1xVc2VyTG9naW5EYXRhSW5wdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-dj9qcnb75s
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/GemplayPages/MultiplayerGameFiles/MultiplayerGamePage.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/GemplayPages/MultiplayerGameFiles/MultiplayerGamePage.razor]
 build_metadata.AdditionalFiles.TargetPath = R2VtcGxheVBhZ2VzXE11bHRpcGxheWVyR2FtZUZpbGVzXE11bHRpcGxheWVyR2FtZVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-yvqbs4tw3f
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/GemplayPages/SinglplayerGameFiles/SinglplayerGamePage.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/GemplayPages/SinglplayerGameFiles/SinglplayerGamePage.razor]
 build_metadata.AdditionalFiles.TargetPath = R2VtcGxheVBhZ2VzXFNpbmdscGxheWVyR2FtZUZpbGVzXFNpbmdscGxheWVyR2FtZVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-eabm3hqr5q
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/MenuPages/CommunityMenuFiles/CommunityMenu.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/MenuPages/CommunityMenuFiles/CommunityMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TWVudVBhZ2VzXENvbW11bml0eU1lbnVGaWxlc1xDb21tdW5pdHlNZW51LnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-23um2tq0j9
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/MenuPages/MainMenuFiles/MainMenu.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/MenuPages/MainMenuFiles/MainMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TWVudVBhZ2VzXE1haW5NZW51RmlsZXNcTWFpbk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-oslpidixnz
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/MenuPages/MultiplayerGamesMenuFiles/MultiplayerGamesMenu.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/MenuPages/MultiplayerGamesMenuFiles/MultiplayerGamesMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TWVudVBhZ2VzXE11bHRpcGxheWVyR2FtZXNNZW51RmlsZXNcTXVsdGlwbGF5ZXJHYW1lc01lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-gjuxj1glgo
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/MenuPages/SingleplayerGamesMenuFiles/SingleplayerGamesMenu.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/MenuPages/SingleplayerGamesMenuFiles/SingleplayerGamesMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TWVudVBhZ2VzXFNpbmdsZXBsYXllckdhbWVzTWVudUZpbGVzXFNpbmdsZXBsYXllckdhbWVzTWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-55tx1sjkv0
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/MenuPages/StartupPageFiles/StartupPage.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/MenuPages/StartupPageFiles/StartupPage.razor]
 build_metadata.AdditionalFiles.TargetPath = TWVudVBhZ2VzXFN0YXJ0dXBQYWdlRmlsZXNcU3RhcnR1cFBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-4kvv8nvjde
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/Shared/MainLayout.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-lor2elsqal
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/UserPages/LoginPageFiles/LoginPage.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/UserPages/LoginPageFiles/LoginPage.razor]
 build_metadata.AdditionalFiles.TargetPath = VXNlclBhZ2VzXExvZ2luUGFnZUZpbGVzXExvZ2luUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-seqggc6fm2
 
-[D:/Program Files (x86)/GitHub/MiniGamesAnsOthersAspNetCoreSite/BlazorClient/UserPages/RegisterPageFiles/RegisterPage.razor]
+[D:/Program Files (x86)/GitHub/MiniGamesWebsite/BlazorClient/UserPages/RegisterPageFiles/RegisterPage.razor]
 build_metadata.AdditionalFiles.TargetPath = VXNlclBhZ2VzXFJlZ2lzdGVyUGFnZUZpbGVzXFJlZ2lzdGVyUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-gn72gdfilv

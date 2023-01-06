@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientSide", "BlazorClient\ClientSide.csproj", "{BEDD7707-187D-41CE-B6F8-8B5891DA2A44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{BEDD7707-187D-41CE-B6F8-8B5891DA2A44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerSide", "AspApiServer\ServerSide.csproj", "{8FFAFB22-D39A-4626-B3DD-1E995C6D1010}"
 EndProject
