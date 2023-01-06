@@ -141,7 +141,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         }
         private async Task PlayersMove()
         {
-            if (MonopolyLogic.ExecuteTurn(1) == MonopolyTurnResult.CanBuyCell)
+            if (MonopolyLogic.ExecutePlayerMove(1) == MonopolyTurnResult.CanBuyCell)
             {
                 await CellBuyingProcess();
             }

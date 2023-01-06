@@ -2036,9 +2036,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj",
-      "projectName": "ASPcoreServer",
-      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ASPcoreServer.csproj",
+      "projectUniqueName": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ServerSide.csproj",
+      "projectName": "ServerSide",
+      "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\ServerSide.csproj",
       "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
       "outputPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesAnsOthersAspNetCoreSite\\AspApiServer\\obj\\",
       "projectStyle": "PackageReference",

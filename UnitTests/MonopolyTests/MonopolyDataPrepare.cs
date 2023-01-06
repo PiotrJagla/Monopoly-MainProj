@@ -201,11 +201,11 @@ namespace UnitTests.MonopolyTests
 
         public static void ExecuteClientTestTurn(ref MonopolyService Client, int turn)
         {
-            Client.ExecuteTurn(1);
+            Client.ExecutePlayerMove(1);
             if (Client.GetBoard()[turn] is MonopolyIslandCell)
             {
-                Client.ExecuteTurn(1);
-                Client.ExecuteTurn(1);
+                Client.ExecutePlayerMove(1);
+                Client.ExecutePlayerMove(1);
             }
         }
 

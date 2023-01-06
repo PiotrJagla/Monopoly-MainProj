@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{BEDD7707-187D-41CE-B6F8-8B5891DA2A44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPcoreServer", "AspApiServer\ASPcoreServer.csproj", "{8FFAFB22-D39A-4626-B3DD-1E995C6D1010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerSide", "AspApiServer\ServerSide.csproj", "{8FFAFB22-D39A-4626-B3DD-1E995C6D1010}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F5031B8C-9E22-473D-9CDA-93175F530CAE}"
 EndProject

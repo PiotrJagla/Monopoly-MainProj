@@ -109,18 +109,18 @@ namespace UnitTests.MonopolyTests
             int i = 0;
             while(true)
             {
-                Clients[0].ExecuteTurn(1);
+                Clients[0].ExecutePlayerMove(1);
                 Clients[0].BuyCellIfPossible();
 
                 MonopolyService CurrentClient = Clients[0];
                 MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
 
-                Clients[1].ExecuteTurn(1);
+                Clients[1].ExecutePlayerMove(1);
 
                 CurrentClient = Clients[1];
                 MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
 
-                Clients[2].ExecuteTurn(0);
+                Clients[2].ExecutePlayerMove(0);
 
                 CurrentClient = Clients[2];
                 MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);

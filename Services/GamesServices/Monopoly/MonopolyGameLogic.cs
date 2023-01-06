@@ -243,7 +243,7 @@ namespace Services.GamesServices.Monopoly
             BoardService.CheckForMonopolOf(Players[PlayersSpecialIndexes.MainPlayer]);
         }
 
-        public MonopolyTurnResult ExecuteTurn(int MoveAmount)
+        public MonopolyTurnResult ExecutePlayerMove(int MoveAmount)
         {
             Move(MoveAmount);
             CheckEvents();

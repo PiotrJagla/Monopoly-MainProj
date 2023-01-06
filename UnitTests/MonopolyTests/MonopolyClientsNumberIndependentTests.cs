@@ -26,7 +26,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestBuyingOwnCell()
         {
-            Client.ExecuteTurn(1);
+            Client.ExecutePlayerMove(1);
             Client.BuyCellIfPossible();
 
             for (int i = 2; Client.GetBoard()[i].GetOwner() != PlayerKey.First ; i = (++i)%Client.GetBoard().Count)
@@ -34,7 +34,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
             
-            Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
+            Assert.IsTrue(Client.ExecutePlayerMove(1) == MonopolyTurnResult.CannotBuyCell);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace UnitTests.MonopolyTests
             
             for (int i = 1;  ; i++)
             {
-                Client.ExecuteTurn(1);
+                Client.ExecutePlayerMove(1);
                 Client.BuyCellIfPossible();
 
                 if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
@@ -110,7 +110,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
 
-            Assert.IsTrue(Client.ExecuteTurn(1) == MonopolyTurnResult.CannotBuyCell);
+            Assert.IsTrue(Client.ExecutePlayerMove(1) == MonopolyTurnResult.CannotBuyCell);
         }
 
         [TestMethod]
@@ -120,14 +120,14 @@ namespace UnitTests.MonopolyTests
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
-                Client.ExecuteTurn(1);
+                Client.ExecutePlayerMove(1);
                 if (Client.GetBoard()[i].OnDisplay() == Consts.Monopoly.IslandDiaplsy)
                 {
                     Client.ModalResponse("Wait");
                     break;
                 }
             }
-            Client.ExecuteTurn(BoardSize - 2);
+            Client.ExecutePlayerMove(BoardSize - 2);
 
             Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount);
         }
@@ -139,18 +139,18 @@ namespace UnitTests.MonopolyTests
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
-                Client.ExecuteTurn(1);
+                Client.ExecutePlayerMove(1);
                 if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
                     break;
                 }
             }
 
-            Client.ExecuteTurn(1);
-            Client.ExecuteTurn(1);
-            Client.ExecuteTurn(1);
+            Client.ExecutePlayerMove(1);
+            Client.ExecutePlayerMove(1);
+            Client.ExecutePlayerMove(1);
 
-            Client.ExecuteTurn(BoardSize - 2);
+            Client.ExecutePlayerMove(BoardSize - 2);
 
             Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven);
         }
@@ -162,7 +162,7 @@ namespace UnitTests.MonopolyTests
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
-                Client.ExecuteTurn(1);
+                Client.ExecutePlayerMove(1);
                 if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
                     break;
@@ -170,7 +170,7 @@ namespace UnitTests.MonopolyTests
             }
             Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
 
-            Client.ExecuteTurn(BoardSize - 2);
+            Client.ExecutePlayerMove(BoardSize - 2);
 
             int ExpectedMoney = Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven - Consts.Monopoly.IslandEscapeCost;
             int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
@@ -185,7 +185,7 @@ namespace UnitTests.MonopolyTests
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
-                Client.ExecuteTurn(1);
+                Client.ExecutePlayerMove(1);
                 Client.BuyCellIfPossible();
                 if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
@@ -203,7 +203,7 @@ namespace UnitTests.MonopolyTests
             Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
             Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
 
-            Client.ExecuteTurn(BoardSize - 2);
+            Client.ExecutePlayerMove(BoardSize - 2);
 
             int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
             Assert.IsTrue(ActualMoney >= 0);

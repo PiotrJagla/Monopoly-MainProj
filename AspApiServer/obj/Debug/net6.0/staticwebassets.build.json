@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "QVMjeQcjru4E2GlEwfNJjW+AvML5yPpVH1caldoyYBo=",
-  "Source": "ASPcoreServer",
-  "BasePath": "_content/ASPcoreServer",
+  "Hash": "KAIgHtRcDGE5l3svKJJJN69mWg7cBxrT/3A2v0SSCjY=",
+  "Source": "ServerSide",
+  "BasePath": "_content/ServerSide",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
