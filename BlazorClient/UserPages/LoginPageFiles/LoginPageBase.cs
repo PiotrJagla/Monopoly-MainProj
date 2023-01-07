@@ -13,21 +13,27 @@ namespace BlazorClient.UserPages.LoginPageFiles
         [Inject]
         public NavigationManager NavManager { get; set; }
 
-        public string LoginMessage { get; set; }
+        public List<string> Messages { get; set; }
 
         protected override void OnInitialized()
         {
-            LoginMessage = "";
+            Messages = new List<string>();
         }
 
 
         protected async void LoginUser(UserLoginData userLoginData)
         {
-            if (await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
-                LoginMessage = "Failed to login";
-            else
-                NavManager.NavigateTo($"/MainMenu/{userLoginData.Name}");
-
+            try
+            {
+                if (await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
+                    Messages.Add("Failed to login");
+                else
+                    NavManager.NavigateTo($"/MainMenu/{userLoginData.Name}");
+            }
+            catch
+            {
+                Messages.Add("Database Service is not active");
+            }
             StateHasChanged();
         }
     }

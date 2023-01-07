@@ -7,7 +7,7 @@ using Services.OnlineConnectionsService;
 using Models.Battleship;
 using Models.MultiplayerConnection;
 
-namespace ASPcoreServer.Hubs
+namespace ServerSide.Hubs
 {
     public class BattleshipHub : Hub
     {

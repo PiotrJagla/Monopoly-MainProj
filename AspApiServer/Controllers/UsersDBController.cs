@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.UsersManagment;
 using Services.Database_services;
 
-namespace ASPcoreServer.Controllers
+namespace ServerSide.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

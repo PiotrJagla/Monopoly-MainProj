@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Services.OnlineConnectionsService;
 using Models.MultiplayerConnection;
 
-namespace ASPcoreServer.Hubs
+namespace ServerSide.Hubs
 {
     public class SomeMultiplayerGameHub : Hub
     {

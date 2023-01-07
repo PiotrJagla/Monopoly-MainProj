@@ -7,7 +7,7 @@ using Models.Monopoly;
 using Models;
 using Services.GamesServices.Monopoly.Update;
 
-namespace ASPcoreServer.Hubs
+namespace ServerSide.Hubs
 {
     public class MonopolyHub : Hub
     {

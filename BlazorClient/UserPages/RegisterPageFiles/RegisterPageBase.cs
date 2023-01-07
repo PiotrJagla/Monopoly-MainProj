@@ -9,20 +9,26 @@ namespace BlazorClient.UserPages.RegisterPageFiles
         [Inject]
         public ApiDBService InsertUserDataIntoDB { get; set; }
 
-        protected string RegisterMessage;
+        public List<string> Messages { get; set; }
 
         protected override void OnInitialized()
         {
-            RegisterMessage = "";
+            Messages = new List<string>();
         }
 
         protected async Task RegisterUser(UserLoginData userLoginData)
         {
-            if (await InsertUserDataIntoDB.RegisterUser(userLoginData) == false)
-                RegisterMessage = "Failed to Register";
-            else
-                RegisterMessage = "Registration sukcesful";
-
+            try
+            {
+                if (await InsertUserDataIntoDB.RegisterUser(userLoginData) == false)
+                    Messages.Add("Failed to Register");
+                else
+                    Messages.Add("Secessfully registered");
+            }
+            catch
+            {
+                Messages.Add("Database service is not active");
+            }
             StateHasChanged();
         }
     }
