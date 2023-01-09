@@ -12,11 +12,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyBeachCell : MonopolyCell
     {
-        public PlayerKey OwnedBy { get; set; }
-        public Beach BeachName { get; set; }
-
-        public Costs ActualCosts { get; set; }
-        public Costs BaseCosts { get; set; }
+        private PlayerKey OwnedBy { get; set; }
+        private Beach BeachName { get; set; }
+        private Costs ActualCosts { get; set; }
+        private Costs BaseCosts { get; set; }
 
         private CellBuyingBehaviour BuyingBehaviour;
 
@@ -52,9 +51,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
 
             List<PlayerKey> CheckedOwners = new List<PlayerKey>();
+            CheckedOwners.Add(PlayerKey.NoOne);
             foreach (var BeachCell in AllBeaches)
             {
-                CheckBeachCellMonopol(ref NewBoard, ref CheckedOwners, BeachCell.GetOwner());
+                CheckBeachCellMonopol(ref NewBoard, ref CheckedOwners, BeachCell.GetBuyingBehavior().GetOwner());
             }
 
             return NewBoard;
@@ -66,7 +66,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             if (CheckedOwners.IndexOf(CurrentBeachCellOwner) == -1)
             {
                 List<MonopolyCell> AllBeachesWithSameOwner = new List<MonopolyCell>();
-                AllBeachesWithSameOwner = AllBeaches.FindAll(b => b.GetOwner() == CurrentBeachCellOwner);
+                AllBeachesWithSameOwner = AllBeaches.FindAll(b => b.GetBuyingBehavior().GetOwner() == CurrentBeachCellOwner);
 
                 if (AllBeachesWithSameOwner.Count >= 2)
                 {
@@ -82,7 +82,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             foreach (var BeachCell in AllBeachesWithSameOwner)
             {
                 int CellIndexToUpdate = NewBoard.IndexOf(BeachCell);
-                NewBoard[CellIndexToUpdate].MultiplyStayCostAmount(
+                NewBoard[CellIndexToUpdate].GetBuyingBehavior().MultiplyStayCostAmount(
                     Consts.Monopoly.BeachesOwnedMultiplayer[AllBeachesWithSameOwner.Count]
                 );
             }
@@ -91,10 +91,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public string OnDisplay()
         {
             string result = "";
-            result += $" Owner: {OwnedBy.ToString()} |";
-            result += $" Beach Name: {BeachName.ToString()} |";
-            result += $" Buy For: {ActualCosts.Buy} |";
-            result += $" Stay Cost: {ActualCosts.Stay} ";
+            result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
+            result += $" Nation: {BeachName.ToString()} |";
+            result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
+            result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
             return result;
         }
 

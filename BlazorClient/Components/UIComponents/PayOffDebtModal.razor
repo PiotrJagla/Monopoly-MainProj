@@ -10,7 +10,7 @@
     {
         <button class="btn btn-primary" @onclick="@(() =>SubmitForm(Cell.OnDisplay()))">
             <label>@Cell.OnDisplay()</label>
-            <label>Sell for: @Cell.GetCosts().Buy</label>
+            <label>Sell for: @Cell.GetBuyingBehavior().GetCosts().Buy</label>
         </button>
         <br />
     }

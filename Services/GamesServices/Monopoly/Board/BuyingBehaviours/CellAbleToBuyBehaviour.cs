@@ -10,15 +10,15 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
 {
     public class CellAbleToBuyBehaviour : CellBuyingBehaviour
     {
-        public PlayerKey OwnedBy { get; set; }
-
-        public Costs ActualCosts { get; set; }
-        public Costs BaseCosts { get; set; }
+        private PlayerKey OwnedBy { get; set; }
+        private Costs ActualCosts { get; set; }
+        private Costs BaseCosts { get; set; }
 
         public CellAbleToBuyBehaviour(Costs costs)
         {
-            BaseCosts = costs;
-            ActualCosts = costs;
+            OwnedBy = PlayerKey.NoOne;
+            BaseCosts = new Costs(costs.Buy,costs.Stay);
+            ActualCosts = new Costs(costs.Buy, costs.Stay); ;
         }
 
         public Costs GetCosts()

@@ -62,7 +62,7 @@ namespace Services.GamesServices.Monopoly
         public List<MonopolyCell> GetMainPlayerCells()
         {
             List<MonopolyCell> cells = BoardService.GetBoard().FindAll(
-                cell => cell.GetOwner() == Players[PlayersSpecialIndexes.MainPlayer].Key
+                cell => cell.GetBuyingBehavior().GetOwner() == Players[PlayersSpecialIndexes.MainPlayer].Key
             );
             return cells;
         }
@@ -70,7 +70,7 @@ namespace Services.GamesServices.Monopoly
         public int GetDebtAmount()
         {
             int MainPlayerPos = Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex;
-            return BoardService.GetCell(MainPlayerPos).GetCosts().Stay;
+            return BoardService.GetCell(MainPlayerPos).GetBuyingBehavior().GetCosts().Stay;
         }
 
         public MonopolyUpdateMessage GetUpdatedData()
@@ -118,9 +118,9 @@ namespace Services.GamesServices.Monopoly
             if (BoardService.DoesCellHaveAnotherOwner(Players[PlayersSpecialIndexes.MainPlayer]))
             {
                 MonopolyCell CellMainPlayerSteppedOn = BoardService.GetCell(Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex);
-                result.PlayerGettingMoney = CellMainPlayerSteppedOn.GetOwner();
+                result.PlayerGettingMoney = CellMainPlayerSteppedOn.GetBuyingBehavior().GetOwner();
                 result.PlayerLosingMoney = Players[PlayersSpecialIndexes.MainPlayer].Key;
-                result.ObligationAmount = CellMainPlayerSteppedOn.GetCosts().Stay;
+                result.ObligationAmount = CellMainPlayerSteppedOn.GetBuyingBehavior().GetCosts().Stay;
             }
             return result;
         }
@@ -192,8 +192,8 @@ namespace Services.GamesServices.Monopoly
         {
             for (int i = 0; i < BoardUpdatedData.Count; i++)
             {
-                BoardService.GetCell(i).SetOwner(BoardUpdatedData[i].Owner);
-                BoardService.GetCell(i).SetCosts(BoardUpdatedData[i].NewCosts);
+                BoardService.GetCell(i).GetBuyingBehavior().SetOwner(BoardUpdatedData[i].Owner);
+                BoardService.GetCell(i).GetBuyingBehavior().SetCosts(BoardUpdatedData[i].NewCosts);
             }
         }
 
@@ -239,8 +239,8 @@ namespace Services.GamesServices.Monopoly
         private void BuyCell(int MainPlayerBoardPos)
         {
             PlayerKey MainPlayerKey = Players[ PlayersSpecialIndexes.MainPlayer ].Key;
-            BoardService.GetCell(MainPlayerBoardPos).SetOwner(MainPlayerKey);
-            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).GetCosts().Buy;
+            BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().SetOwner(MainPlayerKey);
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().GetCosts().Buy;
             BoardService.CheckForMonopolOf(Players[PlayersSpecialIndexes.MainPlayer]);
         }
 
@@ -349,8 +349,8 @@ namespace Services.GamesServices.Monopoly
 
             if (CellToSellRef != null)
             {
-                CellToSellRef.SetOwner(PlayerKey.NoOne);
-                MainPlayer.MoneyOwned += CellToSellRef.GetCosts().Buy;
+                CellToSellRef.GetBuyingBehavior().SetOwner(PlayerKey.NoOne);
+                MainPlayer.MoneyOwned += CellToSellRef.GetBuyingBehavior().GetCosts().Buy;
             }
         }
 

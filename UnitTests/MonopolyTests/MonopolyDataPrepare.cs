@@ -132,14 +132,46 @@ namespace UnitTests.MonopolyTests
                 UpdateOthers(ref Clients, ref CurrentClient);
             }
         }
+        public static void ExecuteClientTestTurn(ref MonopolyService Client, int turn)
+        {
+            Client.ExecutePlayerMove(1);
+            if (Client.GetBoard()[turn] is MonopolyIslandCell)
+            {
+                Client.ExecutePlayerMove(1);
+                Client.ExecutePlayerMove(1);
+            }
+        }
+
+        private static void BuyCell(int turn, int clientIndex, ref MonopolyService CurrentClient)
+        {
+            int CellIndex = (turn + 1) % CurrentClient.GetBoard().Count;
+            if (PlayersBuyingOrderOnTurns[turn] == (PlayerKey)clientIndex)
+            {
+                PlayersMoneyFlow[clientIndex].Loss += CurrentClient.GetBoard()[CellIndex].GetBuyingBehavior().GetCosts().Buy;
+                CurrentClient.BuyCellIfPossible();
+            }
+        }
+
+        private static void SellCell(int turn, int clientIndex, ref MonopolyService CurrentClient)
+        {
+            while (CurrentClient.DontHaveMoneyToPay() && CurrentClient.GetMainPlayerCells().Count != 0)
+            {
+                int CellToSellIndex = CurrentClient.GetBoard().IndexOf(CurrentClient.GetMainPlayerCells()[0]);
+
+                PlayersMoneyFlow[clientIndex].Income += CurrentClient.GetBoard()[CellToSellIndex].GetBuyingBehavior().GetCosts().Buy;
+
+                CurrentClient.SellCell(CurrentClient.GetBoard()[CellToSellIndex].OnDisplay());
+            }
+        }
 
         private static void UpdateExpectedMoneyFlow(List<MonopolyService> Clients, int turn, int clientIndex)
         {
             int CellIndex = (turn + 1) % Clients[0].GetBoard().Count;
-            if ((int)(Clients[0].GetBoard()[CellIndex].GetOwner()) < clientIndex)
+            if ((int)(Clients[0].GetBoard()[CellIndex].GetBuyingBehavior().GetOwner()) < clientIndex)
             {
-                PlayersMoneyFlow[clientIndex].Loss += Clients[0].GetBoard()[CellIndex].GetCosts().Stay;
-                PlayersMoneyFlow[(int)(Clients[0].GetBoard()[CellIndex].GetOwner())].Income += Clients[0].GetBoard()[CellIndex].GetCosts().Stay;
+                PlayersMoneyFlow[clientIndex].Loss += Clients[0].GetBoard()[CellIndex].GetBuyingBehavior().GetCosts().Stay;
+                PlayersMoneyFlow[(int)(Clients[0].GetBoard()[CellIndex].GetBuyingBehavior().GetOwner())].Income +=
+                    Clients[0].GetBoard()[CellIndex].GetBuyingBehavior().GetCosts().Stay;
             }
         }
 
@@ -153,29 +185,7 @@ namespace UnitTests.MonopolyTests
                 }
                 client.NextTurn();
             }
-        }
-
-        private static void SellCell(int turn, int clientIndex, ref MonopolyService CurrentClient)
-        {
-            while(CurrentClient.DontHaveMoneyToPay() && CurrentClient.GetMainPlayerCells().Count != 0)
-            {
-                int CellToSellIndex = CurrentClient.GetBoard().IndexOf(CurrentClient.GetMainPlayerCells()[0]);
-
-                PlayersMoneyFlow[clientIndex].Income += CurrentClient.GetBoard()[CellToSellIndex].GetCosts().Buy;
-
-                CurrentClient.SellCell(CurrentClient.GetBoard()[CellToSellIndex].OnDisplay());
-            }
-        }
-
-        private static void BuyCell(int turn, int clientIndex, ref MonopolyService CurrentClient)
-        {
-            int CellIndex = (turn + 1) % CurrentClient.GetBoard().Count;
-            if (PlayersBuyingOrderOnTurns[turn] == (PlayerKey)clientIndex)
-            {
-                PlayersMoneyFlow[clientIndex].Loss += CurrentClient.GetBoard()[CellIndex].GetCosts().Buy;
-                CurrentClient.BuyCellIfPossible();
-            }
-        }
+        }      
 
         public static List<int> GetExpectedMoney(List<MoneyFlow> MoneyFlows)
         {
@@ -199,15 +209,7 @@ namespace UnitTests.MonopolyTests
             return true;
         }
 
-        public static void ExecuteClientTestTurn(ref MonopolyService Client, int turn)
-        {
-            Client.ExecutePlayerMove(1);
-            if (Client.GetBoard()[turn] is MonopolyIslandCell)
-            {
-                Client.ExecutePlayerMove(1);
-                Client.ExecutePlayerMove(1);
-            }
-        }
+        
 
         
         

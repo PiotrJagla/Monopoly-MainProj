@@ -11,7 +11,7 @@ using Services.GamesServices.Monopoly.Board.Cells;
 namespace UnitTests.MonopolyTests
 {
     [TestClass]
-    public class MonopolyClientsNumberIndependentTests
+    public class MonopolyTestsOneClient
     {
         private MonopolyService Client;
 
@@ -28,7 +28,7 @@ namespace UnitTests.MonopolyTests
             Client.ExecutePlayerMove(1);
             Client.BuyCellIfPossible();
 
-            for (int i = 2; Client.GetBoard()[i].GetOwner() != PlayerKey.First ; i = (++i)%Client.GetBoard().Count)
+            for (int i = 2; Client.GetBoard()[i].GetBuyingBehavior().GetOwner() != PlayerKey.First ; i = (++i)%Client.GetBoard().Count)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
@@ -39,7 +39,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void NationMonopolTest()
         {
-            int PolandCostsWithoutMonopol = Client.GetBoard()[1].GetCosts().Stay;
+            int PolandCostsWithoutMonopol = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             
             for (int i = 1;  ; i++)
             {
@@ -50,14 +50,14 @@ namespace UnitTests.MonopolyTests
                     break;
             }
             
-            Assert.IsTrue(Client.GetBoard()[1].GetCosts().Stay == PolandCostsWithoutMonopol*Consts.Monopoly.MonopolMultiplayer);
+            Assert.IsTrue(Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay == PolandCostsWithoutMonopol*Consts.Monopoly.MonopolMultiplayer);
         }
 
         [TestMethod]
         public void BeachMonopolTest_TwoBeachesOwned()
         {
             List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p is MonopolyBeachCell);
-            int FirstBeachStayCost = BeachCells[0].GetCosts().Stay;
+            int FirstBeachStayCost = BeachCells[0].GetBuyingBehavior().GetCosts().Stay;
 
             for (int i = 1; ; i++)
             {
@@ -72,7 +72,7 @@ namespace UnitTests.MonopolyTests
             int ExpectedValue = (int)(FirstBeachStayCost * Consts.Monopoly.BeachesOwnedMultiplayer[2]);
             int ActualValue = Client.GetBoard().FirstOrDefault(
                 b => b.GetBeachName() == BeachCells[0].GetBeachName()
-            ).GetCosts().Stay;
+            ).GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ActualValue == ExpectedValue);
         }
@@ -81,7 +81,7 @@ namespace UnitTests.MonopolyTests
         public void BeachMonopolTest_ThreeBeachesOwned()
         {
             List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p is MonopolyBeachCell);
-            int FirstBeachStayCost = BeachCells[0].GetCosts().Stay;
+            int FirstBeachStayCost = BeachCells[0].GetBuyingBehavior().GetCosts().Stay;
 
             for (int i = 1; ; i++)
             {
@@ -96,7 +96,7 @@ namespace UnitTests.MonopolyTests
             int ExpectedValue = (int)(FirstBeachStayCost * Consts.Monopoly.BeachesOwnedMultiplayer[3]);
             int ActualValue = Client.GetBoard().FirstOrDefault(
                 b => b.GetBeachName() == BeachCells[0].GetBeachName()
-            ).GetCosts().Stay;
+            ).GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ActualValue == ExpectedValue);
         }

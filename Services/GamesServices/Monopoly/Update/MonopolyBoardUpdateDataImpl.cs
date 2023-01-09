@@ -28,9 +28,9 @@ namespace Services.GamesServices.Monopoly.Update
             foreach (var cell in Board)
             {
                 CellsUpdate.Add(new MonopolyCellUpdate());
-                CellsUpdate.Last().Owner = cell.GetOwner();
+                CellsUpdate.Last().Owner = cell.GetBuyingBehavior().GetOwner();
                 CellsUpdate.Last().OfCellIndex = Board.IndexOf(cell);
-                CellsUpdate.Last().NewCosts = cell.GetCosts();
+                CellsUpdate.Last().NewCosts = cell.GetBuyingBehavior().GetCosts();
             }
         }
     }

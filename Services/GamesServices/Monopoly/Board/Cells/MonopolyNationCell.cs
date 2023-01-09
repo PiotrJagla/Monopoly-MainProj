@@ -57,10 +57,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public string OnDisplay()
         {
             string result = "";
-            result += $" Owner: {OwnedBy.ToString()} |";
+            result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
             result += $" Nation: {OfNation.ToString()} |";
-            result += $" Buy For: {ActualCosts.Buy} |";
-            result += $" Stay Cost: {ActualCosts.Stay} ";
+            result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
+            result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
             return result;
         }
 
@@ -78,10 +78,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
                 c => c.GetNation() == OfNation
             );
 
-            PlayerKey SingleNationCellOwner = SingleNationCells[0].GetOwner();
+            PlayerKey SingleNationCellOwner = SingleNationCells[0].GetBuyingBehavior().GetOwner();
 
             List<MonopolyCell> SingleNationCellsWithSameOwner = SingleNationCells.FindAll(
-                c => c.GetOwner() == SingleNationCellOwner
+                c => c.GetBuyingBehavior().GetOwner() == SingleNationCellOwner
             );
 
             if (SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
@@ -95,7 +95,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             foreach (var monopolCell in SingleNationCells)
             {
-                UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].MultiplyStayCostAmount(Consts.Monopoly.MonopolMultiplayer);
+                UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetBuyingBehavior().MultiplyStayCostAmount(Consts.Monopoly.MonopolMultiplayer);
             }
         }
 
