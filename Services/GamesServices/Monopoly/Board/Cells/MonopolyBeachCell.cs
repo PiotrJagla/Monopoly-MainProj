@@ -33,48 +33,8 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
         {
             return monopolBehaviour.UpdateBoardMonopol(Board, OnCell);
-            //List<MonopolyCell> NewBoard = Board;
-
-            //List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
-
-            //List<PlayerKey> CheckedOwners = new List<PlayerKey>();
-            //CheckedOwners.Add(PlayerKey.NoOne);
-            //foreach (var BeachCell in AllBeaches)
-            //{
-            //    CheckBeachCellMonopol(ref NewBoard, ref CheckedOwners, BeachCell.GetBuyingBehavior().GetOwner());
-            //}
-
-            //return NewBoard;
         }
-
-        private void CheckBeachCellMonopol(ref List<MonopolyCell> NewBoard, ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
-        {
-            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
-            if (CheckedOwners.IndexOf(CurrentBeachCellOwner) == -1)
-            {
-                List<MonopolyCell> AllBeachesWithSameOwner = new List<MonopolyCell>();
-                AllBeachesWithSameOwner = AllBeaches.FindAll(b => b.GetBuyingBehavior().GetOwner() == CurrentBeachCellOwner);
-
-                if (AllBeachesWithSameOwner.Count >= 2)
-                {
-                    ApplyMonopol(ref NewBoard, AllBeachesWithSameOwner);
-                }
-
-                CheckedOwners.Add(CurrentBeachCellOwner);
-            }
-        }
-
-        public void ApplyMonopol(ref List<MonopolyCell> NewBoard, in List<MonopolyCell> AllBeachesWithSameOwner)
-        {
-            foreach (var BeachCell in AllBeachesWithSameOwner)
-            {
-                int CellIndexToUpdate = NewBoard.IndexOf(BeachCell);
-                NewBoard[CellIndexToUpdate].GetBuyingBehavior().MultiplyStayCostAmount(
-                    Consts.Monopoly.BeachesOwnedMultiplayer[AllBeachesWithSameOwner.Count]
-                );
-            }
-        }
-
+        
         public string OnDisplay()
         {
             string result = "";

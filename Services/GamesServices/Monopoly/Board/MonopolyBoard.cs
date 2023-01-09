@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Services.GamesServices.Monopoly.Board.Cells;
+using Services.GamesServices.Monopoly.Update;
 
 namespace Services.GamesServices.Monopoly.Board
 {
@@ -108,6 +109,23 @@ namespace Services.GamesServices.Monopoly.Board
         public bool SteppedOnIsland(int CellIndex)
         {
             return Board[CellIndex] is MonopolyIslandCell;
+        }
+
+        public MonopolyBoardUpdateData MakeBoardUpdateData()
+        {
+            MonopolyBoardUpdateData BoardUpdatedData = UpdateDataFactory.CreateBoardUpdateData();
+            BoardUpdatedData.FormatBoardUpdateData(Board);
+            return BoardUpdatedData;
+        }
+
+        public int GetDebtAmount(int MainPlayerCellPos)
+        {
+            return Board[MainPlayerCellPos].GetBuyingBehavior().GetCosts().Stay;
+        }
+
+        public List<MonopolyCell> GetMainPlayerCells(PlayerKey MainPlayerKey)
+        {
+            return Board.FindAll(c => c.GetBuyingBehavior().GetOwner() == MainPlayerKey);
         }
     }
 }
