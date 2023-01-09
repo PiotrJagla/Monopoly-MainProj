@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Models;
 using Models.UsersManagment;
 using Services.APIservices;
 
@@ -27,7 +28,7 @@ namespace BlazorClient.UserPages.RegisterPageFiles
             }
             catch
             {
-                Messages.Add("Database service is not active");
+                Messages.Add(Consts.Message.ServerDown);
             }
             StateHasChanged();
         }

@@ -57,14 +57,14 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BeachMonopolTest_TwoBeachesOwned()
         {
-            List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p.GetBeachName() != Beach.NoBeach);
+            List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p is MonopolyBeachCell);
             int FirstBeachStayCost = BeachCells[0].GetCosts().Stay;
 
             for (int i = 1; ; i++)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
 
-                if (Client.GetBoard()[i].GetBeachName() != Beach.NoBeach)
+                if (Client.GetBoard()[i] is MonopolyBeachCell)
                     Client.BuyCellIfPossible();
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
@@ -81,14 +81,14 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BeachMonopolTest_ThreeBeachesOwned()
         {
-            List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p.GetBeachName() != Beach.NoBeach);
+            List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p is MonopolyBeachCell);
             int FirstBeachStayCost = BeachCells[0].GetCosts().Stay;
 
             for (int i = 1; ; i++)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
                 
-                if (Client.GetBoard()[i].GetBeachName() != Beach.NoBeach)
+                if (Client.GetBoard()[i] is MonopolyBeachCell)
                     Client.BuyCellIfPossible();
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())

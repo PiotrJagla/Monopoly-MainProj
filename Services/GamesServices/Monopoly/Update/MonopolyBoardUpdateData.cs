@@ -7,30 +7,12 @@ using System.Threading.Tasks;
 
 namespace Services.GamesServices.Monopoly.Update
 {
-    public class MonopolyBoardUpdateData
+    public interface MonopolyBoardUpdateData
     {
-        private List<MonopolyCellUpdate> CellsUpdate;
+        List<MonopolyCellUpdate> GetCellsUpdateData();
 
-        public List<MonopolyCellUpdate> GetCellsUpdate()
-        {
-            return CellsUpdate;
-        }
+        MonopolyCellUpdate GetOneCellUpdateData(int index);
 
-        public MonopolyCellUpdate GetCellUpdate(int index)
-        {
-            return CellsUpdate[index];
-        }
-
-        public void FormatBoardUpdateData(List<MonopolyCell> Board)
-        {
-            CellsUpdate = new List<MonopolyCellUpdate>();
-            foreach (var cell in Board)
-            {
-                CellsUpdate.Add(new MonopolyCellUpdate());
-                CellsUpdate.Last().Owner = cell.GetOwner();
-                CellsUpdate.Last().OfCellIndex = Board.IndexOf(cell);
-                CellsUpdate.Last().NewCosts = cell.GetCosts();
-            }
-        }
+        void FormatBoardUpdateData(List<MonopolyCell> Board);
     }
 }

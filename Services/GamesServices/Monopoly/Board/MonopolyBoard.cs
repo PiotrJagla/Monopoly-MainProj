@@ -80,8 +80,8 @@ namespace Services.GamesServices.Monopoly.Board
 
         private bool IsBuyableCell(int CellIndex)
         {
-            return Board[CellIndex].GetNation() != Nation.NoNation ||
-                   Board[CellIndex].GetBeachName() != Beach.NoBeach;
+            return Board[CellIndex] is MonopolyNationCell ||
+                   Board[CellIndex] is MonopolyBeachCell;
         }
 
         private bool IsPlayerCellOwner(MonopolyPlayer Player)

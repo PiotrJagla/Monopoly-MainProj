@@ -11,7 +11,7 @@ namespace Models.Monopoly
     {
         Nation GetNation();
         Beach GetBeachName();
-
+         
         PlayerKey GetOwner();
         void SetOwner(PlayerKey NewOwner);
 

@@ -1,5 +1,6 @@
 ﻿using BlazorClient.Components.UserLoginDataInputFiles;
 using Microsoft.AspNetCore.Components;
+using Models;
 using Models.UsersManagment;
 using Services.APIservices;
 
@@ -32,7 +33,7 @@ namespace BlazorClient.UserPages.LoginPageFiles
             }
             catch
             {
-                Messages.Add("Database Service is not active");
+                Messages.Add(Consts.Message.ServerDown);
             }
             StateHasChanged();
         }

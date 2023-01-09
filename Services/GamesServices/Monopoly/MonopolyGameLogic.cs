@@ -78,23 +78,23 @@ namespace Services.GamesServices.Monopoly
             if (GameIsAlreadyStarted() == true)
             {
                 UpdatedData.PlayersData = MakePlayersUpdateData().GetPlayersUpdatedData();
-                UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsUpdate();
+                UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsUpdateData();
                 UpdatedData.MoneyBond = MakeMoneyBond();
                 UpdatedData.BankruptPlayer = CheckForBankruptPlayer(ref UpdatedData);
             }
             return UpdatedData;
         }
 
-        private PlayersUpdateData MakePlayersUpdateData()
+        private MonopolyPlayersUpdateData MakePlayersUpdateData()
         {
-            PlayersUpdateData PlayersUpdatedData = new PlayersUpdateData();
+            MonopolyPlayersUpdateData PlayersUpdatedData = UpdateDataFactory.CreatePlayersUpdateData();
             PlayersUpdatedData.FormatPlayersUpdateData(Players);
             return PlayersUpdatedData;
         }
 
         private MonopolyBoardUpdateData MakeBoardUpdateData()
         {
-            MonopolyBoardUpdateData BoardUpdatedData = new MonopolyBoardUpdateData();
+            MonopolyBoardUpdateData BoardUpdatedData = UpdateDataFactory.CreateBoardUpdateData();
             BoardUpdatedData.FormatBoardUpdateData(BoardService.GetBoard());
             return BoardUpdatedData;
         }

@@ -200,7 +200,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 return Response.Data.ToString();
             }
 
-            return "";
+            return "No More cells to sell";
         }
 
         private async Task BrodcastUpdatedInformations()

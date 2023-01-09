@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,11 @@ namespace Models
     {
         public static string MySQLConnectionString => "server=localhost;port=3306;database=bazaDanych;user=root;password=1234";
         public static string ServerURL => "https://localhost:7268";
+
+        public static class Message
+        {
+            public static string ServerDown = "Server is down";
+        }
 
         public static class HubUrl
         {

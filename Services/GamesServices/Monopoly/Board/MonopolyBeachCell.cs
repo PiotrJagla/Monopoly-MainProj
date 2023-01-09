@@ -44,7 +44,7 @@ namespace Services.GamesServices.Monopoly.Board
         {
             List<MonopolyCell> NewBoard = Board;
 
-            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c.GetBeachName() != Beach.NoBeach);
+            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
 
             List<PlayerKey> CheckedOwners = new List<PlayerKey>();
             foreach (var BeachCell in AllBeaches)
@@ -57,7 +57,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         private void CheckBeachCellMonopol(ref List<MonopolyCell> NewBoard,ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
         {
-            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c.GetBeachName() != Beach.NoBeach);
+            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
             if (CheckedOwners.IndexOf(CurrentBeachCellOwner) == -1)
             {
                 List<MonopolyCell> AllBeachesWithSameOwner = new List<MonopolyCell>();
