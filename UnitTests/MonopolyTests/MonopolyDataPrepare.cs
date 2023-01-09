@@ -3,7 +3,7 @@ using Models.Monopoly;
 using Models.MultiplayerConnection;
 using MySqlX.XDevAPI;
 using Services.GamesServices.Monopoly;
-using Services.GamesServices.Monopoly.Board;
+using Services.GamesServices.Monopoly.Board.Cells;
 using System;
 using System.Collections.Generic;
 using System.Linq;

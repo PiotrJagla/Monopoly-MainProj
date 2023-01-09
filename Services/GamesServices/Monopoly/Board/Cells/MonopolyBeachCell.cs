@@ -1,13 +1,14 @@
 ﻿using Enums.Monopoly;
 using Models;
 using Models.Monopoly;
+using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board
+namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyBeachCell : MonopolyCell
     {
@@ -17,12 +18,16 @@ namespace Services.GamesServices.Monopoly.Board
         public Costs ActualCosts { get; set; }
         public Costs BaseCosts { get; set; }
 
-        public MonopolyBeachCell(Costs costs = null, Beach WhatBeach = Beach.NoBeach)
+        private CellBuyingBehaviour BuyingBehaviour;
+
+        public MonopolyBeachCell(Costs costs, Beach WhatBeach = Beach.NoBeach)
         {
             BeachName = WhatBeach;
             ActualCosts = new Costs(costs.Buy, costs.Stay);
             BaseCosts = new Costs(costs.Buy, costs.Stay);
             OwnedBy = PlayerKey.NoOne;
+
+            BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
         }
 
         public Costs GetCosts()
@@ -49,13 +54,13 @@ namespace Services.GamesServices.Monopoly.Board
             List<PlayerKey> CheckedOwners = new List<PlayerKey>();
             foreach (var BeachCell in AllBeaches)
             {
-                CheckBeachCellMonopol(ref NewBoard,ref CheckedOwners, BeachCell.GetOwner());
+                CheckBeachCellMonopol(ref NewBoard, ref CheckedOwners, BeachCell.GetOwner());
             }
 
             return NewBoard;
         }
 
-        private void CheckBeachCellMonopol(ref List<MonopolyCell> NewBoard,ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
+        private void CheckBeachCellMonopol(ref List<MonopolyCell> NewBoard, ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
         {
             List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
             if (CheckedOwners.IndexOf(CurrentBeachCellOwner) == -1)
@@ -72,7 +77,7 @@ namespace Services.GamesServices.Monopoly.Board
             }
         }
 
-        public void ApplyMonopol(ref List<MonopolyCell> NewBoard,in List<MonopolyCell> AllBeachesWithSameOwner)
+        public void ApplyMonopol(ref List<MonopolyCell> NewBoard, in List<MonopolyCell> AllBeachesWithSameOwner)
         {
             foreach (var BeachCell in AllBeachesWithSameOwner)
             {
@@ -116,6 +121,11 @@ namespace Services.GamesServices.Monopoly.Board
         public MonopolyModalParameters GetModalParameters()
         {
             return null;
+        }
+
+        public CellBuyingBehaviour GetBuyingBehavior()
+        {
+            return BuyingBehaviour;
         }
     }
 }

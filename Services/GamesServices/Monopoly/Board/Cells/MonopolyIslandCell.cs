@@ -1,21 +1,24 @@
 ﻿using Enums.Monopoly;
 using Models;
 using Models.Monopoly;
+using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board
+namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyIslandCell : MonopolyCell
     {
         private int TurnsRemaining;
+        private CellBuyingBehaviour BuyingBehaviour;
 
         public MonopolyIslandCell()
         {
             TurnsRemaining = 0;
+            BuyingBehaviour = new CellNotAbleToBuyBehaviour();
         }
 
         public Beach GetBeachName()
@@ -64,7 +67,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void MultiplyStayCostAmount(float Multiplayer)
         {
-            
+
         }
 
         public string OnDisplay()
@@ -74,12 +77,17 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void SetCosts(Costs costs)
         {
-            
+
         }
 
         public void SetOwner(PlayerKey NewOwner)
         {
-            
+
+        }
+
+        public CellBuyingBehaviour GetBuyingBehavior()
+        {
+            return BuyingBehaviour;
         }
     }
 }

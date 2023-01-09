@@ -3,30 +3,34 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Models;
 using Models.Monopoly;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Pkcs;
+using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board
+namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyNationCell : MonopolyCell
     {
-        public PlayerKey OwnedBy { get; set; }
+        private PlayerKey OwnedBy;
+        private Costs ActualCosts { get; set; }
+        private Costs BaseCosts { get; set; }
+        private Nation OfNation { get; set; }
 
-        public Costs ActualCosts { get; set; }
-        public Costs BaseCosts { get; set; }
-
-        public Nation OfNation { get; set; }
+        private CellBuyingBehaviour BuyingBehaviour;
 
 
-        public MonopolyNationCell(Costs costs = null, Nation nation = Nation.NoNation)
+        public MonopolyNationCell(Costs costs, Nation nation = Nation.NoNation)
         {
             ActualCosts = new Costs(costs.Buy, costs.Stay);
             BaseCosts = new Costs(costs.Buy, costs.Stay);
             OfNation = nation;
             OwnedBy = PlayerKey.NoOne;
+
+            BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
         }
 
         public Nation GetNation()
@@ -69,7 +73,7 @@ namespace Services.GamesServices.Monopoly.Board
         {
             List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
             UpdatedBoard = Board;
-            
+
             List<MonopolyCell> SingleNationCells = UpdatedBoard.FindAll(
                 c => c.GetNation() == OfNation
             );
@@ -80,7 +84,7 @@ namespace Services.GamesServices.Monopoly.Board
                 c => c.GetOwner() == SingleNationCellOwner
             );
 
-            if(SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
+            if (SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
             {
                 ApplyMonopol(ref UpdatedBoard, SingleNationCells);
             }
@@ -108,6 +112,11 @@ namespace Services.GamesServices.Monopoly.Board
         public MonopolyModalParameters GetModalParameters()
         {
             return null;
+        }
+
+        public CellBuyingBehaviour GetBuyingBehavior()
+        {
+            return BuyingBehaviour;
         }
     }
 }

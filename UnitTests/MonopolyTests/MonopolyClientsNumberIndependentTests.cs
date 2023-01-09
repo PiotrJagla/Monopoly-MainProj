@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.MultiplayerConnection;
 using Enums.Monopoly;
-using Models.Monopoly;
-using Services.GamesServices.Monopoly.Board;
+using Services.GamesServices.Monopoly.Board.Cells;
 
 namespace UnitTests.MonopolyTests
 {

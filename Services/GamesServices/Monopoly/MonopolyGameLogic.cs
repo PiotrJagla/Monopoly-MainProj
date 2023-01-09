@@ -11,6 +11,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Services.GamesServices.Monopoly.Update;
 using MySqlX.XDevAPI.Common;
+using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Board;
 
 namespace Services.GamesServices.Monopoly
