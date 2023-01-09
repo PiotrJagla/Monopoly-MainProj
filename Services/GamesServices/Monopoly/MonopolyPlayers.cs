@@ -58,5 +58,68 @@ namespace Services.GamesServices.Monopoly
         {
             return Players[PlayersSpecialIndexes.MainPlayer];
         }
+
+        public PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData)
+        {
+            //There is copy of MoneyObligation Because lambda doesnt accept references
+            MoneyObligation BondCopy = new MoneyObligation();
+            BondCopy.PlayerLosingMoney = UpdateData.MoneyBond.PlayerLosingMoney;
+            int PlayerObligatedToPayMoneyOwned = GetPlayerObligatedToPayMoneyOwned(BondCopy);
+
+            int ObligationAmount = UpdateData.MoneyBond.ObligationAmount;
+
+            ChangeMoneyBondIfBankrupt(ref UpdateData, PlayerObligatedToPayMoneyOwned);
+            return GetBankruptPlayer(UpdateData, PlayerObligatedToPayMoneyOwned, ObligationAmount);
+        }
+
+        private int GetPlayerObligatedToPayMoneyOwned(MoneyObligation BondCopy)
+        {
+            int PlayerObligatedToPayMoneyOwned = 0;
+            MonopolyPlayer PlayerObligatedToPay = Players.FirstOrDefault(p => p != null && (p.Key == BondCopy.PlayerLosingMoney));
+            if (PlayerObligatedToPay != null)
+            {
+                PlayerObligatedToPayMoneyOwned = PlayerObligatedToPay.MoneyOwned;
+            }
+
+            return PlayerObligatedToPayMoneyOwned;
+        }
+
+        private void ChangeMoneyBondIfBankrupt(ref MonopolyUpdateMessage UpdateData, int PlayerObligatedToPayMoneyOwned)
+        {
+            if (PlayerObligatedToPayMoneyOwned < UpdateData.MoneyBond.ObligationAmount)
+            {
+                UpdateData.MoneyBond.ObligationAmount = PlayerObligatedToPayMoneyOwned;
+            }
+        }
+        private PlayerKey GetBankruptPlayer(MonopolyUpdateMessage UpdateData, int PlayerObligatedToPayMoneyOwned, int ObligationAmount)
+        {
+            if (PlayerObligatedToPayMoneyOwned < ObligationAmount)
+            {
+                return UpdateData.MoneyBond.PlayerLosingMoney;
+            }
+
+            return PlayerKey.NoOne;
+        }
+
+        public void UpdateData(List<PlayerUpdateData> PlayersUpdatedData)
+        {
+            for (int i = 0; i < PlayersUpdatedData.Count; i++)
+            {
+                Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex = PlayersUpdatedData[i].Position;
+                Players[PlayersUpdatedData[i].PlayerIndex].MoneyOwned = PlayersUpdatedData[i].Money;
+            }
+        }
+
+        private void UpdateMoneyObligation(MoneyObligation obligation)
+        {
+            MonopolyPlayer PlayerGettingMoney = Players.FirstOrDefault(p => p != null && (p.Key == obligation.PlayerGettingMoney));
+            MonopolyPlayer PlayerLosingMoney = Players.FirstOrDefault(p => p != null && (p.Key == obligation.PlayerLosingMoney));
+            if (PlayerGettingMoney != null && PlayerLosingMoney != null)
+            {
+                PlayerGettingMoney.MoneyOwned += obligation.ObligationAmount;
+                PlayerLosingMoney.MoneyOwned -= obligation.ObligationAmount;
+            }
+        }
+
     }
 }

@@ -79,7 +79,6 @@ namespace Services.GamesServices.Monopoly
             if (GameIsAlreadyStarted() == true)
             {
                 UpdatedData.PlayersData = MakePlayersUpdateData().GetPlayersUpdatedData();
-                //UpdatedData.CellsOwners = MakeBoardUpdateData().GetCellsUpdateData();
                 UpdatedData.CellsOwners = BoardService.MakeBoardUpdateData().GetCellsUpdateData();
                 UpdatedData.MoneyBond = MakeMoneyBond();
                 UpdatedData.BankruptPlayer = CheckForBankruptPlayer(ref UpdatedData);
@@ -93,14 +92,6 @@ namespace Services.GamesServices.Monopoly
             PlayersUpdatedData.FormatPlayersUpdateData(Players);
             return PlayersUpdatedData;
         }
-
-        private MonopolyBoardUpdateData MakeBoardUpdateData()
-        {
-            MonopolyBoardUpdateData BoardUpdatedData = UpdateDataFactory.CreateBoardUpdateData();
-            BoardUpdatedData.FormatBoardUpdateData(BoardService.GetBoard());
-            return BoardUpdatedData;
-        }
-
         private MoneyObligation MakeMoneyBond()
         {
             try
@@ -113,20 +104,12 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        private MoneyObligation CalculateBond() //TA METODA MOGLABY BYC DO MonopolyPlayers class
+        private MoneyObligation CalculateBond()
         {
-            MoneyObligation result = new MoneyObligation();
-            if (BoardService.DoesCellHaveAnotherOwner(Players[PlayersSpecialIndexes.MainPlayer]))
-            {
-                MonopolyCell CellMainPlayerSteppedOn = BoardService.GetCell(Players[PlayersSpecialIndexes.MainPlayer].OnCellIndex);
-                result.PlayerGettingMoney = CellMainPlayerSteppedOn.GetBuyingBehavior().GetOwner();
-                result.PlayerLosingMoney = Players[PlayersSpecialIndexes.MainPlayer].Key;
-                result.ObligationAmount = CellMainPlayerSteppedOn.GetBuyingBehavior().GetCosts().Stay;
-            }
-            return result;
+            return BoardService.CalculateBond(Players[PlayersSpecialIndexes.MainPlayer]);
         }
 
-        private PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData)
+        private PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
         {
             //There is copy of MoneyObligation Because lambda doesnt accept references
             MoneyObligation BondCopy = new MoneyObligation();
@@ -186,14 +169,10 @@ namespace Services.GamesServices.Monopoly
 
         private void UpdateBoardData(List<MonopolyCellUpdate> BoardUpdatedData)
         {
-            for (int i = 0; i < BoardUpdatedData.Count; i++)
-            {
-                BoardService.GetCell(i).GetBuyingBehavior().SetOwner(BoardUpdatedData[i].Owner);
-                BoardService.GetCell(i).GetBuyingBehavior().SetCosts(BoardUpdatedData[i].NewCosts);
-            }
+            BoardService.UpdateData(BoardUpdatedData);
         }
 
-        private void UpdateMoneyObligation(MoneyObligation obligation)
+        private void UpdateMoneyObligation(MoneyObligation obligation) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
         {
             MonopolyPlayer PlayerGettingMoney = Players.FirstOrDefault(p => p!=null &&( p.Key == obligation.PlayerGettingMoney));
             MonopolyPlayer PlayerLosingMoney = Players.FirstOrDefault(p => p!=null &&( p.Key == obligation.PlayerLosingMoney));
@@ -204,7 +183,7 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey)
+        private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
         {
             CheckIfMainPlayerWentBankrupt(BankruptPlayerKey);
 
@@ -214,7 +193,7 @@ namespace Services.GamesServices.Monopoly
                 Players[BankruptPlayerIndex] = null;
         }
 
-        private void CheckIfMainPlayerWentBankrupt(PlayerKey BankruptPlayer)
+        private void CheckIfMainPlayerWentBankrupt(PlayerKey BankruptPlayer) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
         {
             if (PlayersSpecialIndexes.MainPlayer == -1) return;
 

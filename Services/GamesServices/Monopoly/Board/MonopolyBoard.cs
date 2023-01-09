@@ -127,5 +127,26 @@ namespace Services.GamesServices.Monopoly.Board
         {
             return Board.FindAll(c => c.GetBuyingBehavior().GetOwner() == MainPlayerKey);
         }
+
+        public MoneyObligation CalculateBond(in MonopolyPlayer MainPlayer) 
+        {
+            MoneyObligation result = new MoneyObligation();
+            if (DoesCellHaveAnotherOwner(MainPlayer))
+            {
+                result.PlayerGettingMoney = Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner();
+                result.PlayerLosingMoney = MainPlayer.Key;
+                result.ObligationAmount = Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetCosts().Stay;
+            }
+            return result;
+        }
+
+        public void UpdateData(List<MonopolyCellUpdate> BoardUpdatedData)
+        {
+            for (int i = 0; i < BoardUpdatedData.Count; i++)
+            {
+                Board[i].GetBuyingBehavior().SetOwner(BoardUpdatedData[i].Owner);
+                Board[i].GetBuyingBehavior().SetCosts(BoardUpdatedData[i].NewCosts);
+            }
+        }
     }
 }
