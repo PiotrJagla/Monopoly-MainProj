@@ -1,6 +1,7 @@
 ﻿using Enums.Monopoly;
 using Models;
 using Models.Monopoly;
+using Services.GamesServices.Monopoly.Board.Behaviours;
 using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
@@ -12,52 +13,38 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyBeachCell : MonopolyCell
     {
-        private PlayerKey OwnedBy { get; set; }
         private Beach BeachName { get; set; }
-        private Costs ActualCosts { get; set; }
-        private Costs BaseCosts { get; set; }
 
         private CellBuyingBehaviour BuyingBehaviour;
+
+        private MonopolBehaviour monopolBehaviour;
 
         public MonopolyBeachCell(Costs costs, Beach WhatBeach = Beach.NoBeach)
         {
             BeachName = WhatBeach;
-            ActualCosts = new Costs(costs.Buy, costs.Stay);
-            BaseCosts = new Costs(costs.Buy, costs.Stay);
-            OwnedBy = PlayerKey.NoOne;
 
             BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
+            monopolBehaviour = new MonopolBeachCellBehaviour();
         }
-
-        public Costs GetCosts()
-        {
-            return ActualCosts;
-        }
-
         public Nation GetNation()
         {
             return Nation.NoNation;
         }
-
-        public PlayerKey GetOwner()
+        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
         {
-            return OwnedBy;
-        }
+            return monopolBehaviour.UpdateBoardMonopol(Board, OnCell);
+            //List<MonopolyCell> NewBoard = Board;
 
-        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
-        {
-            List<MonopolyCell> NewBoard = Board;
+            //List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
 
-            List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
+            //List<PlayerKey> CheckedOwners = new List<PlayerKey>();
+            //CheckedOwners.Add(PlayerKey.NoOne);
+            //foreach (var BeachCell in AllBeaches)
+            //{
+            //    CheckBeachCellMonopol(ref NewBoard, ref CheckedOwners, BeachCell.GetBuyingBehavior().GetOwner());
+            //}
 
-            List<PlayerKey> CheckedOwners = new List<PlayerKey>();
-            CheckedOwners.Add(PlayerKey.NoOne);
-            foreach (var BeachCell in AllBeaches)
-            {
-                CheckBeachCellMonopol(ref NewBoard, ref CheckedOwners, BeachCell.GetBuyingBehavior().GetOwner());
-            }
-
-            return NewBoard;
+            //return NewBoard;
         }
 
         private void CheckBeachCellMonopol(ref List<MonopolyCell> NewBoard, ref List<PlayerKey> CheckedOwners, PlayerKey CurrentBeachCellOwner)
@@ -97,25 +84,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
             return result;
         }
-
-        public void SetCosts(Costs costs)
-        {
-            ActualCosts = costs;
-        }
-
-        public void SetOwner(PlayerKey NewOwner)
-        {
-            OwnedBy = NewOwner;
-        }
-
         public Beach GetBeachName()
         {
             return BeachName;
-        }
-
-        public void MultiplyStayCostAmount(float Multiplayer)
-        {
-            ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
         }
 
         public MonopolyModalParameters GetModalParameters()

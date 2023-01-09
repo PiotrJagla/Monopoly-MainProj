@@ -97,7 +97,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void CheckForMonopolOf(MonopolyPlayer aPlayer)
         {
-            Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board);
+            Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board, aPlayer.OnCellIndex);
         }
 
         public MonopolyModalParameters GetCellModalParameters(int CellIndex)

@@ -14,18 +14,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         Nation GetNation();
         Beach GetBeachName();
 
-        PlayerKey GetOwner();
-        void SetOwner(PlayerKey NewOwner);
-
-        Costs GetCosts();
-        void SetCosts(Costs costs);
-        List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board);
-        void MultiplyStayCostAmount(float Multiplayer);
-
+        List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell);
         CellBuyingBehaviour GetBuyingBehavior();
-
         string OnDisplay();
-
         MonopolyModalParameters GetModalParameters();
     }
 }

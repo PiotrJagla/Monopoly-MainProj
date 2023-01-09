@@ -4,6 +4,7 @@ using Models;
 using Models.Monopoly;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Pkcs;
+using Services.GamesServices.Monopoly.Board.Behaviours;
 using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
@@ -15,45 +16,23 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyNationCell : MonopolyCell
     {
-        private PlayerKey OwnedBy;
-        private Costs ActualCosts { get; set; }
-        private Costs BaseCosts { get; set; }
         private Nation OfNation { get; set; }
 
         private CellBuyingBehaviour BuyingBehaviour;
+        private MonopolBehaviour monopolBehaviour;
 
 
         public MonopolyNationCell(Costs costs, Nation nation = Nation.NoNation)
         {
-            ActualCosts = new Costs(costs.Buy, costs.Stay);
-            BaseCosts = new Costs(costs.Buy, costs.Stay);
             OfNation = nation;
-            OwnedBy = PlayerKey.NoOne;
-
             BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
+            monopolBehaviour = new MonopolNationCellBehaviour();
         }
 
         public Nation GetNation()
         {
             return OfNation;
         }
-
-        public PlayerKey GetOwner()
-        {
-            return OwnedBy;
-        }
-
-        public Costs GetCosts()
-        {
-            return ActualCosts;
-        }
-
-        public void SetCosts(Costs costs)
-        {
-            ActualCosts.Stay = costs.Stay;
-            ActualCosts.Buy = costs.Buy;
-        }
-
         public string OnDisplay()
         {
             string result = "";
@@ -63,32 +42,27 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
             return result;
         }
-
-        public void SetOwner(PlayerKey NewOwner)
+        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
         {
-            OwnedBy = NewOwner;
-        }
+            return monopolBehaviour.UpdateBoardMonopol(Board, OnCell);
+            //List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
+            //UpdatedBoard = Board;
 
-        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
-        {
-            List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
-            UpdatedBoard = Board;
+            //List<MonopolyCell> SingleNationCells = UpdatedBoard.FindAll(
+            //    c => c.GetNation() == OfNation
+            //);
 
-            List<MonopolyCell> SingleNationCells = UpdatedBoard.FindAll(
-                c => c.GetNation() == OfNation
-            );
+            //PlayerKey SingleNationCellOwner = SingleNationCells[0].GetBuyingBehavior().GetOwner();
 
-            PlayerKey SingleNationCellOwner = SingleNationCells[0].GetBuyingBehavior().GetOwner();
+            //List<MonopolyCell> SingleNationCellsWithSameOwner = SingleNationCells.FindAll(
+            //    c => c.GetBuyingBehavior().GetOwner() == SingleNationCellOwner
+            //);
 
-            List<MonopolyCell> SingleNationCellsWithSameOwner = SingleNationCells.FindAll(
-                c => c.GetBuyingBehavior().GetOwner() == SingleNationCellOwner
-            );
-
-            if (SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
-            {
-                ApplyMonopol(ref UpdatedBoard, SingleNationCells);
-            }
-            return UpdatedBoard;
+            //if (SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
+            //{
+            //    ApplyMonopol(ref UpdatedBoard, SingleNationCells);
+            //}
+            //return UpdatedBoard;
         }
 
         private void ApplyMonopol(ref List<MonopolyCell> UpdatedBoard, List<MonopolyCell> SingleNationCells)
@@ -103,12 +77,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return Beach.NoBeach;
         }
-
-        public void MultiplyStayCostAmount(float Multiplayer)
-        {
-            ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
-        }
-
         public MonopolyModalParameters GetModalParameters()
         {
             return null;

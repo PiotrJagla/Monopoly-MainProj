@@ -1,6 +1,7 @@
 ﻿using Enums.Monopoly;
 using Models;
 using Models.Monopoly;
+using Services.GamesServices.Monopoly.Board.Behaviours;
 using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
     internal class StartCell : MonopolyCell
     {
         private CellBuyingBehaviour BuyingBehaviour;
+        private MonopolBehaviour monopolBehaviour;
         public StartCell()
         {
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
+            monopolBehaviour = new NoMonopolBehaviour();
         }
         public Beach GetBeachName()
         {
@@ -25,11 +28,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public CellBuyingBehaviour GetBuyingBehavior()
         {
             return BuyingBehaviour;
-        }
-
-        public Costs GetCosts()
-        {
-            return new Costs();
         }
 
         public MonopolyModalParameters GetModalParameters()
@@ -42,36 +40,14 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return Nation.NoNation;
         }
 
-        public PlayerKey GetOwner()
+        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
         {
-            return PlayerKey.NoOne;
-        }
-
-
-
-        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board)
-        {
-            return Board;
-        }
-
-        public void MultiplyStayCostAmount(float Multiplayer)
-        {
-
+            return monopolBehaviour.UpdateBoardMonopol(Board,OnCell);
         }
 
         public string OnDisplay()
         {
             return "Start!";
-        }
-
-        public void SetCosts(Costs costs)
-        {
-
-        }
-
-        public void SetOwner(PlayerKey NewOwner)
-        {
-
         }
     }
 }
