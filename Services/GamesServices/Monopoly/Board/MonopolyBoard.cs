@@ -129,7 +129,19 @@ namespace Services.GamesServices.Monopoly.Board
             return Board.FindAll(c => c.GetBuyingBehavior().GetOwner() == MainPlayerKey);
         }
 
-        public MoneyObligation CalculateBond(in MonopolyPlayer MainPlayer) 
+        public MoneyObligation MakeMoneyBond(in MonopolyPlayer MainPlayer)
+        {
+            try
+            {
+                return CalculateBond(MainPlayer);
+            }
+            catch
+            {
+                return new MoneyObligation();
+            }
+        }
+
+        private MoneyObligation CalculateBond(in MonopolyPlayer MainPlayer) 
         {
             MoneyObligation result = new MoneyObligation();
             if (DoesCellHaveAnotherOwner(MainPlayer))

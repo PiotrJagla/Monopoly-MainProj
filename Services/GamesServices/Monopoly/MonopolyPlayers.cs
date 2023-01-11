@@ -7,6 +7,7 @@ using Services.GamesServices.Monopoly.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,20 +18,25 @@ namespace Services.GamesServices.Monopoly
         private List<MonopolyPlayer> Players;
         private SpecialIndexes PlayersSpecialIndexes;
 
-        public MonopolyPlayers(List<Player> PlayersInGame)
+        public MonopolyPlayers()
         {
             Players = new List<MonopolyPlayer>();
             PlayersSpecialIndexes = new SpecialIndexes();
-            InitPlayers(PlayersInGame);
         }
 
-        private void InitPlayers(List<Player> PlayersInGame)
+        public void InitPlayers(List<Player> PlayersInGame)
         {
             for (int i = 0; i < PlayersInGame.Count; i++)
             {
                 AddPlayer((PlayerKey)i);
             }
             PlayersSpecialIndexes.WhosTurn = 0;
+        }
+
+        public void SetMainPlayerIndex(int index)
+        {
+            if (PlayersSpecialIndexes.MainPlayer == -1)
+                PlayersSpecialIndexes.MainPlayer = index;
         }
 
         private void AddPlayer(PlayerKey key)
@@ -101,7 +107,14 @@ namespace Services.GamesServices.Monopoly
             return PlayerKey.NoOne;
         }
 
-        public void UpdateData(List<PlayerUpdateData> PlayersUpdatedData)
+        public void UpdateData(MonopolyUpdateMessage UpdatedData)
+        {
+            UpdatePlayersData(UpdatedData.PlayersData);
+            UpdateMoneyObligation(UpdatedData.MoneyBond);
+            UpdateBankruptPlayer(UpdatedData.BankruptPlayer);
+        }
+
+        private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData)
         {
             for (int i = 0; i < PlayersUpdatedData.Count; i++)
             {
@@ -121,7 +134,7 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey)
+        public void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey)
         {
             CheckIfMainPlayerWentBankrupt(BankruptPlayerKey);
 
@@ -138,6 +151,44 @@ namespace Services.GamesServices.Monopoly
             if (BankruptPlayer == Players[PlayersSpecialIndexes.MainPlayer].Key)
                 PlayersSpecialIndexes.MainPlayer = -1;
         }
+
+        public void ChargeMainPlayer(int ChargeAmount)
+        {
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= ChargeAmount;
+        }
+
+        public void GiveMainPlayerMoney(int MoneyToGive)
+        {
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned += MoneyToGive;
+        }
+
+        public PlayerKey WhoWon()
+        {
+            if (Players.FindAll(p => p != null).Count == 1)
+                return Players.FirstOrDefault(p => p != null).Key;
+
+            return PlayerKey.NoOne;
+        }
+
+        public bool IsAbleToPayForEscapingFromIsland()
+        {
+            return Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned >= Consts.Monopoly.IslandEscapeCost;
+        }
+
+        public bool IsMainPlayerTurn()
+        {
+            return PlayersSpecialIndexes.WhosTurn == PlayersSpecialIndexes.MainPlayer;
+        }
+
+        public void NextTurn()
+        {
+            PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
+
+            while (Players[PlayersSpecialIndexes.WhosTurn] == null)
+                PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
+        }
+
+       
 
     }
 }
