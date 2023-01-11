@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Update;
+using Org.BouncyCastle.Asn1.Cmp;
 
 namespace Services.GamesServices.Monopoly.Board
 {
@@ -148,5 +149,7 @@ namespace Services.GamesServices.Monopoly.Board
                 Board[i].GetBuyingBehavior().SetCosts(BoardUpdatedData[i].NewCosts);
             }
         }
+
+        
     }
 }

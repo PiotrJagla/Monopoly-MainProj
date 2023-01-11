@@ -109,7 +109,7 @@ namespace Services.GamesServices.Monopoly
             return BoardService.CalculateBond(Players[PlayersSpecialIndexes.MainPlayer]);
         }
 
-        private PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
+        private PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData) 
         {
             //There is copy of MoneyObligation Because lambda doesnt accept references
             MoneyObligation BondCopy = new MoneyObligation();
@@ -172,7 +172,7 @@ namespace Services.GamesServices.Monopoly
             BoardService.UpdateData(BoardUpdatedData);
         }
 
-        private void UpdateMoneyObligation(MoneyObligation obligation) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
+        private void UpdateMoneyObligation(MoneyObligation obligation)
         {
             MonopolyPlayer PlayerGettingMoney = Players.FirstOrDefault(p => p!=null &&( p.Key == obligation.PlayerGettingMoney));
             MonopolyPlayer PlayerLosingMoney = Players.FirstOrDefault(p => p!=null &&( p.Key == obligation.PlayerLosingMoney));
@@ -183,7 +183,7 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
+        private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey)
         {
             CheckIfMainPlayerWentBankrupt(BankruptPlayerKey);
 
@@ -193,7 +193,7 @@ namespace Services.GamesServices.Monopoly
                 Players[BankruptPlayerIndex] = null;
         }
 
-        private void CheckIfMainPlayerWentBankrupt(PlayerKey BankruptPlayer) // DODAC DO PLAYERS SERVICE Z ZOBACZENIEM BLEDÓW
+        private void CheckIfMainPlayerWentBankrupt(PlayerKey BankruptPlayer)
         {
             if (PlayersSpecialIndexes.MainPlayer == -1) return;
 

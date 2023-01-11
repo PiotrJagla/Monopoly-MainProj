@@ -110,7 +110,7 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        private void UpdateMoneyObligation(MoneyObligation obligation)
+        public void UpdateMoneyObligation(MoneyObligation obligation)
         {
             MonopolyPlayer PlayerGettingMoney = Players.FirstOrDefault(p => p != null && (p.Key == obligation.PlayerGettingMoney));
             MonopolyPlayer PlayerLosingMoney = Players.FirstOrDefault(p => p != null && (p.Key == obligation.PlayerLosingMoney));
@@ -119,6 +119,24 @@ namespace Services.GamesServices.Monopoly
                 PlayerGettingMoney.MoneyOwned += obligation.ObligationAmount;
                 PlayerLosingMoney.MoneyOwned -= obligation.ObligationAmount;
             }
+        }
+
+        private void UpdateBankruptPlayer(PlayerKey BankruptPlayerKey)
+        {
+            CheckIfMainPlayerWentBankrupt(BankruptPlayerKey);
+
+            MonopolyPlayer BankruptPlayer = Players.FirstOrDefault(p => p != null && (p.Key == BankruptPlayerKey));
+            int BankruptPlayerIndex = Players.IndexOf(BankruptPlayer);
+            if (BankruptPlayerIndex != -1)
+                Players[BankruptPlayerIndex] = null;
+        }
+
+        private void CheckIfMainPlayerWentBankrupt(PlayerKey BankruptPlayer)
+        {
+            if (PlayersSpecialIndexes.MainPlayer == -1) return;
+
+            if (BankruptPlayer == Players[PlayersSpecialIndexes.MainPlayer].Key)
+                PlayersSpecialIndexes.MainPlayer = -1;
         }
 
     }
