@@ -15,33 +15,19 @@ namespace Services.GamesServices.Monopoly
     public interface MonopolyService
     {
         void StartGame(List<Player> PlayersInGame);
-
         List<MonopolyCell> GetBoard();
-
         List<MonopolyCell> GetMainPlayerCells();
-
         MonopolyUpdateMessage GetUpdatedData();
-
         int GetDebtAmount();
-
         void UpdateData(MonopolyUpdateMessage UpdatedData);
-
         MonopolyTurnResult ExecutePlayerMove(int MoveAmount);
-
         void SetMainPlayerIndex(int index);
-
         bool IsYourTurn();
-
         void NextTurn();
-
         void BuyCellIfPossible();
-
         bool DontHaveMoneyToPay();
-
         void SellCell(string CellToSellDisplay);
-
         PlayerKey WhoWon();
-
         MonopolyModalParameters GetModalParameters();
         void ModalResponse(string StringResponse);
 

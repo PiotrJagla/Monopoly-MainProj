@@ -122,7 +122,6 @@ namespace UnitTests.MonopolyTests
                 Client.ExecutePlayerMove(1);
                 if (Client.GetBoard()[i].OnDisplay() == Consts.Monopoly.IslandDiaplsy)
                 {
-                    Client.ModalResponse("Wait");
                     break;
                 }
             }
@@ -167,7 +166,7 @@ namespace UnitTests.MonopolyTests
                     break;
                 }
             }
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 
@@ -192,15 +191,15 @@ namespace UnitTests.MonopolyTests
                 }
             }
             //i am called many times because one time is not enough to test whether client is able to pay
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Client.ModalResponse($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 

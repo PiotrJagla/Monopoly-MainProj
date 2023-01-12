@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZPZD3nEBOmVA5kWUCl4rEPyQkPaRprhtbPr+WobyjkIrE2XByd6+KchwDD58l/iaRT/elZ+qG7oa8w28CF/W4g==",
+  "dgSpecHash": "7s6kC5zjySDAWxH8VMWyh21zaXZ4CRdJ1l/tL+ikNK/qw+rMSA4priUVIPrjpScP9yQykYg6fsrEVDVtDArlGA==",
   "success": true,
   "projectFilePath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\BlazorClient\\BlazorClient.csproj",
   "expectedPackageFiles": [
@@ -60,7 +60,7 @@
     "C:\\Users\\piotr\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\piotr\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\piotr\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.9\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.9.nupkg.sha512"
+    "C:\\Users\\piotr\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.13\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.13.nupkg.sha512"
   ],
   "logs": []
 }

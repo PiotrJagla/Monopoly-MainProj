@@ -18,6 +18,7 @@ namespace Services.GamesServices.Monopoly
 {
     public class MonopolyGameLogic : MonopolyService
     {
+        //TODO: Przenieść logike Liczb turn do wyjścia z bezludnej wypspy do BoardService
         private MonopolyBoard BoardService;
         private MonopolyPlayers PlayersService;
 
@@ -29,15 +30,10 @@ namespace Services.GamesServices.Monopoly
 
         public void StartGame(List<Player> PlayersInGame)
         {
-            if (GameIsAlreadyStarted())
+            if (PlayersService.DidGameStart())
                 return;
 
             PlayersService.InitPlayers(PlayersInGame);
-        }
-
-        private bool GameIsAlreadyStarted()
-        {
-            return PlayersService.GetPlayers().Count != 0;
         }
 
         public List<MonopolyCell> GetBoard()
@@ -58,7 +54,7 @@ namespace Services.GamesServices.Monopoly
         public MonopolyUpdateMessage GetUpdatedData()
         {
             MonopolyUpdateMessage UpdatedData = new MonopolyUpdateMessage();
-            if (GameIsAlreadyStarted() == true)
+            if (PlayersService.DidGameStart() == true)
             {
                 UpdatedData.PlayersData = PlayersService.MakePlayersUpdateData().GetPlayersUpdatedData();
                 UpdatedData.CellsOwners = BoardService.MakeBoardUpdateData().GetCellsUpdateData();
@@ -112,17 +108,18 @@ namespace Services.GamesServices.Monopoly
 
         private bool IsAbleToMove()
         {
-            if (PlayersService.GetMainPlayer().TurnsOnIslandRemaining > 1)
-            {
-                PlayersService.GetMainPlayer().TurnsOnIslandRemaining--;
-                return false;
-            }
-            else
-            {
-                PlayersService.GetMainPlayer().TurnsOnIslandRemaining = 0;
-            }
+            //if (PlayersService.GetMainPlayer().TurnsOnIslandRemaining > 1)
+            //{
+            //    PlayersService.GetMainPlayer().TurnsOnIslandRemaining--;
+            //    return false;
+            //}
+            //else
+            //{
+            //    PlayersService.GetMainPlayer().TurnsOnIslandRemaining = 0;
+            //}
 
-            return true;
+            //return true;
+            return BoardService.IsAbleToMove();
         }
 
         private void OnStartCellCrossed(int MoveAmount)
@@ -140,11 +137,12 @@ namespace Services.GamesServices.Monopoly
 
         private void CheckIfSteppedOnIsland()
         {
-            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-            if (WillStayOnIsland())
-            {
-                MainPlayer.TurnsOnIslandRemaining = 3;
-            }
+            //MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+            //if (WillStayOnIsland())
+            //{
+            //    MainPlayer.TurnsOnIslandRemaining = 3;
+            //}
+            BoardService.CheckIfMainPlayerSteppedOnIsland(PlayersService.GetMainPlayer());
         }
 
         private bool WillStayOnIsland()
@@ -210,19 +208,19 @@ namespace Services.GamesServices.Monopoly
 
         public void ModalResponse(string StringResponse)
         {
-            if(StringResponse == "Throw Dice(Excape if 1 is Rolled)")
+            if(StringResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
             {
                 if(GetRandom.number.Next(1,6) == 1)
                 {
-                    PlayersService.GetMainPlayer().TurnsOnIslandRemaining = 0;
+                    BoardService.EscapeFromIsland();
                 }
             }
-            else if(StringResponse == $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave")
+            else if(StringResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
             {
                 if (IsAbleToPayForEscapingFromIsland())
                 {
                     PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
-                    PlayersService.GetMainPlayer().TurnsOnIslandRemaining = 0;
+                    BoardService.EscapeFromIsland();
                 }
 
             }

@@ -52,6 +52,9 @@ namespace Models
             public static string IslandDiaplsy = "Desert Island";
 
             public static float[] BeachesOwnedMultiplayer = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
+
+            public static string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
+            public static string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
         }
     }
 }

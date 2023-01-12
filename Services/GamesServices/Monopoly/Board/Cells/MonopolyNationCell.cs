@@ -21,7 +21,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
 
-
         public MonopolyNationCell(Costs costs, Nation nation = Nation.NoNation)
         {
             OfNation = nation;

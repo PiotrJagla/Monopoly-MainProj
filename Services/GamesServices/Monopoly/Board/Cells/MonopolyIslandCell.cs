@@ -14,11 +14,13 @@ namespace Services.GamesServices.Monopoly.Board.Cells
     public class MonopolyIslandCell : MonopolyCell
     {
         private int TurnsRemaining;
+        private readonly Int TurnsOnIslandRemainingREF;
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
 
-        public MonopolyIslandCell()
+        public MonopolyIslandCell(Int TurnsOnIslandRemaining)
         {
+            TurnsOnIslandRemainingREF = TurnsOnIslandRemaining;
             TurnsRemaining = 0;
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
             monopolBehaviour = new NoMonopolBehaviour();
@@ -32,9 +34,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyModalParameters GetModalParameters()
         {
             StringModalParameters Result = new StringModalParameters();
-            Result.Title = $"You Are On Desert Island For {GetTurnsRemaining()} Turns";
-            Result.ButtonsContent.Add($"Pay {Consts.Monopoly.IslandEscapeCost} To Leave");
-            Result.ButtonsContent.Add("Throw Dice(Excape if 1 is Rolled)");
+            Result.Title = $"You Are On Desert Island For {TurnsOnIslandRemainingREF.Value} Turns";
+            Result.ButtonsContent.Add(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Result.ButtonsContent.Add(Consts.Monopoly.ThrowDiceIslandButtonContent);
             return new MonopolyModalParameters(Result, ModalShow.BeforeMove);
         }
 

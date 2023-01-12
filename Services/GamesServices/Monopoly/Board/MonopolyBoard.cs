@@ -14,11 +14,13 @@ namespace Services.GamesServices.Monopoly.Board
 {
     public class MonopolyBoard
     {
-        private List<MonopolyCell> Board = new List<MonopolyCell>();
+        private List<MonopolyCell> Board;
+        private Int MainPlayerTurnsOnIslandRemaining;
 
         public MonopolyBoard()
         {
             Board = new List<MonopolyCell>();
+            MainPlayerTurnsOnIslandRemaining = new Int();
             InitBoard();
         }
 
@@ -37,7 +39,7 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(150, 100), Nation.France));
 
-            Board.Add(new MonopolyIslandCell());
+            Board.Add(new MonopolyIslandCell(MainPlayerTurnsOnIslandRemaining));
 
 
             Board.Add(new MonopolyNationCell(new Costs(180, 140), Nation.Argentina));
@@ -162,6 +164,39 @@ namespace Services.GamesServices.Monopoly.Board
             }
         }
 
-        
+        public void EscapeFromIsland()
+        {
+            MainPlayerTurnsOnIslandRemaining.Value = 0;
+        }
+
+        public bool IsAbleToMove()
+        {
+            if (MainPlayerTurnsOnIslandRemaining.Value > 1)
+            {
+                MainPlayerTurnsOnIslandRemaining.Value--;
+                return false;
+            }
+            else
+            {
+                MainPlayerTurnsOnIslandRemaining.Value = 0;
+            }
+
+            return true;
+        }
+
+        public void CheckIfMainPlayerSteppedOnIsland(MonopolyPlayer MainPlayer)
+        {
+            if (WillStayOnIsland(MainPlayer))
+            {
+                MainPlayerTurnsOnIslandRemaining.Value = 3;
+            }
+        }
+
+        private bool WillStayOnIsland(MonopolyPlayer MainPlayer)
+        {
+            return SteppedOnIsland(MainPlayer.OnCellIndex) &&
+                   MainPlayerTurnsOnIslandRemaining.Value == 0;
+        }
+
     }
 }

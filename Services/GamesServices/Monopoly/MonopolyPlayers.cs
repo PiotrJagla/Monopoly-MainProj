@@ -55,14 +55,14 @@ namespace Services.GamesServices.Monopoly
             return PlayersUpdatedData;
         }
 
-        public List<MonopolyPlayer> GetPlayers()
-        {
-            return Players;
-        }
-
         public MonopolyPlayer GetMainPlayer()
         {
             return Players[PlayersSpecialIndexes.MainPlayer];
+        }
+
+        public bool DidGameStart()
+        {
+            return Players.Count != 0;
         }
 
         public PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData)
