@@ -9,6 +9,11 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
 {
     public class NoMonopolBehaviour : MonopolBehaviour
     {
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            return Board;
+        }
+
         public List<MonopolyCell> UpdateBoardMonopol(in List<MonopolyCell> Board, int OnCell)
         {
             return Board;

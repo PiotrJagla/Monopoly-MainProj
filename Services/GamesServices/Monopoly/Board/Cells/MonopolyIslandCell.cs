@@ -40,16 +40,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return new MonopolyModalParameters(Result, ModalShow.BeforeMove);
         }
 
-        private int GetTurnsRemaining()
-        {
-            if (TurnsRemaining <= 1)
-                TurnsRemaining = 3;
-            else
-                TurnsRemaining--;
-
-            return TurnsRemaining;
-        }
-
         public Nation GetNation()
         {
             return Nation.NoNation;
@@ -68,6 +58,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public CellBuyingBehaviour GetBuyingBehavior()
         {
             return BuyingBehaviour;
+        }
+
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            return monopolBehaviour.GetMonopolOff(Board,OnCell);
         }
     }
 }

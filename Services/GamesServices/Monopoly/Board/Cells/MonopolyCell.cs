@@ -15,6 +15,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         Beach GetBeachName();
 
         List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell);
+        List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell);
         CellBuyingBehaviour GetBuyingBehavior();
         string OnDisplay();
         MonopolyModalParameters GetModalParameters();

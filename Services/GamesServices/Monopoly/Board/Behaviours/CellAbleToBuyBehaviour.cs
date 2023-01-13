@@ -33,7 +33,17 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
 
         public void MultiplyStayCostAmount(float Multiplayer)
         {
-            ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
+            if (Multiplayer < 1.0f)
+            {
+                if (BaseCosts.Stay != ActualCosts.Stay)
+                {
+                    ActualCosts.Stay = (int)((float)ActualCosts.Stay * Multiplayer);
+                }
+            }
+            else
+            {
+                ActualCosts.Stay = (int)(BaseCosts.Stay * Multiplayer);
+            }
         }
 
         public void SetCosts(Costs costs)

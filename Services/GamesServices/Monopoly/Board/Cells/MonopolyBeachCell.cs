@@ -58,5 +58,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return BuyingBehaviour;
         }
+
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            return monopolBehaviour.GetMonopolOff(Board,OnCell);
+        }
     }
 }

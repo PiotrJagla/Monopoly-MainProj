@@ -7,6 +7,7 @@ using Services.GamesServices.Monopoly.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,14 @@ namespace Services.GamesServices.Monopoly
 
         public MonopolyPlayer GetMainPlayer()
         {
-            return Players[PlayersSpecialIndexes.MainPlayer];
+            try
+            {
+                return Players[PlayersSpecialIndexes.MainPlayer];
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public bool DidGameStart()
@@ -118,8 +126,11 @@ namespace Services.GamesServices.Monopoly
         {
             for (int i = 0; i < PlayersUpdatedData.Count; i++)
             {
-                Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex = PlayersUpdatedData[i].Position;
-                Players[PlayersUpdatedData[i].PlayerIndex].MoneyOwned = PlayersUpdatedData[i].Money;
+                if (Players[PlayersUpdatedData[i].PlayerIndex] != null)
+                {
+                    Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex = PlayersUpdatedData[i].Position;
+                    Players[PlayersUpdatedData[i].PlayerIndex].MoneyOwned = PlayersUpdatedData[i].Money;
+                }
             }
         }
 

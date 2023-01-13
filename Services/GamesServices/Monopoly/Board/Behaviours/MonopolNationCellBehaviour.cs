@@ -11,6 +11,27 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
 {
     public class MonopolNationCellBehaviour : MonopolBehaviour
     {
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
+            UpdatedBoard = Board;
+
+            List<MonopolyCell> AllCellsOfSoldNations = new List<MonopolyCell>();
+            AllCellsOfSoldNations = UpdatedBoard.FindAll(c => c.GetNation() == UpdatedBoard[OnCell].GetNation());
+
+            MultiplyCellsStayCost(ref UpdatedBoard, AllCellsOfSoldNations, 1.0f / Consts.Monopoly.MonopolMultiplayer);
+
+            return UpdatedBoard;
+        }
+
+        private void MultiplyCellsStayCost(ref List<MonopolyCell> Board, List<MonopolyCell> CellsToMultiply, float Multiplayer)
+        {
+            foreach (var monopolCell in CellsToMultiply)
+            {
+                Board[Board.IndexOf(monopolCell)].GetBuyingBehavior().MultiplyStayCostAmount(Multiplayer);
+            }
+        }
+
         public List<MonopolyCell> UpdateBoardMonopol(in List<MonopolyCell> Board, int OnCell)
         {
             List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
@@ -40,5 +61,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
                 UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetBuyingBehavior().MultiplyStayCostAmount(Consts.Monopoly.MonopolMultiplayer);
             }
         }
+
+        
     }
 }

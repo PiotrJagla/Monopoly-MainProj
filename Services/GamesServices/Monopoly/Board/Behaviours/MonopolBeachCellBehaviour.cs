@@ -54,5 +54,10 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
                 );
             }
         }
+
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            return Board;
+        }
     }
 }

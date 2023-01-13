@@ -18,7 +18,6 @@ namespace Services.GamesServices.Monopoly
 {
     public class MonopolyGameLogic : MonopolyService
     {
-        //TODO: Przenieść logike Liczb turn do wyjścia z bezludnej wypspy do BoardService
         private MonopolyBoard BoardService;
         private MonopolyPlayers PlayersService;
 
@@ -69,7 +68,16 @@ namespace Services.GamesServices.Monopoly
             PlayersService.UpdateData(UpdatedData);
             BoardService.UpdateData(UpdatedData.CellsOwners);
         }
-        
+
+        public void SellCell(string CellToSellDisplay)
+        {
+            MonopolyCell CellToSellRef = BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == CellToSellDisplay);
+
+            CellToSellRef.GetBuyingBehavior().SetOwner(PlayerKey.NoOne);
+            PlayersService.GiveMainPlayerMoney(CellToSellRef.GetBuyingBehavior().GetCosts().Buy);
+            BoardService.GetMonopolOff(CellToSellRef);
+        }
+
         public void BuyCellIfPossible()
         {
             MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
@@ -108,17 +116,6 @@ namespace Services.GamesServices.Monopoly
 
         private bool IsAbleToMove()
         {
-            //if (PlayersService.GetMainPlayer().TurnsOnIslandRemaining > 1)
-            //{
-            //    PlayersService.GetMainPlayer().TurnsOnIslandRemaining--;
-            //    return false;
-            //}
-            //else
-            //{
-            //    PlayersService.GetMainPlayer().TurnsOnIslandRemaining = 0;
-            //}
-
-            //return true;
             return BoardService.IsAbleToMove();
         }
 
@@ -137,18 +134,7 @@ namespace Services.GamesServices.Monopoly
 
         private void CheckIfSteppedOnIsland()
         {
-            //MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-            //if (WillStayOnIsland())
-            //{
-            //    MainPlayer.TurnsOnIslandRemaining = 3;
-            //}
             BoardService.CheckIfMainPlayerSteppedOnIsland(PlayersService.GetMainPlayer());
-        }
-
-        private bool WillStayOnIsland()
-        {
-            return BoardService.SteppedOnIsland(PlayersService.GetMainPlayer().OnCellIndex) &&
-                   PlayersService.GetMainPlayer().TurnsOnIslandRemaining == 0;
         }
 
         private MonopolyTurnResult MakeTurnResult()
@@ -182,17 +168,6 @@ namespace Services.GamesServices.Monopoly
         public bool DontHaveMoneyToPay()
         {
             return BoardService.DontHaveMoneyToPay(PlayersService.GetMainPlayer());
-        }
-
-        public void SellCell(string CellToSellDisplay)
-        {
-            MonopolyCell CellToSellRef = BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == CellToSellDisplay);
-
-            if (CellToSellRef != null)
-            {
-                CellToSellRef.GetBuyingBehavior().SetOwner(PlayerKey.NoOne);
-                PlayersService.GiveMainPlayerMoney(CellToSellRef.GetBuyingBehavior().GetCosts().Buy);
-            }
         }
 
         public PlayerKey WhoWon()

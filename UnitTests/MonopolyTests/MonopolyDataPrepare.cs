@@ -27,46 +27,22 @@ namespace UnitTests.MonopolyTests
 
     public class MonopolyDataPrepare
     {
-        private static PlayerKey[][] PlayersBuyingOrderInTurns_XClients = new PlayerKey[][]
-        {
-            new PlayerKey[]{ },
-            new PlayerKey[]{ },
-            new PlayerKey[]{
-                PlayerKey.First, PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
-                PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
-            },
-            new PlayerKey[]{ 
-                PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
-                PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne
-            }
-        };
-
-        private static PlayerKey[] PlayersBuyingOrderOnTurns = new PlayerKey[] { };
-
         private static List<MoneyFlow> PlayersMoneyFlow;
 
-        public static List<MoneyFlow> ExecuteTurnsNumber(int TurnsAmount, ref List<MonopolyService> Clients)
+        public static List<MoneyFlow> ExecuteTurnsNumber(int TurnsAmount, ref List<MonopolyService> Clients, PlayerKey[] BuyingOrder)
         {
             PrepareClientsData(ref Clients);
-            ExecuteTurns(TurnsAmount, ref Clients);
+            ExecuteTurns(TurnsAmount, ref Clients, BuyingOrder);
             return PlayersMoneyFlow;
         }
 
         public static void PrepareClientsData(ref List<MonopolyService> Clients)
         {
-            ChooseBuyingOrder(Clients.Count);
             List<Player> Players = AddPlayers(ref Clients);
             StartClientsGame(ref Clients, Players);
             SetMainPlayersIndex(ref Clients);
             List<MonopolyService> Clients2 = InitClients(Clients.Count);
             Clients = Clients2;
-        }
-
-
-
-        private static void ChooseBuyingOrder(int ClientsNumber)
-        {
-            PlayersBuyingOrderOnTurns = PlayersBuyingOrderInTurns_XClients[ClientsNumber];
         }
 
         public static List<MonopolyService> InitClients(int HowMany)
@@ -112,21 +88,21 @@ namespace UnitTests.MonopolyTests
             }
         }
 
-        private static void ExecuteTurns(int TurnsAmount,ref List<MonopolyService> Clients)
+        private static void ExecuteTurns(int TurnsAmount,ref List<MonopolyService> Clients, PlayerKey[] BuyingOrder)
         {
             for (int turn = 0; turn < TurnsAmount; turn++)
             {
-                ExecuteClientsTurn(ref Clients, turn);
+                ExecuteClientsTurn(ref Clients, turn, BuyingOrder);
             }
         }
 
-        private static void ExecuteClientsTurn(ref List<MonopolyService> Clients, int turn)
+        private static void ExecuteClientsTurn(ref List<MonopolyService> Clients, int turn, PlayerKey[] BuyingOrder)
         {
             for (int clientIndex = 0; clientIndex < Clients.Count; clientIndex++)
             {
                 MonopolyService CurrentClient = Clients[clientIndex];
                 ExecuteClientTestTurn(ref CurrentClient, turn);
-                BuyCell(turn, clientIndex, ref CurrentClient);
+                BuyCell(turn, clientIndex, ref CurrentClient, BuyingOrder);
                 SellCell(turn, clientIndex, ref CurrentClient);
                 UpdateExpectedMoneyFlow(Clients, turn, clientIndex);
                 UpdateOthers(ref Clients, ref CurrentClient);
@@ -142,10 +118,20 @@ namespace UnitTests.MonopolyTests
             }
         }
 
-        private static void BuyCell(int turn, int clientIndex, ref MonopolyService CurrentClient)
+        public static void ExecuteClientTestTurn(ref List<MonopolyService> Clients,int ClientIndex,  int turn)
+        {
+            Clients[ClientIndex].ExecutePlayerMove(1);
+            if (Clients[ClientIndex].GetBoard()[turn] is MonopolyIslandCell)
+            {
+                Clients[ClientIndex].ExecutePlayerMove(1);
+                Clients[ClientIndex].ExecutePlayerMove(1);
+            }
+        }
+
+        private static void BuyCell(int turn, int clientIndex, ref MonopolyService CurrentClient, PlayerKey[] BuyingOrder)
         {
             int CellIndex = (turn + 1) % CurrentClient.GetBoard().Count;
-            if (PlayersBuyingOrderOnTurns[turn] == (PlayerKey)clientIndex)
+            if (BuyingOrder[turn] == (PlayerKey)clientIndex)
             {
                 PlayersMoneyFlow[clientIndex].Loss += CurrentClient.GetBoard()[CellIndex].GetBuyingBehavior().GetCosts().Buy;
                 CurrentClient.BuyCellIfPossible();

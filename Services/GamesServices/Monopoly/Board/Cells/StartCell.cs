@@ -35,6 +35,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return null;
         }
 
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            return monopolBehaviour.GetMonopolOff(Board,OnCell);
+        }
+
         public Nation GetNation()
         {
             return Nation.NoNation;

@@ -17,6 +17,12 @@ namespace UnitTests.MonopolyTests
     [TestClass]
     public class MonopolyTestsThreeClients
     {
+        private PlayerKey[] BuyingOrder = new PlayerKey[]
+        {
+            PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
+            PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne
+        };
+
         private List<MonopolyService> Clients;
 
         [TestInitialize]
@@ -43,7 +49,7 @@ namespace UnitTests.MonopolyTests
             for (int turn = 1; turn <= TurnsToTest; turn++)
             {
                 Clients = ResetClients();
-                List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(turn, ref Clients);
+                List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(turn, ref Clients, BuyingOrder);
 
                 List<PlayerUpdateData> ActualMoney = Clients[0].GetUpdatedData().PlayersData;
                 List<int> ExpectedMoney = MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow);
@@ -54,14 +60,12 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BankrupcyTest1()
         {
-
-            List<MonopolyService> Clients = null;
             List<MoneyFlow> PlayersMoneyFlow = null;
 
             for (int i = 1; ; i++)
             {
                 Clients = ResetClients();
-                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
                 if (PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[2].Loss)
                 {
@@ -84,7 +88,7 @@ namespace UnitTests.MonopolyTests
             for (int i = 1; ; i++)
             {
                 Clients = ResetClients();
-                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
                 if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
                 {
@@ -155,7 +159,7 @@ namespace UnitTests.MonopolyTests
             for (int i = 1; ; i++)
             {
                 Clients = ResetClients();
-                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
                 if (PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[2].Loss &&
                     PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)

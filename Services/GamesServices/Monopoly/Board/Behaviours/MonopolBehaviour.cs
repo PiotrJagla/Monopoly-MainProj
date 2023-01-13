@@ -10,5 +10,6 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
     public interface MonopolBehaviour
     {
         List<MonopolyCell> UpdateBoardMonopol(in List<MonopolyCell> Board, int OnCell);
+        List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell);
     }
 }
