@@ -25,6 +25,14 @@ namespace UnitTests.MonopolyTests
 
         };
 
+        private PlayerKey[] BuyingOrderFirstWinner = new PlayerKey[]
+        {
+            PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
+            PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,
+            PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
+
+        };
+
         private List<MonopolyService> Clients;
 
         [TestInitialize]
@@ -162,7 +170,7 @@ namespace UnitTests.MonopolyTests
             {
                 g = i;
                 Clients = ResetClients();
-                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
+                PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderFirstWinner);
 
                 if ((PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount) < PlayersMoneyFlow[2].Loss &&
                     (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount) < PlayersMoneyFlow[1].Loss)
@@ -175,7 +183,7 @@ namespace UnitTests.MonopolyTests
             Clients[1].UpdateData(Clients[1].GetUpdatedData());
             Clients[2].UpdateData(Clients[2].GetUpdatedData());
 
-            //Assert.IsTrue(Clients[0].WhoWon() == PlayerKey.First);
+            Assert.IsTrue(Clients[0].WhoWon() == PlayerKey.First);
             Assert.IsTrue(Clients[1].WhoWon() == PlayerKey.First);
             Assert.IsTrue(Clients[2].WhoWon() == PlayerKey.First);
         }
