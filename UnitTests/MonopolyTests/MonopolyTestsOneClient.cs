@@ -102,6 +102,63 @@ namespace UnitTests.MonopolyTests
         }
 
         [TestMethod]
+        public void LosingMonopolAfterSellingBeachCell_Had2Sold1()
+        {
+            List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p is MonopolyBeachCell);
+            int FirstBeachStayCost = BeachCells[0].GetBuyingBehavior().GetCosts().Stay;
+
+            for (int i = 1; ; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+
+                if (Client.GetBoard()[i] is MonopolyBeachCell)
+                    Client.BuyCellIfPossible();
+
+                if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
+                    break;
+            }
+            MonopolyCell? CellToSell = Client.GetBoard().FirstOrDefault(
+                b => b.GetBeachName() == BeachCells[1].GetBeachName()
+            );
+            Client.SellCell(CellToSell.OnDisplay());
+            int ActualValue = Client.GetBoard().FirstOrDefault(
+                b => b.GetBeachName() == BeachCells[0].GetBeachName()
+            ).GetBuyingBehavior().GetCosts().Stay;
+
+            Assert.IsTrue(ActualValue == FirstBeachStayCost);
+        }
+
+        [TestMethod]
+        public void LosingMonopolAfterSellingBeachCell_Had3Sold1()
+        {
+            List<MonopolyCell> BeachCells = Client.GetBoard().FindAll(p => p is MonopolyBeachCell);
+            int SecoundBeachCellStayCost = BeachCells[1].GetBuyingBehavior().GetCosts().Stay;
+
+            for (int i = 1; ; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+
+                if (Client.GetBoard()[i] is MonopolyBeachCell)
+                    Client.BuyCellIfPossible();
+
+                if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
+                    break;
+            }
+            MonopolyCell? CellToSell = Client.GetBoard().FirstOrDefault(
+                b => b.GetBeachName() == BeachCells[2].GetBeachName()
+            );
+            Client.SellCell(CellToSell.OnDisplay());
+
+            int ExpectedValue = (int)(SecoundBeachCellStayCost * Consts.Monopoly.BeachesOwnedMultiplayer[2]);
+
+            int ActualValue = Client.GetBoard().FirstOrDefault(
+                b => b.GetBeachName() == BeachCells[1].GetBeachName()
+            ).GetBuyingBehavior().GetCosts().Stay;
+
+            Assert.IsTrue(ExpectedValue == ActualValue);
+        }
+
+        [TestMethod]
         public void IsAbleToBuyStartCell_ShouldBeNo()
         {
             for (int i = 1; i < Client.GetBoard().Count; i++)

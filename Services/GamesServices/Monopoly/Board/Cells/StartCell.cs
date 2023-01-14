@@ -40,7 +40,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return Nation.NoNation;
         }
 
-        public MonopolBehaviour MonopolCHanges_NEW()
+        public MonopolBehaviour MonopolCHanges()
         {
             return monopolBehaviour;
         }

@@ -13,6 +13,16 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
     {
         public List<MonopolyCell> UpdateBoardMonopol(in List<MonopolyCell> Board, int OnCell)
         {
+            return ChangeBeachesStayCost(Board);
+        }
+
+        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        {
+            return ChangeBeachesStayCost(Board);
+        }
+
+        private List<MonopolyCell> ChangeBeachesStayCost(in List<MonopolyCell> Board)
+        {
             List<MonopolyCell> NewBoard = Board;
 
             List<MonopolyCell> AllBeaches = NewBoard.FindAll(c => c is MonopolyBeachCell);
@@ -35,10 +45,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
                 List<MonopolyCell> AllBeachesWithSameOwner = new List<MonopolyCell>();
                 AllBeachesWithSameOwner = AllBeaches.FindAll(b => b.GetBuyingBehavior().GetOwner() == CurrentBeachCellOwner);
 
-                if (AllBeachesWithSameOwner.Count >= 2)
-                {
-                    ApplyMonopol(ref NewBoard, AllBeachesWithSameOwner);
-                }
+                ApplyMonopol(ref NewBoard, AllBeachesWithSameOwner);
 
                 CheckedOwners.Add(CurrentBeachCellOwner);
             }
@@ -53,11 +60,6 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
                     Consts.Monopoly.BeachesOwnedMultiplayer[AllBeachesWithSameOwner.Count]
                 );
             }
-        }
-
-        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
-        {
-            return Board;
         }
     }
 }

@@ -106,13 +106,13 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void CheckForMonopolOf(MonopolyPlayer aPlayer)
         {
-            Board = Board[aPlayer.OnCellIndex].MonopolCHanges_NEW().UpdateBoardMonopol(Board, aPlayer.OnCellIndex);
+            Board = Board[aPlayer.OnCellIndex].MonopolCHanges().UpdateBoardMonopol(Board, aPlayer.OnCellIndex);
         }
 
         public void GetMonopolOff(MonopolyCell aCell)
         {
             int aCellIndex = Board.IndexOf(aCell);
-            Board = Board[aCellIndex].MonopolCHanges_NEW().GetMonopolOff(Board, aCellIndex);
+            Board = Board[aCellIndex].MonopolCHanges().GetMonopolOff(Board, aCellIndex);
         }
 
         public void SetChampionship(string OnCellDisplay)

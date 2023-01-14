@@ -56,7 +56,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         }
 
 
-        public MonopolBehaviour MonopolCHanges_NEW()
+        public MonopolBehaviour MonopolCHanges()
         {
             return monopolBehaviour;
         }

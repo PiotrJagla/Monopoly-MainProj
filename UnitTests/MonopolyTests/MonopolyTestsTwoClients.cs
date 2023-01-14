@@ -118,6 +118,7 @@ namespace UnitTests.MonopolyTests
                 Clients = ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderInLosingMonopolCheck);
 
+
                 if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
                 {
                     break;
