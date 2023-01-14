@@ -11,12 +11,11 @@ using System.Threading.Tasks;
 
 namespace Services.GamesServices.Monopoly.Board.Cells
 {
-    public class ChampionshipCell : MonopolyCell
+    public class AirportCell : MonopolyCell
     {
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
-
-        public ChampionshipCell()
+        public AirportCell()
         {
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
             monopolBehaviour = new NoMonopolBehaviour();
@@ -36,19 +35,12 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             StringModalParameters Parameters = new StringModalParameters();
 
+            Parameters.Title = "Choose a cell where you want to go";
             foreach (var cell in Board)
             {
-                if(IsCellAddedToModal(cell,MainPlayerKey))
-                    Parameters.ButtonsContent.Add(cell.OnDisplay());
+                Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
-
-            Parameters.Title = "Choose Cell To Set World Championship";
-            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
-        }
-
-        private bool IsCellAddedToModal(MonopolyCell cell, PlayerKey MainPlayerKey)
-        {
-            return cell is MonopolyNationCell && cell.GetBuyingBehavior().GetOwner() == MainPlayerKey;
+            return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove);
         }
 
         public Nation GetNation()
@@ -63,7 +55,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public string OnDisplay()
         {
-            return "World Championship";
+            return "Airport";
         }
     }
 }

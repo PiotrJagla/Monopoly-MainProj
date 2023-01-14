@@ -55,7 +55,9 @@ namespace Services.GamesServices.Monopoly.Board
 
         public List<MonopolyCell> GetBoard()
         {
-            return Board;
+            List<MonopolyCell> BoardCopy = new List<MonopolyCell>();
+            BoardCopy = Board;
+            return BoardCopy;
         }
 
         public bool DontHaveMoneyToPay(MonopolyPlayer Debtor)
@@ -106,13 +108,13 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void CheckForMonopolOf(MonopolyPlayer aPlayer)
         {
-            Board = Board[aPlayer.OnCellIndex].MonopolCHanges().UpdateBoardMonopol(Board, aPlayer.OnCellIndex);
+            Board = Board[aPlayer.OnCellIndex].MonopolChanges().UpdateBoardMonopol(Board, aPlayer.OnCellIndex);
         }
 
         public void GetMonopolOff(MonopolyCell aCell)
         {
             int aCellIndex = Board.IndexOf(aCell);
-            Board = Board[aCellIndex].MonopolCHanges().GetMonopolOff(Board, aCellIndex);
+            Board = Board[aCellIndex].MonopolChanges().GetMonopolOff(Board, aCellIndex);
         }
 
         public void SetChampionship(string OnCellDisplay)
@@ -120,23 +122,19 @@ namespace Services.GamesServices.Monopoly.Board
             MonopolyCell? CellWithChampionship = Board.FirstOrDefault(
                 c => c.GetBuyingBehavior().IsThereChampionship() == true
             );
+            if (CellWithChampionship != null)
+                CellWithChampionship.GetBuyingBehavior().GetChampionshipOff();
+
+
             MonopolyCell? CellToSetChampionship = Board.FirstOrDefault(
                 c => c.OnDisplay() == OnCellDisplay
             );
             CellToSetChampionship.GetBuyingBehavior().SetChampionship();
-
-            if (CellWithChampionship != null)
-                CellWithChampionship.GetBuyingBehavior().GetChampionshipOff();
         }
 
         public MonopolyModalParameters GetCellModalParameters(MonopolyPlayer MainPlayer)
         {
             return Board[MainPlayer.OnCellIndex].GetModalParameters(Board, MainPlayer.Key);
-        }
-
-        public bool SteppedOnIsland(int CellIndex)
-        {
-            return Board[CellIndex] is MonopolyIslandCell;
         }
 
         public MonopolyBoardUpdateData MakeBoardUpdateData()
@@ -219,7 +217,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         private bool WillStayOnIsland(MonopolyPlayer MainPlayer)
         {
-            return SteppedOnIsland(MainPlayer.OnCellIndex) &&
+            return Board[MainPlayer.OnCellIndex] is MonopolyIslandCell &&
                    MainPlayerTurnsOnIslandRemaining.Value == 0;
         }
 

@@ -60,7 +60,9 @@ namespace Services.GamesServices.Monopoly
         {
             try
             {
-                return Players[PlayersSpecialIndexes.MainPlayer];
+                MonopolyPlayer MainPlayerCopy = new MonopolyPlayer();
+                MainPlayerCopy = Players[PlayersSpecialIndexes.MainPlayer];
+                return MainPlayerCopy;
             }
             catch
             {

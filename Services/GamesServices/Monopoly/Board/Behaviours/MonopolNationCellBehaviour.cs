@@ -24,14 +24,6 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
             return UpdatedBoard;
         }
 
-        private void MultiplyCellsStayCost(ref List<MonopolyCell> Board, List<MonopolyCell> CellsToMultiply, float Multiplayer)
-        {
-            foreach (var monopolCell in CellsToMultiply)
-            {
-                Board[Board.IndexOf(monopolCell)].GetBuyingBehavior().MultiplyStayCostAmount(Multiplayer);
-            }
-        }
-
         public List<MonopolyCell> UpdateBoardMonopol(in List<MonopolyCell> Board, int OnCell)
         {
             List<MonopolyCell> UpdatedBoard = new List<MonopolyCell>();
@@ -49,19 +41,17 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours
 
             if (SingleNationCells.Count == SingleNationCellsWithSameOwner.Count)
             {
-                ApplyMonopol(ref UpdatedBoard, SingleNationCells);
+                MultiplyCellsStayCost(ref UpdatedBoard, SingleNationCells, Consts.Monopoly.MonopolMultiplayer);
             }
             return UpdatedBoard;
         }
-
-        private void ApplyMonopol(ref List<MonopolyCell> UpdatedBoard, List<MonopolyCell> SingleNationCells)
+        private void MultiplyCellsStayCost(ref List<MonopolyCell> Board, List<MonopolyCell> CellsToMultiply, float Multiplayer)
         {
-            foreach (var monopolCell in SingleNationCells)
+            foreach (var monopolCell in CellsToMultiply)
             {
-                UpdatedBoard[UpdatedBoard.IndexOf(monopolCell)].GetBuyingBehavior().MultiplyStayCostAmount(Consts.Monopoly.MonopolMultiplayer);
+                Board[Board.IndexOf(monopolCell)].GetBuyingBehavior().MultiplyStayCostAmount(Multiplayer);
             }
         }
 
-        
     }
 }
