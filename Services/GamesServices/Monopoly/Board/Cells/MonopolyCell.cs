@@ -1,5 +1,6 @@
 ﻿using Enums.Monopoly;
 using Models.Monopoly;
+using Services.GamesServices.Monopoly.Board.Behaviours;
 using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         Nation GetNation();
         Beach GetBeachName();
 
-        List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell);
-        List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell);
         CellBuyingBehaviour GetBuyingBehavior();
+
+        MonopolBehaviour MonopolCHanges_NEW();
         string OnDisplay();
-        MonopolyModalParameters GetModalParameters();
+        MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey);
     }
 }

@@ -17,5 +17,9 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
         void SetCosts(Costs costs);
         void MultiplyStayCostAmount(float Multiplayer);
 
+        bool IsThereChampionship();
+        void SetChampionship();
+        void GetChampionshipOff();
+
     }
 }

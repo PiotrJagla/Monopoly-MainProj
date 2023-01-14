@@ -207,6 +207,39 @@ namespace UnitTests.MonopolyTests
             Assert.IsTrue(ActualMoney >= 0);
 
         }
+
+        [TestMethod]
+        public void WorldChampionshipSettingTest_TwoChampinships()
+        {
+            int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+            int ExpectedStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
+
+            int ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+            Assert.IsTrue(ExpectedStayCost1 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost1);
+            Assert.IsTrue(Client.GetBoard()[1].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo));
+
+
+            Client.ModalResponse(Client.GetBoard()[2].OnDisplay());
+            ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+            int ActualStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
+            Assert.IsTrue(ExpectedStayCost2 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost2);
+            Assert.IsTrue(ExpectedStayCost1 == ActualStayCost1);
+            Assert.IsTrue(Client.GetBoard()[1].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo) == false);
+            Assert.IsTrue(Client.GetBoard()[2].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo));
+        }
+
+        [TestMethod]
+        public void WorldChampionshipSettingTest_OneChampionship()
+        {
+            int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
+
+            int ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+            Assert.IsTrue(ExpectedStayCost1 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost1);
+
+        }
+
     }
 
 }

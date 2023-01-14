@@ -128,22 +128,39 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected async Task Move()
         {
-            try
-            {
-                await PlayersMove();
-                await CheckForBanckrupcy();
-                await BrodcastUpdatedInformations();
-            }
-            catch
-            {
-                Messages.Add("Game has not started yet");
-            }
+
+            await PlayersMove();
+            await CheckForBanckrupcy();
+            await BrodcastUpdatedInformations();
+            //try
+            //{
+            //    await PlayersMove();
+            //    await CheckForBanckrupcy();
+            //    await BrodcastUpdatedInformations();
+            //}
+            //catch
+            //{
+            //    Messages.Add("Game has not started yet");
+            //}
         }
         private async Task PlayersMove()
         {
             if (MonopolyLogic.ExecutePlayerMove(1) == MonopolyTurnResult.CanBuyCell)
             {
                 await CellBuyingProcess();
+            }
+
+            MonopolyModalParameters StringParameters = MonopolyLogic.GetModalParameters();
+            if (StringParameters != null && StringParameters.WhenShowModal == ModalShow.AfterMove)
+            {
+                ModalParameters parameters = new ModalParameters();
+                parameters.Add(nameof(SelectButtonModal.StringParameters), StringParameters.Parameters);
+                var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
+                var Response = await ModalResponse.Result;
+                if (Response.Confirmed)
+                {
+                    MonopolyLogic.ModalResponse(Response.Data.ToString());
+                }
             }
         }
 

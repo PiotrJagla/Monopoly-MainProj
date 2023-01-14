@@ -110,8 +110,9 @@ namespace UnitTests.MonopolyTests
         }
         public static void ExecuteClientTestTurn(ref MonopolyService Client, int turn)
         {
+            int CellIndex = (turn + 1) % Client.GetBoard().Count;
             Client.ExecutePlayerMove(1);
-            if (Client.GetBoard()[turn] is MonopolyIslandCell)
+            if (Client.GetBoard()[CellIndex] is MonopolyIslandCell)
             {
                 Client.ExecutePlayerMove(1);
                 Client.ExecutePlayerMove(1);

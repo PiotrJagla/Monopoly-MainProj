@@ -12,7 +12,7 @@ namespace Models.Monopoly
         public ModalShow WhenShowModal { get; set; }
         public StringModalParameters Parameters { get; set; }
 
-        public MonopolyModalParameters(StringModalParameters Parameters = null, ModalShow WhenShowModal = ModalShow.Never)
+        public MonopolyModalParameters(StringModalParameters Parameters, ModalShow WhenShowModal = ModalShow.Never)
         {
             this.Parameters = Parameters;
             this.WhenShowModal = WhenShowModal;

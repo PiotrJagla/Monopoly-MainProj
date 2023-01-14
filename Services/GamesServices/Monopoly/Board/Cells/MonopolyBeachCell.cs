@@ -30,10 +30,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return Nation.NoNation;
         }
-        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
-        {
-            return monopolBehaviour.UpdateBoardMonopol(Board, OnCell);
-        }
         
         public string OnDisplay()
         {
@@ -49,7 +45,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BeachName;
         }
 
-        public MonopolyModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
         {
             return null;
         }
@@ -59,9 +55,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+
+        public MonopolBehaviour MonopolCHanges_NEW()
         {
-            return monopolBehaviour.GetMonopolOff(Board,OnCell);
+            return monopolBehaviour;
         }
     }
 }

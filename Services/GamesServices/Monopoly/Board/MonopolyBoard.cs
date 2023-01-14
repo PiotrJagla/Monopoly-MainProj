@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Update;
 using Org.BouncyCastle.Asn1.Cmp;
+using Models.MultiplayerConnection;
 
 namespace Services.GamesServices.Monopoly.Board
 {
@@ -32,6 +33,8 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));
 
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
+
+            Board.Add(new ChampionshipCell());
 
             Board.Add(new MonopolyNationCell(new Costs(130, 70), Nation.France));
             Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
@@ -103,18 +106,32 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void CheckForMonopolOf(MonopolyPlayer aPlayer)
         {
-            Board = Board[aPlayer.OnCellIndex].MonopolChanges(Board, aPlayer.OnCellIndex);
+            Board = Board[aPlayer.OnCellIndex].MonopolCHanges_NEW().UpdateBoardMonopol(Board, aPlayer.OnCellIndex);
         }
 
         public void GetMonopolOff(MonopolyCell aCell)
         {
             int aCellIndex = Board.IndexOf(aCell);
-            Board = Board[aCellIndex].GetMonopolOff(Board, aCellIndex);
+            Board = Board[aCellIndex].MonopolCHanges_NEW().GetMonopolOff(Board, aCellIndex);
         }
 
-        public MonopolyModalParameters GetCellModalParameters(int CellIndex)
+        public void SetChampionship(string OnCellDisplay)
         {
-            return Board[CellIndex].GetModalParameters();
+            MonopolyCell? CellWithChampionship = Board.FirstOrDefault(
+                c => c.GetBuyingBehavior().IsThereChampionship() == true
+            );
+            MonopolyCell? CellToSetChampionship = Board.FirstOrDefault(
+                c => c.OnDisplay() == OnCellDisplay
+            );
+            CellToSetChampionship.GetBuyingBehavior().SetChampionship();
+
+            if (CellWithChampionship != null)
+                CellWithChampionship.GetBuyingBehavior().GetChampionshipOff();
+        }
+
+        public MonopolyModalParameters GetCellModalParameters(MonopolyPlayer MainPlayer)
+        {
+            return Board[MainPlayer.OnCellIndex].GetModalParameters(Board, MainPlayer.Key);
         }
 
         public bool SteppedOnIsland(int CellIndex)

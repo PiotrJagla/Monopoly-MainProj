@@ -39,17 +39,15 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             result += $" Nation: {OfNation.ToString()} |";
             result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
+            if (BuyingBehaviour.IsThereChampionship() == true)
+                result += Consts.Monopoly.ChampionshipInfo;
             return result;
-        }
-        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
-        {
-            return monopolBehaviour.UpdateBoardMonopol(Board, OnCell);
         }
         public Beach GetBeachName()
         {
             return Beach.NoBeach;
         }
-        public MonopolyModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
         {
             return null;
         }
@@ -59,9 +57,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+        public MonopolBehaviour MonopolCHanges_NEW()
         {
-            return monopolBehaviour.GetMonopolOff(Board, OnCell);
+            return monopolBehaviour;
         }
     }
 }

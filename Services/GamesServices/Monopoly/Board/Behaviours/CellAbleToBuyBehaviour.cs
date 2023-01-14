@@ -1,4 +1,5 @@
 ﻿using Enums.Monopoly;
+using Models;
 using Models.Monopoly;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,18 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
 {
     public class CellAbleToBuyBehaviour : CellBuyingBehaviour
     {
-        private PlayerKey OwnedBy { get; set; }
-        private Costs ActualCosts { get; set; }
-        private Costs BaseCosts { get; set; }
+        private PlayerKey OwnedBy;
+        private Costs ActualCosts;
+        private Costs BaseCosts;
+
+        private bool IsChampionshiSet;
 
         public CellAbleToBuyBehaviour(Costs costs)
         {
             OwnedBy = PlayerKey.NoOne;
             BaseCosts = new Costs(costs.Buy,costs.Stay);
             ActualCosts = new Costs(costs.Buy, costs.Stay); ;
+            IsChampionshiSet = false;
         }
 
         public Costs GetCosts()
@@ -35,7 +39,7 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
         {
             if (Multiplayer < 1.0f)
             {
-                if (BaseCosts.Stay != ActualCosts.Stay)
+                if (BaseCosts.Stay < ActualCosts.Stay)
                 {
                     ActualCosts.Stay = (int)((float)ActualCosts.Stay * Multiplayer);
                 }
@@ -56,5 +60,23 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
         {
             OwnedBy = NewOwner;
         }
+
+        public bool IsThereChampionship()
+        {
+            return IsChampionshiSet;
+        }
+
+        public void SetChampionship()
+        {
+            ActualCosts.Stay = (int)((float)ActualCosts.Stay * Consts.Monopoly.ChampionshipMultiplayer);
+            IsChampionshiSet = true;
+        }
+
+        public void GetChampionshipOff()
+        {
+            ActualCosts.Stay = (int)((float)ActualCosts.Stay * (1.0f/Consts.Monopoly.ChampionshipMultiplayer));
+            IsChampionshiSet = false;
+        }
+        
     }
 }

@@ -10,6 +10,11 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
 {
     public class CellNotAbleToBuyBehaviour : CellBuyingBehaviour
     {
+        public void GetChampionshipOff()
+        {
+            
+        }
+
         public Costs GetCosts()
         {
             return new Costs();
@@ -20,7 +25,17 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
             return PlayerKey.NoOne;
         }
 
+        public bool IsThereChampionship()
+        {
+            return false;
+        }
+
         public void MultiplyStayCostAmount(float Multiplayer)
+        {
+            
+        }
+
+        public void SetChampionship()
         {
             
         }

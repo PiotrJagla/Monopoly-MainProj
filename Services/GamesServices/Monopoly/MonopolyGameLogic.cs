@@ -103,8 +103,6 @@ namespace Services.GamesServices.Monopoly
             return MakeTurnResult();
         }
 
-        
-
         private void Move(int amount)
         {
             if (IsAbleToMove() == false) return;
@@ -177,8 +175,7 @@ namespace Services.GamesServices.Monopoly
 
         public MonopolyModalParameters GetModalParameters()
         {
-            int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
-            return BoardService.GetCellModalParameters(MainPlayerPos);
+            return BoardService.GetCellModalParameters(PlayersService.GetMainPlayer());
         }
 
         public void ModalResponse(string StringResponse)
@@ -198,6 +195,10 @@ namespace Services.GamesServices.Monopoly
                     BoardService.EscapeFromIsland();
                 }
 
+            }
+            else if(BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == StringResponse) != null)
+            {
+                BoardService.SetChampionship(StringResponse);
             }
         }
 

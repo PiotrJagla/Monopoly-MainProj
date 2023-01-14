@@ -13,7 +13,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyIslandCell : MonopolyCell
     {
-        private int TurnsRemaining;
         private readonly Int TurnsOnIslandRemainingREF;
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
@@ -21,7 +20,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyIslandCell(Int TurnsOnIslandRemaining)
         {
             TurnsOnIslandRemainingREF = TurnsOnIslandRemaining;
-            TurnsRemaining = 0;
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
             monopolBehaviour = new NoMonopolBehaviour();
         }
@@ -31,7 +29,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return Beach.NoBeach;
         }
 
-        public MonopolyModalParameters GetModalParameters()
+        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
         {
             StringModalParameters Result = new StringModalParameters();
             Result.Title = $"You Are On Desert Island For {TurnsOnIslandRemainingREF.Value} Turns";
@@ -45,11 +43,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return Nation.NoNation;
         }
 
-        public List<MonopolyCell> MonopolChanges(in List<MonopolyCell> Board, int OnCell)
-        {
-            return monopolBehaviour.UpdateBoardMonopol(Board,OnCell);
-        }
-
         public string OnDisplay()
         {
             return Consts.Monopoly.IslandDiaplsy;
@@ -60,9 +53,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public List<MonopolyCell> GetMonopolOff(in List<MonopolyCell> Board, int OnCell)
+
+        public MonopolBehaviour MonopolCHanges_NEW()
         {
-            return monopolBehaviour.GetMonopolOff(Board,OnCell);
+            return monopolBehaviour;
         }
     }
 }

@@ -11,15 +11,17 @@ using System.Threading.Tasks;
 
 namespace Services.GamesServices.Monopoly.Board.Cells
 {
-    internal class StartCell : MonopolyCell
+    public class ChampionshipCell : MonopolyCell
     {
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
-        public StartCell()
+
+        public ChampionshipCell()
         {
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
             monopolBehaviour = new NoMonopolBehaviour();
         }
+
         public Beach GetBeachName()
         {
             return Beach.NoBeach;
@@ -32,7 +34,20 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
         {
-            return null;
+            StringModalParameters Result = new StringModalParameters();
+
+
+            List<MonopolyCell> MainPlayerNationCells = Board.FindAll(
+                c => c is MonopolyNationCell && c.GetBuyingBehavior().GetOwner() == MainPlayerKey
+            );
+
+            foreach (var cell in MainPlayerNationCells)
+            {
+                Result.ButtonsContent.Add(cell.OnDisplay());
+            }
+
+            Result.Title = "Choose Cell To Set World Championship";
+            return new MonopolyModalParameters(Result, ModalShow.AfterMove);
         }
 
         public Nation GetNation()
@@ -47,7 +62,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public string OnDisplay()
         {
-            return "Start!";
+            return "World Championship";
         }
     }
 }
