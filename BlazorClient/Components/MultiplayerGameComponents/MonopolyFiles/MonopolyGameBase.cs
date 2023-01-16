@@ -96,16 +96,16 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         {
             if (MonopolyLogic.IsYourTurn() == true)
             {
-                MonopolyModalParameters StringParameters = MonopolyLogic.GetModalParameters();
-                if (StringParameters != null && StringParameters.WhenShowModal == ModalShow.BeforeMove)
+                MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
+                if (ModalParameters != null && ModalParameters.WhenShowModal == ModalShow.BeforeMove)
                 {
                     ModalParameters parameters = new ModalParameters();
-                    parameters.Add(nameof(SelectButtonModal.StringParameters), StringParameters.Parameters);
+                    parameters.Add(nameof(SelectButtonModal.StringParameters), ModalParameters.Parameters);
                     var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
                     var Response = await ModalResponse.Result;
                     if (Response.Confirmed)
                     {
-                        MonopolyLogic.ModalResponse(Response.Data.ToString());
+                        MonopolyLogic.ModalResponse(Response.Data.ToString(), ModalParameters.Identifier);
                     }
                 }
             }
@@ -128,20 +128,16 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected async Task Move()
         {
-
-            await PlayersMove();
-            await CheckForBanckrupcy();
-            await BrodcastUpdatedInformations();
-            //try
-            //{
-            //    await PlayersMove();
-            //    await CheckForBanckrupcy();
-            //    await BrodcastUpdatedInformations();
-            //}
-            //catch
-            //{
-            //    Messages.Add("Game has not started yet");
-            //}
+            try
+            {
+                await PlayersMove();
+                await CheckForBanckrupcy();
+                await BrodcastUpdatedInformations();
+            }
+            catch
+            {
+                Messages.Add("Game has not started yet");
+            }
         }
         private async Task PlayersMove()
         {
@@ -150,16 +146,16 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 await CellBuyingProcess();
             }
 
-            MonopolyModalParameters StringParameters = MonopolyLogic.GetModalParameters();
-            if (StringParameters != null && StringParameters.WhenShowModal == ModalShow.AfterMove)
+            MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
+            if (ModalParameters != null && ModalParameters.WhenShowModal == ModalShow.AfterMove)
             {
                 ModalParameters parameters = new ModalParameters();
-                parameters.Add(nameof(SelectButtonModal.StringParameters), StringParameters.Parameters);
+                parameters.Add(nameof(SelectButtonModal.StringParameters), ModalParameters.Parameters);
                 var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
                 var Response = await ModalResponse.Result;
                 if (Response.Confirmed)
                 {
-                    MonopolyLogic.ModalResponse(Response.Data.ToString());
+                    MonopolyLogic.ModalResponse(Response.Data.ToString(), ModalParameters.Identifier);
                 }
             }
         }

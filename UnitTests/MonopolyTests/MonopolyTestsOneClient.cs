@@ -223,7 +223,7 @@ namespace UnitTests.MonopolyTests
                     break;
                 }
             }
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent, ModalResponseIdentifier.Island);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 
@@ -248,15 +248,15 @@ namespace UnitTests.MonopolyTests
                 }
             }
             //i am called many times because one time is not enough to test whether client is able to pay
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 
@@ -270,14 +270,14 @@ namespace UnitTests.MonopolyTests
         {
             int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             int ExpectedStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
-            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Championship);
 
             int ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(ExpectedStayCost1 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost1);
             Assert.IsTrue(Client.GetBoard()[1].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo));
 
 
-            Client.ModalResponse(Client.GetBoard()[2].OnDisplay());
+            Client.ModalResponse(Client.GetBoard()[2].OnDisplay(), ModalResponseIdentifier.Championship);
             ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             int ActualStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(ExpectedStayCost2 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost2);
@@ -290,11 +290,31 @@ namespace UnitTests.MonopolyTests
         public void WorldChampionshipSettingTest_OneChampionship()
         {
             int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
-            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Championship);
 
             int ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(ExpectedStayCost1 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost1);
 
+        }
+
+        [TestMethod]
+        public void FlyingFromAirportTest()
+        {
+            for (int i = 1; ; i++)
+            {
+                Client.ExecutePlayerMove(1);
+
+                if (Client.GetBoard()[i] is AirportCell)
+                {
+                    break;
+                }
+            }
+
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Airport);
+            int ActualPlayerMoney = Client.GetUpdatedData().PlayersData[0].Money;
+            int ExpectedMoney = Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven;
+
+            Assert.IsTrue(ActualPlayerMoney == ExpectedMoney);
         }
 
     }

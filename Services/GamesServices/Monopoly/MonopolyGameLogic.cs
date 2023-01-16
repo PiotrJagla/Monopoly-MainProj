@@ -178,33 +178,51 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetCellModalParameters(PlayersService.GetMainPlayer());
         }
 
-        public void ModalResponse(string StringResponse)
+        public void ModalResponse(string StringResponse, ModalResponseIdentifier Identifier)
         {
-            if(StringResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
+            switch(Identifier)
             {
-                if(GetRandom.number.Next(1,6) == 1)
-                {
-                    BoardService.EscapeFromIsland();
-                }
-            }
-            else if(StringResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
-            {
-                if (IsAbleToPayForEscapingFromIsland())
-                {
-                    PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
-                    BoardService.EscapeFromIsland();
-                }
+                case ModalResponseIdentifier.Island:
+                    if (StringResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
+                    {
+                        if (GetRandom.number.Next(1, 6) == 1)
+                        {
+                            BoardService.EscapeFromIsland();
+                        }
+                    }
+                    else if (StringResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
+                    {
+                        if (IsAbleToPayForEscapingFromIsland())
+                        {
+                            PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
+                            BoardService.EscapeFromIsland();
+                        }
 
+                    }
+                    break;
+                case ModalResponseIdentifier.Championship:
+                    BoardService.SetChampionship(StringResponse);
+                    break;
+                case ModalResponseIdentifier.Airport:
+                    FastForwardToSelectedCell(StringResponse);
+                    break;
+                default:
+                    break;
             }
-            else if(BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == StringResponse) != null)
-            {
-                BoardService.SetChampionship(StringResponse);
-            }
+            
         }
 
         private bool IsAbleToPayForEscapingFromIsland()
         {
             return PlayersService.IsAbleToPayForEscapingFromIsland();
+        }
+
+        private void FastForwardToSelectedCell(string DestinationDisplay)
+        {
+            int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
+            int CellsToJumpThrough = BoardService.DistanceToCellFrom(MainPlayerPos, DestinationDisplay);
+            ExecutePlayerMove(CellsToJumpThrough);
+            
         }
     }
 }

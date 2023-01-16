@@ -12,10 +12,14 @@ namespace Models.Monopoly
         public ModalShow WhenShowModal { get; set; }
         public StringModalParameters Parameters { get; set; }
 
-        public MonopolyModalParameters(StringModalParameters Parameters, ModalShow WhenShowModal = ModalShow.Never)
+        public ModalResponseIdentifier Identifier { get; set; }
+
+        public MonopolyModalParameters(
+            StringModalParameters Parameters, ModalShow WhenShowModal, ModalResponseIdentifier identifier)
         {
             this.Parameters = Parameters;
             this.WhenShowModal = WhenShowModal;
+            this.Identifier = identifier;
         }
     }
 }

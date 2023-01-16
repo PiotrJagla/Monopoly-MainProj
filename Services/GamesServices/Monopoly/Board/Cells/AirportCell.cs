@@ -40,7 +40,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             {
                 Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
-            return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove);
+            return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove, ModalResponseIdentifier.Airport);
         }
 
         public Nation GetNation()

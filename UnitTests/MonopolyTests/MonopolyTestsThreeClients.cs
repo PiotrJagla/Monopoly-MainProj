@@ -20,8 +20,8 @@ namespace UnitTests.MonopolyTests
         private PlayerKey[] BuyingOrder = new PlayerKey[]
         {
             PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
-            PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,
-            PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
+            PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
+            PlayerKey.First,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
 
         };
 
@@ -71,9 +71,10 @@ namespace UnitTests.MonopolyTests
         public void BankrupcyTest1()
         {
             List<MoneyFlow> PlayersMoneyFlow = null;
-
+            int g = 0;
             for (int i = 1; ; i++)
             {
+                g = i;
                 Clients = ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
@@ -94,9 +95,10 @@ namespace UnitTests.MonopolyTests
 
             List<MonopolyService> Clients = null;
             List<MoneyFlow> PlayersMoneyFlow = null;
-
+            int g = 0;
             for (int i = 1; ; i++)
             {
+                g = i;
                 Clients = ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
@@ -165,10 +167,8 @@ namespace UnitTests.MonopolyTests
         public void WinnerTest()
         {
             List<MoneyFlow> PlayersMoneyFlow = null;
-            int g = 0;
             for (int i = 1; ; i++)
             {
-                g = i;
                 Clients = ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderFirstWinner);
 

@@ -32,6 +32,8 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(new Costs(50, 30), Nation.Poland));
             Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));
 
+            Board.Add(new AirportCell());
+
             Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
 
             Board.Add(new ChampionshipCell());
@@ -221,5 +223,15 @@ namespace Services.GamesServices.Monopoly.Board
                    MainPlayerTurnsOnIslandRemaining.Value == 0;
         }
 
+        public int DistanceToCellFrom(int MainPlayerPos, string DestinationDisplay)
+        {
+            MonopolyCell Destination = Board.FirstOrDefault(c => c.OnDisplay() == DestinationDisplay);  
+            int DestinationIndex = Board.IndexOf(Destination);
+
+            if(DestinationIndex < MainPlayerPos)
+                return Math.Abs(DestinationIndex + Board.Count - MainPlayerPos);
+
+            return Math.Abs(DestinationIndex - MainPlayerPos);
+        }
     }
 }

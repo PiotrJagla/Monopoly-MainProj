@@ -29,7 +29,7 @@ namespace Services.GamesServices.Monopoly
         void SellCell(string CellToSellDisplay);
         PlayerKey WhoWon();
         MonopolyModalParameters GetModalParameters();
-        void ModalResponse(string StringResponse);
+        void ModalResponse(string StringResponse, ModalResponseIdentifier Identifier);
 
     }
 }
