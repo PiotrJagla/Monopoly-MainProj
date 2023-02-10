@@ -2,7 +2,9 @@
 using Models;
 using Models.Monopoly;
 using Services.GamesServices.Monopoly.Board.Behaviours;
-using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
+using Services.GamesServices.Monopoly.Board.Behaviours.Buying;
+using Services.GamesServices.Monopoly.Board.Behaviours.Monopol;
+using Services.GamesServices.Monopoly.Board;
 using System;
 using System.Collections.Generic;
 using System.Linq;

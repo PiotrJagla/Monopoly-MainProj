@@ -5,7 +5,8 @@ using Models.Monopoly;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Pkcs;
 using Services.GamesServices.Monopoly.Board.Behaviours;
-using Services.GamesServices.Monopoly.Board.BuyingBehaviours;
+using Services.GamesServices.Monopoly.Board.Behaviours.Buying;
+using Services.GamesServices.Monopoly.Board.Behaviours.Monopol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,15 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         }
         public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
-            return null;
+            if (Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
+                return null;
+
+            StringModalParameters Parameters = new StringModalParameters();
+
+            Parameters.Title = "Do you wany to buy this cell";
+            Parameters.ButtonsContent.Add("Yes");
+            Parameters.ButtonsContent.Add("No");
+            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
         }
 
         public CellBuyingBehaviour GetBuyingBehavior()

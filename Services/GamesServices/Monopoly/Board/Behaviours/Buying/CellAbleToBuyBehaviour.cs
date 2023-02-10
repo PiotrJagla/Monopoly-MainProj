@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
+namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
 {
     public class CellAbleToBuyBehaviour : CellBuyingBehaviour
     {
@@ -20,7 +20,7 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
         public CellAbleToBuyBehaviour(Costs costs)
         {
             OwnedBy = PlayerKey.NoOne;
-            BaseCosts = new Costs(costs.Buy,costs.Stay);
+            BaseCosts = new Costs(costs.Buy, costs.Stay);
             ActualCosts = new Costs(costs.Buy, costs.Stay); ;
             IsChampionshiSet = false;
         }
@@ -41,7 +41,7 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
             {
                 if (BaseCosts.Stay < ActualCosts.Stay)
                 {
-                    ActualCosts.Stay = (int)((float)ActualCosts.Stay * Multiplayer);
+                    ActualCosts.Stay = (int)(ActualCosts.Stay * Multiplayer);
                 }
             }
             else
@@ -68,15 +68,15 @@ namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
 
         public void SetChampionship()
         {
-            ActualCosts.Stay = (int)((float)ActualCosts.Stay * Consts.Monopoly.ChampionshipMultiplayer);
+            ActualCosts.Stay = (int)(ActualCosts.Stay * Consts.Monopoly.ChampionshipMultiplayer);
             IsChampionshiSet = true;
         }
 
         public void GetChampionshipOff()
         {
-            ActualCosts.Stay = (int)((float)ActualCosts.Stay * (1.0f/Consts.Monopoly.ChampionshipMultiplayer));
+            ActualCosts.Stay = (int)(ActualCosts.Stay * (1.0f / Consts.Monopoly.ChampionshipMultiplayer));
             IsChampionshiSet = false;
         }
-        
+
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board.Behaviours
+namespace Services.GamesServices.Monopoly.Board.Behaviours.Monopol
 {
     public interface MonopolBehaviour
     {

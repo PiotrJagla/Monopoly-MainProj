@@ -11,6 +11,7 @@ namespace Enums.Monopoly
         Airport,
         Island,
         Championship,
+        Nation,
         NoResponse
     }
 }

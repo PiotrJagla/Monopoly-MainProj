@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board.BuyingBehaviours
+namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
 {
     public interface CellBuyingBehaviour
     {

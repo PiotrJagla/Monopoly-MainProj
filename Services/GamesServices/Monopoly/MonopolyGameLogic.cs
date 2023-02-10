@@ -14,6 +14,7 @@ using MySqlX.XDevAPI.Common;
 using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Board;
 
+
 namespace Services.GamesServices.Monopoly
 {
     public class MonopolyGameLogic : MonopolyService
@@ -191,6 +192,9 @@ namespace Services.GamesServices.Monopoly
                 case ModalResponseIdentifier.Airport:
                     FastForwardToSelectedCell(StringResponse);
                     break;
+                case ModalResponseIdentifier.Nation:
+                    CellBuyingProcedure(StringResponse);
+                    break;
                 default:
                     break;
             }
@@ -227,6 +231,15 @@ namespace Services.GamesServices.Monopoly
             int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
             int CellsToJumpThrough = BoardService.DistanceToCellFrom(MainPlayerPos, DestinationDisplay);
             ExecutePlayerMove(CellsToJumpThrough);
+        }
+
+        private void CellBuyingProcedure(string ModalResponse)
+        {
+            if(ModalResponse.ToLower() == "yes" && BoardService.IsPossibleToBuyCell(PlayersService.GetMainPlayer()))
+            {
+                BuyCellIfPossible();
+            }
+
         }
     }
 }
