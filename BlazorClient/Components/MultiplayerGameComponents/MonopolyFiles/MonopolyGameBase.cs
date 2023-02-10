@@ -95,21 +95,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         protected async Task ExecuteBeforeMoveActions()
         {
             await ExecuteModal(ModalShow.BeforeMove);
-            //if (MonopolyLogic.IsYourTurn() == true)
-            //{
-            //    MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
-            //    if (ModalParameters != null && ModalParameters.WhenShowModal == ModalShow.BeforeMove)
-            //    {
-            //        ModalParameters parameters = new ModalParameters();
-            //        parameters.Add(nameof(SelectButtonModal.StringParameters), ModalParameters.Parameters);
-            //        var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
-            //        var Response = await ModalResponse.Result;
-            //        if (Response.Confirmed)
-            //        {
-            //            MonopolyLogic.ModalResponse(Response.Data.ToString(), ModalParameters.Identifier);
-            //        }
-            //    }
-            //}
         }
 
         protected async Task ExecuteModal(ModalShow When)
@@ -166,19 +151,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             {
                 await CellBuyingProcess();
             }
-
-            //MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
-            //if (ModalParameters != null && ModalParameters.WhenShowModal == ModalShow.AfterMove)
-            //{
-            //    ModalParameters parameters = new ModalParameters();
-            //    parameters.Add(nameof(SelectButtonModal.StringParameters), ModalParameters.Parameters);
-            //    var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
-            //    var Response = await ModalResponse.Result;
-            //    if (Response.Confirmed)
-            //    {
-            //        MonopolyLogic.ModalResponse(Response.Data.ToString(), ModalParameters.Identifier);
-            //    }
-            //}
 
             await ExecuteModal(ModalShow.AfterMove);
         }
