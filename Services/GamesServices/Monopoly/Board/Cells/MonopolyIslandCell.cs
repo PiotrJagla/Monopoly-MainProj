@@ -29,7 +29,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return Beach.NoBeach;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
+        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
             StringModalParameters Result = new StringModalParameters();
             Result.Title = $"You Are On Desert Island For {TurnsOnIslandRemainingREF.Value} Turns";

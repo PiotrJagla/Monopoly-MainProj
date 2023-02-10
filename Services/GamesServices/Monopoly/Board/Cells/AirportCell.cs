@@ -31,14 +31,15 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
+        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
             StringModalParameters Parameters = new StringModalParameters();
 
             Parameters.Title = "Choose a cell where you want to go";
             foreach (var cell in Board)
             {
-                Parameters.ButtonsContent.Add(cell.OnDisplay());
+                if(cell is MonopolyNationCell || cell is MonopolyBeachCell)
+                    Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
             return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove, ModalResponseIdentifier.Airport);
         }

@@ -183,22 +183,7 @@ namespace Services.GamesServices.Monopoly
             switch(Identifier)
             {
                 case ModalResponseIdentifier.Island:
-                    if (StringResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
-                    {
-                        if (GetRandom.number.Next(1, 6) == 1)
-                        {
-                            BoardService.EscapeFromIsland();
-                        }
-                    }
-                    else if (StringResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
-                    {
-                        if (IsAbleToPayForEscapingFromIsland())
-                        {
-                            PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
-                            BoardService.EscapeFromIsland();
-                        }
-
-                    }
+                    StayingOnIslandBehaviour(StringResponse);
                     break;
                 case ModalResponseIdentifier.Championship:
                     BoardService.SetChampionship(StringResponse);
@@ -212,6 +197,26 @@ namespace Services.GamesServices.Monopoly
             
         }
 
+        private void StayingOnIslandBehaviour(string StringResponse)
+        {
+            if (StringResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
+            {
+                if (GetRandom.number.Next(1, 6) == 1)
+                {
+                    BoardService.EscapeFromIsland();
+                }
+            }
+            else if (StringResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
+            {
+                if (IsAbleToPayForEscapingFromIsland())
+                {
+                    PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
+                    BoardService.EscapeFromIsland();
+                }
+
+            }
+        }
+
         private bool IsAbleToPayForEscapingFromIsland()
         {
             return PlayersService.IsAbleToPayForEscapingFromIsland();
@@ -222,7 +227,6 @@ namespace Services.GamesServices.Monopoly
             int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
             int CellsToJumpThrough = BoardService.DistanceToCellFrom(MainPlayerPos, DestinationDisplay);
             ExecutePlayerMove(CellsToJumpThrough);
-            
         }
     }
 }

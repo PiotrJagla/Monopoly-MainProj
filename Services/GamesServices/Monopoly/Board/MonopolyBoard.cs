@@ -136,7 +136,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public MonopolyModalParameters GetCellModalParameters(MonopolyPlayer MainPlayer)
         {
-            return Board[MainPlayer.OnCellIndex].GetModalParameters(Board, MainPlayer.Key);
+            return Board[MainPlayer.OnCellIndex].GetModalParameters(Board, MainPlayer);
         }
 
         public MonopolyBoardUpdateData MakeBoardUpdateData()

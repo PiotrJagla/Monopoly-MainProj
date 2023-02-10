@@ -19,6 +19,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         MonopolBehaviour MonopolChanges();
         string OnDisplay();
-        MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey);
+        MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer);
     }
 }

@@ -32,13 +32,13 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, PlayerKey MainPlayerKey)
+        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
             StringModalParameters Parameters = new StringModalParameters();
 
             foreach (var cell in Board)
             {
-                if(IsCellAddedToModal(cell,MainPlayerKey))
+                if(CanAddCellToModal(cell,MainPlayer.Key))
                     Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
 
@@ -46,7 +46,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Championship);
         }
 
-        private bool IsCellAddedToModal(MonopolyCell cell, PlayerKey MainPlayerKey)
+        private bool CanAddCellToModal(MonopolyCell cell, PlayerKey MainPlayerKey)
         {
             return cell is MonopolyNationCell && cell.GetBuyingBehavior().GetOwner() == MainPlayerKey;
         }
