@@ -2559,7 +2559,6 @@ D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\sco
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\PayOffDebtModal.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\SelectButtonModal.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\ShowMessages.razor.rz.scp.css
-D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\YesOrNoModal.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UserLoginDataInputFiles\UserLoginDataInput.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\GemplayPages\MultiplayerGameFiles\MultiplayerGamePage.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\GemplayPages\SinglplayerGameFiles\SinglplayerGamePage.razor.rz.scp.css

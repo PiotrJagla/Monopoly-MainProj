@@ -21,9 +21,11 @@ namespace Services.GamesServices.Monopoly
     {
         private MonopolyBoard BoardService;
         private MonopolyPlayers PlayersService;
+        private int MoveQuantity;
 
         public MonopolyGameLogic()
         {
+            MoveQuantity = 1;
             BoardService = new MonopolyBoard();
             PlayersService = new MonopolyPlayers(); 
         }
@@ -97,11 +99,14 @@ namespace Services.GamesServices.Monopoly
             BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
         }
 
-        public MonopolyTurnResult ExecutePlayerMove(int MoveAmount)
+        public void ExecutePlayerMove(int MoveAmount)
         {
+            if (MoveQuantity == 0)
+                MoveAmount = MoveQuantity;
+
             Move(MoveAmount);
             CheckEvents();
-            return MakeTurnResult();
+            MoveQuantity = 1;
         }
 
         private void Move(int amount)
@@ -134,14 +139,6 @@ namespace Services.GamesServices.Monopoly
         private void CheckIfSteppedOnIsland()
         {
             BoardService.CheckIfMainPlayerSteppedOnIsland(PlayersService.GetMainPlayer());
-        }
-
-        private MonopolyTurnResult MakeTurnResult()
-        {
-            if (BoardService.IsPossibleToBuyCell(PlayersService.GetMainPlayer()))
-                return MonopolyTurnResult.CanBuyCell;
-
-            return MonopolyTurnResult.CannotBuyCell;
         }
 
         private bool DidCrossedStartCell(int MoveAmount)
@@ -231,6 +228,7 @@ namespace Services.GamesServices.Monopoly
             int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
             int CellsToJumpThrough = BoardService.DistanceToCellFrom(MainPlayerPos, DestinationDisplay);
             ExecutePlayerMove(CellsToJumpThrough);
+            MoveQuantity = 0;
         }
 
         private void CellBuyingProcedure(string ModalResponse)

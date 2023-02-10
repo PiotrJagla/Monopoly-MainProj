@@ -95,6 +95,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         protected async Task ExecuteBeforeMoveActions()
         {
             await ExecuteModal(ModalShow.BeforeMove);
+            await InvokeAsync(StateHasChanged);
         }
 
         protected async Task ExecuteModal(ModalShow When)
@@ -130,8 +131,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             await MonopolyHubConn.SendAsync("UserReady");
         }
 
-
-
         protected async Task Move()
         {
             try
@@ -147,39 +146,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         }
         private async Task PlayersMove()
         {
-            //if (MonopolyLogic.ExecutePlayerMove(1) == MonopolyTurnResult.CanBuyCell)
-            //{
-            //    await CellBuyingProcess();
-            //}
-
             MonopolyLogic.ExecutePlayerMove(1);
             await ExecuteModal(ModalShow.AfterMove);
-        }
-
-
-
-        private async Task CellBuyingProcess()
-        {
-            if (await IsCellBought())
-            {
-                MonopolyLogic.BuyCellIfPossible();
-            }
-        }
-
-        private async Task<bool> IsCellBought()
-        {
-            ModalParameters parameters = new ModalParameters();
-            parameters.Add(nameof(YesOrNoModal.Title), "Do you want to buy this?");
-
-            var ModalResponse = ModalService.Show<YesOrNoModal>("Passing Data", parameters);
-            var Response = await ModalResponse.Result;
-
-            if (Response.Confirmed)
-            {
-                return StringConvert.StringToBool(Response.Data.ToString());
-            }
-
-            return false;
         }
 
         private async Task CheckForBanckrupcy()

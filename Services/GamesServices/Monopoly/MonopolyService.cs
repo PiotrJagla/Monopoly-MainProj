@@ -20,7 +20,7 @@ namespace Services.GamesServices.Monopoly
         MonopolyUpdateMessage GetUpdatedData();
         int GetDebtAmount();
         void UpdateData(MonopolyUpdateMessage UpdatedData);
-        MonopolyTurnResult ExecutePlayerMove(int MoveAmount);
+        void ExecutePlayerMove(int MoveAmount);
         void SetMainPlayerIndex(int index);
         bool IsYourTurn();
         void NextTurn();

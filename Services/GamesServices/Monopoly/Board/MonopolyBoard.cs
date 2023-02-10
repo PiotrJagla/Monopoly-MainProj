@@ -27,7 +27,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         private void InitBoard()
         {
-            Board.Add(new StartCell());
+            Board.Add(new MonopolyStartCell());
 
             Board.Add(new MonopolyNationCell(new Costs(50, 30), Nation.Poland));
             Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));

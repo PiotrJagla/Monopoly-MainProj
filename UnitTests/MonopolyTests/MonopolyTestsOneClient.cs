@@ -32,8 +32,8 @@ namespace UnitTests.MonopolyTests
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
-            
-            Assert.IsTrue(Client.ExecutePlayerMove(1) == MonopolyTurnResult.CannotBuyCell);
+            Client.ExecutePlayerMove(1);
+            Assert.IsTrue(Client.GetModalParameters() == null);
         }
 
         [TestMethod]
@@ -161,12 +161,12 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void IsAbleToBuyStartCell_ShouldBeNo()
         {
-            for (int i = 1; i < Client.GetBoard().Count; i++)
+            for (int i = 1; i <= Client.GetBoard().Count; i++)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
 
-            Assert.IsTrue(Client.ExecutePlayerMove(1) == MonopolyTurnResult.CannotBuyCell);
+            Assert.IsTrue(Client.GetModalParameters() == null);
         }
 
         [TestMethod]

@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Services.GamesServices.Monopoly.Board.Cells
 {
-    internal class StartCell : MonopolyCell
+    internal class MonopolyStartCell : MonopolyCell
     {
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
-        public StartCell()
+        public MonopolyStartCell()
         {
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
             monopolBehaviour = new NoMonopolBehaviour();
