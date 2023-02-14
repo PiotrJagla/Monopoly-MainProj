@@ -43,13 +43,7 @@ namespace UnitTests.MonopolyTests
 
         private List<MonopolyService> ResetClients()
         {
-            List<MonopolyService> Result = new List<MonopolyService>();
-            int ClientsNumber = 3;
-            for (int i = 0; i < ClientsNumber; i++)
-            {
-                Result.Add(new MonopolyGameLogic());
-            }
-            return Result;
+            return MonopolyDataPrepare.InitClients(3);
         }
 
         [TestMethod]

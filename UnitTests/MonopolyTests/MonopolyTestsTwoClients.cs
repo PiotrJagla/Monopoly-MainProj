@@ -35,17 +35,12 @@ namespace UnitTests.MonopolyTests
         public void TestsSetup()
         {
             Clients = ResetClients();
+            
         }
 
         private List<MonopolyService> ResetClients()
         {
-            List<MonopolyService> Result = new List<MonopolyService>();
-            int ClientsNumber = 2;
-            for (int i = 0; i < ClientsNumber; i++)
-            {
-                Result.Add(new MonopolyGameLogic());
-            }
-            return Result;
+            return MonopolyDataPrepare.InitClients(2);
         }
 
         [TestMethod]
@@ -126,6 +121,30 @@ namespace UnitTests.MonopolyTests
             }
             int StayCistWithoutMonopolActual = Clients[0].GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(StayCistWithoutMonopolActual == StayCostWithoutMonopolExpected);
+        }
+
+        [TestMethod]
+        public void TestBuingOnlyField()
+        {
+            ResetClients();
+
+            Clients[0].ExecutePlayerMove(1);
+            Clients[0].ModalResponse(
+                Consts.Monopoly.FieldBuyString, ModalResponseIdentifier.Nation
+            );
+            MonopolyUpdateMessage FirstClientUpdateData = Clients[0].GetUpdatedData();
+            Clients[1].UpdateData(FirstClientUpdateData);
+
+            int FirstClientMoneyAfterBuy = FirstClientUpdateData.PlayersData[0].Money;
+            int FirstClientExpectedMoney = Consts.Monopoly.StartMoneyAmount;
+            FirstClientExpectedMoney -= Consts.Monopoly.NationFieldCosts.Buy;
+
+            Clients[1].ExecutePlayerMove(1);
+            int SecoundClientMoneyAfterStay = Clients[1].GetUpdatedData().PlayersData[1].Money;
+            int SecoundClientExpectedMoney = Consts.Monopoly.StartMoneyAmount - Consts.Monopoly.NationFieldCosts.Stay;
+
+            Assert.IsTrue(FirstClientMoneyAfterBuy == FirstClientExpectedMoney);
+            Assert.IsTrue(SecoundClientMoneyAfterStay == SecoundClientExpectedMoney);
         }
     }
 }

@@ -21,6 +21,12 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
             monopolBehaviour = new NoMonopolBehaviour();
         }
+
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
+        {
+            
+        }
+
         public Beach GetBeachName()
         {
             return Beach.NoBeach;

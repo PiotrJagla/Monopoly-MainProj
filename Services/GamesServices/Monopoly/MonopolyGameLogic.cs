@@ -81,23 +81,8 @@ namespace Services.GamesServices.Monopoly
             BoardService.GetMonopolOff(CellToSellRef);
         }
 
-        public void BuyCellIfPossible()
-        {
-            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
 
-            if (BoardService.IsPossibleToBuyCell(MainPlayer))
-            {
-                BuyCell(MainPlayer.OnCellIndex);
-            }
-        }
-
-        private void BuyCell(int MainPlayerBoardPos)
-        {
-            PlayerKey MainPlayerKey = PlayersService.GetMainPlayer().Key;
-            BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().SetOwner(MainPlayerKey);
-            PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().GetCosts().Buy);
-            BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
-        }
+        
 
         public void ExecutePlayerMove(int MoveAmount)
         {
@@ -190,7 +175,10 @@ namespace Services.GamesServices.Monopoly
                     FastForwardToSelectedCell(StringResponse);
                     break;
                 case ModalResponseIdentifier.Nation:
-                    CellBuyingProcedure(StringResponse);
+                    NationCellBuyingProcedure(StringResponse);
+                    break;
+                case ModalResponseIdentifier.Beach:
+                    BeachCellBuyingProcedure(StringResponse);                    
                     break;
                 default:
                     break;
@@ -231,13 +219,51 @@ namespace Services.GamesServices.Monopoly
             MoveQuantity = 0;
         }
 
-        private void CellBuyingProcedure(string ModalResponse)
+        private void NationCellBuyingProcedure(string ModalResponse)
         {
-            if(ModalResponse.ToLower() == "yes" && BoardService.IsPossibleToBuyCell(PlayersService.GetMainPlayer()))
+            if(ModalResponse.ToLower() == "yes")
             {
                 BuyCellIfPossible();
             }
+            else if(ModalResponse == Consts.Monopoly.FieldBuyString)
+            {
+                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+                
+                BoardService.GetCell(MainPlayer.OnCellIndex).
+                    GetBuyingBehavior().SetOwner(MainPlayer.Key);
+                BoardService.GetCell(MainPlayer.OnCellIndex).
+                    GetBuyingBehavior().SetCosts(Consts.Monopoly.NationFieldCosts);
+                PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
+                    .GetBuyingBehavior().GetCosts().Buy);
+                BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
+            }
 
+        }
+
+        public void BuyCellIfPossible()
+        {
+            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+
+            if (BoardService.IsPossibleToBuyCell(MainPlayer))
+            {
+                BuyCell(MainPlayer.OnCellIndex);
+            }
+        }
+
+        private void BuyCell(int MainPlayerBoardPos)
+        {
+            PlayerKey MainPlayerKey = PlayersService.GetMainPlayer().Key;
+            BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().SetOwner(MainPlayerKey);
+            PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().GetCosts().Buy);
+            BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
+        }
+
+        private void BeachCellBuyingProcedure(string ModalResponse)
+        {
+            if (ModalResponse.ToLower() == "yes")
+            {
+                BuyCellIfPossible();
+            }
         }
     }
 }

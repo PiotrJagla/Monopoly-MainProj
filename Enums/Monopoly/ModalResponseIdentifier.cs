@@ -12,6 +12,7 @@ namespace Enums.Monopoly
         Island,
         Championship,
         Nation,
+        Beach,
         NoResponse
     }
 }

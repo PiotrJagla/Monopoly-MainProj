@@ -70,5 +70,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return monopolBehaviour;
         }
+
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
+        {
+            BuyingBehaviour.SetOwner(MainPlayer.Key);
+        }
     }
 }

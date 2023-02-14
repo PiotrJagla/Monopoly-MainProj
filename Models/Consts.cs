@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Monopoly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -45,8 +46,6 @@ namespace Models
             public static int IslandEscapeCost = 30;
             public static int StartMoneyAmount = 400;
             public static int OnStartCrossedMoneyGiven = 50;
-            public static int StayCost = 100;
-            public static int BuyCost = 200;
             public static float MonopolMultiplayer = 2.0f;
             public static float ChampionshipMultiplayer = 2.0f;
 
@@ -57,6 +56,12 @@ namespace Models
 
             public static string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
             public static string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
+
+            public static string FieldBuyString = "Field";
+            public static string OneHouseBuyString = "1 House";
+            public static string TwoHousesBuyString = "2 Houses";
+
+            public static Costs NationFieldCosts = new Costs(40, 20);
         }
     }
 }

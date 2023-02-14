@@ -66,5 +66,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return "World Championship";
         }
+
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
+        {
+            
+        }
     }
 }

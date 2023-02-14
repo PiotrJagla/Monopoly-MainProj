@@ -36,7 +36,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             string result = "";
             result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
-            result += $" Nation: {BeachName.ToString()} |";
+            result += $" Beach: {BeachName.ToString()} |";
             result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
             return result;
@@ -56,7 +56,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             Parameters.Title = "Do you wany to buy this cell";
             Parameters.ButtonsContent.Add("Yes");
             Parameters.ButtonsContent.Add("No");
-            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
+            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Beach);
         }
 
         public CellBuyingBehaviour GetBuyingBehavior()
@@ -68,6 +68,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolBehaviour MonopolChanges()
         {
             return monopolBehaviour;
+        }
+
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
+        {
+            
         }
     }
 }
