@@ -38,12 +38,12 @@ namespace UnitTests.MonopolyTests
         [TestInitialize]
         public void TestsSetup()
         {
-            Clients = ResetClients();
+            ResetClients();
         }
 
-        private List<MonopolyService> ResetClients()
+        private void ResetClients()
         {
-            return MonopolyDataPrepare.InitClients(3);
+            Clients = MonopolyDataPrepare.InitClients(3);
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace UnitTests.MonopolyTests
             int TurnsToTest = 5;
             for (int turn = 1; turn <= TurnsToTest; turn++)
             {
-                Clients = ResetClients();
+                ResetClients();
                 List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(turn, ref Clients, BuyingOrder);
 
                 List<PlayerUpdateData> ActualMoney = Clients[0].GetUpdatedData().PlayersData;
@@ -69,7 +69,7 @@ namespace UnitTests.MonopolyTests
             for (int i = 1; ; i++)
             {
                 g = i;
-                Clients = ResetClients();
+                ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
                 if (PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[2].Loss)
@@ -86,14 +86,12 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void BankrupcyTest2()
         {
-
-            List<MonopolyService> Clients = null;
             List<MoneyFlow> PlayersMoneyFlow = null;
             int g = 0;
             for (int i = 1; ; i++)
             {
                 g = i;
-                Clients = ResetClients();
+                ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrder);
 
                 if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
@@ -112,7 +110,7 @@ namespace UnitTests.MonopolyTests
         {
             List<MoneyFlow> PlayersMoneyFlow = null;
 
-            Clients = ResetClients();
+            ResetClients();
 
             MonopolyDataPrepare.PrepareClientsData(ref Clients);
 
@@ -163,7 +161,7 @@ namespace UnitTests.MonopolyTests
             List<MoneyFlow> PlayersMoneyFlow = null;
             for (int i = 1; ; i++)
             {
-                Clients = ResetClients();
+                ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderFirstWinner);
 
                 if ((PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount) < PlayersMoneyFlow[2].Loss &&

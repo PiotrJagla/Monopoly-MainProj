@@ -232,10 +232,34 @@ namespace Services.GamesServices.Monopoly
                 BoardService.GetCell(MainPlayer.OnCellIndex).
                     GetBuyingBehavior().SetOwner(MainPlayer.Key);
                 BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetCosts(Consts.Monopoly.NationFieldCosts);
+                    GetBuyingBehavior().SetBaseCosts(Consts.Monopoly.NationFieldCosts);
                 PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
                     .GetBuyingBehavior().GetCosts().Buy);
-                BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
+                BoardService.CheckForMonopolOf(MainPlayer);
+            }
+            else if(ModalResponse == Consts.Monopoly.OneHouseBuyString)
+            {
+                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+
+                BoardService.GetCell(MainPlayer.OnCellIndex).
+                    GetBuyingBehavior().SetOwner(MainPlayer.Key);
+                BoardService.GetCell(MainPlayer.OnCellIndex).
+                    GetBuyingBehavior().SetBaseCosts(Consts.Monopoly.NationOneHouseCosts);
+                PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
+                    .GetBuyingBehavior().GetCosts().Buy);
+                BoardService.CheckForMonopolOf(MainPlayer);
+            }
+            else if (ModalResponse == Consts.Monopoly.TwoHousesBuyString)
+            {
+                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+
+                BoardService.GetCell(MainPlayer.OnCellIndex).
+                    GetBuyingBehavior().SetOwner(MainPlayer.Key);
+                BoardService.GetCell(MainPlayer.OnCellIndex).
+                    GetBuyingBehavior().SetBaseCosts(Consts.Monopoly.NationTwoHousesCosts);
+                PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
+                    .GetBuyingBehavior().GetCosts().Buy);
+                BoardService.CheckForMonopolOf(MainPlayer);
             }
 
         }

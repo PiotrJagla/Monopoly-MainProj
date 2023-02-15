@@ -14,7 +14,9 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
         PlayerKey GetOwner();
         void SetOwner(PlayerKey NewOwner);
         Costs GetCosts();
-        void SetCosts(Costs costs);
+        void UpdateCosts(Costs costs);
+        void SetBaseCosts(Costs costs);
+
         void MultiplyStayCostAmount(float Multiplayer);
 
         bool IsThereChampionship();

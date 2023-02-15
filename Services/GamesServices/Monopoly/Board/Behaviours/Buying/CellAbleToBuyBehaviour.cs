@@ -25,6 +25,10 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
             IsChampionshiSet = false;
         }
 
+        public CellAbleToBuyBehaviour()
+        {
+        }
+
         public Costs GetCosts()
         {
             return ActualCosts;
@@ -50,7 +54,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
             }
         }
 
-        public void SetCosts(Costs costs)
+        public void UpdateCosts(Costs costs)
         {
             ActualCosts.Stay = costs.Stay;
             ActualCosts.Buy = costs.Buy;
@@ -78,5 +82,12 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
             IsChampionshiSet = false;
         }
 
+        public void SetBaseCosts(Costs costs)
+        {
+            BaseCosts.Stay = costs.Stay;
+            BaseCosts.Buy = costs.Buy;
+            ActualCosts.Stay = costs.Stay;
+            ActualCosts.Buy = costs.Buy;
+        }
     }
 }

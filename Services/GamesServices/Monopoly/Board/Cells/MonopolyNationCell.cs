@@ -55,9 +55,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
             StringModalParameters Parameters = new StringModalParameters();
 
-            Parameters.Title = "Do you wany to buy this cell";
-            Parameters.ButtonsContent.Add("Yes");
-            Parameters.ButtonsContent.Add("No");
+            Parameters.Title = "What Do You wanna build?";
+            Parameters.ButtonsContent.Add("Nothing");
+            Parameters.ButtonsContent.Add(Consts.Monopoly.FieldBuyString);
+            Parameters.ButtonsContent.Add(Consts.Monopoly.OneHouseBuyString);
+            Parameters.ButtonsContent.Add(Consts.Monopoly.TwoHousesBuyString);
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
         }
 
