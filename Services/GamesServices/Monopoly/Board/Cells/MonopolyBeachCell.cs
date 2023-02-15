@@ -70,7 +70,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return monopolBehaviour;
         }
 
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought, List<MonopolyCell> CheckMonopol)
         {
             
         }

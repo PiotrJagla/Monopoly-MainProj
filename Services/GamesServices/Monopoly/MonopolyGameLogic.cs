@@ -221,47 +221,9 @@ namespace Services.GamesServices.Monopoly
 
         private void NationCellBuyingProcedure(string ModalResponse)
         {
-            if(ModalResponse.ToLower() == "yes")
-            {
-                BuyCellIfPossible();
-            }
-            else if(ModalResponse == Consts.Monopoly.FieldBuyString)
-            {
-                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-                
-                BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetOwner(MainPlayer.Key);
-                BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetBaseCosts(Consts.Monopoly.NationFieldCosts);
-                PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
-                    .GetBuyingBehavior().GetCosts().Buy);
-                BoardService.CheckForMonopolOf(MainPlayer);
-            }
-            else if(ModalResponse == Consts.Monopoly.OneHouseBuyString)
-            {
-                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-
-                BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetOwner(MainPlayer.Key);
-                BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetBaseCosts(Consts.Monopoly.NationOneHouseCosts);
-                PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
-                    .GetBuyingBehavior().GetCosts().Buy);
-                BoardService.CheckForMonopolOf(MainPlayer);
-            }
-            else if (ModalResponse == Consts.Monopoly.TwoHousesBuyString)
-            {
-                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-
-                BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetOwner(MainPlayer.Key);
-                BoardService.GetCell(MainPlayer.OnCellIndex).
-                    GetBuyingBehavior().SetBaseCosts(Consts.Monopoly.NationTwoHousesCosts);
-                PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayer.OnCellIndex)
-                    .GetBuyingBehavior().GetCosts().Buy);
-                BoardService.CheckForMonopolOf(MainPlayer);
-            }
-
+            MonopolyPlayer MainPlayer1 = PlayersService.GetMainPlayer();
+            int BuyCost = BoardService.BuyCell(MainPlayer1, ModalResponse);
+            PlayersService.ChargeMainPlayer(BuyCost);
         }
 
         private void BeachCellBuyingProcedure(string ModalResponse)

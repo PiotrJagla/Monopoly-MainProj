@@ -30,6 +30,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
             monopolBehaviour = new MonopolNationCellBehaviour();
 
+            BuildingTypeToCostsMap = new Dictionary<string, Costs>();
             BuildingTypeToCostsMap.Add(
                 Consts.Monopoly.FieldBuyString, Consts.Monopoly.NationFieldCosts
             );
@@ -87,11 +88,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return monopolBehaviour;
         }
 
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought, List<MonopolyCell> CheckMonopol)
         {
             BuyingBehaviour.SetOwner(MainPlayer.Key);
             BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
-            //monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
+            monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
         }
     }
 }
