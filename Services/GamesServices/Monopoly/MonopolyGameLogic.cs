@@ -264,6 +264,14 @@ namespace Services.GamesServices.Monopoly
 
         }
 
+        private void BeachCellBuyingProcedure(string ModalResponse)
+        {
+            if (ModalResponse.ToLower() == "yes")
+            {
+                BuyCellIfPossible();
+            }
+        }
+
         public void BuyCellIfPossible()
         {
             MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
@@ -280,14 +288,6 @@ namespace Services.GamesServices.Monopoly
             BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().SetOwner(MainPlayerKey);
             PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().GetCosts().Buy);
             BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
-        }
-
-        private void BeachCellBuyingProcedure(string ModalResponse)
-        {
-            if (ModalResponse.ToLower() == "yes")
-            {
-                BuyCellIfPossible();
-            }
         }
     }
 }

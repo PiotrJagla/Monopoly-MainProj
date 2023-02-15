@@ -233,5 +233,10 @@ namespace Services.GamesServices.Monopoly.Board
 
             return Math.Abs(DestinationIndex - MainPlayerPos);
         }
+
+        public void BuyCell(MonopolyPlayer MainPlayer, string WhatIsBought)
+        {
+            Board[MainPlayer.OnCellIndex].CellBought(MainPlayer, WhatIsBought);
+        }
     }
 }

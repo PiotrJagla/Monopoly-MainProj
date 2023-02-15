@@ -22,11 +22,25 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         private CellBuyingBehaviour BuyingBehaviour;
         private MonopolBehaviour monopolBehaviour;
 
+        private Dictionary<string, Costs> BuildingTypeToCostsMap;
+
         public MonopolyNationCell(Costs costs, Nation nation = Nation.NoNation)
         {
             OfNation = nation;
             BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
             monopolBehaviour = new MonopolNationCellBehaviour();
+
+            BuildingTypeToCostsMap.Add(
+                Consts.Monopoly.FieldBuyString, Consts.Monopoly.NationFieldCosts
+            );
+
+            BuildingTypeToCostsMap.Add(
+                Consts.Monopoly.OneHouseBuyString, Consts.Monopoly.NationOneHouseCosts
+            );
+
+            BuildingTypeToCostsMap.Add(
+                Consts.Monopoly.TwoHousesBuyString, Consts.Monopoly.NationTwoHousesCosts
+            );
         }
 
         public Nation GetNation()
@@ -76,6 +90,8 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought)
         {
             BuyingBehaviour.SetOwner(MainPlayer.Key);
+            BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
+            //monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
         }
     }
 }
