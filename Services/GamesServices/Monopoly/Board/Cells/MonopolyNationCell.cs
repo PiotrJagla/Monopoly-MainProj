@@ -1,4 +1,5 @@
 ﻿using Enums.Monopoly;
+using Google.Protobuf.Collections;
 using Microsoft.Extensions.Logging.Abstractions;
 using Models;
 using Models.Monopoly;
@@ -44,6 +45,14 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             );
         }
 
+        public MonopolyNationCell(Dictionary<string,Costs> BuildingToCostsMap, Nation nation)
+        {
+            OfNation = nation;
+            BuildingTypeToCostsMap = BuildingToCostsMap;
+            BuyingBehaviour = new CellAbleToBuyBehaviour(BuildingTypeToCostsMap[Consts.Monopoly.FieldBuyString]);
+            monopolBehaviour = new MonopolNationCellBehaviour();
+        }
+
         public Nation GetNation()
         {
             return OfNation;
@@ -66,7 +75,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
             if (Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
-                return null;
+                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
 
             StringModalParameters Parameters = new StringModalParameters();
 
@@ -88,11 +97,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return monopolBehaviour;
         }
 
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought, List<MonopolyCell> CheckMonopol)
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
             BuyingBehaviour.SetOwner(MainPlayer.Key);
             BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
-            monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
+            CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
         }
     }
 }

@@ -221,9 +221,12 @@ namespace Services.GamesServices.Monopoly
 
         private void NationCellBuyingProcedure(string ModalResponse)
         {
-            MonopolyPlayer MainPlayer1 = PlayersService.GetMainPlayer();
-            int BuyCost = BoardService.BuyCell(MainPlayer1, ModalResponse);
-            PlayersService.ChargeMainPlayer(BuyCost);
+            if (BoardService.IsPossibleToBuyCell(PlayersService.GetMainPlayer()))
+            {
+                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+                int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
+                PlayersService.ChargeMainPlayer(BuyCost);
+            }
         }
 
         private void BeachCellBuyingProcedure(string ModalResponse)

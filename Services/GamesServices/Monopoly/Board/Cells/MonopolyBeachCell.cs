@@ -49,13 +49,13 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
             if (Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
-                return null;
+                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
 
             StringModalParameters Parameters = new StringModalParameters();
 
             Parameters.Title = "Do you wany to buy this cell";
-            Parameters.ButtonsContent.Add("Yes");
-            Parameters.ButtonsContent.Add("No");
+            Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyAccepted);
+            Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyDeclined);
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Beach);
         }
 
@@ -70,9 +70,14 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return monopolBehaviour;
         }
 
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought, List<MonopolyCell> CheckMonopol)
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
+            if(WhatIsBought == Consts.Monopoly.BeachBuyAccepted)
+            {
+                BuyingBehaviour.SetOwner(MainPlayer.Key);
+            }
             
+            CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
         }
     }
 }

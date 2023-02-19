@@ -21,6 +21,7 @@ namespace UnitTests.MonopolyTests
         {
             PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
             PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
+            PlayerKey.First,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,
             PlayerKey.First,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
 
         };
@@ -28,6 +29,7 @@ namespace UnitTests.MonopolyTests
         private PlayerKey[] BuyingOrderFirstWinner = new PlayerKey[]
         {
             PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
+            PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,
             PlayerKey.First, PlayerKey.First, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,
             PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
 
@@ -52,9 +54,9 @@ namespace UnitTests.MonopolyTests
             int TurnsToTest = 5;
             for (int turn = 1; turn <= TurnsToTest; turn++)
             {
-                ResetClients();
+                
                 List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(turn, ref Clients, BuyingOrder);
-
+                
                 List<PlayerUpdateData> ActualMoney = Clients[0].GetUpdatedData().PlayersData;
                 List<int> ExpectedMoney = MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow);
                 Assert.IsTrue(MonopolyDataPrepare.CompareMoneyAmount(ExpectedMoney, ActualMoney));

@@ -22,38 +22,8 @@ namespace Services.GamesServices.Monopoly.Board
         {
             Board = new List<MonopolyCell>();
             MainPlayerTurnsOnIslandRemaining = new Int();
-            InitBoard();
-        }
-
-        private void InitBoard()
-        {
-            Board.Add(new MonopolyStartCell());
-
-            Board.Add(new MonopolyNationCell(new Costs(50, 30), Nation.Poland));
-            Board.Add(new MonopolyNationCell(new Costs(80, 40), Nation.Poland));
-
-            Board.Add(new AirportCell());
-
-            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
-
-            Board.Add(new ChampionshipCell());
-
-            Board.Add(new MonopolyNationCell(new Costs(130, 70), Nation.France));
-            Board.Add(new MonopolyNationCell(new Costs(110, 50), Nation.France));
-            Board.Add(new MonopolyNationCell(new Costs(150, 100), Nation.France));
-
-
-            Board.Add(new MonopolyIslandCell(MainPlayerTurnsOnIslandRemaining));
-
-            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Bali));
-
-            Board.Add(new MonopolyNationCell(new Costs(180, 140), Nation.Argentina));
-            Board.Add(new MonopolyNationCell(new Costs(250, 200), Nation.Argentina));
-            Board.Add(new MonopolyNationCell(new Costs(210, 150), Nation.Argentina));
-
-            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Cypr));
-
-        }
+            Board = MonopolyBoardFactory.MakeBoard(ref MainPlayerTurnsOnIslandRemaining);
+        } 
 
         public List<MonopolyCell> GetBoard()
         {
@@ -131,7 +101,8 @@ namespace Services.GamesServices.Monopoly.Board
             MonopolyCell? CellToSetChampionship = Board.FirstOrDefault(
                 c => c.OnDisplay() == OnCellDisplay
             );
-            CellToSetChampionship.GetBuyingBehavior().SetChampionship();
+            if(CellToSetChampionship != null)
+                CellToSetChampionship.GetBuyingBehavior().SetChampionship();
         }
 
         public MonopolyModalParameters GetCellModalParameters(MonopolyPlayer MainPlayer)
@@ -236,7 +207,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public int BuyCell(MonopolyPlayer MainPlayer, string WhatIsBought)
         {
-            Board[MainPlayer.OnCellIndex].CellBought(MainPlayer, WhatIsBought,Board);
+            Board[MainPlayer.OnCellIndex].CellBought(MainPlayer, WhatIsBought,ref Board);
             int BuyCost = Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetCosts().Buy;
             return BuyCost;
         }

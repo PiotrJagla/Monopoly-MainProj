@@ -38,11 +38,7 @@ namespace UnitTests.MonopolyTests
 
         public static void PrepareClientsData(ref List<MonopolyService> Clients)
         {
-            List<Player> Players = AddPlayers(ref Clients);
-            StartClientsGame(ref Clients, Players);
-            SetMainPlayersIndex(ref Clients);
-            List<MonopolyService> Clients2 = InitClients(Clients.Count);
-            Clients = Clients2;
+            Clients = InitClients(Clients.Count);
         }
 
         public static List<MonopolyService> InitClients(int HowMany)
@@ -134,8 +130,14 @@ namespace UnitTests.MonopolyTests
             int CellIndex = (turn + 1) % CurrentClient.GetBoard().Count;
             if (BuyingOrder[turn] == (PlayerKey)clientIndex)
             {
+                //CurrentClient.BuyCellIfPossible();
+                MonopolyModalParameters parameters = CurrentClient.GetModalParameters();
+                CurrentClient.ModalResponse(
+                    FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                    parameters.Identifier
+                );
+
                 PlayersMoneyFlow[clientIndex].Loss += CurrentClient.GetBoard()[CellIndex].GetBuyingBehavior().GetCosts().Buy;
-                CurrentClient.BuyCellIfPossible();
             }
         }
 
@@ -170,6 +172,7 @@ namespace UnitTests.MonopolyTests
                 {
                     client.UpdateData(CurrentClient.GetUpdatedData());
                 }
+                
                 client.NextTurn();
             }
         }      
@@ -196,7 +199,16 @@ namespace UnitTests.MonopolyTests
             return true;
         }
 
-        
+        public static string FindStringBuyingCellFrom(List<string> Options)
+        {
+            string? Result = Options.FirstOrDefault(option => option == Consts.Monopoly.BeachBuyAccepted ||
+                                                    option == Consts.Monopoly.FieldBuyString);
+
+            if (Result == null)
+                return "";
+
+            return Result;
+        }
 
         
         

@@ -104,7 +104,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             if (MonopolyLogic.IsYourTurn() == true)
             {
                 MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
-                if (ModalParameters != null && ModalParameters.WhenShowModal == When)
+                if (ModalParameters.Identifier != ModalResponseIdentifier.NoResponse &&
+                    ModalParameters.WhenShowModal == When)
                 {
                     ModalParameters parameters = new ModalParameters();
                     parameters.Add(nameof(SelectButtonModal.StringParameters), ModalParameters.Parameters);

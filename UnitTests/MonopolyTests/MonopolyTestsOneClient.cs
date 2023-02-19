@@ -33,7 +33,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
             Client.ExecutePlayerMove(1);
-            Assert.IsTrue(Client.GetModalParameters() == null);
+            Assert.IsTrue(Client.GetModalParameters().Identifier == ModalResponseIdentifier.NoResponse);
         }
 
         [TestMethod]
@@ -166,7 +166,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
 
-            Assert.IsTrue(Client.GetModalParameters() == null);
+            Assert.IsTrue(Client.GetModalParameters().Identifier == ModalResponseIdentifier.NoResponse);
         }
 
         [TestMethod]
@@ -316,6 +316,7 @@ namespace UnitTests.MonopolyTests
 
             Assert.IsTrue(ActualPlayerMoney == ExpectedMoney);
         }
+
 
     }
 

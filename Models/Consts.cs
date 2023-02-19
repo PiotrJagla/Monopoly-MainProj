@@ -61,6 +61,9 @@ namespace Models
             public static string OneHouseBuyString = "1 House";
             public static string TwoHousesBuyString = "2 Houses";
 
+            public static string BeachBuyAccepted = "Yes";
+            public static string BeachBuyDeclined = "No";
+
             public static Costs NationFieldCosts = new Costs(40, 20);
             public static Costs NationOneHouseCosts = new Costs(60, 35);
             public static Costs NationTwoHousesCosts = new Costs(80, 50);

@@ -22,7 +22,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             monopolBehaviour = new NoMonopolBehaviour();
         }
 
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought, List<MonopolyCell> CheckMonopol)
+        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
             
         }
@@ -39,7 +39,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
         {
-            return null;
+            return new MonopolyModalParameters(new StringModalParameters(),ModalShow.Never, ModalResponseIdentifier.NoResponse);
         }
 
         public Nation GetNation()

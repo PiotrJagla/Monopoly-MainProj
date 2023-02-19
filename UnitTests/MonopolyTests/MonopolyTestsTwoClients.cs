@@ -130,11 +130,6 @@ public class MonopolyTestsTwoClients
         OptionsToBuy.Add(Consts.Monopoly.OneHouseBuyString);
         OptionsToBuy.Add(Consts.Monopoly.TwoHousesBuyString);
 
-        List<Costs> CorrespondingCosts = new List<Costs>();
-        CorrespondingCosts.Add(Consts.Monopoly.NationFieldCosts);
-        CorrespondingCosts.Add(Consts.Monopoly.NationOneHouseCosts);
-        CorrespondingCosts.Add(Consts.Monopoly.NationTwoHousesCosts);
-
         for (int i = 0; i < OptionsToBuy.Count; i++)
         {
             ResetClients();
@@ -149,13 +144,13 @@ public class MonopolyTestsTwoClients
 
             int FirstClientMoneyAfterBuy = FirstClientUpdateData.PlayersData[0].Money;
             int FirstClientExpectedMoney = Consts.Monopoly.StartMoneyAmount;
-            FirstClientExpectedMoney -= CorrespondingCosts[i].Buy;
+            FirstClientExpectedMoney -= Clients[0].GetBoard()[1].GetBuyingBehavior().GetCosts().Buy;
 
             Clients[1].ExecutePlayerMove(1);
             Clients[1].UpdateData(Clients[1].GetUpdatedData());
             int SecoundClientMoneyAfterStay = Clients[1].GetUpdatedData().PlayersData[1].Money;
             int SecoundClientExpectedMoney = Consts.Monopoly.StartMoneyAmount;
-            SecoundClientExpectedMoney -= CorrespondingCosts[i].Stay;
+            SecoundClientExpectedMoney -= Clients[0].GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(FirstClientMoneyAfterBuy == FirstClientExpectedMoney);
             Assert.IsTrue(SecoundClientMoneyAfterStay == SecoundClientExpectedMoney);
