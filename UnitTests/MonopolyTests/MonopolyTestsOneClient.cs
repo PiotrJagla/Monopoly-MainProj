@@ -356,7 +356,55 @@ namespace UnitTests.MonopolyTests
             Assert.IsTrue(ActualPlayerMoney == ExpectedMoney);
         }
 
+        [TestMethod]
+        public void TestPossibilityOfBuyingCellWithoutMoney_Nation()
+        {
+            
+            for (int i = 0; i< 10; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+                MonopolyModalParameters parameters = Client.GetModalParameters();
+                Client.ModalResponse(
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                    parameters.Identifier
+                );
 
+                if (i >= 10 && Client.GetBoard()[i + 1] is MonopolyNationCell)
+                    break;
+            }
+            
+            Client.ExecutePlayerMove(1);
+            MonopolyModalParameters ModalParameters = Client.GetModalParameters();
+
+            Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyNationCell);
+            Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.FieldBuyString) == -1);
+            Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.OneHouseBuyString) == -1);
+            Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.TwoHousesBuyString) == -1);
+        }
+
+        [TestMethod]
+        public void TestPossibilityOfBuyingCellWithoutMoney_Beach()
+        {
+            for (int i = 1; i < Client.GetBoard().Count; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+                MonopolyModalParameters parameters = Client.GetModalParameters();
+                Client.ModalResponse(
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                    parameters.Identifier
+                );
+
+                if (i >= 10 && Client.GetBoard()[i + 1] is MonopolyBeachCell)
+                    break;
+            }
+
+            Client.ExecutePlayerMove(1);
+            MonopolyModalParameters ModalParameters = Client.GetModalParameters();
+
+            Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyBeachCell);
+            Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.BeachBuyAccepted) == -1);
+            
+        }
     }
 
 }

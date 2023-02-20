@@ -74,18 +74,9 @@ namespace Services.GamesServices.Monopoly
 
         public void SellCell(string CellToSellDisplay)
         {
-
-            //MonopolyCell CellToSellRef = BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == CellToSellDisplay);
-
-            //CellToSellRef.GetBuyingBehavior().SetOwner(PlayerKey.NoOne);
-            //PlayersService.GiveMainPlayerMoney(CellToSellRef.GetBuyingBehavior().GetCosts().Buy);
-            //BoardService.GetMonopolOff(CellToSellRef);
-
             int BuyCost = BoardService.SellCell(CellToSellDisplay);
             PlayersService.GiveMainPlayerMoney(BuyCost);
         }
-
-
         
 
         public void ExecutePlayerMove(int MoveAmount)

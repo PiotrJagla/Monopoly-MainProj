@@ -31,7 +31,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return Beach.NoBeach;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
+        public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
             StringModalParameters Result = new StringModalParameters();
             Result.Title = $"You Are On Desert Island For {TurnsOnIslandRemainingREF.Value} Turns";
@@ -56,17 +56,12 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         }
 
 
-        public MonopolBehaviour MonopolChanges()
-        {
-            return monopolBehaviour;
-        }
-
         public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
             
         }
 
-        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        public void CellSold(ref List<MonopolyCell> MonopolChanges)
         {
             
         }

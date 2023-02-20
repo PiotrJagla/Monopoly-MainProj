@@ -18,10 +18,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         CellBuyingBehaviour GetBuyingBehavior();
 
         void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol);
-        void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex);
+        void CellSold(ref List<MonopolyCell> MonopolChanges);
 
-        MonopolBehaviour MonopolChanges();
         string OnDisplay();
-        MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer);
+        MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data);
     }
 }

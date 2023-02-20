@@ -27,7 +27,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             
         }
 
-        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        public void CellSold(ref List<MonopolyCell> MonopolChanges)
         {
             
 
@@ -43,12 +43,12 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
+        public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
             StringModalParameters Parameters = new StringModalParameters();
 
             Parameters.Title = "Choose a cell where you want to go";
-            foreach (var cell in Board)
+            foreach (var cell in Data.Board)
             {
                 if(cell is MonopolyNationCell || cell is MonopolyBeachCell)
                     Parameters.ButtonsContent.Add(cell.OnDisplay());
@@ -59,11 +59,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public Nation GetNation()
         {
             return Nation.NoNation;
-        }
-
-        public MonopolBehaviour MonopolChanges()
-        {
-            return monopolBehaviour;
         }
 
         public string OnDisplay()

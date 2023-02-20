@@ -51,16 +51,20 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BeachName;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
+        public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
-            if (Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
+            if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
                 return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
 
             StringModalParameters Parameters = new StringModalParameters();
 
             Parameters.Title = "Do you wany to buy this cell";
-            Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyAccepted);
+
             Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyDeclined);
+
+            if(Data.MainPlayer.MoneyOwned >= BuyingBehaviour.GetCosts().Buy)
+                Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyAccepted);
+
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Beach);
         }
 
@@ -70,10 +74,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         }
 
 
-        public MonopolBehaviour MonopolChanges()
-        {
-            return monopolBehaviour;
-        }
 
         public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
@@ -85,13 +85,13 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
         }
 
-        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        public void CellSold(ref List<MonopolyCell> MonopolChanges)
         {
             BuyingBehaviour.SetOwner(PlayerKey.NoOne);
 
-            int CellIndex2 = MonopolChanges.IndexOf(this);
+            int CellIndex = MonopolChanges.IndexOf(this);
 
-            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges,CellIndex2);
+            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges,CellIndex);
         }
     }
 }

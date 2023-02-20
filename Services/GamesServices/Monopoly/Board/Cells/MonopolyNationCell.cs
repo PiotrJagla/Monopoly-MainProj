@@ -72,29 +72,31 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return Beach.NoBeach;
         }
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
+        public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
-            if (Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
+            if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
                 return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
 
             StringModalParameters Parameters = new StringModalParameters();
 
             Parameters.Title = "What Do You wanna build?";
             Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBoughtString);
-            Parameters.ButtonsContent.Add(Consts.Monopoly.FieldBuyString);
-            Parameters.ButtonsContent.Add(Consts.Monopoly.OneHouseBuyString);
-            Parameters.ButtonsContent.Add(Consts.Monopoly.TwoHousesBuyString);
+
+            if(Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.FieldBuyString].Buy)
+                Parameters.ButtonsContent.Add(Consts.Monopoly.FieldBuyString);
+
+            if (Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.OneHouseBuyString].Buy)
+                Parameters.ButtonsContent.Add(Consts.Monopoly.OneHouseBuyString);
+
+            if (Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.TwoHousesBuyString].Buy)
+                Parameters.ButtonsContent.Add(Consts.Monopoly.TwoHousesBuyString);
+
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
         }
 
         public CellBuyingBehaviour GetBuyingBehavior()
         {
             return BuyingBehaviour;
-        }
-
-        public MonopolBehaviour MonopolChanges()
-        {
-            return monopolBehaviour;
         }
 
         public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
@@ -107,11 +109,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             }
         }
 
-        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        public void CellSold(ref List<MonopolyCell> MonopolChanges)
         {
-            int CellIndex2 = MonopolChanges.IndexOf(this);
+            int CellIndex = MonopolChanges.IndexOf(this);
             BuyingBehaviour.SetOwner(PlayerKey.NoOne);
-            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges, CellIndex2);
+            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges, CellIndex);
         }
     }
 }

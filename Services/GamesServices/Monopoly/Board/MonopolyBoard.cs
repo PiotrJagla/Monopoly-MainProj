@@ -73,22 +73,6 @@ namespace Services.GamesServices.Monopoly.Board
             return Board[Player.OnCellIndex].GetBuyingBehavior().GetOwner() == Player.Key;
         }
 
-        public MonopolyCell GetCell(int Index)
-        {
-            return Board[Index];
-        }
-
-        public void CheckForMonopolOf(MonopolyPlayer aPlayer)
-        {
-            Board = Board[aPlayer.OnCellIndex].MonopolChanges().UpdateBoardMonopol(Board, aPlayer.OnCellIndex);
-        }
-
-        public void GetMonopolOff(MonopolyCell aCell)
-        {
-            int aCellIndex = Board.IndexOf(aCell);
-            Board = Board[aCellIndex].MonopolChanges().GetMonopolOff(Board, aCellIndex);
-        }
-
         public void SetChampionship(string OnCellDisplay)
         {
             MonopolyCell? CellWithChampionship = Board.FirstOrDefault(
@@ -107,7 +91,10 @@ namespace Services.GamesServices.Monopoly.Board
 
         public MonopolyModalParameters GetCellModalParameters(MonopolyPlayer MainPlayer)
         {
-            return Board[MainPlayer.OnCellIndex].GetModalParameters(Board, MainPlayer);
+            DataToGetModalParameters DataForModalParameters = new DataToGetModalParameters();
+            DataForModalParameters.Board = GetBoard();
+            DataForModalParameters.MainPlayer = MainPlayer;
+            return Board[MainPlayer.OnCellIndex].GetModalParameters(DataForModalParameters);
         }
 
         public MonopolyBoardUpdateData MakeBoardUpdateData()
@@ -219,7 +206,8 @@ namespace Services.GamesServices.Monopoly.Board
         {
             MonopolyCell CellToSell = Board.FirstOrDefault(cell => cell.OnDisplay() == CellToSellDisplay);
             int BuyCost = CellToSell.GetBuyingBehavior().GetCosts().Buy;
-            CellToSell.CellSold(ref Board,9);
+            
+            CellToSell.CellSold(ref Board);
             
             return BuyCost;
         }

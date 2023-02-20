@@ -27,7 +27,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             
         }
 
-        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        public void CellSold(ref List<MonopolyCell> MonopolChanges)
         {
             
         }
@@ -42,7 +42,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return BuyingBehaviour;
         }
 
-        public MonopolyModalParameters GetModalParameters(in List<MonopolyCell> Board, MonopolyPlayer MainPlayer)
+        public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
             return new MonopolyModalParameters(new StringModalParameters(),ModalShow.Never, ModalResponseIdentifier.NoResponse);
         }
@@ -51,12 +51,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return Nation.NoNation;
         }
-
-        public MonopolBehaviour MonopolChanges()
-        {
-            return monopolBehaviour;
-        }
-
         public string OnDisplay()
         {
             return "Start!";
