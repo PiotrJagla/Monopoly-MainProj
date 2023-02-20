@@ -216,14 +216,16 @@ namespace Services.GamesServices.Monopoly
             int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
             int CellsToJumpThrough = BoardService.DistanceToCellFrom(MainPlayerPos, DestinationDisplay);
             ExecutePlayerMove(CellsToJumpThrough);
-            MoveQuantity = 0;
+
+            if(CellsToJumpThrough != 0)
+                MoveQuantity = 0;
         }
 
         private void NationCellBuyingProcedure(string ModalResponse)
         {
-            if (BoardService.IsPossibleToBuyCell(PlayersService.GetMainPlayer()))
+            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
+            if (BoardService.IsPossibleToBuyCell(MainPlayer))
             {
-                MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
                 int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
                 PlayersService.ChargeMainPlayer(BuyCost);
             }
@@ -231,9 +233,15 @@ namespace Services.GamesServices.Monopoly
 
         private void BeachCellBuyingProcedure(string ModalResponse)
         {
+            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
             if (ModalResponse.ToLower() == "yes")
             {
-                BuyCellIfPossible();
+                //BuyCellIfPossible();
+                if(BoardService.IsPossibleToBuyCell(MainPlayer))
+                {
+                    int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
+                    PlayersService.ChargeMainPlayer(BuyCost);
+                }
             }
         }
 

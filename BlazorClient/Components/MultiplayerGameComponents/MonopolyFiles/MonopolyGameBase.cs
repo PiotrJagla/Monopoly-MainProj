@@ -144,6 +144,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             {
                 Messages.Add("Game has not started yet");
             }
+
         }
         private async Task PlayersMove()
         {

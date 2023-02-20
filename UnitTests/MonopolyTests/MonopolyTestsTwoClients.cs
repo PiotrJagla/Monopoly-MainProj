@@ -26,6 +26,7 @@ public class MonopolyTestsTwoClients
     {
         PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
         PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
+        PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
         PlayerKey.NoOne,
     };
 
@@ -49,7 +50,7 @@ public class MonopolyTestsTwoClients
         for (int turn = 1; turn <= TurnsToTest; turn++)
         {
             ResetClients();
-            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(TurnsToTest, ref Clients, BuyingOrder);
+            List<MoneyFlow> ClientsMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(turn, ref Clients, BuyingOrder);
 
             List<PlayerUpdateData> ActualMoneyFirst = Clients[0].GetUpdatedData().PlayersData;
             List<int> ExpectedMoney = MonopolyDataPrepare.GetExpectedMoney(ClientsMoneyFlow);

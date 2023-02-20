@@ -130,7 +130,6 @@ namespace UnitTests.MonopolyTests
             int CellIndex = (turn + 1) % CurrentClient.GetBoard().Count;
             if (BuyingOrder[turn] == (PlayerKey)clientIndex)
             {
-                //CurrentClient.BuyCellIfPossible();
                 MonopolyModalParameters parameters = CurrentClient.GetModalParameters();
                 CurrentClient.ModalResponse(
                     FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),

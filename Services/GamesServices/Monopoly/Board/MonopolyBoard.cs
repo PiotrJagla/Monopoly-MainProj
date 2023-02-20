@@ -199,6 +199,9 @@ namespace Services.GamesServices.Monopoly.Board
             MonopolyCell Destination = Board.FirstOrDefault(c => c.OnDisplay() == DestinationDisplay);  
             int DestinationIndex = Board.IndexOf(Destination);
 
+            if (DestinationIndex == -1)
+                return 0;
+
             if(DestinationIndex < MainPlayerPos)
                 return Math.Abs(DestinationIndex + Board.Count - MainPlayerPos);
 

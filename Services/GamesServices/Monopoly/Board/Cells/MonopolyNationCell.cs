@@ -80,7 +80,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             StringModalParameters Parameters = new StringModalParameters();
 
             Parameters.Title = "What Do You wanna build?";
-            Parameters.ButtonsContent.Add("Nothing");
+            Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBoughtString);
             Parameters.ButtonsContent.Add(Consts.Monopoly.FieldBuyString);
             Parameters.ButtonsContent.Add(Consts.Monopoly.OneHouseBuyString);
             Parameters.ButtonsContent.Add(Consts.Monopoly.TwoHousesBuyString);
@@ -99,9 +99,12 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
-            BuyingBehaviour.SetOwner(MainPlayer.Key);
-            BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
-            CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
+            if (WhatIsBought != Consts.Monopoly.NothingBoughtString)
+            {
+                BuyingBehaviour.SetOwner(MainPlayer.Key);
+                BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
+                CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
+            }
         }
     }
 }
