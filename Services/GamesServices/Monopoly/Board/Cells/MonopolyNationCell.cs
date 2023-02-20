@@ -106,5 +106,12 @@ namespace Services.GamesServices.Monopoly.Board.Cells
                 CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
             }
         }
+
+        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        {
+            int CellIndex2 = MonopolChanges.IndexOf(this);
+            BuyingBehaviour.SetOwner(PlayerKey.NoOne);
+            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges, CellIndex2);
+        }
     }
 }

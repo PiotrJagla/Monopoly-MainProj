@@ -71,5 +71,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             
         }
+
+        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        {
+            
+        }
     }
 }

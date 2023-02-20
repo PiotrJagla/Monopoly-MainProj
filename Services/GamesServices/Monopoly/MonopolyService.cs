@@ -24,7 +24,6 @@ namespace Services.GamesServices.Monopoly
         void SetMainPlayerIndex(int index);
         bool IsYourTurn();
         void NextTurn();
-        void BuyCellIfPossible();
         bool DontHaveMoneyToPay();
         void SellCell(string CellToSellDisplay);
         PlayerKey WhoWon();

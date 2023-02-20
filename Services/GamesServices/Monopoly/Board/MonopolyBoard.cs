@@ -214,5 +214,14 @@ namespace Services.GamesServices.Monopoly.Board
             int BuyCost = Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetCosts().Buy;
             return BuyCost;
         }
+
+        public int SellCell(string CellToSellDisplay)
+        {
+            MonopolyCell CellToSell = Board.FirstOrDefault(cell => cell.OnDisplay() == CellToSellDisplay);
+            int BuyCost = CellToSell.GetBuyingBehavior().GetCosts().Buy;
+            CellToSell.CellSold(ref Board,9);
+            
+            return BuyCost;
+        }
     }
 }

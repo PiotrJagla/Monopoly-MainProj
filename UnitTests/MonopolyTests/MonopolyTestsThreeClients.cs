@@ -1,6 +1,7 @@
 ﻿using Enums.Monopoly;
 using Models.Monopoly;
 using Models.MultiplayerConnection;
+using MySqlX.XDevAPI;
 using Org.BouncyCastle.Crypto;
 using Services.GamesServices.Monopoly;
 using Services.GamesServices.Monopoly.Update;
@@ -120,7 +121,12 @@ namespace UnitTests.MonopolyTests
             while(true)
             {
                 Clients[0].ExecutePlayerMove(1);
-                Clients[0].BuyCellIfPossible();
+                
+                MonopolyModalParameters parameters = Clients[0].GetModalParameters();
+                Clients[0].ModalResponse(
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                    parameters.Identifier
+                );
 
                 MonopolyService CurrentClient = Clients[0];
                 MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);

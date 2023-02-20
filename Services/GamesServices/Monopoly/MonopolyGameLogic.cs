@@ -74,11 +74,15 @@ namespace Services.GamesServices.Monopoly
 
         public void SellCell(string CellToSellDisplay)
         {
-            MonopolyCell CellToSellRef = BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == CellToSellDisplay);
 
-            CellToSellRef.GetBuyingBehavior().SetOwner(PlayerKey.NoOne);
-            PlayersService.GiveMainPlayerMoney(CellToSellRef.GetBuyingBehavior().GetCosts().Buy);
-            BoardService.GetMonopolOff(CellToSellRef);
+            //MonopolyCell CellToSellRef = BoardService.GetBoard().FirstOrDefault(c => c.OnDisplay() == CellToSellDisplay);
+
+            //CellToSellRef.GetBuyingBehavior().SetOwner(PlayerKey.NoOne);
+            //PlayersService.GiveMainPlayerMoney(CellToSellRef.GetBuyingBehavior().GetCosts().Buy);
+            //BoardService.GetMonopolOff(CellToSellRef);
+
+            int BuyCost = BoardService.SellCell(CellToSellDisplay);
+            PlayersService.GiveMainPlayerMoney(BuyCost);
         }
 
 
@@ -236,31 +240,12 @@ namespace Services.GamesServices.Monopoly
             MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
             if (ModalResponse.ToLower() == "yes")
             {
-                //BuyCellIfPossible();
                 if(BoardService.IsPossibleToBuyCell(MainPlayer))
                 {
                     int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
                     PlayersService.ChargeMainPlayer(BuyCost);
                 }
             }
-        }
-
-        public void BuyCellIfPossible()
-        {
-            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-
-            if (BoardService.IsPossibleToBuyCell(MainPlayer))
-            {
-                BuyCell(MainPlayer.OnCellIndex);
-            }
-        }
-
-        private void BuyCell(int MainPlayerBoardPos)
-        {
-            PlayerKey MainPlayerKey = PlayersService.GetMainPlayer().Key;
-            BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().SetOwner(MainPlayerKey);
-            PlayersService.ChargeMainPlayer(BoardService.GetCell(MainPlayerBoardPos).GetBuyingBehavior().GetCosts().Buy);
-            BoardService.CheckForMonopolOf(PlayersService.GetMainPlayer());
         }
     }
 }

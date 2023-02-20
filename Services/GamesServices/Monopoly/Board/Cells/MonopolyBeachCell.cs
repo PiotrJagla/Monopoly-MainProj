@@ -27,6 +27,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
             monopolBehaviour = new MonopolBeachCellBehaviour();
         }
+
+        public MonopolyBeachCell()
+        {
+        }
+
         public Nation GetNation()
         {
             return Nation.NoNation;
@@ -78,6 +83,15 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             }
             
             CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
+        }
+
+        public void CellSold(ref List<MonopolyCell> MonopolChanges, int CellIndex)
+        {
+            BuyingBehaviour.SetOwner(PlayerKey.NoOne);
+
+            int CellIndex2 = MonopolChanges.IndexOf(this);
+
+            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges,CellIndex2);
         }
     }
 }

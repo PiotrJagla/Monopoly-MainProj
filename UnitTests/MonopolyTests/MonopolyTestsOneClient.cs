@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Models.MultiplayerConnection;
 using Enums.Monopoly;
 using Services.GamesServices.Monopoly.Board.Cells;
+using Models.Monopoly;
 
 namespace UnitTests.MonopolyTests
 {
@@ -26,7 +27,12 @@ namespace UnitTests.MonopolyTests
         public void TestBuyingOwnCell()
         {
             Client.ExecutePlayerMove(1);
-            Client.BuyCellIfPossible();
+
+            MonopolyModalParameters parameters = Client.GetModalParameters();
+            Client.ModalResponse(
+                MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                parameters.Identifier
+            );
 
             for (int i = 2; Client.GetBoard()[i].GetBuyingBehavior().GetOwner() != PlayerKey.First ; i = (++i)%Client.GetBoard().Count)
             {
@@ -44,7 +50,12 @@ namespace UnitTests.MonopolyTests
             for (int i = 1;  ; i++)
             {
                 Client.ExecutePlayerMove(1);
-                Client.BuyCellIfPossible();
+
+                MonopolyModalParameters parameters = Client.GetModalParameters();
+                Client.ModalResponse(
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                    parameters.Identifier
+                );
 
                 if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
                     break;
@@ -64,7 +75,13 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
 
                 if (Client.GetBoard()[i] is MonopolyBeachCell)
-                    Client.BuyCellIfPossible();
+                {
+                    MonopolyModalParameters parameters = Client.GetModalParameters();
+                    Client.ModalResponse(
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                        parameters.Identifier
+                    );
+                }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
                     break;
@@ -86,9 +103,15 @@ namespace UnitTests.MonopolyTests
             for (int i = 1; ; i++)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                
+
                 if (Client.GetBoard()[i] is MonopolyBeachCell)
-                    Client.BuyCellIfPossible();
+                {
+                    MonopolyModalParameters parameters = Client.GetModalParameters();
+                    Client.ModalResponse(
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                        parameters.Identifier
+                    );
+                }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
                     break;
@@ -112,7 +135,13 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
 
                 if (Client.GetBoard()[i] is MonopolyBeachCell)
-                    Client.BuyCellIfPossible();
+                {
+                    MonopolyModalParameters parameters = Client.GetModalParameters();
+                    Client.ModalResponse(
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                        parameters.Identifier
+                    );
+                }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
                     break;
@@ -139,7 +168,13 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
 
                 if (Client.GetBoard()[i] is MonopolyBeachCell)
-                    Client.BuyCellIfPossible();
+                {
+                    MonopolyModalParameters parameters = Client.GetModalParameters();
+                    Client.ModalResponse(
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                        parameters.Identifier
+                    );
+                }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
                     break;
@@ -241,7 +276,11 @@ namespace UnitTests.MonopolyTests
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
                 Client.ExecutePlayerMove(1);
-                Client.BuyCellIfPossible();
+                MonopolyModalParameters parameters = Client.GetModalParameters();
+                Client.ModalResponse(
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
+                    parameters.Identifier
+                );
                 if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
                     break;
