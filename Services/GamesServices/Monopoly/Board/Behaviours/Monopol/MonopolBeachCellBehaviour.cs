@@ -57,7 +57,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Monopol
             {
                 int CellIndexToUpdate = NewBoard.IndexOf(BeachCell);
                 NewBoard[CellIndexToUpdate].GetBuyingBehavior().MultiplyStayCostAmount(
-                    Consts.Monopoly.BeachesOwnedMultiplayer[AllBeachesWithSameOwner.Count]
+                    Consts.Monopoly.BeachesOwnedMultiplier[AllBeachesWithSameOwner.Count]
                 );
             }
         }

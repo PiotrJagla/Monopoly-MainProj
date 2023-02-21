@@ -17,7 +17,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         CellBuyingBehaviour GetBuyingBehavior();
 
-        void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol);
+        int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol);
         void CellSold(ref List<MonopolyCell> MonopolChanges);
 
         string OnDisplay();

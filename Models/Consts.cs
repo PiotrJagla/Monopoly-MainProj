@@ -52,22 +52,21 @@ namespace Models
             public static string IslandDiaplsy = "Desert Island";
             public static string ChampionshipInfo = "|World Championship|";
 
-            public static float[] BeachesOwnedMultiplayer = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
+            public static float[] BeachesOwnedMultiplier = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
 
             public static string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
             public static string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
 
-            public static string NothingBoughtString = "Nothing";
-            public static string FieldBuyString = "Field";
-            public static string OneHouseBuyString = "1 House";
-            public static string TwoHousesBuyString = "2 Houses";
+            public static string NothingBought = "Nothing";
+            public static string Field = "Field";
+            public static string OneHouse = "1 House";
+            public static string TwoHouses = "2 Houses";
+            public static string ThreeHouses = "3 Houses";
+            public static string Hotel = "Hotel";
 
             public static string BeachBuyAccepted = "Yes";
             public static string BeachBuyDeclined = "No";
 
-            public static Costs NationFieldCosts = new Costs(40, 20);
-            public static Costs NationOneHouseCosts = new Costs(60, 35);
-            public static Costs NationTwoHousesCosts = new Costs(80, 50);
         }
     }
 }

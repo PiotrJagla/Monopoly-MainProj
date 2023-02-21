@@ -201,7 +201,7 @@ namespace UnitTests.MonopolyTests
         public static string FindStringBuyingCellFrom(List<string> Options)
         {
             string? Result = Options.FirstOrDefault(option => option == Consts.Monopoly.BeachBuyAccepted ||
-                                                    option == Consts.Monopoly.FieldBuyString);
+                                                    option == Consts.Monopoly.Field);
 
             if (Result == null)
                 return "";

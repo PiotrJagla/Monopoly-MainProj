@@ -127,9 +127,9 @@ public class MonopolyTestsTwoClients
     public void TestNationBuildingsBuying()
     {
         List<string> OptionsToBuy = new List<string>();
-        OptionsToBuy.Add(Consts.Monopoly.FieldBuyString);
-        OptionsToBuy.Add(Consts.Monopoly.OneHouseBuyString);
-        OptionsToBuy.Add(Consts.Monopoly.TwoHousesBuyString);
+        OptionsToBuy.Add(Consts.Monopoly.Field);
+        OptionsToBuy.Add(Consts.Monopoly.OneHouse);
+        OptionsToBuy.Add(Consts.Monopoly.TwoHouses);
 
         for (int i = 0; i < OptionsToBuy.Count; i++)
         {

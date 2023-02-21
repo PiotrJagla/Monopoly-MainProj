@@ -17,12 +17,14 @@ namespace Services.GamesServices.Monopoly.Board
     {
         private List<MonopolyCell> Board;
         private Int MainPlayerTurnsOnIslandRemaining;
+        private bool IsThisFirstLap;
 
         public MonopolyBoard()
         {
             Board = new List<MonopolyCell>();
             MainPlayerTurnsOnIslandRemaining = new Int();
             Board = MonopolyBoardFactory.MakeBoard(ref MainPlayerTurnsOnIslandRemaining);
+            IsThisFirstLap = true;
         } 
 
         public List<MonopolyCell> GetBoard()
@@ -49,7 +51,8 @@ namespace Services.GamesServices.Monopoly.Board
 
         public bool IsPossibleToBuyCell(MonopolyPlayer buyer)
         {
-            return CanAffordBuying(buyer) && IsNoOneCell(buyer.OnCellIndex) && IsBuyableCell(buyer.OnCellIndex);
+            //return CanAffordBuying(buyer);
+            return true;
         }
 
         private bool CanAffordBuying(MonopolyPlayer buyer)
@@ -60,12 +63,6 @@ namespace Services.GamesServices.Monopoly.Board
         public bool IsNoOneCell(int CellIndex)
         {
             return Board[CellIndex].GetBuyingBehavior().GetOwner() == PlayerKey.NoOne;
-        }
-
-        private bool IsBuyableCell(int CellIndex)
-        {
-            return Board[CellIndex] is MonopolyNationCell ||
-                   Board[CellIndex] is MonopolyBeachCell;
         }
 
         private bool IsPlayerCellOwner(MonopolyPlayer Player)
@@ -91,10 +88,11 @@ namespace Services.GamesServices.Monopoly.Board
 
         public MonopolyModalParameters GetCellModalParameters(MonopolyPlayer MainPlayer)
         {
-            DataToGetModalParameters DataForModalParameters = new DataToGetModalParameters();
-            DataForModalParameters.Board = GetBoard();
-            DataForModalParameters.MainPlayer = MainPlayer;
-            return Board[MainPlayer.OnCellIndex].GetModalParameters(DataForModalParameters);
+            DataToGetModalParameters Data = new DataToGetModalParameters();
+            Data.Board = GetBoard();
+            Data.MainPlayer = MainPlayer;
+            Data.IsThisFirstLap = IsThisFirstLap;
+            return Board[MainPlayer.OnCellIndex].GetModalParameters(Data);
         }
 
         public MonopolyBoardUpdateData MakeBoardUpdateData()
@@ -197,8 +195,7 @@ namespace Services.GamesServices.Monopoly.Board
 
         public int BuyCell(MonopolyPlayer MainPlayer, string WhatIsBought)
         {
-            Board[MainPlayer.OnCellIndex].CellBought(MainPlayer, WhatIsBought,ref Board);
-            int BuyCost = Board[MainPlayer.OnCellIndex].GetBuyingBehavior().GetCosts().Buy;
+            int BuyCost = Board[MainPlayer.OnCellIndex].CellBought(MainPlayer, WhatIsBought,ref Board);
             return BuyCost;
         }
 
@@ -210,6 +207,16 @@ namespace Services.GamesServices.Monopoly.Board
             CellToSell.CellSold(ref Board);
             
             return BuyCost;
+        }
+
+        public bool DidCrossedStartCell(int MoveAmount, int MainPlayerPos)
+        {
+            bool Result = (MainPlayerPos + MoveAmount) >= Board.Count;
+
+            if (Result == true)
+                IsThisFirstLap = false;
+
+            return Result;
         }
     }
 }

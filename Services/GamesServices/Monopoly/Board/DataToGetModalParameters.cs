@@ -12,6 +12,6 @@ namespace Services.GamesServices.Monopoly.Board
     {
         public List<MonopolyCell> Board;
         public MonopolyPlayer MainPlayer;
-
+        public bool IsThisFirstLap;
     }
 }

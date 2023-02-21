@@ -22,9 +22,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             monopolBehaviour = new NoMonopolBehaviour();
         }
 
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
+        public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
-            
+            return 0;
         }
 
         public void CellSold(ref List<MonopolyCell> MonopolChanges)

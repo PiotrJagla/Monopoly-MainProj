@@ -11,109 +11,152 @@ using Services.GamesServices.Monopoly.Board.Behaviours.Monopol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.GamesServices.Monopoly.Board.Cells
+namespace Services.GamesServices.Monopoly.Board.Cells;
+
+public class MonopolyNationCell : MonopolyCell
 {
-    public class MonopolyNationCell : MonopolyCell
+    private Nation OfNation { get; set; }
+
+    private CellBuyingBehaviour BuyingBehaviour;
+    private MonopolBehaviour monopolBehaviour;
+
+    private Dictionary<string, Costs> BuildingTypeToCostsMap;
+
+    private string CurrentBuilding;
+   
+
+    public MonopolyNationCell(Dictionary<string,Costs> BuildingToCostsMap, Nation nation)
     {
-        private Nation OfNation { get; set; }
+        OfNation = nation;
+        BuildingTypeToCostsMap = BuildingToCostsMap;
+        BuyingBehaviour = new CellAbleToBuyBehaviour(BuildingTypeToCostsMap[Consts.Monopoly.Field]);
+        monopolBehaviour = new MonopolNationCellBehaviour();
+        CurrentBuilding = "";
+    }
 
-        private CellBuyingBehaviour BuyingBehaviour;
-        private MonopolBehaviour monopolBehaviour;
+    public Nation GetNation()
+    {
+        return OfNation;
+    }
+    public string OnDisplay()
+    {
+        string result = "";
+        result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
+        result += $" Nation: {OfNation.ToString()} |";
+        result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
+        result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay}| ";
+        result += $" Building: {CurrentBuilding} ";
+        if (BuyingBehaviour.IsThereChampionship() == true)
+            result += Consts.Monopoly.ChampionshipInfo;
+        return result;
+    }
+    public Beach GetBeachName()
+    {
+        return Beach.NoBeach;
+    }
+    public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
+    {
+        if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() == PlayerKey.NoOne)
+            return GetModalBuyingCell(Data);
+        else if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() == Data.MainPlayer.Key)
+            return GetModalEnhancingCell(Data);
 
-        private Dictionary<string, Costs> BuildingTypeToCostsMap;
+        return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
+    }
 
-        public MonopolyNationCell(Costs costs, Nation nation = Nation.NoNation)
+    private MonopolyModalParameters GetModalBuyingCell(DataToGetModalParameters Data)
+    {
+        StringModalParameters Parameters = new StringModalParameters();
+
+        Parameters.Title = "What Do You wanna build?";
+        Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBought);
+
+        List<string> PossibleBuildingsToBuy = new List<string>();
+        PossibleBuildingsToBuy.Add(Consts.Monopoly.Field);
+        PossibleBuildingsToBuy.Add(Consts.Monopoly.OneHouse);
+        PossibleBuildingsToBuy.Add(Consts.Monopoly.TwoHouses);
+        PossibleBuildingsToBuy.Add(Consts.Monopoly.ThreeHouses);
+
+        foreach (var building in PossibleBuildingsToBuy)
         {
-            OfNation = nation;
-            BuyingBehaviour = new CellAbleToBuyBehaviour(costs);
-            monopolBehaviour = new MonopolNationCellBehaviour();
+            if(IsAbleToBuy(building,Data))
+                Parameters.ButtonsContent.Add(building);
+        }
+        
+        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
+    }
 
-            BuildingTypeToCostsMap = new Dictionary<string, Costs>();
-            BuildingTypeToCostsMap.Add(
-                Consts.Monopoly.FieldBuyString, Consts.Monopoly.NationFieldCosts
-            );
+    private bool IsAbleToBuy(string Building, DataToGetModalParameters Data)
+    {
+        bool Result = Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.OneHouse].Buy;
 
-            BuildingTypeToCostsMap.Add(
-                Consts.Monopoly.OneHouseBuyString, Consts.Monopoly.NationOneHouseCosts
-            );
+        if (Building == Consts.Monopoly.ThreeHouses && Data.IsThisFirstLap == true)
+            return false;
 
-            BuildingTypeToCostsMap.Add(
-                Consts.Monopoly.TwoHousesBuyString, Consts.Monopoly.NationTwoHousesCosts
-            );
+        return Result;
+    }
+
+    private MonopolyModalParameters GetModalEnhancingCell(DataToGetModalParameters Data)
+    {
+        StringModalParameters Parameters = new StringModalParameters();
+
+        Parameters.Title = "What Do You wanna build?";
+        Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBought);
+
+        int CurrentBuildingTier = BuyingTiers.GetBuyTierNumber(CurrentBuilding);
+        List<string> PossibleEnhanceBuildings = new List<string>();
+        PossibleEnhanceBuildings.Add(Consts.Monopoly.OneHouse);
+        PossibleEnhanceBuildings.Add(Consts.Monopoly.TwoHouses);
+        PossibleEnhanceBuildings.Add(Consts.Monopoly.ThreeHouses);
+        PossibleEnhanceBuildings.Add(Consts.Monopoly.Hotel);
+
+        foreach (var building in PossibleEnhanceBuildings)
+        {
+            if (IsAbleToEnhance(Data, building))
+                Parameters.ButtonsContent.Add(building);
         }
 
-        public MonopolyNationCell(Dictionary<string,Costs> BuildingToCostsMap, Nation nation)
+        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
+    }
+
+    private bool IsAbleToEnhance(DataToGetModalParameters Data, string WhatIsBought)
+    {
+        bool Result = Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.OneHouse].Buy &&
+                BuyingTiers.GetBuyTierNumber(WhatIsBought) > BuyingTiers.GetBuyTierNumber(CurrentBuilding);
+
+        if (WhatIsBought == Consts.Monopoly.Hotel)
+            Result = Result && CurrentBuilding == Consts.Monopoly.ThreeHouses;
+
+        return Result;
+    }
+
+    public CellBuyingBehaviour GetBuyingBehavior()
+    {
+        return BuyingBehaviour;
+    }
+
+    public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
+    {
+        if (string.IsNullOrEmpty(WhatIsBought) == false)
         {
-            OfNation = nation;
-            BuildingTypeToCostsMap = BuildingToCostsMap;
-            BuyingBehaviour = new CellAbleToBuyBehaviour(BuildingTypeToCostsMap[Consts.Monopoly.FieldBuyString]);
-            monopolBehaviour = new MonopolNationCellBehaviour();
+            BuyingBehaviour.SetOwner(MainPlayer.Key);
+            BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
+            CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
+            CurrentBuilding = WhatIsBought;
+            return BuyingBehaviour.GetCosts().Buy;
         }
 
-        public Nation GetNation()
-        {
-            return OfNation;
-        }
-        public string OnDisplay()
-        {
-            string result = "";
-            result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
-            result += $" Nation: {OfNation.ToString()} |";
-            result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
-            result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
-            if (BuyingBehaviour.IsThereChampionship() == true)
-                result += Consts.Monopoly.ChampionshipInfo;
-            return result;
-        }
-        public Beach GetBeachName()
-        {
-            return Beach.NoBeach;
-        }
-        public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
-        {
-            if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
-                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
+        return 0;
+    }
 
-            StringModalParameters Parameters = new StringModalParameters();
-
-            Parameters.Title = "What Do You wanna build?";
-            Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBoughtString);
-
-            if(Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.FieldBuyString].Buy)
-                Parameters.ButtonsContent.Add(Consts.Monopoly.FieldBuyString);
-
-            if (Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.OneHouseBuyString].Buy)
-                Parameters.ButtonsContent.Add(Consts.Monopoly.OneHouseBuyString);
-
-            if (Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.TwoHousesBuyString].Buy)
-                Parameters.ButtonsContent.Add(Consts.Monopoly.TwoHousesBuyString);
-
-            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
-        }
-
-        public CellBuyingBehaviour GetBuyingBehavior()
-        {
-            return BuyingBehaviour;
-        }
-
-        public void CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
-        {
-            if (WhatIsBought != Consts.Monopoly.NothingBoughtString)
-            {
-                BuyingBehaviour.SetOwner(MainPlayer.Key);
-                BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
-                CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
-            }
-        }
-
-        public void CellSold(ref List<MonopolyCell> MonopolChanges)
-        {
-            int CellIndex = MonopolChanges.IndexOf(this);
-            BuyingBehaviour.SetOwner(PlayerKey.NoOne);
-            MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges, CellIndex);
-        }
+    public void CellSold(ref List<MonopolyCell> MonopolChanges)
+    {
+        int CellIndex = MonopolChanges.IndexOf(this);
+        BuyingBehaviour.SetOwner(PlayerKey.NoOne);
+        MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges, CellIndex);
     }
 }

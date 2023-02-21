@@ -105,7 +105,7 @@ namespace Services.GamesServices.Monopoly
 
         private void OnStartCellCrossed(int MoveAmount)
         {
-            if (DidCrossedStartCell(MoveAmount))
+            if (BoardService.DidCrossedStartCell(MoveAmount, PlayersService.GetMainPlayer().OnCellIndex))
             {
                 PlayersService.GiveMainPlayerMoney(Consts.Monopoly.OnStartCrossedMoneyGiven);
             }
@@ -119,11 +119,6 @@ namespace Services.GamesServices.Monopoly
         private void CheckIfSteppedOnIsland()
         {
             BoardService.CheckIfMainPlayerSteppedOnIsland(PlayersService.GetMainPlayer());
-        }
-
-        private bool DidCrossedStartCell(int MoveAmount)
-        {
-            return (PlayersService.GetMainPlayer().OnCellIndex + MoveAmount) >= BoardService.GetBoard().Count;
         }
 
         public bool IsYourTurn()
@@ -229,14 +224,13 @@ namespace Services.GamesServices.Monopoly
         private void BeachCellBuyingProcedure(string ModalResponse)
         {
             MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-            if (ModalResponse.ToLower() == "yes")
+
+            if(BoardService.IsPossibleToBuyCell(MainPlayer))
             {
-                if(BoardService.IsPossibleToBuyCell(MainPlayer))
-                {
-                    int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
-                    PlayersService.ChargeMainPlayer(BuyCost);
-                }
+                int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
+                PlayersService.ChargeMainPlayer(BuyCost);
             }
+            
         }
     }
 }
