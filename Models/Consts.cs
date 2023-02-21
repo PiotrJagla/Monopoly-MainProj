@@ -57,7 +57,7 @@ namespace Models
             public static string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
             public static string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
 
-            public static string NothingBought = "Nothing";
+            public static string NoBuildingBought = "Nothing";
             public static string Field = "Field";
             public static string OneHouse = "1 House";
             public static string TwoHouses = "2 Houses";

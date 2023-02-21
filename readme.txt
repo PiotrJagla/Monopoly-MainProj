@@ -2,10 +2,10 @@
 features to add:
 
 ~In monopoly:
-
-
--make a functjonality checking if main player is able to buy certain building
-(field, one house and two houses added. Now turn for 3 houses and hotel)
+-Change way of displaying cells(especially costs)
+-Add a possibility to buy someones cell
+-Add chance field
+-refactor way of model response
  
 -make everyting more visual because its so ugly (but working)
 

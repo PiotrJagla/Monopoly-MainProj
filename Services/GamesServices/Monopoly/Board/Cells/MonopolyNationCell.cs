@@ -73,7 +73,7 @@ public class MonopolyNationCell : MonopolyCell
         StringModalParameters Parameters = new StringModalParameters();
 
         Parameters.Title = "What Do You wanna build?";
-        Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBought);
+        Parameters.ButtonsContent.Add(Consts.Monopoly.NoBuildingBought);
 
         List<string> PossibleBuildingsToBuy = new List<string>();
         PossibleBuildingsToBuy.Add(Consts.Monopoly.Field);
@@ -105,7 +105,7 @@ public class MonopolyNationCell : MonopolyCell
         StringModalParameters Parameters = new StringModalParameters();
 
         Parameters.Title = "What Do You wanna build?";
-        Parameters.ButtonsContent.Add(Consts.Monopoly.NothingBought);
+        Parameters.ButtonsContent.Add(Consts.Monopoly.NoBuildingBought);
 
         int CurrentBuildingTier = BuyingTiers.GetBuyTierNumber(CurrentBuilding);
         List<string> PossibleEnhanceBuildings = new List<string>();
@@ -141,7 +141,8 @@ public class MonopolyNationCell : MonopolyCell
 
     public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
     {
-        if (string.IsNullOrEmpty(WhatIsBought) == false)
+        if (WhatIsBought != Consts.Monopoly.NoBuildingBought &&
+            string.IsNullOrEmpty(WhatIsBought) == false)
         {
             BuyingBehaviour.SetOwner(MainPlayer.Key);
             BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);

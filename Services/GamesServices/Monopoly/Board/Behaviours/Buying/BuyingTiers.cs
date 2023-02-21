@@ -16,7 +16,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
             else if (WhatIsBought == Consts.Monopoly.BeachBuyAccepted)
                 return 1;
 
-            if (WhatIsBought == Consts.Monopoly.NothingBought)
+            if (WhatIsBought == Consts.Monopoly.NoBuildingBought)
                 return 0;
             else if (WhatIsBought == Consts.Monopoly.Field)
                 return 1;
