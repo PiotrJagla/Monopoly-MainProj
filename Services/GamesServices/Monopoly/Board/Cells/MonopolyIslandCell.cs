@@ -26,11 +26,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             monopolBehaviour = new NoMonopolBehaviour();
         }
 
-        public Beach GetBeachName()
-        {
-            return Beach.NoBeach;
-        }
-
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
             StringModalParameters Result = new StringModalParameters();
@@ -38,11 +33,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             Result.ButtonsContent.Add(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
             Result.ButtonsContent.Add(Consts.Monopoly.ThrowDiceIslandButtonContent);
             return new MonopolyModalParameters(Result, ModalShow.BeforeMove);
-        }
-
-        public Nation GetNation()
-        {
-            return Nation.NoNation;
         }
 
         public string OnDisplay()
@@ -89,6 +79,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             }
 
             return UpdatedData;
+        }
+
+        public string GetName()
+        {
+            return "Island";
         }
     }
 }

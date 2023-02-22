@@ -38,26 +38,21 @@ public class MonopolyNationCell : MonopolyCell
         CurrentBuilding = "";
     }
 
-    public Nation GetNation()
-    {
-        return OfNation;
-    }
     public string OnDisplay()
     {
         string result = "";
         result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
         result += $" Nation: {OfNation.ToString()} |";
-        if(BuyingBehaviour.GetCosts().Stay != 0)
+
+        if(string.IsNullOrEmpty(CurrentBuilding) == false && CurrentBuilding != Consts.Monopoly.NoBuildingBought)
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay}| ";
+
         result += $" Building: {CurrentBuilding} ";
         if (BuyingBehaviour.IsThereChampionship() == true)
             result += Consts.Monopoly.ChampionshipInfo;
         return result;
     }
-    public Beach GetBeachName()
-    {
-        return Beach.NoBeach;
-    }
+
     public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
     {
         if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() == PlayerKey.NoOne)
@@ -178,5 +173,10 @@ public class MonopolyNationCell : MonopolyCell
         UpdatedData.PlayersService.ChargeMainPlayer(BuyCost);
 
         return UpdatedData;
+    }
+
+    public string GetName()
+    {
+        return OfNation.ToString();
     }
 }

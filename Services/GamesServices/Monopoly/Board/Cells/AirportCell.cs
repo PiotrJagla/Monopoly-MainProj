@@ -33,11 +33,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         }
 
-        public Beach GetBeachName()
-        {
-            return Beach.NoBeach;
-        }
-
         public CellBuyingBehaviour GetBuyingBehavior()
         {
             return BuyingBehaviour;
@@ -54,11 +49,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
                     Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
             return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove);
-        }
-
-        public Nation GetNation()
-        {
-            return Nation.NoNation;
         }
 
         public ModalResponseUpdate OnModalResponse(ModalResponseData Data)
@@ -78,6 +68,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         }
 
         public string OnDisplay()
+        {
+            return "Airport";
+        }
+
+        public string GetName()
         {
             return "Airport";
         }

@@ -23,11 +23,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             monopolBehaviour = new NoMonopolBehaviour();
         }
 
-        public Beach GetBeachName()
-        {
-            return Beach.NoBeach;
-        }
-
         public CellBuyingBehaviour GetBuyingBehavior()
         {
             return BuyingBehaviour;
@@ -51,13 +46,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return cell is MonopolyNationCell && cell.GetBuyingBehavior().GetOwner() == MainPlayerKey;
         }
-
-        public Nation GetNation()
-        {
-            return Nation.NoNation;
-        }
-
-
 
         public string OnDisplay()
         {
@@ -83,6 +71,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             UpdatedData.BoardService.SetChampionship(Data.ModalResponse);
 
             return UpdatedData;
+        }
+
+        public string GetName()
+        {
+            return "Championship";
         }
     }
 }

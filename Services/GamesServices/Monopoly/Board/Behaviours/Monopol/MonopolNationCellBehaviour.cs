@@ -17,7 +17,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Monopol
             UpdatedBoard = Board;
 
             List<MonopolyCell> AllCellsOfSoldNations = new List<MonopolyCell>();
-            AllCellsOfSoldNations = UpdatedBoard.FindAll(c => c.GetNation() == UpdatedBoard[OnCell].GetNation());
+            AllCellsOfSoldNations = UpdatedBoard.FindAll(c => c.GetName() == UpdatedBoard[OnCell].GetName());
 
             MultiplyCellsStayCost(ref UpdatedBoard, AllCellsOfSoldNations, 1.0f / Consts.Monopoly.MonopolMultiplayer);
 
@@ -30,7 +30,7 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Monopol
             UpdatedBoard = Board;
 
             List<MonopolyCell> SingleNationCells = UpdatedBoard.FindAll(
-                c => c.GetNation() == UpdatedBoard[OnCell].GetNation()
+                c => c.GetName() == UpdatedBoard[OnCell].GetName()
             );
 
             PlayerKey SingleNationCellOwner = SingleNationCells[0].GetBuyingBehavior().GetOwner();

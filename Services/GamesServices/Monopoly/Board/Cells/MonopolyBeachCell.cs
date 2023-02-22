@@ -31,11 +31,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyBeachCell()
         {
         }
-
-        public Nation GetNation()
-        {
-            return Nation.NoNation;
-        }
         
         public string OnDisplay()
         {
@@ -45,10 +40,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay} ";
             return result;
-        }
-        public Beach GetBeachName()
-        {
-            return BeachName;
         }
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
@@ -107,6 +98,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             UpdatedData.PlayersService.ChargeMainPlayer(BuyCost);
 
             return UpdatedData;
+        }
+
+        public string GetName()
+        {
+            return BeachName.ToString();
         }
     }
 }

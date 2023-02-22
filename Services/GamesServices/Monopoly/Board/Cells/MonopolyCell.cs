@@ -12,8 +12,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public interface MonopolyCell
     {
-        Nation GetNation();
-        Beach GetBeachName();
+        string GetName();
 
         CellBuyingBehaviour GetBuyingBehavior();
 

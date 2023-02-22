@@ -68,7 +68,7 @@ namespace UnitTests.MonopolyTests
                     CheckCostOnce = false;
                 }
 
-                if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
+                if (Client.GetBoard()[i].GetName() != Client.GetBoard()[i + 1].GetName())
                     break;
             }
             
@@ -92,12 +92,12 @@ namespace UnitTests.MonopolyTests
                         MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
-                if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
+                if (Client.GetBoard()[i].GetName() == BeachCells[1].GetName())
                     break;
             }
             int ExpectedValue = (int)(FirstBeachStayCost * Consts.Monopoly.BeachesOwnedMultiplier[2]);
             int ActualValue = Client.GetBoard().FirstOrDefault(
-                b => b.GetBeachName() == BeachCells[0].GetBeachName()
+                b => b.GetName() == BeachCells[0].GetName()
             ).GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ActualValue == ExpectedValue);
@@ -120,12 +120,12 @@ namespace UnitTests.MonopolyTests
                         MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
-                if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
+                if (Client.GetBoard()[i].GetName() == BeachCells[2].GetName())
                     break;
             }
             int ExpectedValue = (int)(FirstBeachStayCost * Consts.Monopoly.BeachesOwnedMultiplier[3]);
             int ActualValue = Client.GetBoard().FirstOrDefault(
-                b => b.GetBeachName() == BeachCells[0].GetBeachName()
+                b => b.GetName() == BeachCells[0].GetName()
             ).GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ActualValue == ExpectedValue);
@@ -148,15 +148,15 @@ namespace UnitTests.MonopolyTests
                         MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
-                if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
+                if (Client.GetBoard()[i].GetName() == BeachCells[1].GetName())
                     break;
             }
             MonopolyCell? CellToSell = Client.GetBoard().FirstOrDefault(
-                b => b.GetBeachName() == BeachCells[1].GetBeachName()
+                b => b.GetName() == BeachCells[1].GetName()
             );
             Client.SellCell(CellToSell.OnDisplay());
             int ActualValue = Client.GetBoard().FirstOrDefault(
-                b => b.GetBeachName() == BeachCells[0].GetBeachName()
+                b => b.GetName() == BeachCells[0].GetName()
             ).GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ActualValue == FirstBeachStayCost);
@@ -179,18 +179,18 @@ namespace UnitTests.MonopolyTests
                         MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
-                if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
+                if (Client.GetBoard()[i].GetName() == BeachCells[2].GetName())
                     break;
             }
             MonopolyCell? CellToSell = Client.GetBoard().FirstOrDefault(
-                b => b.GetBeachName() == BeachCells[2].GetBeachName()
+                b => b.GetName() == BeachCells[2].GetName()
             );
             Client.SellCell(CellToSell.OnDisplay());
 
             int ExpectedValue = (int)(SecoundBeachCellStayCost * Consts.Monopoly.BeachesOwnedMultiplier[2]);
 
             int ActualValue = Client.GetBoard().FirstOrDefault(
-                b => b.GetBeachName() == BeachCells[1].GetBeachName()
+                b => b.GetName() == BeachCells[1].GetName()
             ).GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ExpectedValue == ActualValue);
@@ -326,7 +326,7 @@ namespace UnitTests.MonopolyTests
                     );
                 }
 
-                if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
+                if (Client.GetBoard()[i].GetName() != Client.GetBoard()[i + 1].GetName())
                     BuyTwoCells = false;
             }
 
