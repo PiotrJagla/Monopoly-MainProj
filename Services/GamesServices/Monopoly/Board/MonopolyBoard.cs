@@ -49,17 +49,6 @@ namespace Services.GamesServices.Monopoly.Board
             return IsNoOneCell(PlayerStepped.OnCellIndex) == false && IsPlayerCellOwner(PlayerStepped) == false;
         }
 
-        public bool IsPossibleToBuyCell(MonopolyPlayer buyer)
-        {
-            //return CanAffordBuying(buyer);
-            return true;
-        }
-
-        private bool CanAffordBuying(MonopolyPlayer buyer)
-        {
-            return buyer.MoneyOwned >= Board[buyer.OnCellIndex].GetBuyingBehavior().GetCosts().Buy;
-        }
-
         public bool IsNoOneCell(int CellIndex)
         {
             return Board[CellIndex].GetBuyingBehavior().GetOwner() == PlayerKey.NoOne;
@@ -165,7 +154,7 @@ namespace Services.GamesServices.Monopoly.Board
             return true;
         }
 
-        public void CheckIfMainPlayerSteppedOnIsland(MonopolyPlayer MainPlayer)
+        public void CheckIfSteppedOnIsland(MonopolyPlayer MainPlayer)
         {
             if (WillStayOnIsland(MainPlayer))
             {
