@@ -36,9 +36,7 @@ namespace UnitTests.MonopolyTests
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
-                MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                parameters.Identifier
-            );
+                MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
 
             for (int i = 0; i < Client.GetBoard().Count; i++)
             {
@@ -46,7 +44,7 @@ namespace UnitTests.MonopolyTests
             }
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyBeachCell);
-            Assert.IsTrue(Client.GetModalParameters().Identifier == ModalResponseIdentifier.NoResponse);
+            Assert.IsTrue(Client.GetModalParameters().WhenShowModal == ModalShow.Never);
         }
 
         [TestMethod]
@@ -60,9 +58,7 @@ namespace UnitTests.MonopolyTests
 
                 MonopolyModalParameters parameters = Client.GetModalParameters();
                 Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                    parameters.Identifier
-                );
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
 
                 if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
                     break;
@@ -85,9 +81,7 @@ namespace UnitTests.MonopolyTests
                 {
                     MonopolyModalParameters parameters = Client.GetModalParameters();
                     Client.ModalResponse(
-                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                        parameters.Identifier
-                    );
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
@@ -115,9 +109,7 @@ namespace UnitTests.MonopolyTests
                 {
                     MonopolyModalParameters parameters = Client.GetModalParameters();
                     Client.ModalResponse(
-                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                        parameters.Identifier
-                    );
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
@@ -145,9 +137,7 @@ namespace UnitTests.MonopolyTests
                 {
                     MonopolyModalParameters parameters = Client.GetModalParameters();
                     Client.ModalResponse(
-                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                        parameters.Identifier
-                    );
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[1].GetBeachName())
@@ -178,9 +168,7 @@ namespace UnitTests.MonopolyTests
                 {
                     MonopolyModalParameters parameters = Client.GetModalParameters();
                     Client.ModalResponse(
-                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                        parameters.Identifier
-                    );
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 }
 
                 if (Client.GetBoard()[i].GetBeachName() == BeachCells[2].GetBeachName())
@@ -208,7 +196,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
             }
 
-            Assert.IsTrue(Client.GetModalParameters().Identifier == ModalResponseIdentifier.NoResponse);
+            Assert.IsTrue(Client.GetModalParameters().WhenShowModal == ModalShow.Never);
         }
 
         [TestMethod]
@@ -265,7 +253,7 @@ namespace UnitTests.MonopolyTests
                     break;
                 }
             }
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent, ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 
@@ -285,9 +273,7 @@ namespace UnitTests.MonopolyTests
                 Client.ExecutePlayerMove(1);
                 MonopolyModalParameters parameters = Client.GetModalParameters();
                 Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                    parameters.Identifier
-                );
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
                     break;
@@ -297,15 +283,15 @@ namespace UnitTests.MonopolyTests
             int ihdg = 0;
 
             //i am called many times because one time is not enough to test whether client is able to pay
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent,ModalResponseIdentifier.Island);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 
@@ -326,14 +312,14 @@ namespace UnitTests.MonopolyTests
 
             int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             int ExpectedStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
-            Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Championship);
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
 
             int ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(ExpectedStayCost1 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost1);
             Assert.IsTrue(Client.GetBoard()[1].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo));
 
 
-            Client.ModalResponse(Client.GetBoard()[2].OnDisplay(), ModalResponseIdentifier.Championship);
+            Client.ModalResponse(Client.GetBoard()[2].OnDisplay());
             ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             int ActualStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(ExpectedStayCost2 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost2);
@@ -353,7 +339,7 @@ namespace UnitTests.MonopolyTests
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is ChampionshipCell);
 
             int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
-            Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Championship);
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
 
             int ActualStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             Assert.IsTrue(ExpectedStayCost1 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost1);
@@ -373,7 +359,7 @@ namespace UnitTests.MonopolyTests
                 }
             }
 
-            Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Airport);
+            Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
             Client.ExecutePlayerMove(1);
             int ActualPlayerMoney = Client.GetUpdatedData().PlayersData[0].Money;
             int ExpectedMoney = Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven;
@@ -390,9 +376,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
                 MonopolyModalParameters parameters = Client.GetModalParameters();
                 Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                    parameters.Identifier
-                );
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
 
                 if (i >= 10 && Client.GetBoard()[i + 1] is MonopolyNationCell)
                     break;
@@ -415,9 +399,7 @@ namespace UnitTests.MonopolyTests
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
                 MonopolyModalParameters parameters = Client.GetModalParameters();
                 Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                    parameters.Identifier
-                );
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
 
                 if (i >= 10 && Client.GetBoard()[i + 1] is MonopolyBeachCell)
                     break;
@@ -427,7 +409,7 @@ namespace UnitTests.MonopolyTests
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyBeachCell);
-            Assert.IsTrue(ModalParameters.Identifier == ModalResponseIdentifier.NoResponse);
+            Assert.IsTrue(ModalParameters.WhenShowModal == ModalShow.Never);
             
         }
 
@@ -505,9 +487,7 @@ namespace UnitTests.MonopolyTests
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
-                Consts.Monopoly.TwoHouses,
-                parameters.Identifier
-            );
+                Consts.Monopoly.TwoHouses);
 
 
             for (int i = 0; i < Client.GetBoard().Count; i++)
@@ -537,9 +517,7 @@ namespace UnitTests.MonopolyTests
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
-                Consts.Monopoly.ThreeHouses,
-                parameters.Identifier
-            );
+                Consts.Monopoly.ThreeHouses);
 
 
             for (int i = 0; i < Client.GetBoard().Count; i++)
@@ -566,9 +544,7 @@ namespace UnitTests.MonopolyTests
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
-                Consts.Monopoly.Field,
-                parameters.Identifier
-            );
+                Consts.Monopoly.Field);
 
             int MainPlayerPos = Client.GetUpdatedData().PlayersData[0].Position;
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyNationCell);
@@ -576,9 +552,7 @@ namespace UnitTests.MonopolyTests
 
             parameters = Client.GetModalParameters();
             Client.ModalResponse(
-                Consts.Monopoly.TwoHouses,
-                parameters.Identifier
-            );
+                Consts.Monopoly.TwoHouses);
 
             Assert.IsTrue(Client.GetBoard()[MainPlayerPos].OnDisplay().Contains(Consts.Monopoly.TwoHouses));
 
@@ -596,9 +570,7 @@ namespace UnitTests.MonopolyTests
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
-                Consts.Monopoly.Field,
-                parameters.Identifier
-            );
+                Consts.Monopoly.Field);
 
             int MainPlayerPos = Client.GetUpdatedData().PlayersData[0].Position;
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyNationCell);

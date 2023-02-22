@@ -44,7 +44,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
-            return new MonopolyModalParameters(new StringModalParameters(),ModalShow.Never, ModalResponseIdentifier.NoResponse);
+            return new MonopolyModalParameters(new StringModalParameters(),ModalShow.Never);
         }
 
         public Nation GetNation()

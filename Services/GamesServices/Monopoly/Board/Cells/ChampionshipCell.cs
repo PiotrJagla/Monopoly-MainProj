@@ -44,7 +44,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             }
 
             Parameters.Title = "Choose Cell To Set World Championship";
-            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Championship);
+            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
         }
 
         private bool CanAddCellToModal(MonopolyCell cell, PlayerKey MainPlayerKey)

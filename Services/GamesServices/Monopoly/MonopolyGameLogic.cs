@@ -140,82 +140,18 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetCellModalParameters(PlayersService.GetMainPlayer());
         }
 
-        public void ModalResponse(string StringResponse, ModalResponseIdentifier Identifier)
+        public void ModalResponse(string StringResponse)
         {
             ModalResponseData Data = new ModalResponseData();
             Data.BoardService = BoardService;
             Data.PlayersService = PlayersService;
             Data.ModalResponse = StringResponse;
+
             ModalResponseUpdate UpdatedData = BoardService.OnCellModalResponse(Data);
+
             BoardService = UpdatedData.BoardService;
             PlayersService = UpdatedData.PlayersService;
             MoveQuantity = UpdatedData.MoveQuantity;
-            //switch (Identifier)
-            //{
-            //    case ModalResponseIdentifier.Island:
-            //        StayingOnIslandBehaviour(StringResponse);
-            //        break;
-            //    case ModalResponseIdentifier.Championship:
-            //        BoardService.SetChampionship(StringResponse);
-            //        break;
-            //    case ModalResponseIdentifier.Airport:
-            //        FastForwardToSelectedCell(StringResponse);
-            //        break;
-            //    case ModalResponseIdentifier.Nation:
-            //        CellBuying(StringResponse);
-            //        break;
-            //    case ModalResponseIdentifier.Beach:
-            //        CellBuying(StringResponse);                    
-            //        break;
-            //    default:
-            //        break;
-            //}
-            
-        }
-
-        private void StayingOnIslandBehaviour(string StringResponse)
-        {
-            //if (StringResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
-            //{
-            //    if (GetRandom.number.Next(1, 6) == 1)
-            //    {
-            //        BoardService.EscapeFromIsland();
-            //    }
-            //}
-            //else if (StringResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
-            //{
-            //    if (PlayersService.IsAbleToPayForEscapingFromIsland())
-            //    {
-            //        PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
-            //        BoardService.EscapeFromIsland();
-            //    }
-            //}
-
-            ModalResponseData Data = new ModalResponseData();
-            Data.BoardService = BoardService;
-            Data.PlayersService = PlayersService;
-            Data.ModalResponse = StringResponse;
-            ModalResponseUpdate UpdatedData = BoardService.OnCellModalResponse(Data);
-            BoardService = UpdatedData.BoardService;
-            PlayersService = UpdatedData.PlayersService;
-            MoveQuantity = UpdatedData.MoveQuantity;
-        }
-
-        private void FastForwardToSelectedCell(string DestinationDisplay)
-        {
-            int MainPlayerPos = PlayersService.GetMainPlayer().OnCellIndex;
-            int CellsToJumpThrough = BoardService.DistanceToCellFrom(MainPlayerPos, DestinationDisplay);
-            MoveQuantity = CellsToJumpThrough;
-
-            if(CellsToJumpThrough == 0)
-                MoveQuantity = 0;
-        }
-
-        private void CellBuying(string ModalResponse)
-        {
-            MonopolyPlayer MainPlayer = PlayersService.GetMainPlayer();
-            int BuyCost = BoardService.BuyCell(MainPlayer, ModalResponse);
-            PlayersService.ChargeMainPlayer(BuyCost);
         }
     }
 }

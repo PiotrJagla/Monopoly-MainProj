@@ -54,10 +54,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
             if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
-                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
+                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never);
 
             if(Data.MainPlayer.MoneyOwned < BuyingBehaviour.GetCosts().Buy)
-                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
+                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never);
 
             StringModalParameters Parameters = new StringModalParameters();
 
@@ -65,7 +65,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyDeclined);
             Parameters.ButtonsContent.Add(Consts.Monopoly.BeachBuyAccepted);
 
-            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Beach);
+            return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
         }
 
         public CellBuyingBehaviour GetBuyingBehavior()

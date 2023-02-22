@@ -136,9 +136,7 @@ public class MonopolyTestsTwoClients
             ResetClients();
 
             Clients[0].ExecutePlayerMove(1);
-            Clients[0].ModalResponse(
-                OptionsToBuy[i], ModalResponseIdentifier.Nation
-            );
+            Clients[0].ModalResponse(OptionsToBuy[i]);
             MonopolyUpdateMessage FirstClientUpdateData = Clients[0].GetUpdatedData();
             Clients[1].UpdateData(FirstClientUpdateData);
 

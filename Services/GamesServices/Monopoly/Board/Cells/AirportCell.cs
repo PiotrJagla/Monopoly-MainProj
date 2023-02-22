@@ -53,7 +53,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
                 if(cell is MonopolyNationCell || cell is MonopolyBeachCell)
                     Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
-            return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove, ModalResponseIdentifier.Airport);
+            return new MonopolyModalParameters(Parameters, ModalShow.BeforeMove);
         }
 
         public Nation GetNation()

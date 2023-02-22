@@ -37,7 +37,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             Result.Title = $"You Are On Desert Island For {TurnsOnIslandRemainingREF.Value} Turns";
             Result.ButtonsContent.Add(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
             Result.ButtonsContent.Add(Consts.Monopoly.ThrowDiceIslandButtonContent);
-            return new MonopolyModalParameters(Result, ModalShow.BeforeMove, ModalResponseIdentifier.Island);
+            return new MonopolyModalParameters(Result, ModalShow.BeforeMove);
         }
 
         public Nation GetNation()

@@ -65,7 +65,7 @@ public class MonopolyNationCell : MonopolyCell
         else if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() == Data.MainPlayer.Key)
             return GetModalEnhancingCell(Data);
 
-        return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never, ModalResponseIdentifier.NoResponse);
+        return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never);
     }
 
     private MonopolyModalParameters GetModalBuyingCell(DataToGetModalParameters Data)
@@ -87,7 +87,7 @@ public class MonopolyNationCell : MonopolyCell
                 Parameters.ButtonsContent.Add(building);
         }
         
-        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
+        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
     }
 
     private bool IsAbleToBuy(string Building, DataToGetModalParameters Data)
@@ -120,7 +120,7 @@ public class MonopolyNationCell : MonopolyCell
                 Parameters.ButtonsContent.Add(building);
         }
 
-        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove, ModalResponseIdentifier.Nation);
+        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
     }
 
     private bool IsAbleToEnhance(DataToGetModalParameters Data, string WhatIsBought)

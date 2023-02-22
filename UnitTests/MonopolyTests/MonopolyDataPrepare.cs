@@ -132,9 +132,7 @@ namespace UnitTests.MonopolyTests
             {
                 MonopolyModalParameters parameters = CurrentClient.GetModalParameters();
                 CurrentClient.ModalResponse(
-                    FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                    parameters.Identifier
-                );
+                    FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
 
                 PlayersMoneyFlow[clientIndex].Loss += CurrentClient.GetBoard()[CellIndex].GetBuyingBehavior().GetCosts().Buy;
             }

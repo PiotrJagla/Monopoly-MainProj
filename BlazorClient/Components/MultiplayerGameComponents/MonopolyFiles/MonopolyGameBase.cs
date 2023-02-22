@@ -104,7 +104,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             if (MonopolyLogic.IsYourTurn() == true)
             {
                 MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
-                if (ModalParameters.Identifier != ModalResponseIdentifier.NoResponse &&
+                if (ModalParameters.WhenShowModal != ModalShow.Never &&
                     ModalParameters.WhenShowModal == When)
                 {
                     ModalParameters parameters = new ModalParameters();
@@ -113,7 +113,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                     var Response = await ModalResponse.Result;
                     if (Response.Confirmed)
                     {
-                        MonopolyLogic.ModalResponse(Response.Data.ToString(), ModalParameters.Identifier);
+                        MonopolyLogic.ModalResponse(Response.Data.ToString());
                     }
                 }
             }

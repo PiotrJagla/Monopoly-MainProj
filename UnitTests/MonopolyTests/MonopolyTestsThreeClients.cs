@@ -131,9 +131,7 @@ namespace UnitTests.MonopolyTests
 
                 MonopolyModalParameters parameters = Clients[0].GetModalParameters();
                 Clients[0].ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
-                    parameters.Identifier
-                );
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
 
                 MonopolyService CurrentClient = Clients[0];
                 MonopolyDataPrepare.UpdateOthers(ref Clients, ref CurrentClient);
