@@ -70,6 +70,11 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
+        public void UpdateMainPlayer(MonopolyPlayer UpdatedPlayer)
+        {
+            Players[PlayersSpecialIndexes.MainPlayer] = UpdatedPlayer;
+        }
+
         public bool DidGameStart()
         {
             return Players.Count != 0;

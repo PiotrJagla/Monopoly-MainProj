@@ -65,5 +65,30 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             
         }
+
+        public ModalResponseUpdate OnModalResponse(ModalResponseData Data)
+        {
+            ModalResponseUpdate UpdatedData = new ModalResponseUpdate();
+            UpdatedData.BoardService = Data.BoardService;
+            UpdatedData.PlayersService = Data.PlayersService;
+
+            if (Data.ModalResponse == Consts.Monopoly.ThrowDiceIslandButtonContent)
+            {
+                if (GetRandom.number.Next(1, 6) == 1)
+                {
+                    UpdatedData.BoardService.EscapeFromIsland();
+                }
+            }
+            else if (Data.ModalResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
+            {
+                if (UpdatedData.PlayersService.IsAbleToPayForEscapingFromIsland())
+                {
+                    UpdatedData.PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
+                    UpdatedData.BoardService.EscapeFromIsland();
+                }
+            }
+
+            return UpdatedData;
+        }
     }
 }

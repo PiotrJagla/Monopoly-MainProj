@@ -160,4 +160,17 @@ public class MonopolyNationCell : MonopolyCell
         BuyingBehaviour.SetOwner(PlayerKey.NoOne);
         MonopolChanges = monopolBehaviour.GetMonopolOff(MonopolChanges, CellIndex);
     }
+
+    public ModalResponseUpdate OnModalResponse(ModalResponseData Data)
+    {
+        ModalResponseUpdate UpdatedData = new ModalResponseUpdate();
+        UpdatedData.BoardService = Data.BoardService;
+        UpdatedData.PlayersService = Data.PlayersService;
+
+        MonopolyPlayer MainPlayer = UpdatedData.PlayersService.GetMainPlayer();
+        int BuyCost = UpdatedData.BoardService.BuyCell(MainPlayer, Data.ModalResponse);
+        UpdatedData.PlayersService.ChargeMainPlayer(BuyCost);
+
+        return UpdatedData;
+    }
 }

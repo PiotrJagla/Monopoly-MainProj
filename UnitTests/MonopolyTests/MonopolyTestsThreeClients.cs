@@ -27,6 +27,15 @@ namespace UnitTests.MonopolyTests
 
         };
 
+        private PlayerKey[] BuyingOrder_ForWhosTurnTest = new PlayerKey[]
+        {
+            PlayerKey.Secound, PlayerKey.Third, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
+            PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
+            PlayerKey.First,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,
+            PlayerKey.First,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne,PlayerKey.NoOne
+
+        };
+
         private PlayerKey[] BuyingOrderFirstWinner = new PlayerKey[]
         {
             PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First, PlayerKey.First,
@@ -111,17 +120,15 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void WhosTurnTest()
         {
-            List<MoneyFlow> PlayersMoneyFlow = null;
-
             ResetClients();
 
             MonopolyDataPrepare.PrepareClientsData(ref Clients);
 
             int i = 0;
-            while(true)
+            while (true)
             {
                 Clients[0].ExecutePlayerMove(1);
-                
+
                 MonopolyModalParameters parameters = Clients[0].GetModalParameters();
                 Clients[0].ModalResponse(
                     MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent),
@@ -147,7 +154,7 @@ namespace UnitTests.MonopolyTests
             }
 
             Clients[1].UpdateData(Clients[1].GetUpdatedData());
-            
+
 
             Assert.IsTrue(Clients[2].IsYourTurn() == false);
             Assert.IsTrue(Clients[1].IsYourTurn() == false);
@@ -156,7 +163,7 @@ namespace UnitTests.MonopolyTests
             Clients[0].NextTurn();
             Clients[2].NextTurn();
 
-            
+
 
             Assert.IsTrue(Clients[2].IsYourTurn() == true);
             Assert.IsTrue(Clients[1].IsYourTurn() == false);

@@ -84,6 +84,14 @@ namespace Services.GamesServices.Monopoly.Board
             return Board[MainPlayer.OnCellIndex].GetModalParameters(Data);
         }
 
+        public ModalResponseUpdate OnCellModalResponse(ModalResponseData Data)
+        {
+            int MainPlayerPos = Data.PlayersService.GetMainPlayer().OnCellIndex;
+            Data.CellDisplay = Board[MainPlayerPos].OnDisplay();
+            ModalResponseUpdate UpdatedData = Board[MainPlayerPos].OnModalResponse(Data);
+            return UpdatedData;
+        }
+
         public MonopolyBoardUpdateData MakeBoardUpdateData()
         {
             MonopolyBoardUpdateData BoardUpdatedData = UpdateDataFactory.CreateBoardUpdateData();

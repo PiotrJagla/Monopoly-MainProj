@@ -22,5 +22,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         string OnDisplay();
         MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data);
+        ModalResponseUpdate OnModalResponse(ModalResponseData Data);
     }
 }

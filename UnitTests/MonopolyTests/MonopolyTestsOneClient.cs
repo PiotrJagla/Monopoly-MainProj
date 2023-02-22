@@ -360,6 +360,7 @@ namespace UnitTests.MonopolyTests
             }
 
             Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Airport);
+            Client.ExecutePlayerMove(1);
             int ActualPlayerMoney = Client.GetUpdatedData().PlayersData[0].Money;
             int ExpectedMoney = Consts.Monopoly.StartMoneyAmount + Consts.Monopoly.OnStartCrossedMoneyGiven;
 

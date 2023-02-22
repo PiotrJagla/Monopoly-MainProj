@@ -73,5 +73,16 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             
         }
+
+        public ModalResponseUpdate OnModalResponse(ModalResponseData Data)
+        {
+            ModalResponseUpdate UpdatedData = new ModalResponseUpdate();
+            UpdatedData.BoardService = Data.BoardService;
+            UpdatedData.PlayersService = Data.PlayersService;
+
+            UpdatedData.BoardService.SetChampionship(Data.CellDisplay);
+
+            return UpdatedData;
+        }
     }
 }
