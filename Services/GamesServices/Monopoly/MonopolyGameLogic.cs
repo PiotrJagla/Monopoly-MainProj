@@ -142,26 +142,34 @@ namespace Services.GamesServices.Monopoly
 
         public void ModalResponse(string StringResponse, ModalResponseIdentifier Identifier)
         {
-            switch(Identifier)
-            {
-                case ModalResponseIdentifier.Island:
-                    StayingOnIslandBehaviour(StringResponse);
-                    break;
-                case ModalResponseIdentifier.Championship:
-                    BoardService.SetChampionship(StringResponse);
-                    break;
-                case ModalResponseIdentifier.Airport:
-                    FastForwardToSelectedCell(StringResponse);
-                    break;
-                case ModalResponseIdentifier.Nation:
-                    StayingOnIslandBehaviour(StringResponse);
-                    break;
-                case ModalResponseIdentifier.Beach:
-                    CellBuying(StringResponse);                    
-                    break;
-                default:
-                    break;
-            }
+            ModalResponseData Data = new ModalResponseData();
+            Data.BoardService = BoardService;
+            Data.PlayersService = PlayersService;
+            Data.ModalResponse = StringResponse;
+            ModalResponseUpdate UpdatedData = BoardService.OnCellModalResponse(Data);
+            BoardService = UpdatedData.BoardService;
+            PlayersService = UpdatedData.PlayersService;
+            MoveQuantity = UpdatedData.MoveQuantity;
+            //switch (Identifier)
+            //{
+            //    case ModalResponseIdentifier.Island:
+            //        StayingOnIslandBehaviour(StringResponse);
+            //        break;
+            //    case ModalResponseIdentifier.Championship:
+            //        BoardService.SetChampionship(StringResponse);
+            //        break;
+            //    case ModalResponseIdentifier.Airport:
+            //        FastForwardToSelectedCell(StringResponse);
+            //        break;
+            //    case ModalResponseIdentifier.Nation:
+            //        CellBuying(StringResponse);
+            //        break;
+            //    case ModalResponseIdentifier.Beach:
+            //        CellBuying(StringResponse);                    
+            //        break;
+            //    default:
+            //        break;
+            //}
             
         }
 

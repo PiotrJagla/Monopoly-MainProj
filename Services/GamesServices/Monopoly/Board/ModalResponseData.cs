@@ -10,9 +10,7 @@ namespace Services.GamesServices.Monopoly.Board
     {
         public MonopolyBoard BoardService;
         public MonopolyPlayers PlayersService;
-        public int MoveQuantity;
         public string ModalResponse;
-        public string CellDisplay;
 
         public ModalResponseData()
         {

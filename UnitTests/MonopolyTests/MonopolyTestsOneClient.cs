@@ -317,6 +317,13 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void WorldChampionshipSettingTest_TwoChampinships()
         {
+            for (int i = 0; Client.GetBoard()[i] is not ChampionshipCell; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+            }
+
+            Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is ChampionshipCell);
+
             int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             int ExpectedStayCost2 = Client.GetBoard()[2].GetBuyingBehavior().GetCosts().Stay;
             Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Championship);
@@ -338,6 +345,13 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void WorldChampionshipSettingTest_OneChampionship()
         {
+            for (int i = 0; Client.GetBoard()[i] is not ChampionshipCell; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+            }
+
+            Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is ChampionshipCell);
+
             int ExpectedStayCost1 = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
             Client.ModalResponse(Client.GetBoard()[1].OnDisplay(), ModalResponseIdentifier.Championship);
 

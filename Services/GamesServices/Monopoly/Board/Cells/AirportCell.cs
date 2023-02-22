@@ -68,7 +68,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             UpdatedData.PlayersService = Data.PlayersService;
 
             int MainPlayerPos = UpdatedData.PlayersService.GetMainPlayer().OnCellIndex;
-            int CellsToJumpThrough = UpdatedData.BoardService.DistanceToCellFrom(MainPlayerPos, Data.CellDisplay);
+            int CellsToJumpThrough = UpdatedData.BoardService.DistanceToCellFrom(MainPlayerPos, Data.ModalResponse);
             UpdatedData.MoveQuantity = CellsToJumpThrough;
 
             if (CellsToJumpThrough == 0)

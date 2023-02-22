@@ -80,7 +80,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             UpdatedData.BoardService = Data.BoardService;
             UpdatedData.PlayersService = Data.PlayersService;
 
-            UpdatedData.BoardService.SetChampionship(Data.CellDisplay);
+            UpdatedData.BoardService.SetChampionship(Data.ModalResponse);
 
             return UpdatedData;
         }
