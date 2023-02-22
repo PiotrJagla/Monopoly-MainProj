@@ -21,12 +21,9 @@ namespace Services.GamesServices.Monopoly.Board.Behaviours.Buying
         {
             OwnedBy = PlayerKey.NoOne;
             BaseCosts = new Costs(costs.Buy, costs.Stay);
-            ActualCosts = new Costs(costs.Buy, costs.Stay); ;
+            ActualCosts = new Costs(costs.Buy, costs.Stay);
+            
             IsChampionshiSet = false;
-        }
-
-        public CellAbleToBuyBehaviour()
-        {
         }
 
         public Costs GetCosts()

@@ -111,8 +111,9 @@ public class MonopolyTestsTwoClients
         for (int i = 3; ; i++)
         {
             ResetClients();
-            PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderInLosingMonopolCheck);
 
+            PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderInLosingMonopolCheck);
+            //StayCostWithoutMonopolExpected = Clients[0].GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
 
             if (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount < PlayersMoneyFlow[1].Loss)
             {

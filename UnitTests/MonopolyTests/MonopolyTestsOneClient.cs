@@ -50,7 +50,8 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void NationMonopolTest()
         {
-            int PolandCostsWithoutMonopol = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+            int PolandCostsWithoutMonopol = 0;
+            bool CheckCostOnce = true;
             
             for (int i = 1;  ; i++)
             {
@@ -58,7 +59,14 @@ namespace UnitTests.MonopolyTests
 
                 MonopolyModalParameters parameters = Client.GetModalParameters();
                 Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
+                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent)
+                );
+
+                if(CheckCostOnce)
+                {
+                    PolandCostsWithoutMonopol = Client.GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+                    CheckCostOnce = false;
+                }
 
                 if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
                     break;
@@ -303,9 +311,23 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void WorldChampionshipSettingTest_TwoChampinships()
         {
+            bool BuyTwoCells = true;
             for (int i = 0; Client.GetBoard()[i] is not ChampionshipCell; i++)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+
+                
+
+                if (BuyTwoCells)
+                {
+                    MonopolyModalParameters parameters = Client.GetModalParameters();
+                    Client.ModalResponse(
+                        MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent)
+                    );
+                }
+
+                if (Client.GetBoard()[i].GetNation() != Client.GetBoard()[i + 1].GetNation())
+                    BuyTwoCells = false;
             }
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is ChampionshipCell);
@@ -325,7 +347,7 @@ namespace UnitTests.MonopolyTests
             Assert.IsTrue(ExpectedStayCost2 * Consts.Monopoly.ChampionshipMultiplayer == ActualStayCost2);
             Assert.IsTrue(ExpectedStayCost1 == ActualStayCost1);
             Assert.IsTrue(Client.GetBoard()[1].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo) == false);
-            Assert.IsTrue(Client.GetBoard()[2].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo));
+            Assert.IsTrue(Client.GetBoard()[2].OnDisplay().Contains(Consts.Monopoly.ChampionshipInfo) == true);
         }
 
         [TestMethod]

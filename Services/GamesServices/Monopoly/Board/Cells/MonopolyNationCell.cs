@@ -24,7 +24,7 @@ public class MonopolyNationCell : MonopolyCell
     private CellBuyingBehaviour BuyingBehaviour;
     private MonopolBehaviour monopolBehaviour;
 
-    private Dictionary<string, Costs> BuildingTypeToCostsMap;
+    private Dictionary<string, Costs> BuildingCosts;
 
     private string CurrentBuilding;
    
@@ -32,8 +32,8 @@ public class MonopolyNationCell : MonopolyCell
     public MonopolyNationCell(Dictionary<string,Costs> BuildingToCostsMap, Nation nation)
     {
         OfNation = nation;
-        BuildingTypeToCostsMap = BuildingToCostsMap;
-        BuyingBehaviour = new CellAbleToBuyBehaviour(BuildingTypeToCostsMap[Consts.Monopoly.Field]);
+        BuildingCosts = BuildingToCostsMap;
+        BuyingBehaviour = new CellAbleToBuyBehaviour(BuildingCosts[Consts.Monopoly.Field]);
         monopolBehaviour = new MonopolNationCellBehaviour();
         CurrentBuilding = "";
     }
@@ -47,8 +47,8 @@ public class MonopolyNationCell : MonopolyCell
         string result = "";
         result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
         result += $" Nation: {OfNation.ToString()} |";
-        result += $" Buy For: {BuyingBehaviour.GetCosts().Buy} |";
-        result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay}| ";
+        if(BuyingBehaviour.GetCosts().Stay != 0)
+            result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay}| ";
         result += $" Building: {CurrentBuilding} ";
         if (BuyingBehaviour.IsThereChampionship() == true)
             result += Consts.Monopoly.ChampionshipInfo;
@@ -83,8 +83,14 @@ public class MonopolyNationCell : MonopolyCell
 
         foreach (var building in PossibleBuildingsToBuy)
         {
-            if(IsAbleToBuy(building,Data))
-                Parameters.ButtonsContent.Add(building);
+            if (IsAbleToBuy(building, Data))
+            {
+                string ButtonToAdd = building;
+                Parameters.Title += $"|{building} Buy: {BuildingCosts[building].Buy} Stay: {BuildingCosts[building].Stay}|";
+                //ButtonToAdd += $"|Buy: {BuildingCosts[building].Buy} Stay: {BuildingCosts[building].Stay}";
+                Parameters.ButtonsContent.Add(ButtonToAdd);
+            }
+            
         }
         
         return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
@@ -92,7 +98,7 @@ public class MonopolyNationCell : MonopolyCell
 
     private bool IsAbleToBuy(string Building, DataToGetModalParameters Data)
     {
-        bool Result = Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.OneHouse].Buy;
+        bool Result = Data.MainPlayer.MoneyOwned >= BuildingCosts[Consts.Monopoly.OneHouse].Buy;
 
         if (Building == Consts.Monopoly.ThreeHouses && Data.IsThisFirstLap == true)
             return false;
@@ -125,7 +131,7 @@ public class MonopolyNationCell : MonopolyCell
 
     private bool IsAbleToEnhance(DataToGetModalParameters Data, string WhatIsBought)
     {
-        bool Result = Data.MainPlayer.MoneyOwned >= BuildingTypeToCostsMap[Consts.Monopoly.OneHouse].Buy &&
+        bool Result = Data.MainPlayer.MoneyOwned >= BuildingCosts[Consts.Monopoly.OneHouse].Buy &&
                 BuyingTiers.GetBuyTierNumber(WhatIsBought) > BuyingTiers.GetBuyTierNumber(CurrentBuilding);
 
         if (WhatIsBought == Consts.Monopoly.Hotel)
@@ -145,7 +151,7 @@ public class MonopolyNationCell : MonopolyCell
             string.IsNullOrEmpty(WhatIsBought) == false)
         {
             BuyingBehaviour.SetOwner(MainPlayer.Key);
-            BuyingBehaviour.SetBaseCosts(BuildingTypeToCostsMap[WhatIsBought]);
+            BuyingBehaviour.SetBaseCosts(BuildingCosts[WhatIsBought]);
             CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
             CurrentBuilding = WhatIsBought;
             return BuyingBehaviour.GetCosts().Buy;
