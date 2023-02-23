@@ -4,6 +4,7 @@ using Models.Monopoly;
 using Services.GamesServices.Monopoly.Board.Behaviours;
 using Services.GamesServices.Monopoly.Board.Behaviours.Buying;
 using Services.GamesServices.Monopoly.Board.Behaviours.Monopol;
+using Services.GamesServices.Monopoly.Board.ModalData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
     internal class MonopolyStartCell : MonopolyCell
     {
         private CellBuyingBehaviour BuyingBehaviour;
-        private MonopolBehaviour monopolBehaviour;
+
         public MonopolyStartCell()
         {
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
-            monopolBehaviour = new NoMonopolBehaviour();
+ 
         }
 
         public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)

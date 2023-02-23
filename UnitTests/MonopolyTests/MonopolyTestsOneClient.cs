@@ -393,7 +393,7 @@ namespace UnitTests.MonopolyTests
         public void TestPossibilityOfBuyingCellWithoutMoney_Nation()
         {
             
-            for (int i = 0; i< 10; i++)
+            for (int i = 0; ; i++)
             {
                 MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
                 MonopolyModalParameters parameters = Client.GetModalParameters();

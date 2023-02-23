@@ -19,7 +19,8 @@ public class MonopolyTestsTwoClients
     {
         PlayerKey.First, PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
         PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
-        PlayerKey.NoOne,
+        PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
+        PlayerKey.NoOne
     };
 
     private PlayerKey[] BuyingOrderInLosingMonopolCheck = new PlayerKey[]
@@ -27,7 +28,7 @@ public class MonopolyTestsTwoClients
         PlayerKey.Secound, PlayerKey.Secound, PlayerKey.First, PlayerKey.First, PlayerKey.First,PlayerKey.First,PlayerKey.First,
         PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
         PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
-        PlayerKey.NoOne,
+        PlayerKey.NoOne
     };
 
     private List<MonopolyService> Clients;

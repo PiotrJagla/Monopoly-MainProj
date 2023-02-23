@@ -10,6 +10,7 @@ using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Update;
 using Org.BouncyCastle.Asn1.Cmp;
 using Models.MultiplayerConnection;
+using Services.GamesServices.Monopoly.Board.ModalData;
 
 namespace Services.GamesServices.Monopoly.Board
 {

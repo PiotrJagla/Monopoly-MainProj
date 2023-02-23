@@ -13,7 +13,7 @@ using Services.GamesServices.Monopoly.Update;
 using MySqlX.XDevAPI.Common;
 using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Board;
-
+using Services.GamesServices.Monopoly.Board.ModalData;
 
 namespace Services.GamesServices.Monopoly
 {
@@ -140,12 +140,12 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetCellModalParameters(PlayersService.GetMainPlayer());
         }
 
-        public void ModalResponse(string StringResponse)
+        public void ModalResponse(string ModalResponse)
         {
             ModalResponseData Data = new ModalResponseData();
             Data.BoardService = BoardService;
             Data.PlayersService = PlayersService;
-            Data.ModalResponse = StringResponse;
+            Data.ModalResponse = ModalResponse;
 
             ModalResponseUpdate UpdatedData = BoardService.OnCellModalResponse(Data);
 

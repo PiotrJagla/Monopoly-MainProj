@@ -43,29 +43,30 @@ namespace Models
         }
         public static class Monopoly
         {
-            public static int IslandEscapeCost = 30;
-            public static int StartMoneyAmount = 400;
-            public static int OnStartCrossedMoneyGiven = 50;
-            public static float MonopolMultiplayer = 2.0f;
-            public static float ChampionshipMultiplayer = 2.0f;
-
-            public static string IslandDiaplsy = "Desert Island";
-            public static string ChampionshipInfo = "|World Championship|";
-
-            public static float[] BeachesOwnedMultiplier = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
-
-            public static string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
-            public static string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
-
-            public static string NoBuildingBought = "Nothing";
-            public static string Field = "Field";
-            public static string OneHouse = "1 House";
-            public static string TwoHouses = "2 Houses";
-            public static string ThreeHouses = "3 Houses";
-            public static string Hotel = "Hotel";
-
-            public static string BeachBuyAccepted = "Yes";
-            public static string BeachBuyDeclined = "No";
+            public static readonly int IslandEscapeCost = 30;
+            public static readonly int StartMoneyAmount = 400;
+            public static readonly int OnStartCrossedMoneyGiven = 50;
+            public static readonly int 
+            public static readonly float MonopolMultiplayer = 2.0f;
+            public static readonly float ChampionshipMultiplayer = 2.0f;
+                          
+            public static readonly string IslandDiaplsy = "Desert Island";
+            public static readonly string ChampionshipInfo = "|World Championship|";
+                          
+            public static readonly float[] BeachesOwnedMultiplier = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
+                          
+            public static readonly string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
+            public static readonly string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
+                          
+            public static readonly string NoBuildingBought = "Nothing";
+            public static readonly string Field = "Field";
+            public static readonly string OneHouse = "1 House";
+            public static readonly string TwoHouses = "2 Houses";
+            public static readonly string ThreeHouses = "3 Houses";
+            public static readonly string Hotel = "Hotel";
+                          
+            public static readonly string BeachBuyAccepted = "Yes";
+            public static readonly string BeachBuyDeclined = "No";
 
         }
     }

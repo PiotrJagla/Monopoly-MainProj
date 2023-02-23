@@ -4,12 +4,12 @@ using Models.Monopoly;
 using Services.GamesServices.Monopoly.Board.Behaviours;
 using Services.GamesServices.Monopoly.Board.Behaviours.Buying;
 using Services.GamesServices.Monopoly.Board.Behaviours.Monopol;
-using Services.GamesServices.Monopoly.Board;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Services.GamesServices.Monopoly.Board.ModalData;
 
 namespace Services.GamesServices.Monopoly.Board.Cells
 {
@@ -17,13 +17,13 @@ namespace Services.GamesServices.Monopoly.Board.Cells
     {
         private readonly Int TurnsOnIslandRemainingREF;
         private CellBuyingBehaviour BuyingBehaviour;
-        private MonopolBehaviour monopolBehaviour;
+
 
         public MonopolyIslandCell(Int TurnsOnIslandRemaining)
         {
             TurnsOnIslandRemainingREF = TurnsOnIslandRemaining;
             BuyingBehaviour = new CellNotAbleToBuyBehaviour();
-            monopolBehaviour = new NoMonopolBehaviour();
+
         }
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
