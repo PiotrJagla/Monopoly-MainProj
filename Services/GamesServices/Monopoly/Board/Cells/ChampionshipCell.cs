@@ -39,6 +39,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
                     Parameters.ButtonsContent.Add(cell.OnDisplay());
             }
 
+            if(Parameters.ButtonsContent.Count == 0)
+                return MonopolyModalFactory.NoModalParameters();
+
             Parameters.Title = "Choose Cell To Set World Championship";
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
         }

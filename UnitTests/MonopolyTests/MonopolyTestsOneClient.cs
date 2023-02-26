@@ -8,6 +8,7 @@ using Models.MultiplayerConnection;
 using Enums.Monopoly;
 using Services.GamesServices.Monopoly.Board.Cells;
 using Models.Monopoly;
+using System.Runtime.Serialization.Formatters;
 
 namespace UnitTests.MonopolyTests
 {
@@ -278,17 +279,13 @@ namespace UnitTests.MonopolyTests
 
             for (int i = 1; i < Client.GetBoard().Count; i++)
             {
-                Client.ExecutePlayerMove(1);
-                MonopolyModalParameters parameters = Client.GetModalParameters();
-                Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
                 if (Client.GetBoard()[i] is MonopolyIslandCell)
                 {
                     break;
                 }
-            }
 
-            int ihdg = 0;
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+            }
 
             //i am called many times because one time is not enough to test whether client is able to pay
             Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
@@ -300,8 +297,6 @@ namespace UnitTests.MonopolyTests
             Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
             Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
             Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-
-            Client.ExecutePlayerMove(BoardSize - 2);
 
             int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
             Assert.IsTrue(ActualMoney >= 0);
@@ -601,6 +596,49 @@ namespace UnitTests.MonopolyTests
             parameters = Client.GetModalParameters();
 
             Assert.IsTrue(parameters.Parameters.ButtonsContent.Contains(Consts.Monopoly.TwoHouses));
+
+        }
+
+        [TestMethod]
+        public void TestTaxCell()
+        {
+            for (int i = 0; ; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyTaxCell)
+                    break;
+            }
+
+            Client.ModalResponse();
+
+            int ExpectedMoneyAmount = Consts.Monopoly.StartMoneyAmount - Consts.Monopoly.TaxAmount;
+            int ActualMoneyAmount = Client.GetUpdatedData().PlayersData[0].Money;
+            
+
+            Assert.IsTrue(ExpectedMoneyAmount == ActualMoneyAmount);
+
+        }
+
+        [TestMethod]
+        public void TestTaxCell_PlayerWithoutMoneyToPay()
+        {
+            for (int i = 0; ; i++)
+            {
+                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
+                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyTaxCell)
+                    break;
+            }
+
+            MonopolyModalParameters parameters = Client.GetModalParameters();
+            
+            int TaxesToPay = Consts.Monopoly.StartMoneyAmount / Consts.Monopoly.TaxAmount + 1;
+            for (int i = 0; i < TaxesToPay; i++)
+            {
+                Client.ModalResponse();
+            }
+            PlayerKey BankruptPlayer = Client.GetUpdatedData().BankruptPlayer;
+
+            Assert.IsTrue(BankruptPlayer == PlayerKey.First);
 
         }
     }

@@ -40,7 +40,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
-            return new MonopolyModalParameters(new StringModalParameters(),ModalShow.Never);
+            return MonopolyModalFactory.NoModalParameters();
         }
 
         public ModalResponseUpdate OnModalResponse(ModalResponseData Data)

@@ -46,7 +46,7 @@ namespace Models
             public static readonly int IslandEscapeCost = 30;
             public static readonly int StartMoneyAmount = 400;
             public static readonly int OnStartCrossedMoneyGiven = 50;
-            public static readonly int 
+            public static readonly int TaxAmount = 60;
             public static readonly float MonopolMultiplayer = 2.0f;
             public static readonly float ChampionshipMultiplayer = 2.0f;
                           

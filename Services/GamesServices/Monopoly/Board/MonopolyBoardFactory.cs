@@ -31,7 +31,7 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France));
             Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France));
 
-            //Board.Add(new MonopolyChanceCell());
+            Board.Add(new MonopolyTaxCell());
 
             Board.Add(new MonopolyIslandCell(RefToMainPlayerTurnsOnIslandRemainig));
 

@@ -140,7 +140,7 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetCellModalParameters(PlayersService.GetMainPlayer());
         }
 
-        public void ModalResponse(string ModalResponse)
+        public void ModalResponse(string ModalResponse = "")
         {
             ModalResponseData Data = new ModalResponseData();
             Data.BoardService = BoardService;

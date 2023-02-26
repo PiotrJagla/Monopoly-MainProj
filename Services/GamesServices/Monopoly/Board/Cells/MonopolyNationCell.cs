@@ -61,7 +61,7 @@ public class MonopolyNationCell : MonopolyCell
         else if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() == Data.MainPlayer.Key)
             return GetModalEnhancingCell(Data);
 
-        return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never);
+        return MonopolyModalFactory.NoModalParameters();
     }
 
     private MonopolyModalParameters GetModalBuyingCell(DataToGetModalParameters Data)
@@ -83,7 +83,7 @@ public class MonopolyNationCell : MonopolyCell
             {
                 string ButtonToAdd = building;
                 Parameters.Title += $"|{building} Buy: {BuildingCosts[building].Buy} Stay: {BuildingCosts[building].Stay}|";
-                //ButtonToAdd += $"|Buy: {BuildingCosts[building].Buy} Stay: {BuildingCosts[building].Stay}";
+                
                 Parameters.ButtonsContent.Add(ButtonToAdd);
             }
             

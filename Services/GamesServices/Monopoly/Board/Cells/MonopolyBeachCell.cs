@@ -46,10 +46,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
             if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
-                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never);
+                return MonopolyModalFactory.NoModalParameters();
 
-            if(Data.MainPlayer.MoneyOwned < BuyingBehaviour.GetCosts().Buy)
-                return new MonopolyModalParameters(new StringModalParameters(), ModalShow.Never);
+            if (Data.MainPlayer.MoneyOwned < BuyingBehaviour.GetCosts().Buy)
+                return MonopolyModalFactory.NoModalParameters();
 
             StringModalParameters Parameters = new StringModalParameters();
 
