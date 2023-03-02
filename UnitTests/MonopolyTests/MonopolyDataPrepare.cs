@@ -207,7 +207,29 @@ namespace UnitTests.MonopolyTests
             return Result;
         }
 
-        
+        public static void GoTo<T>(ref MonopolyService Client, int MinimumTurns = 0,int MaxTurns = 100, bool WithBuying = false)
+        {
+            for (int i = 1; ; i++)
+            {
+                ExecuteClientTestTurn(ref Client, i - 1);
+
+                if(WithBuying == true)
+                {
+                    BuyCell(ref Client);
+                }
+
+                if (i >= MinimumTurns && Client.GetBoard()[(i) % Client.GetBoard().Count] is T)
+                    break;
+            }
+        }
+
+        public static void BuyCell(ref MonopolyService Client)
+        {
+            MonopolyModalParameters parameters = Client.GetModalParameters();
+            Client.ModalResponse(
+                FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent)
+            );
+        }
         
     }
 }

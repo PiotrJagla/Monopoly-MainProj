@@ -676,6 +676,16 @@
           "bin/placeholder/Models.dll": {}
         }
       },
+      "StringManipulationLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        }
+      },
       "Validation/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1782,6 +1792,11 @@
       "path": "../Models/Models.csproj",
       "msbuildProject": "../Models/Models.csproj"
     },
+    "StringManipulationLib/1.0.0": {
+      "type": "project",
+      "path": "../StringManipulationLib/StringManipulationLib.csproj",
+      "msbuildProject": "../StringManipulationLib/StringManipulationLib.csproj"
+    },
     "Validation/1.0.0": {
       "type": "project",
       "path": "../Validation/Validation.csproj",
@@ -1793,6 +1808,7 @@
       "Microsoft.AspNetCore.SignalR.Client >= 7.0.0",
       "Models >= 1.0.0",
       "MySql.Data >= 8.0.31",
+      "StringManipulationLib >= 1.0.0",
       "Validation >= 1.0.0"
     ]
   },
@@ -1825,6 +1841,9 @@
           "projectReferences": {
             "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Models\\Models.csproj"
+            },
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj"
             },
             "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj"

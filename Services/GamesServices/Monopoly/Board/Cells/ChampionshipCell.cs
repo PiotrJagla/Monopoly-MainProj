@@ -15,22 +15,16 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class ChampionshipCell : MonopolyCell
     {
-        private CellBuyingBehaviour BuyingBehaviour;
-
-
-        public ChampionshipCell()
-        {
-            BuyingBehaviour = new CellNotAbleToBuyBehaviour();
- 
-        }
-
         public CellBuyingBehaviour GetBuyingBehavior()
         {
-            return BuyingBehaviour;
+            return new CellNotAbleToBuyBehaviour();
         }
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
+            ModalParametersFactory Factory = new ModalParametersFactory();
+            return Factory.ChampionshipParameters(Data, "Choose Cell To Set World Championship");
+
             StringModalParameters Parameters = new StringModalParameters();
 
             foreach (var cell in Data.Board)
@@ -45,7 +39,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             Parameters.Title = "Choose Cell To Set World Championship";
             return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
         }
-
+        
         private bool CanAddCellToModal(MonopolyCell cell, PlayerKey MainPlayerKey)
         {
             return cell is MonopolyNationCell && cell.GetBuyingBehavior().GetOwner() == MainPlayerKey;
@@ -80,6 +74,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public string GetName()
         {
             return "Championship";
+        }
+
+        public void UpdateData(MonopolyCellUpdate UpdatedData)
+        {
+            
         }
     }
 }

@@ -48,3 +48,5 @@ D:\Program Files (x86)\GitHub\MiniGamesWebsite\Services\obj\Debug\net6.0\Service
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\Services\obj\Debug\net6.0\refint\Services.dll
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\Services\obj\Debug\net6.0\Services.pdb
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\Services\obj\Debug\net6.0\ref\Services.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Services\bin\Debug\net6.0\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\Services\bin\Debug\net6.0\StringManipulationLib.pdb

@@ -12,6 +12,8 @@ namespace Models.Monopoly
         public PlayerKey Owner{ get; set; }
         public int OfCellIndex { get; set; }
 
+        public string NewBuilding { get; set; }
+
         public Costs NewCosts { get; set; }
 
         public MonopolyCellUpdate()
@@ -19,6 +21,7 @@ namespace Models.Monopoly
             NewCosts = new Costs();
             Owner = PlayerKey.NoOne;
             OfCellIndex = -1;
+            NewBuilding = "";
         }
     }
 }

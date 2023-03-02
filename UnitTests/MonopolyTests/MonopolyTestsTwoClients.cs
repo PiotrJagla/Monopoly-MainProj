@@ -157,4 +157,28 @@ public class MonopolyTestsTwoClients
         }
         
     }
+
+    [TestMethod]
+    public void CellsDisplaySynchronizationTest()
+    {
+        Clients[0].ExecutePlayerMove(2);
+        Clients[0].ModalResponse(Consts.Monopoly.Field);
+
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+
+        Clients[1].ExecutePlayerMove(1);
+        Clients[1].ModalResponse(Consts.Monopoly.OneHouse);
+
+        Clients[0].UpdateData(Clients[1].GetUpdatedData());
+
+        string FirstClientDisplay = Clients[0].GetBoard()[2].OnDisplay();
+        string SecoundClientDisplay = Clients[1].GetBoard()[2].OnDisplay();
+
+        Assert.IsTrue(FirstClientDisplay == SecoundClientDisplay);
+
+        FirstClientDisplay = Clients[0].GetBoard()[1].OnDisplay();
+        SecoundClientDisplay = Clients[1].GetBoard()[1].OnDisplay();
+
+        Assert.IsTrue(FirstClientDisplay == SecoundClientDisplay);
+    }
 }

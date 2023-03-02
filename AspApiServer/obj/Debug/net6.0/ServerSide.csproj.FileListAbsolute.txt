@@ -147,3 +147,5 @@ D:\Program Files (x86)\GitHub\MiniGamesWebsite\AspApiServer\obj\Debug\net6.0\sta
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\AspApiServer\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ServerSide.props
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\AspApiServer\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ServerSide.props
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\AspApiServer\obj\Debug\net6.0\staticwebassets.pack.json
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\AspApiServer\bin\Debug\net6.0\StringManipulationLib.dll
+D:\Program Files (x86)\GitHub\MiniGamesWebsite\AspApiServer\bin\Debug\net6.0\StringManipulationLib.pdb

@@ -109,7 +109,9 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
                 {
                     ModalParameters parameters = new ModalParameters();
                     parameters.Add(nameof(SelectButtonModal.StringParameters), ModalParameters.Parameters);
-                    var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters);
+                    ModalOptions options = new ModalOptions();
+                    options.HideCloseButton = true;
+                    var ModalResponse = ModalService.Show<SelectButtonModal>("Passing Data", parameters, options);
                     var Response = await ModalResponse.Result;
                     if (Response.Confirmed)
                     {

@@ -481,10 +481,16 @@
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31",
+          "StringManipulationLib": "1.0.0",
           "Validation": "1.0.0"
         },
         "runtime": {
           "Services.dll": {}
+        }
+      },
+      "StringManipulationLib/1.0.0": {
+        "runtime": {
+          "StringManipulationLib.dll": {}
         }
       },
       "Validation/1.0.0": {
@@ -815,6 +821,11 @@
       "sha512": ""
     },
     "Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "StringManipulationLib/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

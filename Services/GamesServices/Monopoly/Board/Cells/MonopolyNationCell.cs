@@ -20,7 +20,8 @@ namespace Services.GamesServices.Monopoly.Board.Cells;
 
 public class MonopolyNationCell : MonopolyCell
 {
-    private Nation OfNation { get; set; }
+    private Nation OfNation;
+    private City OfCity;
 
     private CellBuyingBehaviour BuyingBehaviour;
     private MonopolBehaviour monopolBehaviour;
@@ -30,8 +31,9 @@ public class MonopolyNationCell : MonopolyCell
     private string CurrentBuilding;
    
 
-    public MonopolyNationCell(Dictionary<string,Costs> BuildingToCostsMap, Nation nation)
+    public MonopolyNationCell(Dictionary<string,Costs> BuildingToCostsMap, Nation nation, City city)
     {
+        OfCity = city;
         OfNation = nation;
         BuildingCosts = BuildingToCostsMap;
         BuyingBehaviour = new CellAbleToBuyBehaviour(BuildingCosts[Consts.Monopoly.Field]);
@@ -44,6 +46,7 @@ public class MonopolyNationCell : MonopolyCell
         string result = "";
         result += $" Owner: {BuyingBehaviour.GetOwner().ToString()} |";
         result += $" Nation: {OfNation.ToString()} |";
+        result += $" City: {OfCity.ToString()} |";
 
         if(string.IsNullOrEmpty(CurrentBuilding) == false && CurrentBuilding != Consts.Monopoly.NoBuildingBought)
             result += $" Stay Cost: {BuyingBehaviour.GetCosts().Stay}| ";
@@ -179,5 +182,12 @@ public class MonopolyNationCell : MonopolyCell
     public string GetName()
     {
         return OfNation.ToString();
+    }
+
+    public void UpdateData(MonopolyCellUpdate UpdatedData)
+    {
+        BuyingBehaviour.SetOwner(UpdatedData.Owner);
+        BuyingBehaviour.UpdateCosts(UpdatedData.NewCosts);
+        CurrentBuilding = UpdatedData.NewBuilding;
     }
 }

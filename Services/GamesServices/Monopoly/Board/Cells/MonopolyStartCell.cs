@@ -15,14 +15,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     internal class MonopolyStartCell : MonopolyCell
     {
-        private CellBuyingBehaviour BuyingBehaviour;
-
-        public MonopolyStartCell()
-        {
-            BuyingBehaviour = new CellNotAbleToBuyBehaviour();
- 
-        }
-
         public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
             return 0;
@@ -35,7 +27,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public CellBuyingBehaviour GetBuyingBehavior()
         {
-            return BuyingBehaviour;
+            return new CellNotAbleToBuyBehaviour();
         }
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
@@ -59,6 +51,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public string GetName()
         {
             return "StartCell";
+        }
+
+        public void UpdateData(MonopolyCellUpdate UpdatedData)
+        {
+            
         }
     }
 }

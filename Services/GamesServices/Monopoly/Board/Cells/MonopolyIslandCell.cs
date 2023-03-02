@@ -85,5 +85,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return "Island";
         }
+
+        public void UpdateData(MonopolyCellUpdate UpdatedData)
+        {
+            
+        }
     }
 }

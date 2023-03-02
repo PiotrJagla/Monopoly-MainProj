@@ -64,9 +64,14 @@ namespace Models
             public static readonly string TwoHouses = "2 Houses";
             public static readonly string ThreeHouses = "3 Houses";
             public static readonly string Hotel = "Hotel";
+            public static readonly List<string> PossibleBuildings = new List<string> { Field, OneHouse, TwoHouses, ThreeHouses, Hotel };
                           
             public static readonly string BeachBuyAccepted = "Yes";
             public static readonly string BeachBuyDeclined = "No";
+            public static readonly Costs BeachCellCosts = new Costs(100, 30);
+
+            public static readonly string PayTaxRolled = "Pay Tax";
+            public static readonly string NewChampionshipRolled = "Championship On:";
 
         }
     }

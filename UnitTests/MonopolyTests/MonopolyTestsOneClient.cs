@@ -27,13 +27,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestBuyingOwnCell()
         {
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-
-                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyBeachCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyBeachCell>(ref Client);
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
@@ -221,6 +215,7 @@ namespace UnitTests.MonopolyTests
                     break;
                 }
             }
+
             Client.ExecutePlayerMove(BoardSize - 2);
 
             Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money == Consts.Monopoly.StartMoneyAmount);
@@ -231,14 +226,7 @@ namespace UnitTests.MonopolyTests
         {
             int BoardSize = Client.GetBoard().Count;
 
-            for (int i = 1; i < Client.GetBoard().Count; i++)
-            {
-                Client.ExecutePlayerMove(1);
-                if (Client.GetBoard()[i] is MonopolyIslandCell)
-                {
-                    break;
-                }
-            }
+            MonopolyDataPrepare.GoTo<MonopolyIslandCell>(ref Client);
 
             Client.ExecutePlayerMove(1);
             Client.ExecutePlayerMove(1);
@@ -254,14 +242,7 @@ namespace UnitTests.MonopolyTests
         {
             int BoardSize = Client.GetBoard().Count;
 
-            for (int i = 1; i < Client.GetBoard().Count; i++)
-            {
-                Client.ExecutePlayerMove(1);
-                if (Client.GetBoard()[i] is MonopolyIslandCell)
-                {
-                    break;
-                }
-            }
+            MonopolyDataPrepare.GoTo<MonopolyIslandCell>(ref Client);
             Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
 
             Client.ExecutePlayerMove(BoardSize - 2);
@@ -277,15 +258,7 @@ namespace UnitTests.MonopolyTests
         {
             int BoardSize = Client.GetBoard().Count;
 
-            for (int i = 1; i < Client.GetBoard().Count; i++)
-            {
-                if (Client.GetBoard()[i] is MonopolyIslandCell)
-                {
-                    break;
-                }
-
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-            }
+            MonopolyDataPrepare.GoTo<MonopolyIslandCell>(ref Client);
 
             //i am called many times because one time is not enough to test whether client is able to pay
             Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
@@ -348,10 +321,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void WorldChampionshipSettingTest_OneChampionship()
         {
-            for (int i = 0; Client.GetBoard()[i] is not ChampionshipCell; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-            }
+            MonopolyDataPrepare.GoTo<ChampionshipCell>(ref Client);
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is ChampionshipCell);
 
@@ -366,15 +336,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void FlyingFromAirportTest()
         {
-            for (int i = 1; ; i++)
-            {
-                Client.ExecutePlayerMove(1);
-
-                if (Client.GetBoard()[i] is AirportCell)
-                {
-                    break;
-                }
-            }
+            MonopolyDataPrepare.GoTo<AirportCell>(ref Client);
 
             Client.ModalResponse(Client.GetBoard()[1].OnDisplay());
             Client.ExecutePlayerMove(1);
@@ -387,19 +349,8 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingCellWithoutMoney_Nation()
         {
-            
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                MonopolyModalParameters parameters = Client.GetModalParameters();
-                Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client, 10, Client.GetBoard().Count, true);
 
-                if (i >= 10 && Client.GetBoard()[i + 1] is MonopolyNationCell)
-                    break;
-            }
-            
-            Client.ExecutePlayerMove(1);
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyNationCell);
@@ -411,18 +362,8 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingCellWithoutMoney_Beach()
         {
-            for (int i = 1; i < Client.GetBoard().Count; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                MonopolyModalParameters parameters = Client.GetModalParameters();
-                Client.ModalResponse(
-                    MonopolyDataPrepare.FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent));
-
-                if (i >= 10 && Client.GetBoard()[i + 1] is MonopolyBeachCell)
-                    break;
-            }
-
-            Client.ExecutePlayerMove(1);
+            MonopolyDataPrepare.GoTo<MonopolyBeachCell>(ref Client, 10, Client.GetBoard().Count, true);
+            
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyBeachCell);
@@ -433,12 +374,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingThreeHouses_FirstLap()
         {
-            for (int i = 1; i < Client.GetBoard().Count; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                if (i >= 5 && Client.GetBoard()[i + 1] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client);
 
             Client.ExecutePlayerMove(1);
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
@@ -451,15 +387,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingThreeHouses_SecoundLap()
         {
-            for (int i = 0; i < Client.GetBoard().Count; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-        
-
-                if (i >= Client.GetBoard().Count &&
-                    Client.GetBoard()[(i + 1)% Client.GetBoard().Count] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client, Client.GetBoard().Count);
 
             Client.ExecutePlayerMove(1);
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
@@ -472,15 +400,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingHotel_NotBoughtCell()
         {
-            for (int i = 0; i < Client.GetBoard().Count; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-
-
-                if (i >= Client.GetBoard().Count &&
-                    Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client, Client.GetBoard().Count);
 
             Client.ExecutePlayerMove(1);
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
@@ -493,14 +413,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingHotel_TwoHousesBought()
         {
-            for (int i = 0; i < Client.GetBoard().Count; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-
-
-                if (Client.GetBoard()[i] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client);
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
@@ -522,15 +435,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestPossibilityOfBuyingHotel_ThreeHousesBought()
         {
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-
-
-                if (i >= Client.GetBoard().Count &&
-                    Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client, Client.GetBoard().Count);
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
@@ -552,12 +457,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestEnhancingCell_CellEnhanced()
         {
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client);
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
@@ -578,12 +478,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestEnhancingCell_OptionsToBuy()
         {
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyNationCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client);
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             Client.ModalResponse(
@@ -602,12 +497,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestTaxCell()
         {
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyTaxCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyTaxCell>(ref Client);
 
             Client.ModalResponse();
 
@@ -622,12 +512,7 @@ namespace UnitTests.MonopolyTests
         [TestMethod]
         public void TestTaxCell_PlayerWithoutMoneyToPay()
         {
-            for (int i = 0; ; i++)
-            {
-                MonopolyDataPrepare.ExecuteClientTestTurn(ref Client, i);
-                if (Client.GetBoard()[(i + 1) % Client.GetBoard().Count] is MonopolyTaxCell)
-                    break;
-            }
+            MonopolyDataPrepare.GoTo<MonopolyTaxCell>(ref Client);
 
             MonopolyModalParameters parameters = Client.GetModalParameters();
             
@@ -640,6 +525,35 @@ namespace UnitTests.MonopolyTests
 
             Assert.IsTrue(BankruptPlayer == PlayerKey.First);
 
+        }
+
+        [TestMethod]
+        public void ChanceCellTest_TaxRooled()
+        {
+            MonopolyDataPrepare.GoTo<MonopolyChanceCell>(ref Client);
+
+            int ExpectedMoney = Client.GetUpdatedData().PlayersData[0].Money - Consts.Monopoly.TaxAmount;
+            MonopolyModalParameters parameters = Client.GetModalParameters();
+            Client.ModalResponse(Consts.Monopoly.PayTaxRolled);
+            int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
+
+            Assert.IsTrue(ExpectedMoney == ActualMoney);
+        }
+
+        [TestMethod]
+        public void ChanceCellTest_ChampionshipRolled()
+        {
+            int FirstNationCellIndex = 1;
+
+            MonopolyDataPrepare.GoTo<MonopolyChanceCell>(ref Client, 0, 0,true);
+
+            int ExpectedMoney = Client.GetBoard()[FirstNationCellIndex].GetBuyingBehavior().GetCosts().Stay;
+
+            
+            Client.ModalResponse($"{Consts.Monopoly.NewChampionshipRolled}{Client.GetBoard()[FirstNationCellIndex].OnDisplay()}");
+            int ActualMoney = Client.GetBoard()[FirstNationCellIndex].GetBuyingBehavior().GetCosts().Stay;
+
+            Assert.IsTrue(ExpectedMoney*Consts.Monopoly.ChampionshipMultiplayer == ActualMoney);
         }
     }
 

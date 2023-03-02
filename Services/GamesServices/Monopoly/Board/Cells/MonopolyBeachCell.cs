@@ -105,5 +105,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             return BeachName.ToString();
         }
+
+        public void UpdateData(MonopolyCellUpdate UpdatedData)
+        {
+            BuyingBehaviour.SetOwner(UpdatedData.Owner);
+            BuyingBehaviour.UpdateCosts(UpdatedData.NewCosts);
+        }
     }
 }

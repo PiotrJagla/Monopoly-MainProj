@@ -997,6 +997,7 @@
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31",
+          "StringManipulationLib": "1.0.0",
           "Validation": "1.0.0"
         },
         "compile": {
@@ -1970,6 +1971,7 @@
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31",
+          "StringManipulationLib": "1.0.0",
           "Validation": "1.0.0"
         },
         "compile": {

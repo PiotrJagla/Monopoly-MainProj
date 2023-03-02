@@ -18,30 +18,42 @@ namespace Services.GamesServices.Monopoly.Board
             Board.Add(new MonopolyStartCell());
 
             int NationCellNumber = 0;
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Poland));
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Poland));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Poland, City.Warszawa));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Poland, City.Krakow));
+
+            Board.Add(new MonopolyChanceCell());
 
             Board.Add(new AirportCell());
 
-            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Dubaj));
+            Board.Add(new MonopolyBeachCell(Consts.Monopoly.BeachCellCosts, Beach.Dubaj));
 
             Board.Add(new ChampionshipCell());
-
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France));
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France));
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France));
+            
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France, City.Paris));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France,City.Lyon));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.France,City.Marsylia));
 
             Board.Add(new MonopolyTaxCell());
 
             Board.Add(new MonopolyIslandCell(RefToMainPlayerTurnsOnIslandRemainig));
 
-            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Bali));
+            Board.Add(new MonopolyBeachCell(Consts.Monopoly.BeachCellCosts, Beach.Bali));
 
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Argentina));
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Argentina));
-            Board.Add(new MonopolyNationCell(NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Argentina));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Argentina,City.Quilmes));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Argentina, City.Cordoba));
+            Board.Add(new MonopolyNationCell(
+                NationCellCostsFactory.GetNationCellCostsOfNumber(NationCellNumber++), Nation.Argentina, City.Rosario));
 
-            Board.Add(new MonopolyBeachCell(new Costs(100, 30), Beach.Cypr));
+            
+
+            Board.Add(new MonopolyBeachCell(Consts.Monopoly.BeachCellCosts, Beach.Cypr));
             return Board;
         }
     }

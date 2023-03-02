@@ -24,5 +24,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data);
         ModalResponseUpdate OnModalResponse(ModalResponseData Data);
+
+        void UpdateData(MonopolyCellUpdate UpdatedData);
     }
 }

@@ -2445,6 +2445,7 @@
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31",
+          "StringManipulationLib": "1.0.0",
           "Validation": "1.0.0"
         },
         "compile": {
@@ -2452,6 +2453,16 @@
         },
         "runtime": {
           "bin/placeholder/Services.dll": {}
+        }
+      },
+      "StringManipulationLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StringManipulationLib.dll": {}
         }
       },
       "Validation/1.0.0": {
@@ -8069,6 +8080,11 @@
       "path": "../Services/Services.csproj",
       "msbuildProject": "../Services/Services.csproj"
     },
+    "StringManipulationLib/1.0.0": {
+      "type": "project",
+      "path": "../StringManipulationLib/StringManipulationLib.csproj",
+      "msbuildProject": "../StringManipulationLib/StringManipulationLib.csproj"
+    },
     "Validation/1.0.0": {
       "type": "project",
       "path": "../Validation/Validation.csproj",
@@ -8082,6 +8098,7 @@
       "Microsoft.NET.Test.Sdk >= 17.1.0",
       "Models >= 1.0.0",
       "Services >= 1.0.0",
+      "StringManipulationLib >= 1.0.0",
       "Validation >= 1.0.0",
       "coverlet.collector >= 3.1.2"
     ]
@@ -8118,6 +8135,9 @@
             },
             "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Services\\Services.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Services\\Services.csproj"
+            },
+            "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj": {
+              "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\StringManipulationLib\\StringManipulationLib.csproj"
             },
             "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj": {
               "projectPath": "D:\\Program Files (x86)\\GitHub\\MiniGamesWebsite\\Validation\\Validation.csproj"

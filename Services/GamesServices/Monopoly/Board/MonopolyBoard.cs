@@ -137,8 +137,9 @@ namespace Services.GamesServices.Monopoly.Board
         {
             for (int i = 0; i < BoardUpdatedData.Count; i++)
             {
-                Board[i].GetBuyingBehavior().SetOwner(BoardUpdatedData[i].Owner);
-                Board[i].GetBuyingBehavior().UpdateCosts(BoardUpdatedData[i].NewCosts);
+                //Board[i].GetBuyingBehavior().SetOwner(BoardUpdatedData[i].Owner);
+                //Board[i].GetBuyingBehavior().UpdateCosts(BoardUpdatedData[i].NewCosts);
+                Board[i].UpdateData(BoardUpdatedData[i]);
             }
         }
 

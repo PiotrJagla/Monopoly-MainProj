@@ -770,6 +770,7 @@
           "Microsoft.AspNetCore.SignalR.Client": "7.0.0",
           "Models": "1.0.0",
           "MySql.Data": "8.0.31",
+          "StringManipulationLib": "1.0.0",
           "Validation": "1.0.0"
         },
         "compile": {
@@ -777,6 +778,16 @@
         },
         "runtime": {
           "bin/placeholder/Services.dll": {}
+        }
+      },
+      "StringManipulationLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/StringManipulationLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StringManipulationLib.dll": {}
         }
       },
       "Validation/1.0.0": {
@@ -2014,6 +2025,11 @@
       "type": "project",
       "path": "../Services/Services.csproj",
       "msbuildProject": "../Services/Services.csproj"
+    },
+    "StringManipulationLib/1.0.0": {
+      "type": "project",
+      "path": "../StringManipulationLib/StringManipulationLib.csproj",
+      "msbuildProject": "../StringManipulationLib/StringManipulationLib.csproj"
     },
     "Validation/1.0.0": {
       "type": "project",

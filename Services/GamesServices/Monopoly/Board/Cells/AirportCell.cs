@@ -15,14 +15,6 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class AirportCell : MonopolyCell
     {
-        private CellBuyingBehaviour BuyingBehaviour;
-
-        public AirportCell()
-        {
-            BuyingBehaviour = new CellNotAbleToBuyBehaviour();
-
-        }
-
         public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
         {
             return 0;
@@ -36,7 +28,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public CellBuyingBehaviour GetBuyingBehavior()
         {
-            return BuyingBehaviour;
+            return new CellNotAbleToBuyBehaviour();
         }
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
@@ -76,6 +68,11 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         public string GetName()
         {
             return "Airport";
+        }
+
+        public void UpdateData(MonopolyCellUpdate UpdatedData)
+        {
+            
         }
     }
 }

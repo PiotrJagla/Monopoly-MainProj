@@ -1,4 +1,5 @@
-﻿using Models.Monopoly;
+﻿using Models;
+using Models.Monopoly;
 using Services.GamesServices.Monopoly.Board.Cells;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,18 @@ namespace Services.GamesServices.Monopoly.Update
                 CellsUpdate.Last().Owner = cell.GetBuyingBehavior().GetOwner();
                 CellsUpdate.Last().OfCellIndex = Board.IndexOf(cell);
                 CellsUpdate.Last().NewCosts = cell.GetBuyingBehavior().GetCosts();
+                CellsUpdate.Last().NewBuilding = ExtractBuildingFromDisplay(cell.OnDisplay());
             }
+        }
+
+        public string ExtractBuildingFromDisplay(string Display)
+        {
+            foreach (var building in Consts.Monopoly.PossibleBuildings)
+            {
+                if (Display.Contains(building))
+                    return building;
+            }
+            return "";
         }
     }
 }

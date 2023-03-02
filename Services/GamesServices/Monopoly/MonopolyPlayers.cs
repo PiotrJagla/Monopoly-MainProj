@@ -82,8 +82,15 @@ namespace Services.GamesServices.Monopoly
 
         public PlayerKey CheckForBankruptPlayer(ref MonopolyUpdateMessage UpdateData)
         {
-            if (GetMainPlayer().MoneyOwned < 0)
-                return GetMainPlayer().Key;
+            try
+            {
+                if (GetMainPlayer().MoneyOwned < 0)
+                    return GetMainPlayer().Key;
+            }
+            catch
+            {
+                return PlayerKey.NoOne;
+            }
 
             //There is copy of MoneyObligation Because lambda doesnt accept references
             MoneyObligation BondCopy = new MoneyObligation();
