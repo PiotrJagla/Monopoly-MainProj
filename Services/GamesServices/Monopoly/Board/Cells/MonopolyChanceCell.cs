@@ -36,34 +36,16 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
             Parameters.Title = "You can roll something";
             int RandomRoll = GetRandom.number.Next(1,2);
-            RandomRoll = 2;
+            
             if(RandomRoll == 1)
             {
                 Parameters.ButtonsContent.Add(Consts.Monopoly.PayTaxRolled);
             }
             else if(RandomRoll == 2)
             {
-                //foreach (var cell in Data.Board)
-                //{
-                //    if (CanAddCellToModal(cell, Data.MainPlayer.Key))
-                //        Parameters.ButtonsContent.Add($"{Consts.Monopoly.NewChampionshipRolled}{cell.OnDisplay()}");
-                //}
-
-                //if (Parameters.ButtonsContent.Count == 0)
-                //    return MonopolyModalFactory.NoModalParameters();
-                
-
-                foreach (var cell in Data.Board)
-                {
-                    if (CanAddCellToModal(cell, Data.MainPlayer.Key))
-                        Parameters.ButtonsContent.Add(cell.OnDisplay());
-                }
-
-                if (Parameters.ButtonsContent.Count == 0)
-                    return MonopolyModalFactory.NoModalParameters();
-
-                Parameters.Title = "Choose Cell To Set World Championship";
-                return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
+                ModalParametersFactory Factory = new ModalParametersFactory();
+                return Factory.ChampionshipParameters(
+                    Data, "You Rolled New Chamionship", Consts.Monopoly.NewChampionshipModalPrefix);
             }
             
 
@@ -85,9 +67,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             {
                 UpdatedData.PlayersService.ChargeMainPlayer(Consts.Monopoly.TaxAmount);
             }
-            else if(Data.ModalResponse.Contains(Consts.Monopoly.NewChampionshipRolled))
+            else if(Data.ModalResponse.Contains(Consts.Monopoly.NewChampionshipModalPrefix))
             {
-                int length = Consts.Monopoly.NewChampionshipRolled.Length;
+                int length = Consts.Monopoly.NewChampionshipModalPrefix.Length;
                 string CellDisplay = Data.ModalResponse.Remove(0,length);
                 UpdatedData.BoardService.SetChampionship(CellDisplay);
             }

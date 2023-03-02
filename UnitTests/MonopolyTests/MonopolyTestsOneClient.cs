@@ -550,7 +550,7 @@ namespace UnitTests.MonopolyTests
             int ExpectedMoney = Client.GetBoard()[FirstNationCellIndex].GetBuyingBehavior().GetCosts().Stay;
 
             
-            Client.ModalResponse($"{Consts.Monopoly.NewChampionshipRolled}{Client.GetBoard()[FirstNationCellIndex].OnDisplay()}");
+            Client.ModalResponse($"{Consts.Monopoly.NewChampionshipModalPrefix}{Client.GetBoard()[FirstNationCellIndex].OnDisplay()}");
             int ActualMoney = Client.GetBoard()[FirstNationCellIndex].GetBuyingBehavior().GetCosts().Stay;
 
             Assert.IsTrue(ExpectedMoney*Consts.Monopoly.ChampionshipMultiplayer == ActualMoney);

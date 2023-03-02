@@ -71,7 +71,7 @@ namespace Models
             public static readonly Costs BeachCellCosts = new Costs(100, 30);
 
             public static readonly string PayTaxRolled = "Pay Tax";
-            public static readonly string NewChampionshipRolled = "Championship On:";
+            public static readonly string NewChampionshipModalPrefix = "Championship On:";
 
         }
     }
