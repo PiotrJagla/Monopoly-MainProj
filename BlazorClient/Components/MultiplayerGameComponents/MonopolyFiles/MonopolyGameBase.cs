@@ -136,16 +136,19 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected async Task Move()
         {
-            try
-            {
-                await PlayersMove();
-                await CheckForBanckrupcy();
-                await BrodcastUpdatedInformations();
-            }
-            catch
-            {
-                Messages.Add("Game has not started yet");
-            }
+            //try
+            //{
+            //    await PlayersMove();
+            //    await CheckForBanckrupcy();
+            //    await BrodcastUpdatedInformations();
+            //}
+            //catch
+            //{
+            //    Messages.Add("Game has not started yet");
+            //}
+            await PlayersMove();
+            await CheckForBanckrupcy();
+            await BrodcastUpdatedInformations();
 
         }
         private async Task PlayersMove()

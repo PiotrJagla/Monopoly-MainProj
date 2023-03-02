@@ -63,8 +63,8 @@ public class MonopolyNationCell : MonopolyCell
             return GetModalBuyingCell(Data);
         else if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() == Data.MainPlayer.Key)
             return GetModalEnhancingCell(Data);
-
-        return MonopolyModalFactory.NoModalParameters();
+        else
+            return GetModalRepurchasingCell(Data);
     }
 
     private MonopolyModalParameters GetModalBuyingCell(DataToGetModalParameters Data)
@@ -139,22 +139,47 @@ public class MonopolyNationCell : MonopolyCell
         return Result;
     }
 
+    private MonopolyModalParameters GetModalRepurchasingCell(DataToGetModalParameters Data)
+    {
+        int StayCost = BuyingBehaviour.GetCosts().Stay;
+        int MainPlayerMoney = Data.MainPlayer.MoneyOwned;
+        int RepurchaseCost = (int)(BuyingBehaviour.GetCosts().Stay*Consts.Monopoly.CellRepurchaseMultiplayer);
+        if (MainPlayerMoney < StayCost + RepurchaseCost)
+            return MonopolyModalFactory.NoModalParameters();
+
+        StringModalParameters Parameters = new StringModalParameters();
+
+        Parameters.Title = "Do you want to repurchace this cell";
+        Parameters.ButtonsContent.Add("Yes");
+        Parameters.ButtonsContent.Add("No");
+
+        return new MonopolyModalParameters(Parameters, ModalShow.AfterMove);
+    }
+
     public CellBuyingBehaviour GetBuyingBehavior()
     {
         return BuyingBehaviour;
     }
 
-    public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought,ref List<MonopolyCell> CheckMonopol)
+    public int CellBought(MonopolyPlayer MainPlayer, string ModalResponse,ref List<MonopolyCell> CheckMonopol)
     {
-        if (WhatIsBought != Consts.Monopoly.NoBuildingBought &&
-            string.IsNullOrEmpty(WhatIsBought) == false)
+        if (ModalResponse.ToLower() == "yes")
         {
             BuyingBehaviour.SetOwner(MainPlayer.Key);
-            BuyingBehaviour.SetBaseCosts(BuildingCosts[WhatIsBought]);
+            return (int)(BuyingBehaviour.GetCosts().Buy * Consts.Monopoly.CellRepurchaseMultiplayer);
+        }
+
+        if (ModalResponse != Consts.Monopoly.NoBuildingBought &&
+            string.IsNullOrEmpty(ModalResponse) == false &&
+            ModalResponse.ToLower() != "no")
+        {
+            BuyingBehaviour.SetOwner(MainPlayer.Key);
+            BuyingBehaviour.SetBaseCosts(BuildingCosts[ModalResponse]);
             CheckMonopol = monopolBehaviour.UpdateBoardMonopol(CheckMonopol, MainPlayer.OnCellIndex);
-            CurrentBuilding = WhatIsBought;
+            CurrentBuilding = ModalResponse;
             return BuyingBehaviour.GetCosts().Buy;
         }
+        
 
         return 0;
     }

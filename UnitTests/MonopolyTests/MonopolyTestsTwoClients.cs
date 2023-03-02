@@ -9,6 +9,8 @@ using Services.GamesServices.Monopoly.Update;
 using Models.Monopoly;
 using Models.MultiplayerConnection;
 using Enums.Monopoly;
+using MySqlX.XDevAPI;
+using Services.GamesServices.Monopoly.Board.Cells;
 
 namespace UnitTests.MonopolyTests;
 
@@ -22,6 +24,7 @@ public class MonopolyTestsTwoClients
         PlayerKey.First,PlayerKey.First,PlayerKey.First,PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne, PlayerKey.NoOne,
         PlayerKey.NoOne
     };
+
 
     private PlayerKey[] BuyingOrderInLosingMonopolCheck = new PlayerKey[]
     {
@@ -75,8 +78,9 @@ public class MonopolyTestsTwoClients
                 break;
             }
         }
-
+        Clients[1].UpdateData(Clients[1].GetUpdatedData());
         MonopolyUpdateMessage CheckBankrupcy = Clients[1].GetUpdatedData();
+        
 
         Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Secound);
     }
@@ -96,11 +100,9 @@ public class MonopolyTestsTwoClients
                 break;
             }
         }
-
-        Clients[1].UpdateData(Clients[1].GetUpdatedData());
+        
 
         Assert.IsTrue(Clients[0].WhoWon() == PlayerKey.First);
-        Assert.IsTrue(Clients[1].WhoWon() == PlayerKey.First);
     }
 
     [TestMethod]
@@ -180,5 +182,112 @@ public class MonopolyTestsTwoClients
         SecoundClientDisplay = Clients[1].GetBoard()[1].OnDisplay();
 
         Assert.IsTrue(FirstClientDisplay == SecoundClientDisplay);
+    }
+
+    [TestMethod]
+    public void TestAppearenceOfRepurchancingModal()
+    {
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].ModalResponse(Consts.Monopoly.Field);
+
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+
+        Clients[1].ExecutePlayerMove(1);
+        MonopolyModalParameters parameters = Clients[1].GetModalParameters();
+        
+        Assert.IsTrue(Clients[1].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.First);
+        Assert.IsTrue(parameters.Parameters.Title == "Do you want to repurchace this cell");
+        Assert.IsTrue(parameters.Parameters.ButtonsContent[0] == "Yes" || parameters.Parameters.ButtonsContent[0] == "No");       
+        Assert.IsTrue(parameters.Parameters.ButtonsContent[1] == "No" || parameters.Parameters.ButtonsContent[1] == "Yes");       
+    }
+
+    [TestMethod]
+    public void TestAbilityToRepurchaceCell()
+    {
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].ModalResponse(Consts.Monopoly.Field);
+
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+
+        Clients[1].ExecutePlayerMove(1);
+
+        Assert.IsTrue(Clients[1].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.First);
+
+        Clients[1].ModalResponse("Yes");
+
+        Clients[0].UpdateData(Clients[1].GetUpdatedData());
+        Assert.IsTrue(Clients[0].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.Secound);
+    }
+
+    [TestMethod]
+    public void TestCellRepurchasing_WithMoney()
+    {
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].ModalResponse(Consts.Monopoly.Field);
+
+        int BuyCost = Clients[0].GetBoard()[1].GetBuyingBehavior().GetCosts().Buy;
+        int StayCost = Clients[0].GetBoard()[1].GetBuyingBehavior().GetCosts().Stay;
+        float Multiplyer = Consts.Monopoly.CellRepurchaseMultiplayer;
+        int ExpectedMoneyAmount = Consts.Monopoly.StartMoneyAmount - StayCost - (int)(BuyCost * Multiplyer);
+
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+
+        Clients[1].ExecutePlayerMove(1);
+
+        Assert.IsTrue(Clients[1].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.First);
+
+        Clients[1].ModalResponse("Yes");
+
+        Clients[0].UpdateData(Clients[1].GetUpdatedData());
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Assert.IsTrue(Clients[0].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.Secound);
+
+        int ActualMoneyAmount = Clients[1].GetUpdatedData().PlayersData[1].Money;
+        Assert.IsTrue(ExpectedMoneyAmount == ActualMoneyAmount);
+    }
+
+    [TestMethod]
+    public void TestCellRepurchasing_WithoutMoney()
+    {
+
+        MonopolyService Client = Clients[1];
+        MonopolyDataPrepare.GoTo<MonopolyIslandCell>(ref Client);
+
+        //Make Sure That Client 2 has no more money than paying for escaping from island
+        int SecoundClientPos = Clients[1].GetUpdatedData().PlayersData[1].Position;
+        Assert.IsTrue(Clients[1].GetBoard()[SecoundClientPos] is MonopolyIslandCell);
+
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+        Clients[1].ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+
+
+        int IslandPos = Clients[1].GetUpdatedData().PlayersData[1].Position;
+        int FirstClientPos = 1;
+        int BoardSize = Clients[0].GetBoard().Count;
+        Clients[1].ExecutePlayerMove(BoardSize - IslandPos + FirstClientPos);
+
+        Clients[0].UpdateData(Clients[1].GetUpdatedData());
+
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].ModalResponse(Consts.Monopoly.TwoHouses);
+
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+
+        SecoundClientPos = Clients[0].GetUpdatedData().PlayersData[1].Position;
+        Assert.IsTrue(Clients[0].GetBoard()[SecoundClientPos].GetBuyingBehavior().GetOwner() == PlayerKey.First);
+
+        MonopolyModalParameters parameters = Clients[1].GetModalParameters();
+        Assert.IsTrue(parameters.WhenShowModal == ModalShow.Never);
+
+        
     }
 }

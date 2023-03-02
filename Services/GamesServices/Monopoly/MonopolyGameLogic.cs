@@ -60,7 +60,7 @@ namespace Services.GamesServices.Monopoly
             {
                 UpdatedData.PlayersData = PlayersService.MakePlayersUpdateData().GetPlayersUpdatedData();
                 UpdatedData.CellsOwners = BoardService.MakeBoardUpdateData().GetCellsUpdateData();
-                UpdatedData.MoneyBond = BoardService.MakeMoneyBond(PlayersService.GetMainPlayer());
+                UpdatedData.MoneyBond = BoardService.GetMoneyBond();
                 UpdatedData.BankruptPlayer = PlayersService.CheckForBankruptPlayer(ref UpdatedData);
             }
             return UpdatedData;
@@ -95,6 +95,7 @@ namespace Services.GamesServices.Monopoly
 
             Move(MoveAmount);
             CheckEvents();
+            BoardService.MakeMoneyBond(PlayersService.GetMainPlayer());
             MoveQuantity = 0;
         }
 
@@ -142,6 +143,8 @@ namespace Services.GamesServices.Monopoly
 
         public void ModalResponse(string ModalResponse = "")
         {
+            
+
             ModalResponseData Data = new ModalResponseData();
             Data.BoardService = BoardService;
             Data.PlayersService = PlayersService;

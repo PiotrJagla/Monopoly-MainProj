@@ -30,7 +30,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
         {
             StringModalParameters Result = new StringModalParameters();
             Result.Title = $"You Are On Desert Island For {TurnsOnIslandRemainingREF.Value} Turns";
-            Result.ButtonsContent.Add(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Result.ButtonsContent.Add(Consts.Monopoly.PayToEscapeIsland);
             Result.ButtonsContent.Add(Consts.Monopoly.ThrowDiceIslandButtonContent);
             return new MonopolyModalParameters(Result, ModalShow.BeforeMove);
         }
@@ -69,7 +69,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
                     UpdatedData.BoardService.EscapeFromIsland();
                 }
             }
-            else if (Data.ModalResponse == Consts.Monopoly.PayToEscapeIslandCellButtonContent)
+            else if (Data.ModalResponse == Consts.Monopoly.PayToEscapeIsland)
             {
                 if (UpdatedData.PlayersService.IsAbleToPayForEscapingFromIsland())
                 {

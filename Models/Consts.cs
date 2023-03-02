@@ -49,6 +49,7 @@ namespace Models
             public static readonly int TaxAmount = 60;
             public static readonly float MonopolMultiplayer = 2.0f;
             public static readonly float ChampionshipMultiplayer = 2.0f;
+            public static readonly float CellRepurchaseMultiplayer = 2.0f;
                           
             public static readonly string IslandDiaplsy = "Desert Island";
             public static readonly string ChampionshipInfo = "|World Championship|";
@@ -56,7 +57,7 @@ namespace Models
             public static readonly float[] BeachesOwnedMultiplier = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f };
                           
             public static readonly string ThrowDiceIslandButtonContent = "Throw Dice(Excape if 1 is Rolled)";
-            public static readonly string PayToEscapeIslandCellButtonContent = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
+            public static readonly string PayToEscapeIsland = $"Pay {Consts.Monopoly.IslandEscapeCost} To Leave";
                           
             public static readonly string NoBuildingBought = "Nothing";
             public static readonly string Field = "Field";

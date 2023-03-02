@@ -19,9 +19,11 @@ namespace Services.GamesServices.Monopoly.Board
         private List<MonopolyCell> Board;
         private Int MainPlayerTurnsOnIslandRemaining;
         private bool IsThisFirstLap;
+        private MoneyObligation MoneyBondToPay;
 
         public MonopolyBoard()
         {
+            MoneyBondToPay = new MoneyObligation();
             Board = new List<MonopolyCell>();
             MainPlayerTurnsOnIslandRemaining = new Int();
             Board = MonopolyBoardFactory.MakeBoard(ref MainPlayerTurnsOnIslandRemaining);
@@ -109,15 +111,28 @@ namespace Services.GamesServices.Monopoly.Board
             return Board.FindAll(c => c.GetBuyingBehavior().GetOwner() == MainPlayerKey);
         }
 
-        public MoneyObligation MakeMoneyBond(in MonopolyPlayer MainPlayer)
+        public MoneyObligation GetMoneyBond()
         {
+            return MoneyBondToPay;
+        }
+
+        public void MakeMoneyBond(in MonopolyPlayer MainPlayer)
+        {
+            //try
+            //{
+            //    return CalculateBond(MainPlayer);
+            //}
+            //catch
+            //{
+            //    return new MoneyObligation();
+            //}
             try
             {
-                return CalculateBond(MainPlayer);
+                MoneyBondToPay =  CalculateBond(MainPlayer);
             }
             catch
             {
-                return new MoneyObligation();
+                MoneyBondToPay = new MoneyObligation();
             }
         }
 
@@ -137,8 +152,6 @@ namespace Services.GamesServices.Monopoly.Board
         {
             for (int i = 0; i < BoardUpdatedData.Count; i++)
             {
-                //Board[i].GetBuyingBehavior().SetOwner(BoardUpdatedData[i].Owner);
-                //Board[i].GetBuyingBehavior().UpdateCosts(BoardUpdatedData[i].NewCosts);
                 Board[i].UpdateData(BoardUpdatedData[i]);
             }
         }

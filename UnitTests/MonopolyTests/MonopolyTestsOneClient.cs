@@ -243,7 +243,7 @@ namespace UnitTests.MonopolyTests
             int BoardSize = Client.GetBoard().Count;
 
             MonopolyDataPrepare.GoTo<MonopolyIslandCell>(ref Client);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
 
             Client.ExecutePlayerMove(BoardSize - 2);
 
@@ -261,15 +261,15 @@ namespace UnitTests.MonopolyTests
             MonopolyDataPrepare.GoTo<MonopolyIslandCell>(ref Client);
 
             //i am called many times because one time is not enough to test whether client is able to pay
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
-            Client.ModalResponse(Consts.Monopoly.PayToEscapeIslandCellButtonContent);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
+            Client.ModalResponse(Consts.Monopoly.PayToEscapeIsland);
 
             int ActualMoney = Client.GetUpdatedData().PlayersData[0].Money;
             Assert.IsTrue(ActualMoney >= 0);
