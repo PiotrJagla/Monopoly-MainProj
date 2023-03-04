@@ -555,6 +555,10 @@ namespace UnitTests.MonopolyTests
 
             Assert.IsTrue(ExpectedMoney*Consts.Monopoly.ChampionshipMultiplayer == ActualMoney);
         }
+
+
+
+        
     }
 
 }

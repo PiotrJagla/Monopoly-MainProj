@@ -18,9 +18,11 @@ namespace Services.GamesServices.Monopoly
     {
         private List<MonopolyPlayer> Players;
         private SpecialIndexes PlayersSpecialIndexes;
+        int NumberOfDubletsInARow;
 
         public MonopolyPlayers()
         {
+            NumberOfDubletsInARow = 1;
             Players = new List<MonopolyPlayer>();
             PlayersSpecialIndexes = new SpecialIndexes();
         }
@@ -145,6 +147,11 @@ namespace Services.GamesServices.Monopoly
             {
                 if (Players[PlayersUpdatedData[i].PlayerIndex] != null)
                 {
+                    int PreviousPos = Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex;
+                    int CurrentPos = PlayersUpdatedData[i].Position;
+                    int MoveAmount = CurrentPos - PreviousPos;
+                    CheckForDublet(MoveAmount);
+
                     Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex = PlayersUpdatedData[i].Position;
                     Players[PlayersUpdatedData[i].PlayerIndex].MoneyOwned = PlayersUpdatedData[i].Money;
                 }
@@ -216,7 +223,23 @@ namespace Services.GamesServices.Monopoly
                 PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
         }
 
-       
+        public void CheckForDublet(int MoveAmount)
+        {
+            if (MoveAmount == 6 && NumberOfDubletsInARow < 3)
+            {
+                PlayersSpecialIndexes.WhosTurn = (--PlayersSpecialIndexes.WhosTurn) % Players.Count;
+                NumberOfDubletsInARow++;
+            }
+            else if(NumberOfDubletsInARow == 3)
+            {
+                NumberOfDubletsInARow = 0;
+            }
+        }
+
+        public bool IsThisThirdDublet(int MoveAmount)
+        {
+            return MoveAmount == 6 && (NumberOfDubletsInARow + 1) == 3; 
+        }
 
     }
 }

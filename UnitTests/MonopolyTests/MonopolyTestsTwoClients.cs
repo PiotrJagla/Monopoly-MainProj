@@ -290,4 +290,68 @@ public class MonopolyTestsTwoClients
 
         
     }
+
+    [TestMethod]
+    public void TestDublet()
+    {
+        Assert.IsTrue(Clients[0].IsYourTurn());
+        Assert.IsTrue(Clients[1].IsYourTurn() == false);
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+
+        Assert.IsTrue(Clients[0].IsYourTurn());
+        Assert.IsTrue(Clients[1].IsYourTurn() == false);
+    }
+
+    [TestMethod]
+    public void TestDublet_After6RolledThirdTime()
+    {
+        Assert.IsTrue(Clients[0].IsYourTurn());
+        Assert.IsTrue(Clients[1].IsYourTurn() == false);
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Assert.IsTrue(Clients[0].IsYourTurn() == false);
+        Assert.IsTrue(Clients[1].IsYourTurn() == true);
+    }
+
+    [TestMethod]
+    public void TestDublet_PositionAfterThirdDublet()
+    {
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        int ExpectedPosition = 12;
+        int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
+        Assert.IsTrue(ExpectedPosition == ActualPosition);
+    }
 }

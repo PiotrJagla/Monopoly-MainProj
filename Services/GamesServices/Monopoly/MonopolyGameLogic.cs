@@ -93,8 +93,11 @@ namespace Services.GamesServices.Monopoly
             if (MoveQuantity > 0)
                 MoveAmount = MoveQuantity;
 
+            if (PlayersService.IsThisThirdDublet(MoveAmount))
+                MoveAmount = 0;
+
             Move(MoveAmount);
-            CheckEvents();
+            CheckEvents(MoveAmount);
             BoardService.MakeMoneyBond(PlayersService.GetMainPlayer());
             MoveQuantity = 0;
         }
@@ -116,9 +119,10 @@ namespace Services.GamesServices.Monopoly
             }
         }
 
-        private void CheckEvents()
+        private void CheckEvents(int MoveAmount)
         {
             BoardService.CheckIfSteppedOnIsland(PlayersService.GetMainPlayer());
+            PlayersService.CheckForDublet(MoveAmount);
         }
 
         public void SetMainPlayerIndex(int index)
