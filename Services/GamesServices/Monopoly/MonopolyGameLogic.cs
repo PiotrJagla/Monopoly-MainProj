@@ -27,7 +27,7 @@ namespace Services.GamesServices.Monopoly
         {
             MoveQuantity = 0;
             BoardService = new MonopolyBoard();
-            PlayersService = new MonopolyPlayers(); 
+            PlayersService = new MonopolyPlayers(BoardService.GetBoard().Count); 
         }
 
         public void StartGame(List<Player> PlayersInGame)
@@ -92,9 +92,6 @@ namespace Services.GamesServices.Monopoly
         {
             if (MoveQuantity > 0)
                 MoveAmount = MoveQuantity;
-
-            if (PlayersService.IsThisThirdDublet(MoveAmount))
-                MoveAmount = 0;
 
             Move(MoveAmount);
             CheckEvents(MoveAmount);

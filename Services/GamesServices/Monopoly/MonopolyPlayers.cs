@@ -6,6 +6,7 @@ using Services.GamesServices.Monopoly.Board.Cells;
 using Services.GamesServices.Monopoly.Update;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
@@ -19,10 +20,12 @@ namespace Services.GamesServices.Monopoly
         private List<MonopolyPlayer> Players;
         private SpecialIndexes PlayersSpecialIndexes;
         int NumberOfDubletsInARow;
+        int BoardSize;
 
-        public MonopolyPlayers()
+        public MonopolyPlayers(int BoardSize)
         {
             NumberOfDubletsInARow = 1;
+            this.BoardSize = BoardSize;
             Players = new List<MonopolyPlayer>();
             PlayersSpecialIndexes = new SpecialIndexes();
         }
@@ -223,16 +226,48 @@ namespace Services.GamesServices.Monopoly
                 PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
         }
 
+        private void PreviousTurn()
+        {
+            try
+            {
+                SetPreviousTurn();
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void SetPreviousTurn()
+        {
+            PlayersSpecialIndexes.WhosTurn = (--PlayersSpecialIndexes.WhosTurn) % Players.Count;
+
+            while (Players[PlayersSpecialIndexes.WhosTurn] == null)
+                PlayersSpecialIndexes.WhosTurn = (--PlayersSpecialIndexes.WhosTurn) % Players.Count;
+        }
+
         public void CheckForDublet(int MoveAmount)
         {
-            if (MoveAmount == 6 && NumberOfDubletsInARow < 3)
+            if(MoveAmount == 6)
             {
-                PlayersSpecialIndexes.WhosTurn = (--PlayersSpecialIndexes.WhosTurn) % Players.Count;
-                NumberOfDubletsInARow++;
+                if (NumberOfDubletsInARow < 3)
+                {
+                    PreviousTurn();
+                    NumberOfDubletsInARow++;
+                }
+                else if (NumberOfDubletsInARow == 3)
+                {
+                    NumberOfDubletsInARow = 0;
+
+                    Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= 6;
+                    if (Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex < 0)
+                        ChargeMainPlayer(Consts.Monopoly.StartMoneyAmount);
+                    Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex += BoardSize;
+                }
             }
-            else if(NumberOfDubletsInARow == 3)
+            else
             {
-                NumberOfDubletsInARow = 0;
+                NumberOfDubletsInARow = 1;
             }
         }
 

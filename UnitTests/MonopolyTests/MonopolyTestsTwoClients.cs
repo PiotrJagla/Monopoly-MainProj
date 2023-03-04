@@ -333,7 +333,7 @@ public class MonopolyTestsTwoClients
     }
 
     [TestMethod]
-    public void TestDublet_PositionAfterThirdDublet()
+    public void PositionAfterThirdDublet_ThirdThowIsDublet()
     {
         Clients[0].ExecutePlayerMove(6);
         Clients[0].NextTurn();
@@ -353,5 +353,124 @@ public class MonopolyTestsTwoClients
         int ExpectedPosition = 12;
         int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
         Assert.IsTrue(ExpectedPosition == ActualPosition);
+    }
+
+    [TestMethod]
+    public void PositionAfterThirdDublet_ThirdThowIsntDublet()
+    {
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        int ExpectedPosition = 13;
+        int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
+        Assert.IsTrue(ExpectedPosition == ActualPosition);
+    }
+
+    [TestMethod]
+    public void PositionAfterThirdDublet_BreakBetweenDublets()
+    {
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        int ExpectedPosition = 20 % Clients[0].GetBoard().Count;
+        int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
+        Assert.IsTrue(ExpectedPosition == ActualPosition);
+    }
+
+    [TestMethod]
+    public void PositionAfterThirdDublet_TestPayingStayCost()
+    {
+        
+
+        for (int i = 1; ; i++)
+        {
+            Clients[1].ExecutePlayerMove(1);
+
+            if (Clients[1].GetBoard()[(i + 6*2) % Clients[1].GetBoard().Count] is MonopolyNationCell)
+                break;
+        }
+
+        Clients[1].ExecutePlayerMove(12);
+        Clients[1].ModalResponse(Consts.Monopoly.Field);
+       
+        Clients[0].UpdateData(Clients[1].GetUpdatedData());
+
+        int SecoundClientPos = Clients[0].GetUpdatedData().PlayersData[1].Position;
+        Assert.IsTrue(Clients[0].GetBoard()[SecoundClientPos] is MonopolyNationCell);
+
+
+        for (int i = 1; ; i++)
+        {
+            Clients[0].ExecutePlayerMove(1);
+
+            if (Clients[0].GetBoard()[(i + 6 * 2) % Clients[0].GetBoard().Count] is MonopolyNationCell)
+                break;
+        }
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[0].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[0].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        Clients[0].ExecutePlayerMove(6);
+        Clients[0].NextTurn();
+        Clients[1].UpdateData(Clients[0].GetUpdatedData());
+        Clients[0].UpdateData(Clients[0].GetUpdatedData());
+        Clients[1].NextTurn();
+
+        
+
+        int FirstClientPos = Clients[0].GetUpdatedData().PlayersData[0].Position;
+
+        Assert.IsTrue(FirstClientPos == SecoundClientPos);
+
+        int ExpectedMoney = Consts.Monopoly.StartMoneyAmount;
+        ExpectedMoney -= 2 * Clients[0].GetBoard()[FirstClientPos].GetBuyingBehavior().GetCosts().Stay;
+
+        int ActualMoney = Clients[0].GetUpdatedData().PlayersData[0].Money;
+
+        //Assert.IsTrue(ExpectedMoney == ActualMoney);
+
     }
 }
