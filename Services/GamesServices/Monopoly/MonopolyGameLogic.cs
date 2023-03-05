@@ -62,6 +62,7 @@ namespace Services.GamesServices.Monopoly
                 UpdatedData.CellsOwners = BoardService.MakeBoardUpdateData().GetCellsUpdateData();
                 UpdatedData.MoneyBond = BoardService.GetMoneyBond();
                 UpdatedData.BankruptPlayer = PlayersService.CheckForBankruptPlayer(ref UpdatedData);
+                UpdatedData.DidDubletAppear = PlayersService.IsDubletRolledBySomeone();
             }
             return UpdatedData;
         }

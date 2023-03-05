@@ -59,6 +59,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
             MonopolyHubConn.On<MonopolyUpdateMessage>("UpdateData", async (NewData) =>
             {
+                
                 Update(NewData);
                 MonopolyLogic.NextTurn();
                 await ExecuteBeforeMoveActions();

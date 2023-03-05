@@ -142,13 +142,15 @@ namespace Services.GamesServices.Monopoly
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
         {
-            UpdatePlayersData(UpdatedData.PlayersData);
+            UpdatePlayersData(UpdatedData.PlayersData, UpdatedData.DidDubletAppear);
             UpdateMoneyObligation(UpdatedData.MoneyBond);
             UpdateBankruptPlayer(UpdatedData.BankruptPlayer);
         }
 
-        private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData)
+        private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData, bool DidDubletAppear)
         {
+            IsDubletRolled = DidDubletAppear;
+            
             for (int i = 0; i < PlayersUpdatedData.Count; i++)
             {
                 if (Players[PlayersUpdatedData[i].PlayerIndex] != null)
@@ -158,7 +160,7 @@ namespace Services.GamesServices.Monopoly
                         int PreviousPos = Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex;
                         int CurrentPos = PlayersUpdatedData[i].Position;
                         int MoveAmount = CurrentPos - PreviousPos;
-                        CheckForDublet(MoveAmount, PlayersUpdatedData[i].PlayerIndex);
+                        //CheckForDublet(MoveAmount, PlayersUpdatedData[i].PlayerIndex);
                     }
 
 
@@ -227,10 +229,15 @@ namespace Services.GamesServices.Monopoly
 
         public void NextTurn()
         {
-            PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
-
-            while (Players[PlayersSpecialIndexes.WhosTurn] == null)
+            if (IsDubletRolled == false)
+            {
                 PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
+
+                while (Players[PlayersSpecialIndexes.WhosTurn] == null)
+                    PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
+
+            }
+            
         }
 
         private void PreviousTurn()
@@ -259,6 +266,7 @@ namespace Services.GamesServices.Monopoly
             {                
                 NumberOfDubletsInARow = 1;
                 IsDubletRolled = false;
+                
             }
         }
 
@@ -266,14 +274,16 @@ namespace Services.GamesServices.Monopoly
         {
             if (NumberOfDubletsInARow < 3)
             {
-                PreviousTurn();
+                //PreviousTurn();
                 NumberOfDubletsInARow++;
                 IsDubletRolled = true;
+                
             }
             else if (NumberOfDubletsInARow == 3)
             {
                 IsDubletRolled = false;
-                NumberOfDubletsInARow = 0;
+                
+                NumberOfDubletsInARow = 1;
 
                 Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= 6;
 
@@ -288,6 +298,12 @@ namespace Services.GamesServices.Monopoly
         public bool IsThisThirdDublet(int MoveAmount)
         {
             return MoveAmount == 6 && (NumberOfDubletsInARow + 1) == 3; 
+        }
+
+        public bool IsDubletRolledBySomeone()
+        {
+            
+            return IsDubletRolled;
         }
 
     }

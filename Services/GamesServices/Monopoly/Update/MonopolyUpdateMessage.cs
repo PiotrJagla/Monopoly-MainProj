@@ -15,7 +15,7 @@ namespace Services.GamesServices.Monopoly.Update
         public MoneyObligation MoneyBond { get; set; }
 
         public PlayerKey BankruptPlayer { get; set; }
-        public bool DidDubletAppear;
+        public bool DidDubletAppear { get; set; }
 
         public MonopolyUpdateMessage()
         {
