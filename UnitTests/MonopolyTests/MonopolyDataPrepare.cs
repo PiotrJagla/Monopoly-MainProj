@@ -172,14 +172,22 @@ namespace UnitTests.MonopolyTests
             MonopolyUpdateMessage UpdatedData = CurrentClient.GetUpdatedData();
             foreach (var client in Clients)
             {
-                //if (CurrentClient != client)
-                //{
-                //    client.UpdateData(CurrentClient.GetUpdatedData());
-                //}
+
                 client.UpdateData(UpdatedData);
                 client.NextTurn();
             }
-        }      
+        }
+
+        public static void UpdateOthers(ref List<MonopolyService> Clients,int CurrentClientIndex)
+        {
+            MonopolyUpdateMessage UpdatedData = Clients[CurrentClientIndex].GetUpdatedData();
+            foreach (var client in Clients)
+            {
+
+                client.UpdateData(UpdatedData);
+                client.NextTurn();
+            }
+        }
 
         public static List<int> GetExpectedMoney(List<MoneyFlow> MoneyFlows)
         {
@@ -237,6 +245,8 @@ namespace UnitTests.MonopolyTests
                 FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent)
             );
         }
+
+       
         
     }
 }

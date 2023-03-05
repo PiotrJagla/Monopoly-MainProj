@@ -118,14 +118,6 @@ namespace Services.GamesServices.Monopoly.Board
 
         public void MakeMoneyBond(in MonopolyPlayer MainPlayer)
         {
-            //try
-            //{
-            //    return CalculateBond(MainPlayer);
-            //}
-            //catch
-            //{
-            //    return new MoneyObligation();
-            //}
             try
             {
                 MoneyBondToPay =  CalculateBond(MainPlayer);
@@ -134,6 +126,11 @@ namespace Services.GamesServices.Monopoly.Board
             {
                 MoneyBondToPay = new MoneyObligation();
             }
+        }
+
+        public void ResetBond()
+        {
+            MoneyBondToPay = new MoneyObligation();
         }
 
         private MoneyObligation CalculateBond(in MonopolyPlayer MainPlayer) 

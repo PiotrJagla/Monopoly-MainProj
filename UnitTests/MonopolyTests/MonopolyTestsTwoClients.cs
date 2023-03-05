@@ -295,9 +295,7 @@ public class MonopolyTestsTwoClients
         Assert.IsTrue(Clients[1].IsYourTurn() == false);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
 
         Assert.IsTrue(Clients[0].IsYourTurn());
@@ -311,19 +309,13 @@ public class MonopolyTestsTwoClients
         Assert.IsTrue(Clients[1].IsYourTurn() == false);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Assert.IsTrue(Clients[0].IsYourTurn() == false);
         Assert.IsTrue(Clients[1].IsYourTurn() == true);
@@ -333,19 +325,13 @@ public class MonopolyTestsTwoClients
     public void PositionAfterThirdDublet_ThirdThowIsDublet()
     {
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         int ExpectedPosition = 12;
         int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
@@ -356,19 +342,13 @@ public class MonopolyTestsTwoClients
     public void PositionAfterThirdDublet_ThirdThowIsntDublet()
     {
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(1);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         int ExpectedPosition = 13;
         int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
@@ -379,29 +359,19 @@ public class MonopolyTestsTwoClients
     public void PositionAfterThirdDublet_BreakBetweenDublets()
     {
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(1);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(1);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         int ExpectedPosition = 20 % Clients[0].GetBoard().Count;
         int ActualPosition = Clients[0].GetUpdatedData().PlayersData[0].Position;
@@ -437,35 +407,26 @@ public class MonopolyTestsTwoClients
         }
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[0].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[0].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(6);
-        Clients[0].NextTurn();
-        Clients[1].UpdateData(Clients[0].GetUpdatedData());
-        Clients[0].UpdateData(Clients[0].GetUpdatedData());
-        Clients[1].NextTurn();
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        
+
 
         int FirstClientPos = Clients[0].GetUpdatedData().PlayersData[0].Position;
 
         Assert.IsTrue(FirstClientPos == SecoundClientPos);
 
         int ExpectedMoney = Consts.Monopoly.StartMoneyAmount;
-        ExpectedMoney -= 2 * Clients[0].GetBoard()[FirstClientPos].GetBuyingBehavior().GetCosts().Stay;
+        ExpectedMoney -= Clients[0].GetBoard()[FirstClientPos].GetBuyingBehavior().GetCosts().Stay;
 
         int ActualMoney = Clients[0].GetUpdatedData().PlayersData[0].Money;
 
-        //Assert.IsTrue(ExpectedMoney == ActualMoney);
+        Assert.IsTrue(ExpectedMoney == ActualMoney);
 
     }
 }

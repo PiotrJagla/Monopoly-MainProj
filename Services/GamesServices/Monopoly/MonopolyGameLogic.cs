@@ -62,7 +62,6 @@ namespace Services.GamesServices.Monopoly
                 UpdatedData.CellsOwners = BoardService.MakeBoardUpdateData().GetCellsUpdateData();
                 UpdatedData.MoneyBond = BoardService.GetMoneyBond();
                 UpdatedData.BankruptPlayer = PlayersService.CheckForBankruptPlayer(ref UpdatedData);
-                UpdatedData.FromWhoData = PlayersService.GetMainPlayer().Key;
             }
             return UpdatedData;
         }
@@ -95,9 +94,16 @@ namespace Services.GamesServices.Monopoly
             if (MoveQuantity > 0)
                 MoveAmount = MoveQuantity;
 
+            bool isTrue = PlayersService.IsThisThirdDublet(MoveAmount);
+
             Move(MoveAmount);
             CheckEvents(MoveAmount);
-            BoardService.MakeMoneyBond(PlayersService.GetMainPlayer());
+
+            if (isTrue == false)
+                BoardService.MakeMoneyBond(PlayersService.GetMainPlayer());
+            else
+                BoardService.ResetBond();
+
             MoveQuantity = 0;
         }
 
@@ -121,7 +127,7 @@ namespace Services.GamesServices.Monopoly
         private void CheckEvents(int MoveAmount)
         {
             BoardService.CheckIfSteppedOnIsland(PlayersService.GetMainPlayer());
-            PlayersService.CheckForDublet(MoveAmount);
+            PlayersService.CheckForDublet(MoveAmount, (int)PlayersService.GetMainPlayer().Key);
         }
 
         public void SetMainPlayerIndex(int index)
@@ -146,8 +152,6 @@ namespace Services.GamesServices.Monopoly
 
         public void ModalResponse(string ModalResponse = "")
         {
-            
-
             ModalResponseData Data = new ModalResponseData();
             Data.BoardService = BoardService;
             Data.PlayersService = PlayersService;

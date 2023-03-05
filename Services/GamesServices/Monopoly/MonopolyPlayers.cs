@@ -19,11 +19,14 @@ namespace Services.GamesServices.Monopoly
     {
         private List<MonopolyPlayer> Players;
         private SpecialIndexes PlayersSpecialIndexes;
-        int NumberOfDubletsInARow;
-        int BoardSize;
+        private int NumberOfDubletsInARow;
+        private int BoardSize;
+        private bool IsDubletRolled;
+        
 
         public MonopolyPlayers(int BoardSize)
         {
+            IsDubletRolled = false;
             NumberOfDubletsInARow = 1;
             this.BoardSize = BoardSize;
             Players = new List<MonopolyPlayer>();
@@ -150,10 +153,14 @@ namespace Services.GamesServices.Monopoly
             {
                 if (Players[PlayersUpdatedData[i].PlayerIndex] != null)
                 {
-                    int PreviousPos = Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex;
-                    int CurrentPos = PlayersUpdatedData[i].Position;
-                    int MoveAmount = CurrentPos - PreviousPos;
-                    CheckForDublet(MoveAmount);
+                    if (PlayersUpdatedData[i].PlayerIndex != PlayersSpecialIndexes.MainPlayer)
+                    {
+                        int PreviousPos = Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex;
+                        int CurrentPos = PlayersUpdatedData[i].Position;
+                        int MoveAmount = CurrentPos - PreviousPos;
+                        CheckForDublet(MoveAmount, PlayersUpdatedData[i].PlayerIndex);
+                    }
+
 
                     Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex = PlayersUpdatedData[i].Position;
                     Players[PlayersUpdatedData[i].PlayerIndex].MoneyOwned = PlayersUpdatedData[i].Money;
@@ -228,48 +235,53 @@ namespace Services.GamesServices.Monopoly
 
         private void PreviousTurn()
         {
-            try
+            do
             {
-                SetPreviousTurn();
-            }
-            catch
-            {
-                return;
-            }
+                PlayersSpecialIndexes.WhosTurn = GetPreviousTurn(PlayersSpecialIndexes.WhosTurn);
+            } while (Players[PlayersSpecialIndexes.WhosTurn] == null);
         }
 
-        private void SetPreviousTurn()
+        private int GetPreviousTurn(int CurrentTurn)
         {
-            PlayersSpecialIndexes.WhosTurn = (--PlayersSpecialIndexes.WhosTurn) % Players.Count;
-
-            while (Players[PlayersSpecialIndexes.WhosTurn] == null)
-                PlayersSpecialIndexes.WhosTurn = (--PlayersSpecialIndexes.WhosTurn) % Players.Count;
+            int PreviousTurn = CurrentTurn;
+            PreviousTurn--;
+            PreviousTurn = (PreviousTurn+Players.Count)% Players.Count;
+            return PreviousTurn;
         }
 
-        public void CheckForDublet(int MoveAmount)
+        public void CheckForDublet(int MoveAmount, int WhoThrownDubletIndex)
         {
             if(MoveAmount == 6)
             {
-                if (NumberOfDubletsInARow < 3)
+                DubletThrown();
+            }
+            else if (WhoThrownDubletIndex == PlayersSpecialIndexes.MainPlayer)
+            {                
+                NumberOfDubletsInARow = 1;
+                IsDubletRolled = false;
+            }
+        }
+
+        private void DubletThrown()
+        {
+            if (NumberOfDubletsInARow < 3)
+            {
+                PreviousTurn();
+                NumberOfDubletsInARow++;
+                IsDubletRolled = true;
+            }
+            else if (NumberOfDubletsInARow == 3)
+            {
+                IsDubletRolled = false;
+                NumberOfDubletsInARow = 0;
+
+                Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= 6;
+
+                if (Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex < 0)
                 {
-                    PreviousTurn();
-                    NumberOfDubletsInARow++;
-                }
-                else if (NumberOfDubletsInARow == 3)
-                {
-                    NumberOfDubletsInARow = 0;
-
-                    Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= 6;
-
-                    if (Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex < 0)
-                        ChargeMainPlayer(Consts.Monopoly.StartMoneyAmount);
-
+                    ChargeMainPlayer(Consts.Monopoly.OnStartCrossedMoneyGiven);
                     Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex += BoardSize;
                 }
-            }
-            else
-            {
-                NumberOfDubletsInARow = 1;
             }
         }
 

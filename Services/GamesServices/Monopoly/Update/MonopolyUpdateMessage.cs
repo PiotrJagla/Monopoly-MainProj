@@ -15,7 +15,7 @@ namespace Services.GamesServices.Monopoly.Update
         public MoneyObligation MoneyBond { get; set; }
 
         public PlayerKey BankruptPlayer { get; set; }
-        public PlayerKey FromWhoData { get; set; }
+        public bool DidDubletAppear;
 
         public MonopolyUpdateMessage()
         {
@@ -23,7 +23,7 @@ namespace Services.GamesServices.Monopoly.Update
             CellsOwners = new List<MonopolyCellUpdate>();
             MoneyBond = new MoneyObligation();
             BankruptPlayer = PlayerKey.NoOne;
-            FromWhoData = PlayerKey.NoOne;
+            DidDubletAppear = false;
         }
     }
 }
