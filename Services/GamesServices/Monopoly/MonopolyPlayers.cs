@@ -260,8 +260,10 @@ namespace Services.GamesServices.Monopoly
                     NumberOfDubletsInARow = 0;
 
                     Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= 6;
+
                     if (Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex < 0)
                         ChargeMainPlayer(Consts.Monopoly.StartMoneyAmount);
+
                     Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex += BoardSize;
                 }
             }

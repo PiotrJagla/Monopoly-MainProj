@@ -78,11 +78,8 @@ public class MonopolyTestsTwoClients
                 break;
             }
         }
-        Clients[1].UpdateData(Clients[1].GetUpdatedData());
-        MonopolyUpdateMessage CheckBankrupcy = Clients[1].GetUpdatedData();
-        
 
-        Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Secound);
+        Assert.IsTrue(Clients[0].GetUpdatedData().PlayersData.FirstOrDefault(p => p.PlayerIndex == 1) == null);
     }
 
    [TestMethod]

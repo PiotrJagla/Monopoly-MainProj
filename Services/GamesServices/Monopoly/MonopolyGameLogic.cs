@@ -62,14 +62,18 @@ namespace Services.GamesServices.Monopoly
                 UpdatedData.CellsOwners = BoardService.MakeBoardUpdateData().GetCellsUpdateData();
                 UpdatedData.MoneyBond = BoardService.GetMoneyBond();
                 UpdatedData.BankruptPlayer = PlayersService.CheckForBankruptPlayer(ref UpdatedData);
+                UpdatedData.FromWhoData = PlayersService.GetMainPlayer().Key;
             }
             return UpdatedData;
         }
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
         {
-            PlayersService.UpdateData(UpdatedData);
-            BoardService.UpdateData(UpdatedData.CellsOwners);
+            if (UpdatedData.FromWhoData != PlayersService.GetMainPlayer().Key)
+            {
+                PlayersService.UpdateData(UpdatedData);
+                BoardService.UpdateData(UpdatedData.CellsOwners);
+            }
         }
 
         public void SellCell(string CellToSellDisplay)
