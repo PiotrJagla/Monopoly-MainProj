@@ -4,6 +4,7 @@ using Models.MultiplayerConnection;
 using MySqlX.XDevAPI;
 using Services.GamesServices.Monopoly;
 using Services.GamesServices.Monopoly.Board.Cells;
+using Services.GamesServices.Monopoly.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,6 +98,9 @@ namespace UnitTests.MonopolyTests
             for (int clientIndex = 0; clientIndex < Clients.Count; clientIndex++)
             {
                 MonopolyService CurrentClient = Clients[clientIndex];
+                if (CurrentClient.IsYourTurn() == false)
+                    continue;
+
                 ExecuteClientTestTurn(ref CurrentClient, turn);
                 BuyCell(turn, clientIndex, ref CurrentClient, BuyingOrder);
                 SellCell(turn, clientIndex, ref CurrentClient);
@@ -107,7 +111,9 @@ namespace UnitTests.MonopolyTests
         public static void ExecuteClientTestTurn(ref MonopolyService Client, int turn)
         {
             int CellIndex = (turn + 1) % Client.GetBoard().Count;
+
             Client.ExecutePlayerMove(1);
+
             if (Client.GetBoard()[CellIndex] is MonopolyIslandCell)
             {
                 Client.ExecutePlayerMove(1);
@@ -163,13 +169,14 @@ namespace UnitTests.MonopolyTests
 
         public static void UpdateOthers(ref List<MonopolyService> Clients, ref MonopolyService CurrentClient)
         {
+            MonopolyUpdateMessage UpdatedData = CurrentClient.GetUpdatedData();
             foreach (var client in Clients)
             {
-                if (CurrentClient != client)
-                {
-                    client.UpdateData(CurrentClient.GetUpdatedData());
-                }
-                
+                //if (CurrentClient != client)
+                //{
+                //    client.UpdateData(CurrentClient.GetUpdatedData());
+                //}
+                client.UpdateData(UpdatedData);
                 client.NextTurn();
             }
         }      

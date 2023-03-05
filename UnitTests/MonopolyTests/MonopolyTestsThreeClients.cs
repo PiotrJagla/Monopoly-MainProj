@@ -92,7 +92,6 @@ namespace UnitTests.MonopolyTests
 
             MonopolyUpdateMessage CheckBankrupcy = Clients[0].GetUpdatedData();
             
-            //Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Third);
             Assert.IsTrue(CheckBankrupcy.PlayersData.FirstOrDefault(p => p.PlayerIndex == 3) == null);
         }
 
@@ -113,9 +112,9 @@ namespace UnitTests.MonopolyTests
                 }
             }
 
-            MonopolyUpdateMessage CheckBankrupcy = Clients[1].GetUpdatedData();
+            MonopolyUpdateMessage CheckBankrupcy = Clients[0].GetUpdatedData();
 
-            Assert.IsTrue(CheckBankrupcy.BankruptPlayer == PlayerKey.Secound);
+            Assert.IsTrue(CheckBankrupcy.PlayersData.FirstOrDefault(p => p.PlayerIndex == 1) == null);
         }
 
         [TestMethod]
@@ -128,7 +127,7 @@ namespace UnitTests.MonopolyTests
 
                 ResetClients();
                 PlayersMoneyFlow = MonopolyDataPrepare.ExecuteTurnsNumber(i, ref Clients, BuyingOrderFirstWinner);
-
+                
                 if ((PlayersMoneyFlow[2].Income + Consts.Monopoly.StartMoneyAmount) < PlayersMoneyFlow[2].Loss &&
                     (PlayersMoneyFlow[1].Income + Consts.Monopoly.StartMoneyAmount) < PlayersMoneyFlow[1].Loss)
                 {

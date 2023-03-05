@@ -150,7 +150,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         private async Task PlayersMove()
         {
             //int Random = GetRandom.number.Next(4, 7);
-            MonopolyLogic.ExecutePlayerMove(6);
+            MonopolyLogic.ExecutePlayerMove(1);
             await ExecuteModal(ModalShow.AfterMove);
         }
 

@@ -69,11 +69,8 @@ namespace Services.GamesServices.Monopoly
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
         {
-            if (UpdatedData.FromWhoData != PlayersService.GetMainPlayer().Key)
-            {
-                PlayersService.UpdateData(UpdatedData);
-                BoardService.UpdateData(UpdatedData.CellsOwners);
-            }
+            PlayersService.UpdateData(UpdatedData);
+            BoardService.UpdateData(UpdatedData.CellsOwners);
         }
 
         public void SellCell(string CellToSellDisplay)
@@ -94,6 +91,7 @@ namespace Services.GamesServices.Monopoly
 
         public void ExecutePlayerMove(int MoveAmount)
         {
+
             if (MoveQuantity > 0)
                 MoveAmount = MoveQuantity;
 
@@ -111,7 +109,7 @@ namespace Services.GamesServices.Monopoly
             OnStartCellCrossed(amount);
             MainPlayer.OnCellIndex = (MainPlayer.OnCellIndex + amount) % BoardService.GetBoard().Count;
         }
-
+        
         private void OnStartCellCrossed(int MoveAmount)
         {
             if (BoardService.DidCrossedStartCell(MoveAmount, PlayersService.GetMainPlayer().OnCellIndex))

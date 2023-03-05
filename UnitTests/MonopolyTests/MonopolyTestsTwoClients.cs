@@ -411,8 +411,6 @@ public class MonopolyTestsTwoClients
     [TestMethod]
     public void PositionAfterThirdDublet_TestPayingStayCost()
     {
-        
-
         for (int i = 1; ; i++)
         {
             Clients[1].ExecutePlayerMove(1);
