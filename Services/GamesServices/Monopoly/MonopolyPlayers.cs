@@ -297,7 +297,7 @@ namespace Services.GamesServices.Monopoly
 
         public bool IsThisThirdDublet(int MoveAmount)
         {
-            return MoveAmount == 6 && (NumberOfDubletsInARow + 1) == 3; 
+            return MoveAmount == 6 && (NumberOfDubletsInARow) == 3; 
         }
 
         public bool IsDubletRolledBySomeone()

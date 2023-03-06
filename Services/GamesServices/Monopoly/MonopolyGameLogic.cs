@@ -22,9 +22,11 @@ namespace Services.GamesServices.Monopoly
         private MonopolyBoard BoardService;
         private MonopolyPlayers PlayersService;
         private int MoveQuantity;
+        private bool IsThisRoolThirdDublet;
 
         public MonopolyGameLogic()
         {
+            IsThisRoolThirdDublet = false;
             MoveQuantity = 0;
             BoardService = new MonopolyBoard();
             PlayersService = new MonopolyPlayers(BoardService.GetBoard().Count); 
@@ -95,12 +97,12 @@ namespace Services.GamesServices.Monopoly
             if (MoveQuantity > 0)
                 MoveAmount = MoveQuantity;
 
-            bool isTrue = PlayersService.IsThisThirdDublet(MoveAmount);
+            IsThisRoolThirdDublet = PlayersService.IsThisThirdDublet(MoveAmount);
 
             Move(MoveAmount);
             CheckEvents(MoveAmount);
 
-            if (isTrue == false)
+            if (IsThisRoolThirdDublet == false)
                 BoardService.MakeMoneyBond(PlayersService.GetMainPlayer());
             else
                 BoardService.ResetBond();
@@ -148,6 +150,9 @@ namespace Services.GamesServices.Monopoly
 
         public MonopolyModalParameters GetModalParameters()
         {
+            if (IsThisRoolThirdDublet)
+                return MonopolyModalFactory.NoModalParameters();
+
             return BoardService.GetCellModalParameters(PlayersService.GetMainPlayer());
         }
 
