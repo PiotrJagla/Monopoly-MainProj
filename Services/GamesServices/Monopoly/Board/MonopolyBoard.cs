@@ -116,6 +116,11 @@ namespace Services.GamesServices.Monopoly.Board
             return MoneyBondToPay;
         }
 
+        public void ResetBond()
+        {
+            MoneyBondToPay = new MoneyObligation();
+        }
+
         public void MakeMoneyBond(in MonopolyPlayer MainPlayer)
         {
             try
@@ -126,11 +131,6 @@ namespace Services.GamesServices.Monopoly.Board
             {
                 MoneyBondToPay = new MoneyObligation();
             }
-        }
-
-        public void ResetBond()
-        {
-            MoneyBondToPay = new MoneyObligation();
         }
 
         private MoneyObligation CalculateBond(in MonopolyPlayer MainPlayer) 
@@ -153,11 +153,6 @@ namespace Services.GamesServices.Monopoly.Board
             }
         }
 
-        public void EscapeFromIsland()
-        {
-            MainPlayerTurnsOnIslandRemaining.Value = 0;
-        }
-
         public bool IsAbleToMove()
         {
             if (MainPlayerTurnsOnIslandRemaining.Value > 1)
@@ -171,21 +166,7 @@ namespace Services.GamesServices.Monopoly.Board
             }
 
             return true;
-        }
-
-        public void CheckIfSteppedOnIsland(MonopolyPlayer MainPlayer)
-        {
-            if (WillStayOnIsland(MainPlayer))
-            {
-                MainPlayerTurnsOnIslandRemaining.Value = 3;
-            }
-        }
-
-        private bool WillStayOnIsland(MonopolyPlayer MainPlayer)
-        {
-            return Board[MainPlayer.OnCellIndex] is MonopolyIslandCell &&
-                   MainPlayerTurnsOnIslandRemaining.Value == 0;
-        }
+        } 
 
         public int DistanceToCellFrom(int MainPlayerPos, string DestinationDisplay)
         {
@@ -217,6 +198,20 @@ namespace Services.GamesServices.Monopoly.Board
             return BuyCost;
         }
 
+        public void CheckIfSteppedOnIsland(MonopolyPlayer MainPlayer)
+        {
+            if (WillStayOnIsland(MainPlayer))
+            {
+                MainPlayerTurnsOnIslandRemaining.Value = 3;
+            }
+        }
+
+        private bool WillStayOnIsland(MonopolyPlayer MainPlayer)
+        {
+            return Board[MainPlayer.OnCellIndex] is MonopolyIslandCell &&
+                   MainPlayerTurnsOnIslandRemaining.Value == 0;
+        }
+
         public bool DidCrossedStartCell(int MoveAmount, int MainPlayerPos)
         {
             bool Result = (MainPlayerPos + MoveAmount) >= Board.Count;
@@ -225,6 +220,11 @@ namespace Services.GamesServices.Monopoly.Board
                 IsThisFirstLap = false;
 
             return Result;
+        }
+
+        public void EscapeFromIsland()
+        {
+            MainPlayerTurnsOnIslandRemaining.Value = 0;
         }
     }
 }

@@ -294,7 +294,7 @@ public class MonopolyTestsTwoClients
         Assert.IsTrue(Clients[0].IsYourTurn());
         Assert.IsTrue(Clients[1].IsYourTurn() == false);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
 
@@ -308,13 +308,13 @@ public class MonopolyTestsTwoClients
         Assert.IsTrue(Clients[0].IsYourTurn());
         Assert.IsTrue(Clients[1].IsYourTurn() == false);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Assert.IsTrue(Clients[0].IsYourTurn() == false);
@@ -324,13 +324,13 @@ public class MonopolyTestsTwoClients
     [TestMethod]
     public void PositionAfterThirdDublet_ThirdThowIsDublet()
     {
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         int ExpectedPosition = 12;
@@ -341,10 +341,10 @@ public class MonopolyTestsTwoClients
     [TestMethod]
     public void PositionAfterThirdDublet_ThirdThowIsntDublet()
     {
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(1);
@@ -358,19 +358,19 @@ public class MonopolyTestsTwoClients
     [TestMethod]
     public void PositionAfterThirdDublet_BreakBetweenDublets()
     {
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
-        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
-
-        Clients[0].ExecutePlayerMove(1);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         Clients[0].ExecutePlayerMove(1);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(1);
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
+
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
         int ExpectedPosition = 20 % Clients[0].GetBoard().Count;
@@ -385,11 +385,11 @@ public class MonopolyTestsTwoClients
         {
             Clients[1].ExecutePlayerMove(1);
 
-            if (Clients[1].GetBoard()[(i + 6*2) % Clients[1].GetBoard().Count] is MonopolyNationCell)
+            if (Clients[1].GetBoard()[(i + Consts.Monopoly.Dublet * 2) % Clients[1].GetBoard().Count] is MonopolyNationCell)
                 break;
         }
 
-        Clients[1].ExecutePlayerMove(12);
+        Clients[1].ExecutePlayerMove(Consts.Monopoly.Dublet * 2);
         Clients[1].ModalResponse(Consts.Monopoly.Field);
        
         Clients[0].UpdateData(Clients[1].GetUpdatedData());
@@ -402,17 +402,17 @@ public class MonopolyTestsTwoClients
         {
             Clients[0].ExecutePlayerMove(1);
 
-            if (Clients[0].GetBoard()[(i + 6 * 2) % Clients[0].GetBoard().Count] is MonopolyNationCell)
+            if (Clients[0].GetBoard()[(i + Consts.Monopoly.Dublet*2) % Clients[0].GetBoard().Count] is MonopolyNationCell)
                 break;
         }
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
-        Clients[0].ExecutePlayerMove(6);
+        Clients[0].ExecutePlayerMove(Consts.Monopoly.Dublet);
         MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
 
 

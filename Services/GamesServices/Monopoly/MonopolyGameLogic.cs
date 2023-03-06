@@ -29,7 +29,7 @@ namespace Services.GamesServices.Monopoly
             IsThisRoolThirdDublet = false;
             MoveQuantity = 0;
             BoardService = new MonopolyBoard();
-            PlayersService = new MonopolyPlayers(BoardService.GetBoard().Count); 
+            PlayersService = new MonopolyPlayers(); 
         }
 
         public void StartGame(List<Player> PlayersInGame)
@@ -130,7 +130,7 @@ namespace Services.GamesServices.Monopoly
         private void CheckEvents(int MoveAmount)
         {
             BoardService.CheckIfSteppedOnIsland(PlayersService.GetMainPlayer());
-            PlayersService.CheckForDublet(MoveAmount, (int)PlayersService.GetMainPlayer().Key);
+            PlayersService.CheckForDublet(MoveAmount, BoardService.GetBoard().Count);
         }
 
         public void SetMainPlayerIndex(int index)

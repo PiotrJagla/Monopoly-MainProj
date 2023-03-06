@@ -15,7 +15,7 @@ namespace Services.GamesServices.Monopoly.Board.ModalData
         public ModalResponseUpdate()
         {
             BoardService = new MonopolyBoard();
-            PlayersService = new MonopolyPlayers(BoardService.GetBoard().Count);
+            PlayersService = new MonopolyPlayers();
             MoveQuantity = 0;
         }
     }

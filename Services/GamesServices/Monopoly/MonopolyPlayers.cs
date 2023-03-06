@@ -20,15 +20,13 @@ namespace Services.GamesServices.Monopoly
         private List<MonopolyPlayer> Players;
         private SpecialIndexes PlayersSpecialIndexes;
         private int NumberOfDubletsInARow;
-        private int BoardSize;
         private bool IsDubletRolled;
         
 
-        public MonopolyPlayers(int BoardSize)
+        public MonopolyPlayers()
         {
             IsDubletRolled = false;
             NumberOfDubletsInARow = 1;
-            this.BoardSize = BoardSize;
             Players = new List<MonopolyPlayer>();
             PlayersSpecialIndexes = new SpecialIndexes();
         }
@@ -142,28 +140,18 @@ namespace Services.GamesServices.Monopoly
 
         public void UpdateData(MonopolyUpdateMessage UpdatedData)
         {
-            UpdatePlayersData(UpdatedData.PlayersData, UpdatedData.DidDubletAppear);
+            IsDubletRolled = UpdatedData.DidDubletAppear;
+            UpdatePlayersData(UpdatedData.PlayersData);
             UpdateMoneyObligation(UpdatedData.MoneyBond);
             UpdateBankruptPlayer(UpdatedData.BankruptPlayer);
         }
 
-        private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData, bool DidDubletAppear)
-        {
-            IsDubletRolled = DidDubletAppear;
-            
+        private void UpdatePlayersData(List<PlayerUpdateData> PlayersUpdatedData)
+        {            
             for (int i = 0; i < PlayersUpdatedData.Count; i++)
             {
                 if (Players[PlayersUpdatedData[i].PlayerIndex] != null)
                 {
-                    if (PlayersUpdatedData[i].PlayerIndex != PlayersSpecialIndexes.MainPlayer)
-                    {
-                        int PreviousPos = Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex;
-                        int CurrentPos = PlayersUpdatedData[i].Position;
-                        int MoveAmount = CurrentPos - PreviousPos;
-                        //CheckForDublet(MoveAmount, PlayersUpdatedData[i].PlayerIndex);
-                    }
-
-
                     Players[PlayersUpdatedData[i].PlayerIndex].OnCellIndex = PlayersUpdatedData[i].Position;
                     Players[PlayersUpdatedData[i].PlayerIndex].MoneyOwned = PlayersUpdatedData[i].Money;
                 }
@@ -197,34 +185,61 @@ namespace Services.GamesServices.Monopoly
 
             if (BankruptPlayer == Players[PlayersSpecialIndexes.MainPlayer].Key)
                 PlayersSpecialIndexes.MainPlayer = -1;
+        }        
+
+        public void CheckForDublet(int MoveAmount, int BoardSize)
+        {
+            if(MoveAmount == Consts.Monopoly.Dublet)
+            {
+                DubletThrown(BoardSize);
+            }
+            else
+            {                
+                NumberOfDubletsInARow = 1;
+                IsDubletRolled = false;
+            }
         }
 
-        public void ChargeMainPlayer(int ChargeAmount)
+        private void DubletThrown(int BoardSize)
         {
-            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= ChargeAmount;
+            if (NumberOfDubletsInARow < 3)
+            {
+                NumberOfDubletsInARow++;
+                IsDubletRolled = true;
+            }
+            else if (NumberOfDubletsInARow == 3)
+            {
+                ThirdDublet(BoardSize);
+            }
         }
 
-        public void GiveMainPlayerMoney(int MoneyToGive)
+        private void ThirdDublet(int BoardSize)
         {
-            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned += MoneyToGive;
+            IsDubletRolled = false;
+
+            NumberOfDubletsInARow = 1;
+
+            Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= Consts.Monopoly.Dublet;
+            CheckStartCellCrossed(BoardSize);
         }
 
-        public PlayerKey WhoWon()
+        private void CheckStartCellCrossed(int BoardSize)
         {
-            if (Players.FindAll(p => p != null).Count == 1)
-                return Players.FirstOrDefault(p => p != null).Key;
-
-            return PlayerKey.NoOne;
+            if (Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex < 0)
+            {
+                ChargeMainPlayer(Consts.Monopoly.OnStartCrossedMoneyGiven);
+                Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex += BoardSize;
+            }
         }
 
-        public bool IsAbleToPayForEscapingFromIsland()
+        public bool IsThisThirdDublet(int MoveAmount)
         {
-            return Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned >= Consts.Monopoly.IslandEscapeCost;
+            return MoveAmount == Consts.Monopoly.Dublet && (NumberOfDubletsInARow) == 3; 
         }
 
-        public bool IsMainPlayerTurn()
-        {
-            return PlayersSpecialIndexes.WhosTurn == PlayersSpecialIndexes.MainPlayer;
+        public bool IsDubletRolledBySomeone()
+        { 
+            return IsDubletRolled;
         }
 
         public void NextTurn()
@@ -237,73 +252,30 @@ namespace Services.GamesServices.Monopoly
                     PlayersSpecialIndexes.WhosTurn = (++PlayersSpecialIndexes.WhosTurn) % Players.Count;
 
             }
-            
+
         }
 
-        private void PreviousTurn()
+        public void ChargeMainPlayer(int ChargeAmount)
         {
-            do
-            {
-                PlayersSpecialIndexes.WhosTurn = GetPreviousTurn(PlayersSpecialIndexes.WhosTurn);
-            } while (Players[PlayersSpecialIndexes.WhosTurn] == null);
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned -= ChargeAmount;
         }
 
-        private int GetPreviousTurn(int CurrentTurn)
+        public void GiveMainPlayerMoney(int MoneyToGive)
         {
-            int PreviousTurn = CurrentTurn;
-            PreviousTurn--;
-            PreviousTurn = (PreviousTurn+Players.Count)% Players.Count;
-            return PreviousTurn;
+            Players[PlayersSpecialIndexes.MainPlayer].MoneyOwned += MoneyToGive;
         }
 
-        public void CheckForDublet(int MoveAmount, int WhoThrownDubletIndex)
+        public bool IsMainPlayerTurn()
         {
-            if(MoveAmount == 6)
-            {
-                DubletThrown();
-            }
-            else if (WhoThrownDubletIndex == PlayersSpecialIndexes.MainPlayer)
-            {                
-                NumberOfDubletsInARow = 1;
-                IsDubletRolled = false;
-                
-            }
+            return PlayersSpecialIndexes.WhosTurn == PlayersSpecialIndexes.MainPlayer;
         }
 
-        private void DubletThrown()
+        public PlayerKey WhoWon()
         {
-            if (NumberOfDubletsInARow < 3)
-            {
-                //PreviousTurn();
-                NumberOfDubletsInARow++;
-                IsDubletRolled = true;
-                
-            }
-            else if (NumberOfDubletsInARow == 3)
-            {
-                IsDubletRolled = false;
-                
-                NumberOfDubletsInARow = 1;
+            if (Players.FindAll(p => p != null).Count == 1)
+                return Players.FirstOrDefault(p => p != null).Key;
 
-                Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex -= 6;
-
-                if (Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex < 0)
-                {
-                    ChargeMainPlayer(Consts.Monopoly.OnStartCrossedMoneyGiven);
-                    Players[PlayersSpecialIndexes.WhosTurn].OnCellIndex += BoardSize;
-                }
-            }
-        }
-
-        public bool IsThisThirdDublet(int MoveAmount)
-        {
-            return MoveAmount == 6 && (NumberOfDubletsInARow) == 3; 
-        }
-
-        public bool IsDubletRolledBySomeone()
-        {
-            
-            return IsDubletRolled;
+            return PlayerKey.NoOne;
         }
 
     }

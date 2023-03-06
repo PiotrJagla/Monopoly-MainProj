@@ -71,7 +71,7 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             }
             else if (Data.ModalResponse == Consts.Monopoly.PayToEscapeIsland)
             {
-                if (UpdatedData.PlayersService.IsAbleToPayForEscapingFromIsland())
+                if (UpdatedData.PlayersService.GetMainPlayer().MoneyOwned >= Consts.Monopoly.IslandEscapeCost)
                 {
                     UpdatedData.PlayersService.ChargeMainPlayer(Consts.Monopoly.IslandEscapeCost);
                     UpdatedData.BoardService.EscapeFromIsland();
