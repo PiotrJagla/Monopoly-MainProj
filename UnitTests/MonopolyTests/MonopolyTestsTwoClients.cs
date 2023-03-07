@@ -431,4 +431,20 @@ public class MonopolyTestsTwoClients
         Assert.IsTrue(ExpectedMoney == ActualMoney);
 
     }
+
+    [TestMethod]
+    public void Repurchasing_NoRepurchasingTest()
+    {
+        Clients[0].ExecutePlayerMove(1);
+        Clients[0].ModalResponse(Consts.Monopoly.TwoHouses);
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 0);
+
+        Clients[1].ExecutePlayerMove(1);
+        Clients[1].ModalResponse("No");
+
+        MonopolyDataPrepare.UpdateOthers(ref Clients, 1);
+
+        Assert.IsTrue(Clients[1].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.First);
+        Assert.IsTrue(Clients[0].GetBoard()[1].GetBuyingBehavior().GetOwner() == PlayerKey.First);
+    }
 }

@@ -9,6 +9,7 @@ using Enums.Monopoly;
 using Services.GamesServices.Monopoly.Board.Cells;
 using Models.Monopoly;
 using System.Runtime.Serialization.Formatters;
+using Services.GamesServices.Monopoly.Board.ModalData;
 
 namespace UnitTests.MonopolyTests
 {
@@ -149,7 +150,9 @@ namespace UnitTests.MonopolyTests
             MonopolyCell? CellToSell = Client.GetBoard().FirstOrDefault(
                 b => b.GetName() == BeachCells[1].GetName()
             );
-            Client.SellCell(CellToSell.OnDisplay());
+            
+            string ModalResponse = MonopolyModalFactory.GetCellSellingString(CellToSell);
+            Client.ModalResponse(ModalResponse);
             int ActualValue = Client.GetBoard().FirstOrDefault(
                 b => b.GetName() == BeachCells[0].GetName()
             ).GetBuyingBehavior().GetCosts().Stay;
@@ -180,7 +183,8 @@ namespace UnitTests.MonopolyTests
             MonopolyCell? CellToSell = Client.GetBoard().FirstOrDefault(
                 b => b.GetName() == BeachCells[2].GetName()
             );
-            Client.SellCell(CellToSell.OnDisplay());
+            string ModalResponse = MonopolyModalFactory.GetCellSellingString(CellToSell);
+            Client.ModalResponse(ModalResponse);
 
             int ExpectedValue = (int)(SecoundBeachCellStayCost * Consts.Monopoly.BeachesOwnedMultiplier[2]);
 
@@ -352,8 +356,10 @@ namespace UnitTests.MonopolyTests
             MonopolyDataPrepare.GoTo<MonopolyNationCell>(ref Client, 10, Client.GetBoard().Count, true);
 
             MonopolyModalParameters ModalParameters = Client.GetModalParameters();
+            
 
             Assert.IsTrue(Client.GetBoard()[Client.GetUpdatedData().PlayersData[0].Position] is MonopolyNationCell);
+            Assert.IsTrue(Client.GetUpdatedData().PlayersData[0].Money >= 0);
             Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.Field) == -1);
             Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.OneHouse) == -1);
             Assert.IsTrue(ModalParameters.Parameters.ButtonsContent.IndexOf(Consts.Monopoly.TwoHouses) == -1);

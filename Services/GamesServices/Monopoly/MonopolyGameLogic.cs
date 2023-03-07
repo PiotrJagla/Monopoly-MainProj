@@ -75,12 +75,6 @@ namespace Services.GamesServices.Monopoly
             BoardService.UpdateData(UpdatedData.CellsOwners);
         }
 
-        public void SellCell(string CellToSellDisplay)
-        {
-            int BuyCost = BoardService.SellCell(CellToSellDisplay);
-            PlayersService.GiveMainPlayerMoney(BuyCost);
-        }
-
         public bool IsYourTurn()
         {
             return PlayersService.IsMainPlayerTurn();

@@ -145,7 +145,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             try
             {
                 await PlayersMove();
-                //await CheckForBanckrupcy();
                 await BrodcastUpdatedInformations();
             }
             catch
@@ -155,8 +154,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
         }
         private async Task PlayersMove()
         {
-            //int Random = GetRandom.number.Next(4, 7);
-            MonopolyLogic.ExecutePlayerMove(6);
+            int RandomMove = GetRandom.number.Next(1, 7);
+            MonopolyLogic.ExecutePlayerMove(RandomMove);
             await ExecuteModal(ModalShow.AfterMove);
 
             while (MonopolyLogic.DontHaveMoneyToPay() == true &&
@@ -164,38 +163,6 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             {
                 await ExecuteModal(ModalShow.AfterMove);
             }
-        }
-
-        private async Task CheckForBanckrupcy()
-        {
-            while (MonopolyLogic.DontHaveMoneyToPay() == true &&
-                MonopolyLogic.GetMainPlayerCells().Count != 0)
-            {
-                MonopolyLogic.SellCell(await ChooseCellToSell());
-            }
-        }
-
-        private async Task<string> ChooseCellToSell()
-        {
-            ModalParameters parameters = new ModalParameters();
-            parameters.Add(
-                nameof(PayOffDebtModal.DebtAmount),
-                MonopolyLogic.GetDebtAmount()
-            );
-            parameters.Add(
-                nameof(PayOffDebtModal.PossibleCellsToSell),
-                MonopolyLogic.GetMainPlayerCells()
-            );
-
-            var ModalResponse = ModalService.Show<PayOffDebtModal>("Passing Data", parameters);
-            var Response = await ModalResponse.Result;
-
-            if (Response.Confirmed)
-            {
-                return Response.Data.ToString();
-            }
-
-            return "No More cells to sell";
         }
 
         private async Task BrodcastUpdatedInformations()

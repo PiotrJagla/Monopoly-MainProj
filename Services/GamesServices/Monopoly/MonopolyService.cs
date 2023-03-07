@@ -25,7 +25,6 @@ namespace Services.GamesServices.Monopoly
         bool IsYourTurn();
         void NextTurn();
         bool DontHaveMoneyToPay();
-        void SellCell(string CellToSellDisplay);
         PlayerKey WhoWon();
         MonopolyModalParameters GetModalParameters();
         void ModalResponse(string StringResponse = "");

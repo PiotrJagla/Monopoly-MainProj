@@ -4,6 +4,7 @@ using Models.MultiplayerConnection;
 using MySqlX.XDevAPI;
 using Services.GamesServices.Monopoly;
 using Services.GamesServices.Monopoly.Board.Cells;
+using Services.GamesServices.Monopoly.Board.ModalData;
 using Services.GamesServices.Monopoly.Update;
 using System;
 using System.Collections.Generic;
@@ -151,10 +152,9 @@ namespace UnitTests.MonopolyTests
                 int CellToSellIndex = CurrentClient.GetBoard().IndexOf(CurrentClient.GetMainPlayerCells()[0]);
 
                 PlayersMoneyFlow[clientIndex].Income += CurrentClient.GetBoard()[CellToSellIndex].GetBuyingBehavior().GetCosts().Buy;
-                string ModalResponse = $"{Consts.Monopoly.SellCellPrefix}{CurrentClient.GetBoard()[CellToSellIndex].OnDisplay()}";
+                MonopolyCell CellToSell = CurrentClient.GetBoard()[CellToSellIndex];
+                string ModalResponse = MonopolyModalFactory.GetCellSellingString(CellToSell);
                 CurrentClient.ModalResponse(ModalResponse);
-
-                //CurrentClient.SellCell(CurrentClient.GetBoard()[CellToSellIndex].OnDisplay());
             }
         }
 
@@ -243,9 +243,8 @@ namespace UnitTests.MonopolyTests
         public static void BuyCell(ref MonopolyService Client)
         {
             MonopolyModalParameters parameters = Client.GetModalParameters();
-            Client.ModalResponse(
-                FindStringBuyingCellFrom(parameters.Parameters.ButtonsContent)
-            );
+            if (parameters.Parameters.ButtonsContent.Contains(Consts.Monopoly.TwoHouses))
+                Client.ModalResponse(Consts.Monopoly.TwoHouses);
         }
 
        

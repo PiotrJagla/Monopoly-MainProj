@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Enums.Monopoly;
+using Models;
 using Models.Monopoly;
 using Services.GamesServices.Monopoly.Board.Behaviours.Buying;
 using Services.GamesServices.Monopoly.Board.ModalData;
@@ -30,7 +31,13 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
-            return MonopolyModalFactory.NoModalParameters();
+            StringModalParameters parameters = new StringModalParameters();
+
+            parameters.Title = $"You have to pay {Consts.Monopoly.TaxAmount} tax";
+
+            parameters.ButtonsContent.Add("Pay");
+
+            return new MonopolyModalParameters(parameters, ModalShow.AfterMove);
         }
 
         public string GetName()
