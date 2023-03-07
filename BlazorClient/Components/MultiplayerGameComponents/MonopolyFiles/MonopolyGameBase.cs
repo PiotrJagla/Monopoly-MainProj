@@ -104,7 +104,8 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
             if (MonopolyLogic.IsYourTurn() == true)
             {
-                MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();
+                MonopolyModalParameters ModalParameters = MonopolyLogic.GetModalParameters();                   
+
                 if (ModalParameters.WhenShowModal != ModalShow.Never &&
                     ModalParameters.WhenShowModal == When)
                 {
@@ -144,7 +145,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             try
             {
                 await PlayersMove();
-                await CheckForBanckrupcy();
+                //await CheckForBanckrupcy();
                 await BrodcastUpdatedInformations();
             }
             catch
@@ -157,6 +158,12 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             //int Random = GetRandom.number.Next(4, 7);
             MonopolyLogic.ExecutePlayerMove(6);
             await ExecuteModal(ModalShow.AfterMove);
+
+            while (MonopolyLogic.DontHaveMoneyToPay() == true &&
+                MonopolyLogic.GetMainPlayerCells().Count != 0)
+            {
+                await ExecuteModal(ModalShow.AfterMove);
+            }
         }
 
         private async Task CheckForBanckrupcy()

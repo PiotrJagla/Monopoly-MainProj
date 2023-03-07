@@ -45,6 +45,27 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 
         public MonopolyModalParameters GetModalParameters(DataToGetModalParameters Data)
         {
+            if (Data.MainPlayer.MoneyOwned < BuyingBehaviour.GetCosts().Stay &&
+                BuyingBehaviour.GetOwner() != PlayerKey.NoOne && BuyingBehaviour.GetOwner() != Data.MainPlayer.Key)
+            {
+                StringModalParameters Parameterss = new StringModalParameters();
+                int Moneyhh = BuyingBehaviour.GetCosts().Stay - Data.MainPlayer.MoneyOwned;
+                Parameterss.Title = $"What Cell Do You Wanna sell |You dont have {Moneyhh}";
+
+                foreach (var cell in Data.Board)
+                {
+                    if (cell.GetBuyingBehavior().GetOwner() == Data.MainPlayer.Key)
+                    {
+                        Parameterss.ButtonsContent.Add($"{Consts.Monopoly.SellCellPrefix}{cell.OnDisplay()}");
+                    }
+                }
+
+                if (Parameterss.ButtonsContent.Count == 0)
+                    return MonopolyModalFactory.NoModalParameters();
+
+                return new MonopolyModalParameters(Parameterss, ModalShow.AfterMove);
+            }
+
             if (Data.Board[Data.MainPlayer.OnCellIndex].GetBuyingBehavior().GetOwner() != PlayerKey.NoOne)
                 return MonopolyModalFactory.NoModalParameters();
 
@@ -93,6 +114,14 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             ModalResponseUpdate UpdatedData = new ModalResponseUpdate();
             UpdatedData.BoardService = Data.BoardService;
             UpdatedData.PlayersService = Data.PlayersService;
+
+            if (Data.ModalResponse.Contains(Consts.Monopoly.SellCellPrefix))
+            {
+                string CellDisplay = Data.ModalResponse.Remove(0, Consts.Monopoly.SellCellPrefix.Length);
+                int ReturnAmount = UpdatedData.BoardService.SellCell(CellDisplay);
+                UpdatedData.PlayersService.GiveMainPlayerMoney(ReturnAmount);
+                return UpdatedData;
+            }
 
             MonopolyPlayer MainPlayer = UpdatedData.PlayersService.GetMainPlayer();
             int BuyCost = UpdatedData.BoardService.BuyCell(MainPlayer, Data.ModalResponse);

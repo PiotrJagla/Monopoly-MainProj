@@ -151,8 +151,10 @@ namespace UnitTests.MonopolyTests
                 int CellToSellIndex = CurrentClient.GetBoard().IndexOf(CurrentClient.GetMainPlayerCells()[0]);
 
                 PlayersMoneyFlow[clientIndex].Income += CurrentClient.GetBoard()[CellToSellIndex].GetBuyingBehavior().GetCosts().Buy;
+                string ModalResponse = $"{Consts.Monopoly.SellCellPrefix}{CurrentClient.GetBoard()[CellToSellIndex].OnDisplay()}";
+                CurrentClient.ModalResponse(ModalResponse);
 
-                CurrentClient.SellCell(CurrentClient.GetBoard()[CellToSellIndex].OnDisplay());
+                //CurrentClient.SellCell(CurrentClient.GetBoard()[CellToSellIndex].OnDisplay());
             }
         }
 

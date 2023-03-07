@@ -73,6 +73,7 @@ namespace Models
 
             public static readonly string PayTaxRolled = "Pay Tax";
             public static readonly string NewChampionshipModalPrefix = "Championship On:";
+            public static readonly string SellCellPrefix = "Sell this:";
 
             public static readonly int Dublet = 6;
 
