@@ -19,11 +19,11 @@ namespace Services.GamesServices.Monopoly.Board
         private List<MonopolyCell> Board;
         private Int MainPlayerTurnsOnIslandRemaining;
         private bool IsThisFirstLap;
-        private MoneyObligation MoneyBondToPay;
+        private MoneyObligation MoneyBondToPayOnUpdate;
 
         public MonopolyBoard()
         {
-            MoneyBondToPay = new MoneyObligation();
+            MoneyBondToPayOnUpdate = new MoneyObligation();
             Board = new List<MonopolyCell>();
             MainPlayerTurnsOnIslandRemaining = new Int();
             Board = MonopolyBoardFactory.MakeBoard(ref MainPlayerTurnsOnIslandRemaining);
@@ -113,23 +113,23 @@ namespace Services.GamesServices.Monopoly.Board
 
         public MoneyObligation GetMoneyBond()
         {
-            return MoneyBondToPay;
+            return MoneyBondToPayOnUpdate;
         }
 
         public void ResetBond()
         {
-            MoneyBondToPay = new MoneyObligation();
+            MoneyBondToPayOnUpdate = new MoneyObligation();
         }
 
         public void MakeMoneyBond(in MonopolyPlayer MainPlayer)
         {
             try
             {
-                MoneyBondToPay =  CalculateBond(MainPlayer);
+                MoneyBondToPayOnUpdate =  CalculateBond(MainPlayer);
             }
             catch
             {
-                MoneyBondToPay = new MoneyObligation();
+                MoneyBondToPayOnUpdate = new MoneyObligation();
             }
         }
 

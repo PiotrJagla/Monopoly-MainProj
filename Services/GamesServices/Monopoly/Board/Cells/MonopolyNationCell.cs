@@ -85,7 +85,7 @@ public class MonopolyNationCell : MonopolyCell
             if (IsAbleToBuy(building, Data))
             {
                 string ButtonToAdd = building;
-                Parameters.Title += $"|{building} Buy: {BuildingCosts[building].Buy} Stay: {BuildingCosts[building].Stay}|";
+                Parameters.Title += $" |{building} Buy: {BuildingCosts[building].Buy} Stay: {BuildingCosts[building].Stay}| ";
                 
                 Parameters.ButtonsContent.Add(ButtonToAdd);
             }

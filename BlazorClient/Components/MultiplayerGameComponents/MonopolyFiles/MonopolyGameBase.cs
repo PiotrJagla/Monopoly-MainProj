@@ -132,7 +132,11 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
 
         protected async Task Ready()
         {
-            await MonopolyHubConn.SendAsync("UserReady");
+            if (RoomPlayersNumber == 1)
+                Messages.Add("There has to be minimum 2 players to be ready");
+
+            if (RoomPlayersNumber > 1)
+                await MonopolyHubConn.SendAsync("UserReady");
         }
 
         protected async Task Move()
