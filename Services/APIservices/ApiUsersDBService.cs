@@ -24,9 +24,9 @@ namespace Services.APIservices
             return IsUserLogged;
         }
 
-        public async Task<bool> IsUserLogged(UserLoginData userLoginData)
+        public async Task<bool> IsUserAlreadyLogged(UserLoginData userLoginData)
         {
-            var IsUserLoggedResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/IsUserLogged", userLoginData);
+            var IsUserLoggedResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/IsUserAlreadyLogged", userLoginData);
             var IsUserLogged = await IsUserLoggedResponse.Content.ReadFromJsonAsync<bool>();
             return IsUserLogged;
         }

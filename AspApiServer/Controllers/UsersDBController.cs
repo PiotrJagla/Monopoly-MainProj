@@ -24,19 +24,14 @@ namespace ServerSide.Controllers
             return Ok(result);
         }
 
-        [HttpPost("IsUserLogged")]
-        public async Task<ActionResult<bool>> IsUserLogged(UserLoginData data)
+        [HttpPost("IsUserAlreadyLogged")]
+        public async Task<ActionResult<bool>> IsUserAlreadyLogged(UserLoginData data)
         {
             bool Result = false;
             if(AllLoggedUsers.Contains(data.Name) == false)
             {
                 AllLoggedUsers.Add(data.Name);
                 Result = true;
-            }
-
-            foreach (var item in AllLoggedUsers)
-            {
-                Console.WriteLine(item);
             }
 
             return Ok(Result);

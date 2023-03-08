@@ -15,11 +15,13 @@ namespace ServerSide.Hubs
 
         public void OnUserConnected(string userName)
         {
+            Console.WriteLine("USER CONNECTED");
             PlayersGameConnection.addOnlinePlayer(userName,Context.ConnectionId);
         }
 
         public void FindEnemyForUser(string userName)
         {
+            Console.WriteLine("FINDING ENEMY");
             bool isEnemyFound = PlayersGameConnection.findEnemy(userName);
             Tuple<Player, Player> twoPlayersRoom = PlayersGameConnection.findGameRoomByOneName(userName);
             if (twoPlayersRoom is not null)

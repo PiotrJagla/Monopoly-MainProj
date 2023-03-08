@@ -21,18 +21,16 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
         public string LoggedUserName { get; set; }
 
         private HubConnection BattleshipHubConn;
-
-        public string UserMessage { get; private set; }
-
+        public List<string> Messages { get; set; }
         public bool IsEnemyFound { get; set; }
         public bool IsYourTurn { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            UserMessage = "";
+            Messages = new List<string>();
             BattleshipHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}{Consts.HubUrl.Battleship}")).WithAutomaticReconnect().Build();
-            await BattleshipHubConn.StartAsync();
             OnMessageRecieve();
+            await BattleshipHubConn.StartAsync();
         }
 
         private void OnMessageRecieve()
@@ -86,7 +84,7 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
             if (BattleshipLogic.IsGameOver())
             {
                 IsYourTurn = false;
-                UserMessage = "Game Has Ended!";
+                Messages.Add("Game Has Ended!");
             }
         }
 
@@ -100,10 +98,10 @@ namespace BlazorClient.Components.MultiplayerGameComponents.BattleshipComponentF
             {
                 await BattleshipHubConn.SendAsync("OnUserConnected", LoggedUserName);
                 await BattleshipHubConn.SendAsync("FindEnemyForUser", LoggedUserName);
-                UserMessage = "";
+                Messages.Add("Conectted");
             }
             else
-                UserMessage = "Ships distribution is not correct";
+                Messages.Add("Ships distribution is not correct");
         }
 
         protected void UserBoardClicked(Point2D OnPoint)

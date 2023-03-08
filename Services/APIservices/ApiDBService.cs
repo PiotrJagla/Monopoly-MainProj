@@ -11,6 +11,6 @@ namespace Services.APIservices
     {
         Task<bool> IsLoginDataValid(UserLoginData userLoginData);
         Task<bool> RegisterUser(UserLoginData UserDataToRegister);
-        Task<bool> IsUserLogged(UserLoginData UserDataToRegister);
+        Task<bool> IsUserAlreadyLogged(UserLoginData UserDataToRegister);
     }
 }

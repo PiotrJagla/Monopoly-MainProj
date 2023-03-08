@@ -12,7 +12,7 @@ namespace BlazorClient.UserPages.LoginPageFiles
     public class LoginPageBase : ComponentBase
     {
         [Inject]
-        public ApiDBService validateUserLoginData { get; set; }
+        public ApiDBService CheckInput { get; set; }
 
         [Inject]
         public NavigationManager NavManager { get; set; }
@@ -26,33 +26,24 @@ namespace BlazorClient.UserPages.LoginPageFiles
 
         protected async Task LoginUser(UserLoginData userLoginData)
         {
-            //try
-            //{
-            //    if (await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
-            //        Messages.Add("Failed to login");
-            //    else
-            //    {
-            //        if (await validateUserLoginData.LoginUser(userLoginData.Name))
-            //            NavManager.NavigateTo($"/MainMenu/{userLoginData.Name}");
-            //        else
-            //            Messages.Add("Someone is logged on this account");
-            //    }
-
-            //}
-            //catch
-            //{
-            //    Messages.Add(Consts.Message.ServerDown);
-            //}
-
-            if (await validateUserLoginData.IsLoginDataValid(userLoginData) == false)
-                Messages.Add("Failed to login");
-            else
+            try
             {
-                if(await validateUserLoginData.IsUserLogged(userLoginData) == true)
-                    NavManager.NavigateTo($"/MainMenu/{userLoginData.Name}");
+                if (await CheckInput.IsLoginDataValid(userLoginData) == false)
+                    Messages.Add("Failed to login");
                 else
-                    Messages.Add("Someone is logged on this account");
+                {
+                    if (await CheckInput.IsUserAlreadyLogged(userLoginData) == true)
+                        NavManager.NavigateTo($"/MainMenu/{userLoginData.Name}");
+                    else
+                        Messages.Add("Someone is logged on this account");
+                }
+
             }
+            catch
+            {
+                Messages.Add(Consts.Message.ServerDown);
+            }
+
             StateHasChanged();
         }
     }
