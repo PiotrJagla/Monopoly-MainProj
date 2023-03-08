@@ -50,11 +50,6 @@ namespace Services.GamesServices.Monopoly
             return BoardService.GetMainPlayerCells(PlayersService.GetMainPlayer().Key);
         }
 
-        public int GetDebtAmount() 
-        {
-            return BoardService.GetDebtAmount(PlayersService.GetMainPlayer().OnCellIndex);
-        }
-
         public MonopolyUpdateMessage GetUpdatedData()
         {
             MonopolyUpdateMessage UpdatedData = new MonopolyUpdateMessage();

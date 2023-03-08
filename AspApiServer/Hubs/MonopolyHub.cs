@@ -24,10 +24,11 @@ namespace ServerSide.Hubs
             ConnectionService.JoinToRoom(Context.ConnectionId);
 
             string RoomKey = ConnectionService.GetPlayer(Context.ConnectionId).InRoom;
+            string PlayerJoinedName = ConnectionService.GetPlayer(Context.ConnectionId).Name;
             List<Player> AllPlayersInRoom = ConnectionService.GetPlayersWithCriteria(PlayersSelectCriteria.AllPlayers, Context.ConnectionId);
 
             await Groups.AddToGroupAsync(Context.ConnectionId, RoomKey);
-            await Clients.Group(RoomKey).SendAsync("UserJoined", AllPlayersInRoom.Count);
+            await Clients.Group(RoomKey).SendAsync("UserJoined", AllPlayersInRoom.Count, PlayerJoinedName);
         
         }
 

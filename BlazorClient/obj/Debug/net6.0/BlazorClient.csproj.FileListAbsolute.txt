@@ -2556,7 +2556,6 @@ D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\sco
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\MultiplayerGameComponents\MonopolyFiles\MonopolyGame.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\SinglplayerGameComponentFiles\BlackJackFiles\BlackJackGame.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\SinglplayerGameComponentFiles\TicTacToeFiles\TicTacToeGame.razor.rz.scp.css
-D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\PayOffDebtModal.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\SelectButtonModal.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UIComponents\ShowMessages.razor.rz.scp.css
 D:\Program Files (x86)\GitHub\MiniGamesWebsite\BlazorClient\obj\Debug\net6.0\scopedcss\Components\UserLoginDataInputFiles\UserLoginDataInput.razor.rz.scp.css

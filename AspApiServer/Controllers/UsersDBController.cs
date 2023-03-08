@@ -10,6 +10,7 @@ namespace ServerSide.Controllers
     public class UsersDBController : ControllerBase
     {
         private DBservice DatabaseService;
+        private static List<string> AllLoggedUsers = new List<string>();
 
         public UsersDBController(DBservice dbservice)
         {
@@ -23,11 +24,30 @@ namespace ServerSide.Controllers
             return Ok(result);
         }
 
+        [HttpPost("IsUserLogged")]
+        public async Task<ActionResult<bool>> IsUserLogged(UserLoginData data)
+        {
+            bool Result = false;
+            if(AllLoggedUsers.Contains(data.Name) == false)
+            {
+                AllLoggedUsers.Add(data.Name);
+                Result = true;
+            }
+
+            foreach (var item in AllLoggedUsers)
+            {
+                Console.WriteLine(item);
+            }
+
+            return Ok(Result);
+        }
+
         [HttpPost("RegisterUser")]
         public async Task<ActionResult<bool>> RegisterUser(UserLoginData UserDataToRegister)
         {
             bool result = DatabaseService.InsertUser(UserDataToRegister);
             return Ok(result);
         }
+
     }
 }

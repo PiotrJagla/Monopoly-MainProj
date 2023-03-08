@@ -13,15 +13,9 @@ namespace Services.GamesServices.Monopoly.Board.Cells
 {
     public class MonopolyTaxCell : MonopolyCell
     {
-
         public int CellBought(MonopolyPlayer MainPlayer, string WhatIsBought, ref List<MonopolyCell> CheckMonopol)
         {
             return 0;
-        }
-
-        public void CellSold(ref List<MonopolyCell> MonopolChanges)
-        {
-            
         }
 
         public CellBuyingBehaviour GetBuyingBehavior()
@@ -61,9 +55,10 @@ namespace Services.GamesServices.Monopoly.Board.Cells
             return UpdatedData;
         }
 
-        public void UpdateData(MonopolyCellUpdate UpdatedData)
-        {
-            
-        }
+        public void UpdateData(MonopolyCellUpdate UpdatedData){}
+        public void CellSold(ref List<MonopolyCell> MonopolChanges){}
+        
+
+        
     }
 }

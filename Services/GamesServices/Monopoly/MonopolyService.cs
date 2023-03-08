@@ -18,7 +18,6 @@ namespace Services.GamesServices.Monopoly
         List<MonopolyCell> GetBoard();
         List<MonopolyCell> GetMainPlayerCells();
         MonopolyUpdateMessage GetUpdatedData();
-        int GetDebtAmount();
         void UpdateData(MonopolyUpdateMessage UpdatedData);
         void ExecutePlayerMove(int MoveAmount);
         void SetMainPlayerIndex(int index);

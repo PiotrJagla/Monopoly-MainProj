@@ -101,11 +101,6 @@ namespace Services.GamesServices.Monopoly.Board
             return BoardUpdatedData;
         }
 
-        public int GetDebtAmount(int MainPlayerCellPos)
-        {
-            return Board[MainPlayerCellPos].GetBuyingBehavior().GetCosts().Stay;
-        }
-
         public List<MonopolyCell> GetMainPlayerCells(PlayerKey MainPlayerKey)
         {
             return Board.FindAll(c => c.GetBuyingBehavior().GetOwner() == MainPlayerKey);

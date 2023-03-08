@@ -24,10 +24,17 @@ namespace Services.APIservices
             return IsUserLogged;
         }
 
+        public async Task<bool> IsUserLogged(UserLoginData userLoginData)
+        {
+            var IsUserLoggedResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/IsUserLogged", userLoginData);
+            var IsUserLogged = await IsUserLoggedResponse.Content.ReadFromJsonAsync<bool>();
+            return IsUserLogged;
+        }
+
         public async Task<bool> RegisterUser(UserLoginData UserDataToRegister)
         {
-            var UserRegistrationHttpResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/RegisterUser", UserDataToRegister);
-            var IsUserRegistered = await UserRegistrationHttpResponse.Content.ReadFromJsonAsync<bool>();
+            var UserRegistrationResponse = await HttpRequest.PostAsJsonAsync("api/UsersDB/RegisterUser", UserDataToRegister);
+            var IsUserRegistered = await UserRegistrationResponse.Content.ReadFromJsonAsync<bool>();
             return IsUserRegistered;
         }
     }

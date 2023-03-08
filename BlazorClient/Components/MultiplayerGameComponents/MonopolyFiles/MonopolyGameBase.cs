@@ -42,11 +42,12 @@ namespace BlazorClient.Components.MultiplayerGameComponents.MonopolyFiles
             MonopolyHubConn = new HubConnectionBuilder().WithUrl(NavManager.ToAbsoluteUri($"{Consts.ServerURL}{Consts.HubUrl.Monopoly}")).WithAutomaticReconnect().Build();
             await MonopolyHubConn.StartAsync();
 
-            MonopolyHubConn.On<int>("UserJoined", (AllPlayersInRoom) =>
+            MonopolyHubConn.On<int, string>("UserJoined", (AllPlayersInRoom, PlayerJoinedName) =>
             {
                 RoomPlayersNumber = AllPlayersInRoom;
                 MonopolyLogic.SetMainPlayerIndex(RoomPlayersNumber - 1);
                 Messages.Add($"Players in Room: {RoomPlayersNumber}");
+                Messages.Add($"You are : {(PlayerKey)(RoomPlayersNumber-1)}");
                 InvokeAsync(StateHasChanged);
             });
 
