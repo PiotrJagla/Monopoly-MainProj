@@ -42,5 +42,5 @@ When you step on some cell, modal pops up and options are calculated based on ce
 activates when you step on town cell.
 ![image](https://user-images.githubusercontent.com/76881722/228308277-867a1718-6129-474f-9acc-4389eb175cca.png)
 
-
+The UI of this website is very basic but when making this project it was not my intention to make it pretty but to implement something interesting that will work.
 
