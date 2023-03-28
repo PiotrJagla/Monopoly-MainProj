@@ -17,3 +17,13 @@ that makes computer unbeatable.
 ![image](https://user-images.githubusercontent.com/76881722/228302845-c9051c42-fe83-40de-ab71-eb88140d40ce.png)
 ![image](https://user-images.githubusercontent.com/76881722/228302927-d666093d-0a3c-4a81-870f-1096a0d37246.png)
 
+The fun part is in the Multiplayer games. To handle the connection between clients i used SignalR library.
+![image](https://user-images.githubusercontent.com/76881722/228304625-9a2a0ddd-41ee-4352-95c8-a2fd42dbdb8e.png)
+
+Game called Demo button clicking game is just a two player connected that can click buttons:
+![image](https://user-images.githubusercontent.com/76881722/228305130-e8a36184-65c6-437f-a7d2-759beb0ae705.png)
+
+Secound game is battleship. You can enter your ships and when the number or position or ships are incorrect you cant start a game.
+![image](https://user-images.githubusercontent.com/76881722/228305552-fd5511d3-f90f-40ce-b9ad-6388c437c838.png)
+
+
