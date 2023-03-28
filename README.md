@@ -38,5 +38,8 @@ The last game is monopoly and this is the most complex game i implemented in thi
 (player 3 and 4)
 ![image](https://user-images.githubusercontent.com/76881722/228307902-1cb1eb2e-d38a-4d45-ba70-cc3f60b3bd57.png)
 
+When you step on some cell, modal pops up with possible options to do. Below is modal where you can but a town and build something there
+![image](https://user-images.githubusercontent.com/76881722/228308277-867a1718-6129-474f-9acc-4389eb175cca.png)
+
 
 
