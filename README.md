@@ -26,7 +26,7 @@ Game called Demo button clicking game is just a two player connected that can cl
 Secound game is battleship. You can enter your ships and when the number or position or ships are incorrect you cant start a game.
 ![image](https://user-images.githubusercontent.com/76881722/228305552-fd5511d3-f90f-40ce-b9ad-6388c437c838.png)
 
-The last game is monopoly and this is the most complex game i implemented in this project(2-4 players). I implemented almost every feature of monopoly board game, you can but towns, build houses, set championships and so on 
+The last game is monopoly and this is the most complex game i implemented in this project(2-4 players). I implemented almost every feature of monopoly, exacly Buissness tour that is available on steam. You can buy towns, build houses, set championships and so on. The last player to not bankrupt is a winner
 (player 1 and 2)
 ![image](https://user-images.githubusercontent.com/76881722/228306428-be556bc7-516f-463d-b1f6-3b981e940986.png)
 (player 3 and 4)
@@ -38,7 +38,8 @@ The last game is monopoly and this is the most complex game i implemented in thi
 (player 3 and 4)
 ![image](https://user-images.githubusercontent.com/76881722/228307902-1cb1eb2e-d38a-4d45-ba70-cc3f60b3bd57.png)
 
-When you step on some cell, modal pops up with possible options to do. Below is modal where you can but a town and build something there
+When you step on some cell, modal pops up and options are calculated based on cell type you stepped on and different other factors. Below there is modal that 
+activates when you step on town cell.
 ![image](https://user-images.githubusercontent.com/76881722/228308277-867a1718-6129-474f-9acc-4389eb175cca.png)
 
 
