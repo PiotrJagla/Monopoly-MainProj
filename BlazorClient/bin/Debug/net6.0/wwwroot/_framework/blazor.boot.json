@@ -223,7 +223,7 @@
       "Services.dll": "sha256-VPj5hcmsGZ9aMQKAuAcMtRbIK+wRcQ62dSzXu7T23dM=",
       "StringManipulationLib.dll": "sha256-Zx6CjheXb8JWThTgPzDPHVoBldIE6kjC0ohYM27UXDM=",
       "Validation.dll": "sha256-ohNx4PwSjRBvPXLahwuyoW8YuoZI\/sk4lnvcXXgAfzU=",
-      "BlazorClient.dll": "sha256-EUnwsqszb6a1dtJb8hqEKPIs1REDyPshK82l1S5BauU="
+      "BlazorClient.dll": "sha256-UtJZmbOpEuPvxVT0sp5XCLHE94BKuYcxhZ57j4GDSOQ="
     },
     "extensions": null,
     "lazyAssembly": null,
@@ -234,7 +234,7 @@
       "Services.pdb": "sha256-TpVrdB1Q3Y+LDAsATH1qnv1ppPa8WzaMaXFBCSaBNFM=",
       "StringManipulationLib.pdb": "sha256-Wqyhy4r54EzkXKewMBN2TGDa3WogD0YSiBGK6tuWfiQ=",
       "Validation.pdb": "sha256-lqEV2J416oNRANSDtsB2kJeZ+vfgvdQOPaEwgOwOvYM=",
-      "BlazorClient.pdb": "sha256-qdPbiIRvH\/wFoKvBbMl\/bdB2e9CnqDF\/aflw8+Xy\/FI="
+      "BlazorClient.pdb": "sha256-6x3l41Hi0enuTFak6GG5Ef+iGv7xktlqrsgCWet1UWI="
     },
     "runtime": {
       "dotnet.6.0.13.9t539qd5al.js": "sha256-X\/515F1HEzgsDZdY8BJjt8YUwrWngHGZkMnpClhsrpY=",

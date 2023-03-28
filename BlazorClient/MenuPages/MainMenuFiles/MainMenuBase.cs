@@ -19,10 +19,5 @@ namespace BlazorClient.MenuPages.MainMenuFiles
         {
             NavManager.NavigateTo($"/MultiplayerGamesMenu/{loggedUserName}");
         }
-
-        protected void NavigateToCommunityMenu()
-        {
-            NavManager.NavigateTo("/CommunityMenu");
-        }
     }
 }
