@@ -26,7 +26,17 @@ Game called Demo button clicking game is just a two player connected that can cl
 Secound game is battleship. You can enter your ships and when the number or position or ships are incorrect you cant start a game.
 ![image](https://user-images.githubusercontent.com/76881722/228305552-fd5511d3-f90f-40ce-b9ad-6388c437c838.png)
 
-The last game is monopoly and this is the most complex game i implemented in this project.
-![image](https://user-images.githubusercontent.com/76881722/228306233-ccfc12bb-6011-46f3-80b8-b69e755c36c5.png)
+The last game is monopoly and this is the most complex game i implemented in this project(2-4 players). I implemented almost every feature of monopoly board game, you can but towns, build houses, set championships and so on 
+(player 1 and 2)
+![image](https://user-images.githubusercontent.com/76881722/228306428-be556bc7-516f-463d-b1f6-3b981e940986.png)
+(player 3 and 4)
+![image](https://user-images.githubusercontent.com/76881722/228306485-423510ac-24bb-4979-86a9-a265c87d2e87.png)
+ 
+ Game looks like this:
+ (player 1 and 2)
+ ![image](https://user-images.githubusercontent.com/76881722/228307837-410ae034-0bb3-4c7d-ae08-cb969fdd9277.png)
+(player 3 and 4)
+![image](https://user-images.githubusercontent.com/76881722/228307902-1cb1eb2e-d38a-4d45-ba70-cc3f60b3bd57.png)
+
 
 
