@@ -1,4 +1,4 @@
-This is a project where i made a website with singlplayer and multiplayer games.
+This is a project where i made a website with singlplayer and multiplayer games. To test my code i used MSTest
 When you eneter a website there is a page where you can choose if you wany to login or register.
 ![image](https://user-images.githubusercontent.com/76881722/228301115-61d7c981-0362-4896-8809-05125e099ebe.png)
 
