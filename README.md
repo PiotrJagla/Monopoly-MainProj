@@ -1,4 +1,5 @@
-This is a project where i made a website with singleplayer and multiplayer games. To test my code i used MSTest
+This is a project where I created a website with singleplayer and multiplayer games. I developed it using Blazor on the frontend, .NET API on the backend, and MySQL as the database. To test my code, I used MSTest.
+
 When you eneter a website there is a page where you can choose if you want to login or register.
 ![image](https://user-images.githubusercontent.com/76881722/228301115-61d7c981-0362-4896-8809-05125e099ebe.png)
 
