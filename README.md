@@ -12,12 +12,6 @@ You can also login and program will check if provided data is in database
 When you login there is Main menu page. You can choose between singleplayer and multiplayer games.
 ![image](https://user-images.githubusercontent.com/76881722/228302432-3f777902-7fdd-4c4b-ad9a-deee7c3e13ea.png)
 
-In singlplayer games there are two simple games; A simplified version of blackjack and Tic Tac Toe where you play with computer. In tic tac toe i implemented a minimax algorithm
-that makes computer unbeatable.
-![image](https://user-images.githubusercontent.com/76881722/228302774-01eeaec2-adef-46cc-acc6-9ed42d20baa0.png)
-![image](https://user-images.githubusercontent.com/76881722/228302845-c9051c42-fe83-40de-ab71-eb88140d40ce.png)
-![image](https://user-images.githubusercontent.com/76881722/228302927-d666093d-0a3c-4a81-870f-1096a0d37246.png)
-
 The fun part is in the Multiplayer games. To handle the connection between clients i used SignalR library.
 ![image](https://user-images.githubusercontent.com/76881722/228304625-9a2a0ddd-41ee-4352-95c8-a2fd42dbdb8e.png)
 
