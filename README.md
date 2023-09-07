@@ -15,10 +15,7 @@ When you login there is Main menu page. You can choose between singleplayer and 
 The fun part is in the Multiplayer games. To handle the connection between clients i used SignalR library.
 ![image](https://user-images.githubusercontent.com/76881722/228304625-9a2a0ddd-41ee-4352-95c8-a2fd42dbdb8e.png)
 
-Game called A demo button clicking game is just a two player connected that can click buttons:
-![image](https://user-images.githubusercontent.com/76881722/228305130-e8a36184-65c6-437f-a7d2-759beb0ae705.png)
-
-Second game is battleship. You can enter your ships and when the number or positions of ships are incorrect you cant start a game.
+Battleship. You can enter your ships and when the number or positions of ships are incorrect you cant start a game.
 ![image](https://user-images.githubusercontent.com/76881722/228305552-fd5511d3-f90f-40ce-b9ad-6388c437c838.png)
 
 The last game is monopoly and this is the most complex game i implemented in this project(2-4 players). I implemented almost every feature of monopoly, exactly Business tour that is available on steam. You can buy towns, build houses, set championship, and so on. The last player to not bankrupt is a winner
